@@ -1,0 +1,14 @@
+-- Verify [% project %]:[% change %] on [% engine %]
+
+do $$
+BEGIN
+
+assert (
+    select exists (
+        select 1 from information_schema.routines
+        where specific_schema = [% schema %]
+        and routine_name = [% name %]
+    )
+);
+
+END; $$;

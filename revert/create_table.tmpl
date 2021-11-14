@@ -1,0 +1,8 @@
+-- Revert [% project %]:[% change %] from [% engine %]
+
+BEGIN;
+
+drop table [% schema %].[% name %];
+drop trigger [% schema %]_[% name %]_updated on [% schema %].[% name %];
+
+COMMIT;

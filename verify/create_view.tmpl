@@ -1,0 +1,14 @@
+-- Verify [% project %]:[% change %] on [% engine %]
+
+do $$
+BEGIN
+
+assert (
+    select exists (
+        select 1 from information_schema.views
+        where table_schema='[% schema %]'
+        and table_name='[% name %]'
+    )
+);
+
+END; $$;

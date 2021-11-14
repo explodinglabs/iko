@@ -1,0 +1,10 @@
+-- Deploy [% project %]:[% change %] to [% engine %]
+
+BEGIN;
+
+create or replace view [% schema %].[% name %] as
+    select id from [% schema %].[% table %];  -- Edit!
+
+-- alter view [% schema %].[% table %] owner to api_views_owner;
+
+COMMIT;

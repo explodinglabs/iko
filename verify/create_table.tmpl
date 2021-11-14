@@ -1,0 +1,23 @@
+-- Verify [% project %]:[% change %] on [% engine %]
+
+do $$
+BEGIN
+
+assert (
+    select exists (
+        select 1 from information_schema.tables
+        where table_schema = '[% schema %]'
+        and table_name='[% name %]'
+    )
+);
+
+assert (
+    select exists (
+        select 1 from information_schema.triggers
+        where event_object_schema = '[% schema %]'
+        and event_object_table = '[% name %]'
+        and trigger_name = '[% schema %]_[% name %]_updated'
+    )
+);
+
+END; $$;

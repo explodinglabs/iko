@@ -3,6 +3,6 @@
 do $$
 BEGIN
 
-assert (select exists (select 1 from information_schema.schemata where schema_name = 'foo'));
+assert (select exists (select 1 from information_schema.schemata where schema_name = '[% name %]'));
 
 END; $$;

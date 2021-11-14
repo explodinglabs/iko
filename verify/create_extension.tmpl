@@ -1,0 +1,8 @@
+-- Verify [% project %]:[% change %] on [% engine %]
+
+do $$
+BEGIN
+
+assert (select exists (select 1 from pg_extension where extname='[% name %]'));
+
+END; $$;

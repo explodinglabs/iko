@@ -1,0 +1,20 @@
+-- Verify [% project %]:[% change %] on [% engine %]
+
+do $$
+BEGIN
+
+-- For a table or view
+assert (
+    select exists (
+        select 1 from information_schema.table_privileges
+        where privilege_type = 'SELECT'
+        and table_schema='api'
+        and table_name = 'users'
+        and grantee='web_user'
+    )
+);
+
+-- For a function
+assert (select has_function_privilege('anon', 'api.login(text, text)', 'execute'));
+
+END; $$;

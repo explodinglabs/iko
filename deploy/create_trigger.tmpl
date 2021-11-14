@@ -1,0 +1,9 @@
+-- Deploy [% project %]:[% change %] to [% engine %]
+
+BEGIN;
+
+create trigger [% name %]
+before insert or update on [% schema %].[% table %]
+for each row execute procedure [% schema %].foo();  -- Edit foo!
+
+COMMIT;

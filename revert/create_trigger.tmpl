@@ -2,6 +2,6 @@
 
 BEGIN;
 
-drop schema [% name %];
+drop trigger [% name %] on [% schema %].[% table %];
 
 COMMIT;

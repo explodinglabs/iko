@@ -1,0 +1,8 @@
+-- Deploy [% project %]:[% change %] to [% engine %]
+
+BEGIN;
+
+create role [% name %] nologin;
+-- or: create role [% name %] noinherit login password 'mysecretpassword';
+
+COMMIT;
