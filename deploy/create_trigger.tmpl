@@ -2,8 +2,11 @@
 
 BEGIN;
 
-create trigger [% name %]
-before insert or update on [% schema %].[% table %]
-for each row execute procedure [% schema %].foo();  -- Edit foo!
+/* From the doc: "The name cannot be schema-qualified — the trigger inherits
+ * the schema of its table." */
+
+create trigger [% trigger_name %]
+before insert or update on [% table_schema %].[% table_name %]
+for each row execute procedure utils.notify_row_updated('team-changed');  -- edit this!
 
 COMMIT;
