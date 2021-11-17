@@ -2,10 +2,9 @@
 
 BEGIN;
 
-create or replace function [% schema %].[% name %](x int, y text) returns json as $$
-declare
+create function [% schema %].[% name %](x int, y text) returns json as $$
 begin
-    ...
 end;
+$$ language plpgsql;
 
 COMMIT;

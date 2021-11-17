@@ -2,8 +2,8 @@
 
 BEGIN;
 
-create table if not exists [% schema %].[% name %] (
-    id serial primary key,
+create table [% schema %].[% name %] (
+    id uuid primary key default public.uuid_generate_v4(),
     created_at timestamp not null default now(),
     updated_at timestamp not null default now(),
     ...
