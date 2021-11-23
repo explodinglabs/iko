@@ -1,0 +1,7 @@
+-- Deploy [% project %]:[% change %] to [% engine %]
+
+BEGIN;
+
+grant [% from_role %] to [% to_role %];
+
+COMMIT;

@@ -1,0 +1,7 @@
+-- Revert [% project %]:[% change %] from [% engine %]
+
+BEGIN;
+
+revoke [% to_role %] from [% from_role %];
+
+COMMIT;
