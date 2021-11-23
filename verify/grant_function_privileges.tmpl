@@ -1,0 +1,8 @@
+-- Verify [% project %]:[% change %] on [% engine %]
+
+do $$
+BEGIN
+
+assert (select has_function_privilege('[% role %]', '[% name %](text, text)', 'execute'));
+
+END; $$;

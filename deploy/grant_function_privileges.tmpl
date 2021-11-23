@@ -2,6 +2,6 @@
 
 BEGIN;
 
-grant select on api.users to web_user;
+grant execute on [% name %] to [% role %];
 
 COMMIT;

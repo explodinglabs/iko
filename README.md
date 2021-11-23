@@ -42,3 +42,22 @@ sqitch add api_teams --template create_view --set schema=api --set name=teams --
 ```
 
 Then edit the select statement.
+
+## Grant view privileges
+
+```sh
+sqitch add api_teams_privileges --template grant_view_privileges --set type=select --set schema=api --set name=teams --role=web_user --note 'Grant view privileges on [% schema %].[% name %] to [% role %]'
+```
+
+## Grant function privileges
+
+```sh
+sqitch add api_foo_privileges --template grant_function_privileges --set name=api.login --role=web_user --note 'Grant execute privileges on [% name %] to [% role %]'
+```
+
+## Grant membership privileges
+
+(This is `grant [role] to [role]`.)
+
+```sh
+```
