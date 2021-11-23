@@ -57,7 +57,7 @@ sqitch add api_foo_privileges --template grant_function_privileges --set name=ap
 
 ## Grant membership privileges
 
-(This is `grant [role] to [role]`.)
+(i.e. grant [role] to [role].)
 
 ```sh
 ```
