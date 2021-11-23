@@ -1,0 +1,10 @@
+-- Verify [% project %]:[% change %] on [% engine %]
+
+do $$
+BEGIN
+
+assert (select exists (
+    select pg_has_role('[% role %]', '[% schema %]', 'usage')
+));
+
+END; $$;

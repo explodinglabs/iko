@@ -1,0 +1,7 @@
+-- Deploy [% project %]:[% change %] to [% engine %]
+
+BEGIN;
+
+grant usage on [% schema %] to [% role %];
+
+COMMIT;

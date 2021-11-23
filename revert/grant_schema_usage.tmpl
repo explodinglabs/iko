@@ -1,0 +1,7 @@
+-- Revert [% project %]:[% change %] from [% engine %]
+
+BEGIN;
+
+revoke usage on schema [% schema %] from [% role %];
+
+COMMIT;
