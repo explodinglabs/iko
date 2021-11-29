@@ -1,3 +1,10 @@
+# sqitch-templates
+
+Clone into ~/.sqitch/templates:
+```sh
+git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
+```
+
 ## Create extension
 
 ```sh
