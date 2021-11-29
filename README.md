@@ -1,3 +1,17 @@
+## Create extension
+
+```sh
+sqitch add create_extension_foo --template create_extension --set name=foo --note 'Create extension foo'
+```
+
+## Create function
+
+```sh
+sqitch add utils_notify_row_updated --template create_function --set schema=utils --set name=notify_row_updated --note 'Add utils.notify_row_updated function'
+```
+
+Then edit the function in the deploy script.
+
 ## Create schema
 
 ```sh
@@ -26,14 +40,6 @@ sqitch add data_team_changed_trigger --template create_trigger --set table_schem
 ```
 
 Then edit the procedure called in the deployment script.
-
-## Create function
-
-```sh
-sqitch add utils_notify_row_updated --template create_function --set schema=utils --set name=notify_row_updated --note 'Add utils.notify_row_updated function'
-```
-
-Then edit the function in the deploy script.
 
 ## Create view
 
@@ -66,5 +72,5 @@ sqitch add api_foo_privileges --template grant_role_membership --set from_role=w
 ## Grant view privileges
 
 ```sh
-sqitch add api_teams_privileges --template grant_view_privileges --set type=select --set schema=api --set name=teams --role=web_user --note 'Grant view on api.teams to web_user'
+sqitch add api_teams_privileges --template grant_view_privileges --set type=select --set schema=api --set table=teams --set role=web_user --note 'Grant select on api.teams to web_user'
 ```

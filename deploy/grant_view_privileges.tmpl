@@ -2,6 +2,6 @@
 
 BEGIN;
 
-grant [% type %] on [% table %] to [% role %];
+grant [% type %] on [% schema %].[% table %] to [% role %];
 
 COMMIT;

@@ -2,6 +2,6 @@
 
 BEGIN;
 
-revoke [% type %] on [% table %] from [% role %];
+revoke [% type %] on [% schema %].[% table %] from [% role %];
 
 COMMIT;
