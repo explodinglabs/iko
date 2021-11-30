@@ -65,7 +65,7 @@ sqitch add grant_api_usage_to_anon --template grant_schema_usage --set schema=ap
 ## Grant function execute
 
 ```sh
-sqitch add grant_execute_api_foo --template grant_function_execute --set name=api.login --set role=web_user --note 'Grant execute on api.login to web_user'
+sqitch add grant_execute_api_foo --template grant_execute --set name=api.login --set role=web_user --note 'Grant execute on api.login to web_user'
 ```
 
 And edit the function params.
