@@ -65,19 +65,21 @@ sqitch add grant_api_usage_to_anon --template grant_schema_usage --set schema=ap
 ## Grant function execute
 
 ```sh
-sqitch add api_foo_privileges --template grant_function_execute --set name=api.login --set role=web_user --note 'Grant execute on api.login to web_user'
+sqitch add grant_execute_api_foo --template grant_function_execute --set name=api.login --set role=web_user --note 'Grant execute on api.login to web_user'
 ```
+
+And edit the function params.
 
 ## Grant role membership
 
 (i.e. `grant [role] to [role]`.)
 
 ```sh
-sqitch add api_foo_privileges --template grant_role_membership --set from_role=web_user --set role=authenticator --note 'Grant web_user to authenticator'
+sqitch add grant_role_membership_foo --template grant_role_membership --set from_role=web_user --set role=authenticator --note 'Grant web_user to authenticator'
 ```
 
 ## Grant view privileges
 
 ```sh
-sqitch add api_teams_privileges --template grant_view_privileges --set type=select --set schema=api --set table=teams --set role=web_user --note 'Grant select on api.teams to web_user'
+sqitch add grant_select_api_teams --template grant_view_privileges --set type=select --set schema=api --set table=teams --set role=web_user --note 'Grant select on api.teams to web_user'
 ```
