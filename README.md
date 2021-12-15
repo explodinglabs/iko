@@ -38,7 +38,7 @@ Then add columns to the deploy script.
 ## Create trigger
 
 <blockquote>
-The name cannot be schema-qualified — the trigger inherits the schema of its
+The (trigger) name cannot be schema-qualified — the trigger inherits the schema of its
 table. - <cite><a href="https://www.postgresql.org/docs/9.5/static/sql-createtrigger.html">Postgres docs</a></cite>
 </blockquote>
 
