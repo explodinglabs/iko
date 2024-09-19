@@ -14,7 +14,7 @@ git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
 ## Create function
 
 ```sh
-./sqitch add utils_notify_row_updated --template create_function --set schema=utils --set name=notify_row_updated --note 'Add utils.notify_row_updated function'
+./sqitch add create_function_utils_notify_row_updated --template create_function --set schema=utils --set name=notify_row_updated --note 'Add utils.notify_row_updated function'
 ```
 
 Then edit the function in the deploy script.
@@ -22,7 +22,7 @@ Then edit the function in the deploy script.
 ## Create schema
 
 ```sh
-./sqitch add foo_schema --template create_schema --set name=foo --note 'Add foo schema'
+./sqitch add create_schema_foo --template create_schema --set name=foo --note 'Add foo schema'
 ```
 
 (Nothing more to do.)
@@ -30,7 +30,7 @@ Then edit the function in the deploy script.
 ## Create table
 
 ```sh
-./sqitch add foo_bar --template create_table --set schema=foo --set name=bar --note 'Add foo.bar table'
+./sqitch add create_table_foo_bar --template create_table --set schema=foo --set name=bar --note 'Add foo.bar table'
 ```
 
 Then add columns to the deploy script.
@@ -43,7 +43,7 @@ table. - <cite><a href="https://www.postgresql.org/docs/9.5/static/sql-createtri
 </blockquote>
 
 ```sh
-./sqitch add data_team_changed_trigger --template create_trigger --set table_schema=data --set table_name=team --set trigger_name=team_changed --note 'Add data.team_changed trigger'
+./sqitch add create_trigger_data_team_changed --template create_trigger --set table_schema=data --set table_name=team --set trigger_name=team_changed --note 'Add data.team_changed trigger'
 ```
 
 Then edit the procedure called in the deployment script.
@@ -51,7 +51,7 @@ Then edit the procedure called in the deployment script.
 ## Create view
 
 ```sh
-./sqitch add api_teams --template create_view --set schema=api --set name=teams --note 'Add api.teams view'
+./sqitch add create_view_api_teams --template create_view --set schema=api --set name=teams --note 'Add api.teams view'
 ```
 
 Then edit the select statement.
