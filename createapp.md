@@ -35,11 +35,30 @@ Create data schema and tables.
 
 Edit the table structure in the deploy script.
 
-At this point, start Postgres, set env vars, and then `./sqitch deploy`. (see your app's
+At this point, start Postgres, set env vars, and then `sqitch deploy`. (see your app's
 README). Also check verify and revert.
 
-## To create a trigger
 
+## Trigger a NOTIFY when a row is inserted or updated
+
+Note if you create a trigger on "update", it will also fire when a row is inserted.
+
+Create the function:
 ```sh
-./sqitch add create_trigger_data_play_added --template create_trigger --set trigger_name=play_added --set table=data.play --set event=play-added --note 'Add play_added trigger'
+./sqitch add create_function_utils_notify_row --template create_function --set schema=utils --set name=notify_row --note 'Add utils.notify_row function'
+```
+
+Edit the function. It should be:
+```sql
+create function utils.notify_row() returns trigger language plpgsql as $$
+begin
+    perform pg_notify('myapp_events', json_build_object('path', NEW.id::text, 'id', 1, 'event', TG_ARGV[0], 'data', row_to_json(NEW)::text)::text);
+    return NEW;
+end;
+$$;
+```
+
+Create the trigger.
+```sh
+./sqitch add create_trigger_data_play_added --template create_trigger --set trigger=play_added --set table_schema=data --set table_name=play --set function=utils.notify_row --set event=play-added --note 'Add play_added trigger'
 ```

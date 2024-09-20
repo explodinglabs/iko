@@ -4,7 +4,7 @@ BEGIN
 assert (
     select exists (
         select 1 from information_schema.triggers
-        and trigger_name = '[% trigger_name %]'
+        where trigger_name = '[% trigger %]'
         and event_object_schema = '[% table_schema %]'
         and event_object_table = '[% table_name %]'
     )

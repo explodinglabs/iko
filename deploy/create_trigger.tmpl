@@ -3,8 +3,8 @@ BEGIN;
 /* Note: "The name cannot be schema-qualified — the trigger inherits the schema of its
  * table." */
 
-create trigger [% trigger_name %]
-before insert or update on [% table %]
-for each row execute procedure utils.notify_row_updated('[% event %]');  -- edit this!
+create trigger [% trigger %]
+before insert or update on [% table_schema %].[% table_name %]
+for each row execute procedure [% function %]('[% event %]');
 
 COMMIT;
