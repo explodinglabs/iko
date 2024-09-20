@@ -11,21 +11,19 @@ git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
 ./sqitch add create_extension_foo --template create_extension --set name=foo --note 'Create extension foo'
 ```
 
-## Create function
-
-```sh
-./sqitch add create_function_utils_notify_row_updated --template create_function --set schema=utils --set name=notify_row_updated --note 'Add utils.notify_row_updated function'
-```
-
-Then edit the function in the deploy script.
-
 ## Create schema
 
 ```sh
 ./sqitch add create_schema_foo --template create_schema --set name=foo --note 'Add foo schema'
 ```
 
-(Nothing more to do.)
+## Create function
+
+```sh
+./sqitch add create_function_utils_notify_row_updated --template create_function --set schema=utils --set name=notify_row_updated --note 'Add utils.notify_row_updated function'
+```
+
+Then edit the function.
 
 ## Create table
 
@@ -33,7 +31,19 @@ Then edit the function in the deploy script.
 ./sqitch add create_table_foo_bar --template create_table --set schema=foo --set name=bar --note 'Add foo.bar table'
 ```
 
-Then add columns to the deploy script.
+Then edit the table structure.
+
+## Add column
+
+```sh
+./sqitch add alter_table_foo_bar_add_baz --template alter_table_add_column --set schema=foo --set table=bar --set column_name=baz --set column_type=integer --note 'Add foo.bar column baz'
+```
+
+## Alter column
+
+```sh
+./sqitch add alter_table_foo_bar_alter_baz --template alter_table_alter_column --set schema=foo --set table=bar --set column_name=baz --set change='type varchar(4)' --note 'Alter foo.bar column baz'
+```
 
 ## Create trigger
 
@@ -45,8 +55,6 @@ table. - <cite><a href="https://www.postgresql.org/docs/9.5/static/sql-createtri
 ```sh
 ./sqitch add create_trigger_data_team_changed --template create_trigger --set table_schema=data --set table_name=team --set trigger_name=team_changed --note 'Add data.team_changed trigger'
 ```
-
-Then edit the procedure called in the deployment script.
 
 ## Create view
 

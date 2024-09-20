@@ -12,14 +12,14 @@ Create a `utils` schema.
 ./sqitch add create_schema_utils --template create_schema --set name=utils --note 'Create utils schema'
 ```
 
-Create an `update_modified_column` function which is used in many tables.
+Create an `set_updated_at` function which is used in many tables.
 ```sh
-./sqitch add create_function_utils_update_modified_column --template create_function --set schema=utils --set name=update_modified_column --note 'Add utils.update_modified_column function'
+./sqitch add create_function_utils_set_updated_at --template create_function --set schema=utils --set name=set_updated_at --note 'Add utils.set_updated_at function'
 ```
 
-Edit the deploy function. It should be:
+Edit the function. It should be:
 ```sql
-create function utils.update_modified_column() returns trigger language plpgsql as $$
+create function utils.set_updated_at() returns trigger language plpgsql as $$
 begin
     new.updated_at = now();
     return new;
@@ -27,9 +27,13 @@ end;
 $$;
 ```
 
-Create data schema and tables.
+Create data schema.
 ```sh
 ./sqitch add create_schema_data --template create_schema --set name=data --note 'Create data schema'
+```
+
+Create a table.
+```sh
 ./sqitch add create_table_data_play --template create_table --set schema=data --set name=play --note 'Create data.play table'
 ```
 

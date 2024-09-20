@@ -1,0 +1,13 @@
+do $$
+BEGIN
+
+assert (
+    select exists (
+        select 1 from information_schema.columns
+        where table_schema = '[% schema %]'
+        and table_name = '[% table %]'
+        and column_name = '[% column_name %]'
+    )
+);
+
+END; $$;

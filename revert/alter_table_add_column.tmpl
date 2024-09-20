@@ -1,0 +1,5 @@
+BEGIN;
+
+alter table [% schema %].[% table %] drop column [% column_name %];
+
+COMMIT;
