@@ -45,6 +45,8 @@ Then edit the table structure.
 ./sqitch add alter_table_foo_bar_alter_baz --template alter_table_alter_column --set schema=foo --set table=bar --set column_name=baz --set change='type varchar(4)' --note 'Alter foo.bar column baz'
 ```
 
+Edit the revert script to set the old type.
+
 ## Create trigger
 
 <blockquote>

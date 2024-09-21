@@ -4,7 +4,7 @@ BEGIN;
  * table." */
 
 create trigger [% trigger %]
-before insert or update on [% table_schema %].[% table_name %]
+before insert on [% table_schema %].[% table_name %]
 for each row execute procedure [% function %]('[% event %]');
 
 COMMIT;
