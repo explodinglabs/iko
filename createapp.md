@@ -43,11 +43,15 @@ At this point, start Postgres, set env vars, and then `sqitch deploy`. (see your
 README). Also check verify and revert.
 
 
-## Trigger a NOTIFY when a row is inserted or updated
+## Trigger a NOTIFY when a row is inserted and/or updated)
 
-Note if you create a trigger on "update", it will also fire when a row is inserted.
+Add the amqp extension (https://github.com/omniti-labs/pg_amqp), which provides
+the amqp.publish function:
+```sh
+./sqitch add create_extension_amqp --template create_extension --set name=amqp --note 'Create extension amqp'
+```
 
-Create the function:
+Create the function that will be triggered when a row is inserted:
 ```sh
 ./sqitch add create_function_utils_notify_row --template create_function --set schema=utils --set name=notify_row --note 'Add utils.notify_row function'
 ```
@@ -56,13 +60,16 @@ Edit the function. It should be:
 ```sql
 create function utils.notify_row() returns trigger language plpgsql as $$
 begin
-    perform pg_notify('myapp_events', json_build_object('path', NEW.id::text, 'id', 1, 'event', TG_ARGV[0], 'data', row_to_json(NEW)::text)::text);
+    -- Params are broker_id, exchange, routing_key, message
+    perform amqp.publish(1, 'amq.fanout', '', json_build_object('event', TG_ARGV[0], 'data', row_to_json(NEW)::text)::text);
     return NEW;
 end;
 $$;
 ```
 
-Create the trigger.
+Create a trigger to call the function.
 ```sh
 ./sqitch add create_trigger_data_play_added --template create_trigger --set trigger=play_added --set table_schema=data --set table_name=play --set function=utils.notify_row --set event=play-added --note 'Add play_added trigger'
 ```
+
+Edit the trigger to have "insert", "update" or "insert or update".

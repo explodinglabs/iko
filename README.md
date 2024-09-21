@@ -20,7 +20,7 @@ git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
 ## Create function
 
 ```sh
-./sqitch add create_function_utils_notify_row_updated --template create_function --set schema=utils --set name=notify_row_updated --note 'Add utils.notify_row_updated function'
+./sqitch add create_function_utils_notify_row --template create_function --set schema=utils --set name=notify_row --note 'Add utils.notify_row function'
 ```
 
 Then edit the function.
