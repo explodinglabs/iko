@@ -39,8 +39,8 @@ Create a table.
 
 Edit the table structure in the deploy script.
 
-At this point, start Postgres, set env vars, and then `sqitch deploy`. (see your app's
-README). Also check verify and revert.
+At this point, start Postgres, set env vars, and then `sqitch deploy --verify`.
+(see your app's README).
 
 
 ## Trigger a NOTIFY when a row is inserted and/or updated)
@@ -69,7 +69,8 @@ $$;
 
 Create a trigger to call the function.
 ```sh
-./sqitch add create_trigger_data_play_added --template create_trigger --set trigger=play_added --set table_schema=data --set table_name=play --set function=utils.notify_row --set event=play-added --note 'Add play_added trigger'
+./sqitch add create_trigger_data_play_added --template create_trigger --set trigger=play_added --set table_schema=data --set table_name=play --set function=utils.notify_row --set event=play --note 'Add play_added trigger'
 ```
 
-Edit the trigger to have "insert", "update" or "insert or update".
+The default trigger fires on "insert". Edit the trigger to have "update" or
+"insert or update".

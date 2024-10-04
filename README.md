@@ -17,6 +17,14 @@ git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
 ./sqitch add create_schema_foo --template create_schema --set name=foo --note 'Add foo schema'
 ```
 
+## Drop schema
+
+```sh
+./sqitch add drop_schema_foo --template drop_schema --set name=foo --note 'Drop foo schema'
+```
+
+Does not cascade by default.
+
 ## Create function
 
 ```sh
@@ -25,10 +33,27 @@ git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
 
 Then edit the function.
 
+## Rename function
+
+```sh
+./sqitch add rename_function_utils_notify_row --template rename_function --set oldschema=utils --set oldname=notify_row --set newschema=utils --set newname=notify_row --note 'Rename utils.notify_row function'
+```
+
+## Edit function
+
+Rework the change.
+
+```sh
+sqitch rework change_name --note 'Change change_name'
+```
+
+## Drop function
+
+
 ## Create table
 
 ```sh
-./sqitch add create_table_foo_bar --template create_table --set schema=foo --set name=bar --note 'Add foo.bar table'
+./sqitch add create_table_data_foo --template create_table --set schema=data --set name=foo --note 'Add data.foo table'
 ```
 
 Then edit the table structure.
@@ -47,6 +72,9 @@ Then edit the table structure.
 
 Edit the revert script to set the old type.
 
+## Drop table
+
+
 ## Create trigger
 
 <blockquote>
@@ -57,6 +85,10 @@ table. - <cite><a href="https://www.postgresql.org/docs/9.5/static/sql-createtri
 ```sh
 ./sqitch add create_trigger_data_team_changed --template create_trigger --set table_schema=data --set table_name=team --set trigger_name=team_changed --note 'Add data.team_changed trigger'
 ```
+
+## Alter trigger
+
+## Drop trigger
 
 ## Create view
 

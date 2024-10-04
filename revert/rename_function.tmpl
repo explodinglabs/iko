@@ -1,0 +1,5 @@
+BEGIN;
+
+alter function [% newschema %].[% newname %] rename to [% oldschema %].[% oldname %];
+
+COMMIT;
