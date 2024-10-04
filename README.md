@@ -75,6 +75,7 @@ Edit the revert script to set the old type.
 ## Drop table
 
 
+
 ## Create trigger
 
 <blockquote>
@@ -86,7 +87,9 @@ table. - <cite><a href="https://www.postgresql.org/docs/9.5/static/sql-createtri
 ./sqitch add create_trigger_data_team_changed --template create_trigger --set table_schema=data --set table_name=team --set trigger_name=team_changed --note 'Add data.team_changed trigger'
 ```
 
-## Alter trigger
+## Edit trigger
+
+Drop trigger then create trigger.
 
 ## Drop trigger
 
