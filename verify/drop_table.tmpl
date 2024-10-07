@@ -2,7 +2,7 @@ do $$
 BEGIN
 
 assert (
-    select exists (
+    select not exists (
         select 1 from information_schema.tables
         where table_schema = '[% schema %]'
         and table_name='[% name %]'

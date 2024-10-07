@@ -1,7 +1,5 @@
 BEGIN;
 
--- Should revert the changes in reverse order
-drop trigger [% schema %]_[% name %]_updated on [% schema %].[% name %];
 drop table [% schema %].[% name %];
 
 COMMIT;

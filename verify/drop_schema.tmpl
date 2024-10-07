@@ -1,6 +1,13 @@
 do $$
 BEGIN
 
-assert (select not exists (select 1 from information_schema.schemata where schema_name = '[% name %]'));
+assert (
+    select not exists (
+        select 1
+        from information_schema.schemata
+        where schema_name = '[% name %]'
+    )
+);
 
-END; $$;
+END;
+$$;

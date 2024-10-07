@@ -1,7 +1,9 @@
 BEGIN;
 
-create or replace function [% schema %].[% name %](x int, y text) returns json as $$
+create or replace function [% schema %].[% name %]() returns trigger language plpgsql as $$
 begin
+    new.updated_at = now();
+    return new;
 end;
 $$ language plpgsql;
 
