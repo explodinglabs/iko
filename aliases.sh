@@ -81,7 +81,7 @@ function create-trigger {
     local change_name=${5:-create_trigger_${schema_name}_${table_name}_${trigger_name}}
     sqitch add $change_name \
          --template create_trigger \
-         --set table_schema=$schema_name \
+         --set schema_name=$schema_name \
          --set table_name=$table_name \
          --set trigger_name=$trigger_name \
          --set function_name=$function_name \
