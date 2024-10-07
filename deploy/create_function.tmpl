@@ -1,6 +1,6 @@
 BEGIN;
 
-create or replace function [% schema %].[% name %]() returns trigger language plpgsql as $$
+create or replace function [% schema_name %].[% function_name %]() returns trigger language plpgsql as $$
 begin
     new.updated_at = now();
     return new;

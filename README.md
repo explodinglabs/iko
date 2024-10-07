@@ -5,10 +5,9 @@ Clone into `~/.sqitch/templates`:
 git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
 ```
 
-## Extensions
-
+Add an ad-hoc change:
 ```sh
-./sqitch add create_extension_foo --template create_extension --set name=foo --note 'Create extension foo'
+sqitch add [change_name] --note 'What it does'
 ```
 
 ## Schemas
@@ -40,17 +39,16 @@ Alter column (Edit the revert script to set the old type):
 ./sqitch add alter_table_foo_bar_alter_baz --template alter_table_alter_column --set schema=foo --set table=bar --set column_name=baz --set change='type varchar(4)' --note 'Alter foo.bar column baz'
 ```
 
-Drop table
+Drop table:
 ```sh
-drop-table
+drop-table [schema_name] [table_name]
 ```
-
 
 ## Functions
 
 Create function (edit the function):
 ```sh
-./sqitch add create_function_utils_notify_row --template create_function --set schema=utils --set name=notify_row --note 'Add utils.notify_row function'
+create-function data playlist_updated
 ```
 
 Rename function:
@@ -74,11 +72,15 @@ Create trigger:
 ./sqitch add create_trigger_data_team_changed --template create_trigger --set table_schema=data --set table_name=team --set trigger_name=team_changed --note 'Add data.team_changed trigger'
 ```
 
-Edit trigger:
-Drop the trigger then create a new one.
-
 Drop trigger:
 ```sh
+```
+
+## Extensions
+
+```sh
+create-extension [extension]
+./sqitch add create_extension_foo --template create_extension --set name=foo --note 'Create extension foo'
 ```
 
 ## Views
