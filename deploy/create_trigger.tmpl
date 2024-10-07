@@ -1,10 +1,7 @@
 BEGIN;
 
-/* Note: "The name cannot be schema-qualified — the trigger inherits the schema of its
- * table." */
-
-create trigger [% trigger %]
+create trigger [% trigger_name %]
 before insert on [% table_schema %].[% table_name %]
-for each row execute procedure [% function %]('[% event %]');
+for each row execute procedure [% function_name %]();
 
 COMMIT;

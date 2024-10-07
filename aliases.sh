@@ -40,6 +40,10 @@ function create-table {
     && show-files $change_name
 }
 
+function add-column {
+    # sqitch add alter_table_foo_bar_add_baz --template alter_table_add_column --set schema=foo --set table=bar --set column_name=baz --set column_type=integer --note 'Add foo.bar column baz'
+}
+
 function drop-table {
     local schema_name=$1
     local table_name=$2
@@ -64,5 +68,35 @@ function create-function {
         --set schema_name=$schema_name \
         --set function_name=$function_name \
         --note \'"Add ${schema_name}.${function_name} function"\' \
+    && show-files $change_name
+}
+
+# Triggers
+
+function create-trigger {
+    local schema_name=$1
+    local table_name=$2
+    local trigger_name=$3
+    local function_name=$4
+    local change_name=${5:-create_trigger_${schema_name}_${table_name}_${trigger_name}}
+    sqitch add $change_name \
+         --template create_trigger \
+         --set table_schema=$schema_name \
+         --set table_name=$table_name \
+         --set trigger_name=$trigger_name \
+         --set function_name=$function_name \
+         --note \'"Add trigger $trigger_name on ${schema_name}.${table_name}"\' \
+    && show-files $change_name
+}
+
+# Extensions
+
+function create-extension {
+    local name=$1
+    local change_name=${2:-create_extension_$name}
+    sqitch add $change_name \
+        --template create_extension \
+        --set name=$name \
+        --note \'"Create $name extension"\' \
     && show-files $change_name
 }

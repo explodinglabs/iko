@@ -7,36 +7,26 @@ git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
 
 Add an ad-hoc change:
 ```sh
-sqitch add [change_name] --note 'What it does'
+sqitch add [change] --note 'What it does'
 ```
 
 ## Schemas
 
 Create schema:
 ```sh
-create-schema [schema_name]
+create-schema [schema]
 ```
 
 Drop schema (does not cascade, so drop everything in the schema first):
 ```sh
-drop-schema [schema_name]
+drop-schema [schema]
 ```
 
 ## Tables
 
 Create table (edit the table):
 ```sh
-create-table [schema_name] [table_name]
-```
-
-Add column:
-```sh
-./sqitch add alter_table_foo_bar_add_baz --template alter_table_add_column --set schema=foo --set table=bar --set column_name=baz --set column_type=integer --note 'Add foo.bar column baz'
-```
-
-Alter column (Edit the revert script to set the old type):
-```sh
-./sqitch add alter_table_foo_bar_alter_baz --template alter_table_alter_column --set schema=foo --set table=bar --set column_name=baz --set change='type varchar(4)' --note 'Alter foo.bar column baz'
+create-table [schema] [table]
 ```
 
 Drop table:
@@ -44,32 +34,40 @@ Drop table:
 drop-table [schema_name] [table_name]
 ```
 
+Add column:
+```sh
+add-column [schema] [table] [column]
+```
+
+Rename column:
+```sh
+```
+
+Drop column:
+```sh
+drop-column [schema] [table] [column]
+```
+
 ## Functions
 
-Create function (edit the function):
+Create function:
 ```sh
 create-function data playlist_updated
-```
-
-Rename function:
-```sh
-./sqitch add rename_function_utils_notify_row --template rename_function --set oldschema=utils --set oldname=notify_row --set newschema=utils --set newname=notify_row --note 'Rename utils.notify_row function'
-```
-
-Edit function (rework):
-```sh
-sqitch rework change_name --note 'Change change_name'
 ```
 
 Drop function (edit the revert script to add the function back):
 ```sh
 ```
 
+To edit a function, just edit the "create function" deploy script and sqitch
+rebase, or if the project has been deployed to another environment, do a sqitch
+rework.
+
 ## Triggers
 
 Create trigger:
 ```sh
-./sqitch add create_trigger_data_team_changed --template create_trigger --set table_schema=data --set table_name=team --set trigger_name=team_changed --note 'Add data.team_changed trigger'
+create-trigger [schema] [table] [trigger_name] [function_name]
 ```
 
 Drop trigger:
