@@ -61,7 +61,7 @@ function create-function {
     local change_name=${3:-create_function_${schema_name}_${function_name}}
     sqitch add $change_name \
         --template create_function \
-        --set schema=$schema_name \
+        --set schema_name=$schema_name \
         --set function_name=$function_name \
         --note \'"Add ${schema_name}.${function_name} function"\' \
     && show-files $change_name
