@@ -12,7 +12,7 @@ function create-schema {
     sqitch add $change_name \
         --template create_schema \
         --set name=$name \
-        --note \'"Create $name schema"\'
+        --note \'"Create $name schema"\' \
     && show-files $change_name
 }
 
@@ -22,7 +22,7 @@ function drop-schema {
     sqitch add $change_name \
         --template drop_schema \
         --set name=$name \
-        --note \'"Drop $name schema"\'
+        --note \'"Drop $name schema"\' \
     && show-files $change_name
 }
 
@@ -38,7 +38,6 @@ function create-table {
         --set table_name=$table_name \
         --note \'"Create ${schema_name}.${table_name} table"\' \
     && show-files $change_name
-    && echo "TODO: Edit the table structure in deploy/${change_name}.sql" >&2
 }
 
 function drop-table {
@@ -50,7 +49,7 @@ function drop-table {
         --set schema_name=$schema_name \
         --set table_name=$table_name \
         --note \'"Drop ${schema_name}.${table_name} table"\' \
-    && show-files $change_name
+    && show-files $change_name \
     && echo "TODO: Recreate the table in revert/${change_name}.sql" >&2
 }
 
@@ -64,7 +63,6 @@ function create-function {
         --template create_function \
         --set schema=$schema_name \
         --set function_name=$function_name \
-        --note \'"Add ${schema_name}.${function_name} function"\'
+        --note \'"Add ${schema_name}.${function_name} function"\' \
     && show-files $change_name
-    && echo "TODO: Edit the function in deploy/${change_name}.sql" >&2
 }
