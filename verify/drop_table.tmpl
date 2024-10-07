@@ -4,8 +4,8 @@ BEGIN
 assert (
     select not exists (
         select 1 from information_schema.tables
-        where table_schema = '[% schema %]'
-        and table_name='[% name %]'
+        where table_schema = '[% schema_name %]'
+        and table_name='[% table_name %]'
     )
 );
 
