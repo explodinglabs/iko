@@ -5,7 +5,7 @@ assert (
     select exists (
         select 1 from information_schema.tables
         where table_schema = '[% schema %]'
-        and table='[% table %]'
+        and table_name = '[% table %]'
     )
 );
 

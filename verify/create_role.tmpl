@@ -1,6 +1,12 @@
 do $$
 BEGIN
 
-assert (select exists (select 1 from information_schema.enabled_roles where role = '[% role %]'));
+assert (
+    select exists (
+        select 1
+        from information_schema.enabled_roles
+        where role_name = '[% role %]'
+    )
+);
 
 END; $$;

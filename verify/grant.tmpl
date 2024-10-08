@@ -5,9 +5,9 @@ assert (
     select exists (
         select 1 from information_schema.table_privileges
         where lower(privilege_type) = '[% type %]'
-        and table_schema='[% schema %]'
+        and table_schema = '[% schema %]'
         and table = '[% table %]'
-        and grantee='[% role %]'
+        and grantee = '[% role %]'
     )
 );
 

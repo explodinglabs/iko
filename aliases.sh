@@ -57,6 +57,58 @@ function drop-table {
     && echo "TODO: Recreate the table in revert/${change}.sql" >&2
 }
 
+# Roles
+
+function create-role {
+    local role=$1
+    local change=${2:-create_role_${role}}
+    sqitch add $change \
+        --template create_role \
+        --set role=$role \
+        --note \'"Create ${role} role"\' \
+    && show-files $change
+}
+
+function grant-role {
+    local from_role=$1
+    local to_role=$2
+    local change=${3:-grant_${from_role}_to_${to_role}}
+    sqitch add $change \
+        --template grant_role \
+        --set role1=$role1 \
+        --set role2=$role2 \
+        --note \'"Grant ${role1} to ${role2}"\' \
+    && show-files $change
+}
+
+function grant-usage {
+    local role=$1
+    local schema=$2
+    local change=${3:-grant_usage_${role}_on_${schema}}
+    sqitch add $change \
+        --template grant_usage \
+        --set role=$role \
+        --set schema=$schema \
+        --note \'"Grant ${role} usage of ${schema} schema"\' \
+    && show-files $change
+}
+
+function grant {
+    local role=$1
+    local type=$2
+    local schema=$3
+    local table=$4
+    local change=${5:-grant_${role}_on_${schema}}
+    sqitch add $change \
+        --template grant \
+        --set role=$role \
+        --set type=$type \
+        --set schema=$schema \
+        --set table=$table \
+        --note \'"Grant ${role} to ${type} to ${schema}${table}"\' \
+    && show-files $change
+}
+
 # Functions
 
 function create-function {
