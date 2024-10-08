@@ -75,21 +75,21 @@ function grant-role {
     local change=${3:-grant_${from_role}_to_${to_role}}
     sqitch add $change \
         --template grant_role \
-        --set role1=$role1 \
-        --set role2=$role2 \
-        --note \'"Grant ${role1} to ${role2}"\' \
+        --set from_role=$from_role \
+        --set to_role=$to_role \
+        --note \'"Grant ${from_role} to ${to_role}"\' \
     && show-files $change
 }
 
 function grant-usage {
     local role=$1
-    local schema=$2
-    local change=${3:-grant_usage_${role}_on_${schema}}
+    local to=$2
+    local change=${3:-grant_usage_on_${what// /_}_to_${role}}
     sqitch add $change \
         --template grant_usage \
         --set role=$role \
-        --set schema=$schema \
-        --note \'"Grant ${role} usage of ${schema} schema"\' \
+        --set what=$what \
+        --note \'"Grant usage on ${what}"\' \
     && show-files $change
 }
 
@@ -98,14 +98,14 @@ function grant {
     local type=$2
     local schema=$3
     local table=$4
-    local change=${5:-grant_${role}_on_${schema}}
+    local change=${5:-grant_${role}_${type}_on_${schema}_${table}}
     sqitch add $change \
         --template grant \
         --set role=$role \
         --set type=$type \
         --set schema=$schema \
         --set table=$table \
-        --note \'"Grant ${role} to ${type} to ${schema}${table}"\' \
+        --note \'"Grant ${role} ${type} on ${schema}.${table}"\' \
     && show-files $change
 }
 
