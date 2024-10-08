@@ -4,8 +4,8 @@ BEGIN
 assert (
     select exists (
         select 1 from information_schema.routines
-        where specific_schema = '[% schema_name %]'
-        and routine_name = '[% function_name %]'
+        where specific_schema = '[% schema %]'
+        and routine_name = '[% function %]'
     )
 );
 

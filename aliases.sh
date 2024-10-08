@@ -1,43 +1,43 @@
 function show-files {
-    local change_name=$1
-    cat deploy/${change_name}.sql
-    # for i in deploy verify revert; do cat $i/${change_name}.sql; done
+    local change=$1
+    cat deploy/${change}.sql
+    # for i in deploy verify revert; do cat $i/${change}.sql; done
 }
 
 # Schema
 
 function create-schema {
-    local name=$1
-    local change_name=${2:-create_schema_$name}
-    sqitch add $change_name \
+    local schema=$1
+    local change=${2:-create_schema_$schema}
+    sqitch add $change \
         --template create_schema \
-        --set name=$name \
-        --note \'"Create $name schema"\' \
-    && show-files $change_name
+        --set schema=$schema \
+        --note \'"Create $schema schema"\' \
+    && show-files $change
 }
 
 function drop-schema {
-    local name=$1
-    local change_name=${2:-drop_schema_$name}
-    sqitch add $change_name \
+    local schema=$1
+    local change=${2:-drop_schema_$schema}
+    sqitch add $change \
         --template drop_schema \
-        --set name=$name \
-        --note \'"Drop $name schema"\' \
-    && show-files $change_name
+        --set schema=$schema \
+        --note \'"Drop $schema schema"\' \
+    && show-files $change
 }
 
 # Tables
 
 function create-table {
-    local schema_name=$1
-    local table_name=$2
-    local change_name=${3:-create_table_${schema_name}_${table_name}}
-    sqitch add $change_name \
+    local schema=$1
+    local table=$2
+    local change=${3:-create_table_${schema}_${table}}
+    sqitch add $change \
         --template create_table \
-        --set schema_name=$schema_name \
-        --set table_name=$table_name \
-        --note \'"Create ${schema_name}.${table_name} table"\' \
-    && show-files $change_name
+        --set schema=$schema \
+        --set table=$table \
+        --note \'"Create ${schema}.${table} table"\' \
+    && show-files $change
 }
 
 function add-column {
@@ -45,58 +45,58 @@ function add-column {
 }
 
 function drop-table {
-    local schema_name=$1
-    local table_name=$2
-    local change_name=${3:-drop_table_${schema_name}_${table_name}}
-    sqitch add $change_name \
+    local schema=$1
+    local table=$2
+    local change=${3:-drop_table_${schema}_${table}}
+    sqitch add $change \
         --template drop_table \
-        --set schema_name=$schema_name \
-        --set table_name=$table_name \
-        --note \'"Drop ${schema_name}.${table_name} table"\' \
-    && show-files $change_name \
-    && echo "TODO: Recreate the table in revert/${change_name}.sql" >&2
+        --set schema=$schema \
+        --set table=$table \
+        --note \'"Drop ${schema}.${table} table"\' \
+    && show-files $change \
+    && echo "TODO: Recreate the table in revert/${change}.sql" >&2
 }
 
 # Functions
 
 function create-function {
-    local schema_name=$1
-    local function_name=$2
-    local change_name=${3:-create_function_${schema_name}_${function_name}}
-    sqitch add $change_name \
+    local schema=$1
+    local function=$2
+    local change=${3:-create_function_${schema}_${function}}
+    sqitch add $change \
         --template create_function \
-        --set schema_name=$schema_name \
-        --set function_name=$function_name \
-        --note \'"Add ${schema_name}.${function_name} function"\' \
-    && show-files $change_name
+        --set schema=$schema \
+        --set function=$function \
+        --note \'"Add ${schema}.${function} function"\' \
+    && show-files $change
 }
 
 # Triggers
 
 function create-trigger {
-    local schema_name=$1
-    local table_name=$2
-    local trigger_name=$3
-    local function_name=$4
-    local change_name=${5:-create_trigger_${schema_name}_${table_name}_${trigger_name}}
-    sqitch add $change_name \
+    local schema=$1
+    local table=$2
+    local trigger=$3
+    local function=$4
+    local change=${5:-create_trigger_${schema}_${table}_${trigger}}
+    sqitch add $change \
          --template create_trigger \
-         --set schema_name=$schema_name \
-         --set table_name=$table_name \
-         --set trigger_name=$trigger_name \
-         --set function_name=$function_name \
-         --note \'"Add trigger $trigger_name on ${schema_name}.${table_name}"\' \
-    && show-files $change_name
+         --set schema=$schema \
+         --set table=$table \
+         --set trigger=$trigger \
+         --set function=$function \
+         --note \'"Add trigger $trigger on ${schema}.${table}"\' \
+    && show-files $change
 }
 
 # Extensions
 
 function create-extension {
-    local name=$1
-    local change_name=${2:-create_extension_$name}
-    sqitch add $change_name \
+    local extension=$1
+    local change=${2:-create_extension_$extension}
+    sqitch add $change \
         --template create_extension \
-        --set name=$name \
-        --note \'"Create $name extension"\' \
-    && show-files $change_name
+        --set extension=$extension \
+        --note \'"Create $extension extension"\' \
+    && show-files $change
 }

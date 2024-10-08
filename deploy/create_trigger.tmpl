@@ -1,7 +1,7 @@
 BEGIN;
 
-create trigger [% trigger_name %]
-before update on [% schema_name %].[% table_name %]
-for each row execute procedure [% schema_name %].[% function_name %]();
+create trigger [% trigger %]
+before update on [% schema %].[% table %]
+for each row execute procedure [% schema %].[% function %]();
 
 COMMIT;

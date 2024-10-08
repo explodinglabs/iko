@@ -1,6 +1,6 @@
 do $$
 BEGIN
 
-assert (select exists (select 1 from pg_extension where extname='[% name %]'));
+assert (select exists (select 1 from pg_extension where extname='[% extension %]'));
 
 END; $$;
