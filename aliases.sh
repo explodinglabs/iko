@@ -77,38 +77,38 @@ function create-role {
     && show-files $change
 }
 
-function grant-membership {
+function grant-role-membership {
     local role=$1
     local role_specification=$2
     local change=${3:-grant_${role}_to_${role_specification}}
     sqitch add $change \
-        --template grant_membership \
+        --template grant_role_membership \
         --set role=$role \
         --set role_specification=$role_specification \
         --note \'"Grant ${role} to ${role_specification}"\' \
     && show-files $change
 }
 
-function grant-schema {
+function grant-schema-usage {
     local schema=$1
     local role=$2
     local change=${3:-grant_${schema}_to_${role}}
     sqitch add $change \
-        --template grant_schema \
+        --template grant_schema_usage \
         --set role=$role \
         --set schema=$schema \
         --note \'"Grant ${schema} to ${role}"\' \
     && show-files $change
 }
 
-function grant-table {
+function grant-table-privilege {
     local type=$1
     local schema=$2
     local table=$3
     local role=$4
     local change=${5:-grant_${type}_on_${schema}_${table}_to_${role}}
     sqitch add $change \
-        --template grant_table \
+        --template grant_table_privilege \
         --set role=$role \
         --set type=$type \
         --set schema=$schema \
