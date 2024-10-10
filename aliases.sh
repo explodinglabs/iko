@@ -80,7 +80,7 @@ function create-role {
 function grant-role-membership {
     local role=$1
     local role_specification=$2
-    local change=${3:-grant_${role}_to_${role_specification}}
+    local change=${3:-grant_role_membership_${role}_to_${role_specification}}
     sqitch add $change \
         --template grant_role_membership \
         --set role=$role \
@@ -92,7 +92,7 @@ function grant-role-membership {
 function grant-schema-usage {
     local schema=$1
     local role=$2
-    local change=${3:-grant_${schema}_to_${role}}
+    local change=${3:-grant_schema_usage_${schema}_to_${role}}
     sqitch add $change \
         --template grant_schema_usage \
         --set role=$role \
@@ -106,7 +106,7 @@ function grant-table-privilege {
     local schema=$2
     local table=$3
     local role=$4
-    local change=${5:-grant_${type}_on_${schema}_${table}_to_${role}}
+    local change=${5:-grant_table_privilege_${type}_on_${schema}_${table}_to_${role}}
     sqitch add $change \
         --template grant_table_privilege \
         --set role=$role \
