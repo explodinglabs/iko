@@ -77,12 +77,12 @@ function create-role {
     && show-files $change
 }
 
-function grant-role {
+function grant-membership {
     local role=$1
     local role_specification=$2
     local change=${3:-grant_${role}_to_${role_specification}}
     sqitch add $change \
-        --template grant_role \
+        --template grant_membership \
         --set role=$role \
         --set role_specification=$role_specification \
         --note \'"Grant ${role} to ${role_specification}"\' \
