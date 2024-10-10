@@ -60,7 +60,7 @@ function drop-table {
 # Roles
 
 function create-authenticator {
-    local change=${1:-create_authenticator}
+    local change=${1:-create_role_authenticator}
     sqitch add $change \
         --template create_authenticator \
         --note \'"Create authenticator"\' \
