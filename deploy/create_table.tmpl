@@ -1,7 +1,7 @@
 BEGIN;
 
 create table [% schema %].[% table %] (
-    id serial primary key,
+    id bigint generated always as identity,
     created_at timestamp not null default now(),
     updated_at timestamp not null default now(),
     name text

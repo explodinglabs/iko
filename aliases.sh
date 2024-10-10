@@ -59,6 +59,14 @@ function drop-table {
 
 # Roles
 
+function create-authenticator {
+    local change=${1:-create_authenticator}
+    sqitch add $change \
+        --template create_authenticator \
+        --note \'"Create authenticator"\' \
+    && show-files $change
+}
+
 function create-role {
     local role=$1
     local change=${2:-create_role_${role}}
@@ -70,42 +78,42 @@ function create-role {
 }
 
 function grant-role {
-    local from_role=$1
-    local to_role=$2
-    local change=${3:-grant_${from_role}_to_${to_role}}
+    local role=$1
+    local role_specification=$2
+    local change=${3:-grant_${role}_to_${role_specification}}
     sqitch add $change \
         --template grant_role \
-        --set from_role=$from_role \
-        --set to_role=$to_role \
-        --note \'"Grant ${from_role} to ${to_role}"\' \
-    && show-files $change
-}
-
-function grant-usage {
-    local role=$1
-    local to=$2
-    local change=${3:-grant_usage_on_${what// /_}_to_${role}}
-    sqitch add $change \
-        --template grant_usage \
         --set role=$role \
-        --set what=$what \
-        --note \'"Grant usage on ${what}"\' \
+        --set role_specification=$role_specification \
+        --note \'"Grant ${role} to ${role_specification}"\' \
     && show-files $change
 }
 
-function grant {
-    local role=$1
-    local type=$2
-    local schema=$3
-    local table=$4
-    local change=${5:-grant_${role}_${type}_on_${schema}_${table}}
+function grant-schema {
+    local schema=$1
+    local role=$2
+    local change=${3:-grant_${schema}_to_${role}}
     sqitch add $change \
-        --template grant \
+        --template grant_schema \
+        --set role=$role \
+        --set schema=$schema \
+        --note \'"Grant ${schema} to ${role}"\' \
+    && show-files $change
+}
+
+function grant-table {
+    local type=$1
+    local schema=$2
+    local table=$3
+    local role=$4
+    local change=${5:-grant_${type}_on_${schema}_${table}_to_${role}}
+    sqitch add $change \
+        --template grant_table \
         --set role=$role \
         --set type=$type \
         --set schema=$schema \
         --set table=$table \
-        --note \'"Grant ${role} ${type} on ${schema}.${table}"\' \
+        --note \'"Grant ${type} on ${schema}.${table} to ${role}"\' \
     && show-files $change
 }
 

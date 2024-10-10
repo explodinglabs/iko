@@ -1,5 +1,5 @@
 BEGIN;
 
-revoke [% from_role %] from [% to_role %];
+revoke [% role_specification %] from [% role %];
 
 COMMIT;
