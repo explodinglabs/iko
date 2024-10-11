@@ -136,15 +136,15 @@ function create-function {
 function create-trigger {
     local schema=$1
     local table=$2
-    local trigger=$3
-    local function=$4
+    local function=$3
+    local trigger=$4
     local change=${5:-create_trigger_${schema}_${table}_${trigger}}
     sqitch add $change \
          --template create_trigger \
          --set schema=$schema \
          --set table=$table \
-         --set trigger=$trigger \
          --set function=$function \
+         --set trigger=$trigger \
          --note \'"Add trigger $trigger on ${schema}.${table}"\' \
     && show-files $change
 }

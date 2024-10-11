@@ -4,7 +4,7 @@ create table [% schema %].[% table %] (
     id bigint generated always as identity,
     created_at timestamp not null default now(),
     updated_at timestamp not null default now(),
-    name text
+    name text not null
 );
 
 COMMIT;
