@@ -1,0 +1,12 @@
+do $$
+BEGIN
+
+assert (
+    select exists (
+        select 1 from amqp.broker
+        where broker_id = 1
+        and host = 'rabbitmq'
+    )
+);
+
+END; $$;

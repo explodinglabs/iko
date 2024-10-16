@@ -1,3 +1,7 @@
+#!/bin/bash
+shopt -s expand_aliases
+alias sqitch='./sqitch'
+
 function show-files {
     local change=$1
     cat deploy/${change}.sql
@@ -41,6 +45,7 @@ function create-table {
 }
 
 function add-column {
+    :
     # sqitch add alter_table_foo_bar_add_baz --template alter_table_add_column --set schema=foo --set table=bar --set column_name=baz --set column_type=integer --note 'Add foo.bar column baz'
 }
 
@@ -60,7 +65,7 @@ function drop-table {
 # Roles
 
 function create-authenticator {
-    local change=${1:-create_role_authenticator}
+    local change=${1:-create_authenticator}
     sqitch add $change \
         --template create_authenticator \
         --note \'"Create authenticator"\' \
@@ -158,5 +163,15 @@ function create-extension {
         --template create_extension \
         --set extension=$extension \
         --note \'"Create $extension extension"\' \
+    && show-files $change
+}
+
+# Data
+
+function insert-broker {
+    local change=${1:-insert_broker}
+    sqitch add $change \
+        --template insert_broker \
+        --note \'"Insert broker"\' \
     && show-files $change
 }
