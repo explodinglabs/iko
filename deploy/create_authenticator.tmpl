@@ -1,5 +1,5 @@
 BEGIN;
 
-create role authenticator login noinherit nocreatedb nocreaterole nosuperuser;
+create role authenticator noinherit login password 'mysecretpassword';
 
 COMMIT;
