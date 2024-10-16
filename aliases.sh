@@ -165,13 +165,3 @@ function create-extension {
         --note \'"Create $extension extension"\' \
     && show-files $change
 }
-
-# Data
-
-function insert-broker {
-    local change=${1:-insert_broker}
-    sqitch add $change \
-        --template insert_broker \
-        --note \'"Insert broker"\' \
-    && show-files $change
-}
