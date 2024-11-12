@@ -1,6 +1,6 @@
 do $$
 BEGIN
 
-assert (select has_function_privilege('[% role %]', '[% function %]', 'execute'));
+assert (select has_function_privilege('[% role %]', '[% schema %].[% function %]()', 'execute'));
 
 END; $$;

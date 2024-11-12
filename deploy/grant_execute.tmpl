@@ -1,5 +1,5 @@
 BEGIN;
 
-grant execute on [% function %] to [% role %];
+grant execute on function [% schema %].[% function %] to [% role %];
 
 COMMIT;

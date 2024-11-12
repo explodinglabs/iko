@@ -1,5 +1,5 @@
 BEGIN;
 
-revoke execute on [% function %] from [% role %];
+revoke execute on function [% schema %].[% function %] from [% role %];
 
 COMMIT;

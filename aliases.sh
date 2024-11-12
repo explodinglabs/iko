@@ -64,11 +64,11 @@ function drop-table {
 
 # Roles
 
-function create-authenticator {
-    local change=${1:-create_authenticator}
+function create-role-authenticator {
+    local change=${1:-create_role_authenticator}
     sqitch add $change \
-        --template create_authenticator \
-        --note \'"Create authenticator"\' \
+        --template create_role_authenticator \
+        --note \'"Create role authenticator"\' \
     && show-files $change
 }
 
@@ -123,14 +123,16 @@ function grant-table-privilege {
 }
 
 function grant-execute {
-    local function=$1
-    local role=$2
-    local change=${3:-grant_execute_${function}_to_${role}}
+    local schema=$1
+    local function=$2
+    local role=$3
+    local change=${4:-grant_execute_${schema}_${function}_to_${role}}
     sqitch add $change \
         --template grant_execute \
+        --set schema=$schema \
         --set function=$function \
         --set role=$role \
-        --note \'"Grant ${schema} to ${role}"\' \
+        --note \'"Grant execute on ${schema}.${function} to ${role}"\' \
     && show-files $change
 }
 
