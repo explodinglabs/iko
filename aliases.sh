@@ -122,6 +122,18 @@ function grant-table-privilege {
     && show-files $change
 }
 
+function grant-execute {
+    local function=$1
+    local role=$2
+    local change=${3:-grant_execute_${function}_to_${role}}
+    sqitch add $change \
+        --template grant_execute \
+        --set function=$function \
+        --set role=$role \
+        --note \'"Grant ${schema} to ${role}"\' \
+    && show-files $change
+}
+
 # Functions
 
 function create-function {
