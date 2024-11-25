@@ -1,0 +1,11 @@
+begin;
+
+create function api.jwt_test (out token text)
+as $$
+  select public.sign(row_to_json(r), current_setting('app.jwt_secret')) as token
+  from (
+    select 'my_role'::text as role, extract(epoch from now())::integer + 300 as exp) r;
+$$
+language sql;
+
+commit;
