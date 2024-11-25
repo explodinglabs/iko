@@ -1,0 +1,9 @@
+BEGIN;
+
+create table auth.users (
+  email text primary key check (email ~* '^.+@.+\..+$'),
+  pass text not null check (length(pass) < 512),
+  role name not null check (length(role) < 512)
+);
+
+COMMIT;
