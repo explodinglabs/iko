@@ -1,0 +1,16 @@
+begin;
+
+create function auth.user_role (email text, pass text)
+  returns name
+  language plpgsql
+  as $$
+begin
+  return (
+    select role
+    from auth.users
+    where users.email = user_role.email
+      and users.pass = crypt(user_role.pass, users.pass));
+end;
+$$;
+
+commit;

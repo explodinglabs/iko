@@ -62,11 +62,11 @@ function drop-table {
     && echo "TODO: Recreate the table in revert/${change}.sql" >&2
 }
 
-function create-table-users {
-  local change=${1:-create_table_users}
+function create-table-auth-users {
+  local change=${1:-create_table_auth_users}
   sqitch add $change \
-    --template create_table_users \
-    --note \'"Create function create_table_users"\' \
+    --template create_table_auth_users \
+    --note \'"Create function auth.create_table_auth_users"\' \
     && show-files $change
 }
 
@@ -158,19 +158,27 @@ function create-function {
     && show-files $change
 }
 
-function create-function-check-role-exists {
-  local change=${1:-create_function_check_role_exists}
+function create-function-auth-check-role-exists {
+  local change=${1:-create_function_auth_check_role_exists}
   sqitch add $change \
-    --template create_function_check_role_exists \
-    --note \'"Create function check_role_exists"\' \
+    --template create_function_auth_check_role_exists \
+    --note \'"Create function auth.check_role_exists"\' \
     && show-files $change
 }
 
-function create-function-encrypt-pass {
-  local change=${1:-create_function_encrypt_pass}
+function create-function-auth-encrypt-pass {
+  local change=${1:-create_function_auth_encrypt_pass}
   sqitch add $change \
-    --template create_function_encrypt_pass \
-    --note \'"Create function encrypt_pass"\' \
+    --template create_function_auth_encrypt_pass \
+    --note \'"Create function auth.encrypt_pass"\' \
+    && show-files $change
+}
+
+function create-function-auth-user-role {
+  local change=${1:-create_function_auth_user_role}
+  sqitch add $change \
+    --template create_function_auth_user_role \
+    --note \'"Create function auth.user_role"\' \
     && show-files $change
 }
 
@@ -192,19 +200,19 @@ function create-trigger {
     && show-files $change
 }
 
-function create-trigger-ensure-user-role-exists {
-  local change=${1:-create_trigger_ensure_user_role_exists}
+function create-trigger-ensure-auth-user-role-exists {
+  local change=${1:-create_trigger_auth_ensure_user_role_exists}
   sqitch add $change \
-    --template create_trigger_ensure_user_role_exists \
-    --note \'"Create trigger ensure_user_role_exists"\' \
+    --template create_trigger_auth_ensure_user_role_exists \
+    --note \'"Create trigger auth.ensure_user_role_exists"\' \
     && show-files $change
 }
 
-function create-trigger-encrypt-pass {
-  local change=${1:-create_trigger_encrypt_pass}
+function create-trigger-auth-encrypt-pass {
+  local change=${1:-create_trigger_auth_encrypt_pass}
   sqitch add $change \
-    --template create_trigger_encrypt_pass \
-    --note \'"Create trigger encrypt_pass"\' \
+    --template create_trigger_auth_encrypt_pass \
+    --note \'"Create trigger auth.encrypt_pass"\' \
     && show-files $change
 }
 
