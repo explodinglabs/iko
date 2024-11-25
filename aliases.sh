@@ -166,6 +166,14 @@ function create-function-check-role-exists {
     && show-files $change
 }
 
+function create-function-encrypt-pass {
+    local change=${1:-create_function_encrypt_pass}
+    sqitch add $change \
+        --template create_function_encrypt_pass \
+        --note \'"Create function encrypt_pass"\' \
+    && show-files $change
+}
+
 # Triggers
 
 function create-trigger {
