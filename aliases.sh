@@ -200,6 +200,14 @@ function create-trigger-ensure-user-role-exists {
     && show-files $change
 }
 
+function create-trigger-encrypt-pass {
+    local change=${1:-create_trigger_encrypt_pass}
+    sqitch add $change \
+        --template create_trigger_encrypt_pass \
+        --note \'"Create trigger encrypt_pass"\' \
+    && show-files $change
+}
+
 # Extensions
 
 function create-extension {
