@@ -1,0 +1,7 @@
+BEGIN;
+
+create constraint trigger ensure_user_role_exists
+  after insert or update on auth.users
+  for each row execute procedure auth.check_role_exists();
+
+COMMIT;

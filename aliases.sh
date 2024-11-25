@@ -184,6 +184,14 @@ function create-trigger {
     && show-files $change
 }
 
+function create-trigger-ensure-user-role-exists {
+    local change=${1:-create_trigger_ensure_user_role_exists}
+    sqitch add $change \
+        --template create_trigger_ensure_user_role_exists \
+        --note \'"Create trigger ensure_user_role_exists"\' \
+    && show-files $change
+}
+
 # Extensions
 
 function create-extension {
