@@ -62,6 +62,14 @@ function drop-table {
     && echo "TODO: Recreate the table in revert/${change}.sql" >&2
 }
 
+function create-table-users {
+    local change=${1:-create_table_users}
+    sqitch add $change \
+        --template create_table_users \
+        --note \'"Create function create_table_users"\' \
+    && show-files $change
+}
+
 # Roles
 
 function create-role-authenticator {
@@ -147,6 +155,14 @@ function create-function {
         --set schema=$schema \
         --set function=$function \
         --note \'"Add ${schema}.${function} function"\' \
+    && show-files $change
+}
+
+function create-function-check-role-exists {
+    local change=${1:-create_function_check_role_exists}
+    sqitch add $change \
+        --template create_function_check_role_exists \
+        --note \'"Create function check_role_exists"\' \
     && show-files $change
 }
 
