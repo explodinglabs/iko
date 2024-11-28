@@ -216,7 +216,7 @@ function create-trigger {
     && show-files $change
 }
 
-function create-trigger-ensure-auth-user-role-exists {
+function create-trigger-auth-ensure-user-role-exists {
   local change=${1:-create_trigger_auth_ensure_user_role_exists}
   sqitch add $change \
     --template create_trigger_auth_ensure_user_role_exists \
