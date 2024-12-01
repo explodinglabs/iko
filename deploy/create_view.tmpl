@@ -1,8 +1,8 @@
-BEGIN;
+begin;
 
 create view [% schema %].[% view %] as
 select * from data.foo;  -- Edit!
 
 alter view [% schema %].[% view %] owner to api_views_owner;
 
-COMMIT;
+commit;

@@ -1,7 +1,7 @@
-BEGIN;
+begin;
 
 create trigger [% trigger %]
 before update on [% schema %].[% table %]
 for each row execute procedure [% schema %].[% function %]();
 
-COMMIT;
+commit;

@@ -1,4 +1,4 @@
-BEGIN;
+begin;
 
 create table auth.users (
   email text primary key check (email ~* '^.+@.+\..+$'),
@@ -6,4 +6,4 @@ create table auth.users (
   role name not null check (length(role) < 512)
 );
 
-COMMIT;
+commit;

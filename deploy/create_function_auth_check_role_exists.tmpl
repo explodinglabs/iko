@@ -1,4 +1,4 @@
-BEGIN;
+begin;
 
 create function auth.check_role_exists () returns trigger as $$
 begin
@@ -10,4 +10,4 @@ begin
 end
 $$ language plpgsql;
 
-COMMIT;
+commit;
