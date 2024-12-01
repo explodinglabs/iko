@@ -184,19 +184,19 @@ function create-function-auth-user-role {
     && show-files $change
 }
 
-function create-function-public-jwt-test {
-  local change=${1:-create_function_public_jwt_test}
+function create-function-api-jwt-test {
+  local change=${1:-create_function_api_jwt_test}
   sqitch add $change \
-    --template create_function_public_jwt_test \
-    --note \'"Create function public.jwt_test"\' \
+    --template create_function_api_jwt_test \
+    --note \'"Create function api.jwt_test"\' \
     && show-files $change
 }
 
-function create-function-public-login {
-  local change=${1:-create_function_public_login}
+function create-function-api-login {
+  local change=${1:-create_function_api_login}
   sqitch add $change \
-    --template create_function_public_login \
-    --note \'"Create function public.login"\' \
+    --template create_function_api_login \
+    --note \'"Create function api.login"\' \
     && show-files $change
 }
 

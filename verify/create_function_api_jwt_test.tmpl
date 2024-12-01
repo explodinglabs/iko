@@ -4,7 +4,7 @@ begin
     select exists (
         select 1
         from information_schema.routines
-        where specific_schema = 'public'
-          and routine_name = 'login'));
+        where specific_schema = 'api'
+          and routine_name = 'jwt_test'));
 end;
 $$;
