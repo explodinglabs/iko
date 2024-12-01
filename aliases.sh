@@ -133,12 +133,14 @@ function grant-table-privilege {
 function grant-execute {
   local schema=$1
   local function=$2
-  local role=$3
-  local change=${4:-grant_execute_${schema}_${function}_to_${role}}
+  local params=$3
+  local role=$4
+  local change=${5:-grant_execute_${schema}_${function}_to_${role}}
   sqitch add $change \
     --template grant_execute \
     --set schema=$schema \
     --set function=$function \
+    --set params=$params \
     --set role=$role \
     --note \'"Grant execute on ${schema}.${function} to ${role}"\' \
     && show-files $change
@@ -182,19 +184,19 @@ function create-function-auth-user-role {
     && show-files $change
 }
 
-function create-function-api-jwt-test {
-  local change=${1:-create_function_api_jwt_test}
+function create-function-public-jwt-test {
+  local change=${1:-create_function_public_jwt_test}
   sqitch add $change \
-    --template create_function_api_jwt_test \
-    --note \'"Create function api.jwt_test"\' \
+    --template create_function_public_jwt_test \
+    --note \'"Create function public.jwt_test"\' \
     && show-files $change
 }
 
-function create-function-api-login {
-  local change=${1:-create_function_api_login}
+function create-function-public-login {
+  local change=${1:-create_function_public_login}
   sqitch add $change \
-    --template create_function_api_login \
-    --note \'"Create function api.login"\' \
+    --template create_function_public_login \
+    --note \'"Create function public.login"\' \
     && show-files $change
 }
 

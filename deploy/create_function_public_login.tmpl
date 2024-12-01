@@ -1,6 +1,6 @@
 begin;
 
-create function api.login (email text, pass text, out token text)
+create function public.login (email text, pass text, out token text)
 as $$
 declare
   _role name;
@@ -11,10 +11,9 @@ begin
     raise invalid_password
     using message = 'invalid user or password';
   end if;
-    select sign(row_to_json(r), 'reallyreallyreallyreallyverysafe') as token
-    from (
-      select _role as role, login.email as email, extract(epoch from now())::integer + 60 * 60 as exp) r into token;
-  end;
+  select sign(row_to_json(r), 'reallyreallyreallyreallyverysafe') as token
+    from (select _role as role, login.email as email, extract(epoch from now())::integer + 60 * 60 as exp) r into token;
+end;
 $$
 language plpgsql
 security definer;
