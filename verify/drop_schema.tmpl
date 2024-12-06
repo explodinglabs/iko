@@ -1,13 +1,13 @@
 do $$
 begin
 
-assert (
+  assert (
     select not exists (
-        select 1
-        from information_schema.schemata
-        where schema_name = '[% schema %]'
+      select 1
+      from information_schema.schemata
+      where schema_name = '[% schema %]'
     )
-);
+  );
 
 end;
 $$;

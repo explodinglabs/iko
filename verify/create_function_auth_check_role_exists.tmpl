@@ -1,12 +1,12 @@
 do $$
 begin
 
-assert (
+  assert (
     select exists (
-        select 1 from information_schema.routines
-        where specific_schema = 'auth'
-        and routine_name = 'check_role_exists'
+      select 1 from information_schema.routines
+      where specific_schema = 'auth'
+      and routine_name = 'check_role_exists'
     )
-);
+  );
 
 end; $$;

@@ -1,20 +1,20 @@
 do $$
 begin
 
-assert (
+  assert (
     select not exists (
-        select 1 from information_schema.routines
-        where specific_schema = '[% oldschema %]'
-        and routine_name = '[% oldname %]'
+      select 1 from information_schema.routines
+      where specific_schema = '[% oldschema %]'
+      and routine_name = '[% oldname %]'
     )
-);
+  );
 
-assert (
+  assert (
     select exists (
-        select 1 from information_schema.routines
-        where specific_schema = '[% newschema %]'
-        and routine_name = '[% newname %]'
+      select 1 from information_schema.routines
+      where specific_schema = '[% newschema %]'
+      and routine_name = '[% newname %]'
     )
-);
+  );
 
 end; $$;
