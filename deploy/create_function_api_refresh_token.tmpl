@@ -10,8 +10,7 @@ begin
     select 1
     from auth.refresh_token
     where token = refresh_token
-      and created_at > current_date - interval '2 minutes'
-    )
+    and created_at > current_date - interval '2 minutes'
   ) into valid;
 
   if not valid then
