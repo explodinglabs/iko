@@ -62,11 +62,19 @@ function drop-table {
     && echo "TODO: Recreate the table in revert/${change}.sql" >&2
 }
 
-function create-table-auth-users {
-  local change=${1:-create_table_auth_users}
+function create-table-auth-user {
+  local change=${1:-create_table_auth_user}
   sqitch add $change \
-    --template create_table_auth_users \
-    --note \'"Create function auth.create_table_auth_users"\' \
+    --template create_table_auth_user \
+    --note \'"Create function auth.create_table_auth_user"\' \
+    && show-files $change
+}
+
+function create-table-auth-refresh-token {
+  local change=${1:-create_table_auth_refresh_token}
+  sqitch add $change \
+    --template create_table_auth_refresh_token \
+    --note \'"Create function auth.create_table_auth_refresh_token"\' \
     && show-files $change
 }
 
@@ -197,6 +205,14 @@ function create-function-api-login {
   sqitch add $change \
     --template create_function_api_login \
     --note \'"Create function api.login"\' \
+    && show-files $change
+}
+
+function create-function-api-refresh-token {
+  local change=${1:-create_function_api_refresh_token}
+  sqitch add $change \
+    --template create_function_api_refresh_token \
+    --note \'"Create function api.refresh_token"\' \
     && show-files $change
 }
 

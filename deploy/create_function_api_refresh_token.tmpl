@@ -1,14 +1,13 @@
 begin;
 
-create function api.login(email text, pass text)
+create function api.refresh_token(email text, pass text)
 as $$
 declare
   _role name;
   access_token text;
   refresh_token text;
 begin
-  -- check email and password
-  select auth.user_role (email, pass) into _role;
+  select 1 from auth.refresh_token where 
 
   if _role is null then
     raise invalid_password
