@@ -7,7 +7,7 @@ create function auth.user_role (username text, password text)
 begin
   return (
     select role
-    from auth.users
+    from auth.user
     where user.username = user_role.username
       and user.password = crypt(user_role.password, user.password));
 end;

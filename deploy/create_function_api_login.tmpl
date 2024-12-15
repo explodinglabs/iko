@@ -1,32 +1,38 @@
 begin;
 
-create function api.login(username text, password text) returns text
+create function api.login(username text, password text) returns void
 as $$
 declare
   role name;
   access_token text;
   refresh_token text;
 begin
-  -- check username and password
-  select auth.user_role (username, password) into role;
-  if role is null then
+  -- Check username and password
+  select role
+  from auth.user
+  where user.username = user_role.username
+    and user.password = crypt(user_role.password, user.password))
+  into role_;
+
+  if role_ is null then
     raise invalid_password
     using message = 'Invalid user or password';
   end if;
 
   -- Generate a JWT access token, that expires in one hour
   select public.sign(row_to_json(r), current_setting('app.jwt_secret')) as access_token
-    from (role, login.email as email, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
+    from (role, login.username as username, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
 
   -- Generate and store a refresh token that expires in 7 days
   refresh_token = public.gen_random_uuid()
   insert into auth.refresh_tokens (token)
   values (refresh_token);
 
-  -- Set the refresh_token in a cookie. The access token is not stored.
-  set local "response.headers" = '[{"Set-Cookie": "refreshToken=' || refresh_token || '; Secure; Path=/; SameSite=Strict;}]';
-
-  return access_token;
+  -- Set cookies for the two tokens.
+  set local "response.headers" = '['
+    '{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;},'
+    '{"Set-Cookie": "refreshToken=' || refresh_token || '; Domain=.screenpilot.com.au; Secure; Path=/refresh; HttpOnly; SameSite=Strict;}'
+    ']';
 end;
 $$
 language plpgsql

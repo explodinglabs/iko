@@ -184,14 +184,6 @@ function create-function-auth-encrypt-pass {
     && show-files $change
 }
 
-function create-function-auth-user-role {
-  local change=${1:-create_function_auth_user_role}
-  sqitch add $change \
-    --template create_function_auth_user_role \
-    --note \'"Create function auth.user_role"\' \
-    && show-files $change
-}
-
 function create-function-api-login {
   local change=${1:-create_function_api_login}
   sqitch add $change \
@@ -223,14 +215,6 @@ function create-trigger {
     --set function=$function \
     --set trigger=$trigger \
     --note \'"Add trigger $trigger on ${schema}.${table}"\' \
-    && show-files $change
-}
-
-function create-trigger-auth-ensure-user-role-exists {
-  local change=${1:-create_trigger_auth_ensure_user_role_exists}
-  sqitch add $change \
-    --template create_trigger_auth_ensure_user_role_exists \
-    --note \'"Create trigger auth.ensure_user_role_exists"\' \
     && show-files $change
 }
 

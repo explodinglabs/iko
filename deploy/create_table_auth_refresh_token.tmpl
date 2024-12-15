@@ -3,9 +3,7 @@ begin;
 create table auth.refresh_token (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
-  token text,
-  username text,
-  role text
+  token text
 );
 
 commit;
