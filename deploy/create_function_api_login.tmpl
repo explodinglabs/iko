@@ -19,20 +19,18 @@ begin
     using message = 'Invalid user or password';
   end if;
 
-  -- Generate a JWT access token, that expires in one hour
+  -- Generate a JWT access token that expires in one hour, and set cookie
   select public.sign(row_to_json(r), current_setting('app.jwt_secret')) as access_token
     from (role, login.username as username, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
 
-  -- Generate and store a refresh token that expires in 7 days
+  set local "response.headers" = '[{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;}]';
+
+  -- Generate a refresh token that expires in 7 days, and set cookie
   refresh_token = public.gen_random_uuid()
   insert into auth.refresh_tokens (token)
   values (refresh_token);
 
-  -- Set cookies for the two tokens.
-  set local "response.headers" = '['
-    '{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;},'
-    '{"Set-Cookie": "refreshToken=' || refresh_token || '; Domain=.screenpilot.com.au; Secure; Path=/refresh; HttpOnly; SameSite=Strict;}'
-    ']';
+  set local "response.headers" = '[{"Set-Cookie": "refreshToken=' || refresh_token || '; Domain=.screenpilot.com.au; Secure; Path=/refresh; HttpOnly; SameSite=Strict;}]';
 end;
 $$
 language plpgsql

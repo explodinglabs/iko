@@ -1,27 +1,30 @@
 begin;
 
-create function api.refresh_token(refresh_token text) returns text
+create function api.refresh_token() returns void
 as $$
 declare
   access_token text;
   valid bool;
 begin
+  -- Get token with cookie
+  refresh_token = request.cookie.refreshToken
+
+  -- Check the refresh token exists and is still valid
   select username, role
   from auth.refresh_token
   where token = refresh_token
-  and created_at > current_date - interval '2 minutes'
+  and created_at > current_date - interval '2 minutes';
 
   if not valid then
     raise invalid_refresh_token
     using message = 'Invalid refresh token';
   end if;
 
-  -- Generate a JWT access token, that expires in one hour
+  -- Generate a JWT access token that expires in one hour, and set cookie
   select public.sign(row_to_json(r), current_setting('app.jwt_secret')) as access_token
     from (role, username, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
 
-  return access_token;
-
+  set local "response.headers" = '[{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;}]';
 end;
 $$
 language plpgsql
