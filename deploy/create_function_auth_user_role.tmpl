@@ -1,6 +1,6 @@
 begin;
 
-create function auth.user_role (email text, pass text)
+create function auth.user_role (username text, password text)
   returns name
   language plpgsql
   as $$
@@ -8,8 +8,8 @@ begin
   return (
     select role
     from auth.users
-    where users.email = user_role.email
-      and users.pass = crypt(user_role.pass, users.pass));
+    where user.username = user_role.username
+      and user.password = crypt(user_role.password, user.password));
 end;
 $$;
 
