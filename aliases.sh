@@ -218,6 +218,14 @@ function create-trigger {
     && show-files $change
 }
 
+function create-trigger-auth-ensure-user-role-exists {
+  local change=${1:-create_trigger_auth_ensure_user_role_exists}
+  sqitch add $change \
+    --template create_trigger_auth_ensure_user_role_exists \
+    --note \'"Create trigger auth.ensure_user_role_exists"\' \
+    && show-files $change
+}
+
 function create-trigger-auth-encrypt-pass {
   local change=${1:-create_trigger_auth_encrypt_pass}
   sqitch add $change \
