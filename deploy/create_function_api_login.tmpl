@@ -15,7 +15,7 @@ begin
   into role_;
 
   if role_ is null then
-    raise invalid_password
+    raise sqlstate 'PT401'
     using message = 'Invalid user or password';
   end if;
 
