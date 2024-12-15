@@ -26,7 +26,7 @@ begin
   select public.sign(row_to_json(r), current_setting('app.jwt_secret')) as access_token
     from (select role_ as role, login.username as username, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
 
-  access_token_header := '[{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;}]';
+  access_token_header := '[{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;"}]';
   set local "response.headers" = access_token_header;
 end;
 $$
