@@ -5,9 +5,8 @@ as $$
 declare
   role_ name;
   access_token text;
-  access_token_header text;
   refresh_token text;
-  refresh_token_header text;
+  headers text;
 begin
   -- Check username and password
   select role
@@ -25,16 +24,16 @@ begin
   select public.sign(row_to_json(r), current_setting('app.jwt_secret')) as access_token
     from (select role_ as role, login.user_ as username, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
 
-  access_token_header := '[{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;"}]';
-  set local "response.headers" = access_token_header;
-
   -- Generate a refresh token that expires in 7 days, and set cookie
   refresh_token := public.gen_random_uuid();
   insert into auth.refresh_token (token)
   values (refresh_token);
 
-  refresh_token_header := '[{"Set-Cookie": "refreshToken=' || refresh_token || '; Domain=.screenpilot.com.au; Secure; Path=/refresh_token; HttpOnly; SameSite=Strict;"}]';
-  set local "response.headers" = refresh_token_header;
+  headers := '['
+  '{"Set-Cookie": "accessToken=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;"},'
+  '{"Set-Cookie": "refreshToken=' || refresh_token || '; Domain=.screenpilot.com.au; Secure; Path=/refresh_token; HttpOnly; SameSite=Strict;"}'
+  ']';
+  perform set_config('response.headers', headers, true);
 end;
 $$
 language plpgsql
