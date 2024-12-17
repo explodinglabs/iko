@@ -184,6 +184,14 @@ function create-function-auth-encrypt-pass {
     && show-files $change
 }
 
+function create-function-auth-generate-access-token {
+  local change=${1:-create_function_auth_generate_access_token}
+  sqitch add $change \
+    --template create_function_auth_generate_access_token \
+    --note \'"Create function auth.generate_access_token"\' \
+    && show-files $change
+}
+
 function create-function-api-login {
   local change=${1:-create_function_api_login}
   sqitch add $change \
