@@ -9,7 +9,7 @@ declare
   valid bool;
 begin
   -- Get token with cookie
-  refresh_token := request.cookie.refreshToken;
+  refresh_token := current_setting('request.cookies', true)::json->>'refresh_token';
 
   -- Check the refresh token exists and is still valid
   select username, role
