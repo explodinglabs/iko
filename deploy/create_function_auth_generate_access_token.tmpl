@@ -1,14 +1,18 @@
 begin;
 
-create function auth.generate_access_token(role_ text, username text) returns text
+create function auth.generate_access_token(
+  role_ text, user_ text, secret text
+) returns text
 as $$
 declare
   access_token text;
 begin
-  select public.sign(row_to_json(r), current_setting('pgrst.jwt_secret')) as access_token
+  select public.sign(row_to_json(r), secret) as access_token
     from (select role_ as role, user_ as username, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
   return access_token;
 end;
 
 $$
 language plpgsql;
+
+commit;

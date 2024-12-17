@@ -4,7 +4,7 @@ create function api.refresh_token() returns void
 as $$
 declare
   access_token text;
-  access_token_header text;
+  headers text;
   refresh_token text;
   valid bool;
 begin
