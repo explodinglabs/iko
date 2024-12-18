@@ -3,26 +3,40 @@ begin;
 create function api.refresh_token() returns void
 as $$
 declare
+  user_ text;
   access_token text;
   headers text;
-  refresh_token text;
-  valid bool;
+  refresh_token_ text;
+  role_ text;
 begin
   -- Get token with cookie
-  refresh_token := current_setting('request.cookies', true)::json->>'refresh_token';
+  refresh_token_ := current_setting('request.cookies', true)::json->>'refresh_token';
 
   -- Check the refresh token exists and is still valid
-  select username, role
+  select username into user_
   from auth.refresh_token
-  where token = refresh_token
+  where token = refresh_token_
   and created_at > current_date - interval '2 minutes';
 
-  if not valid then
+  if user_ is null then
     raise sqlstate 'PT401'
     using message = 'Invalid or expired refresh token';
   end if;
 
-  select auth.generate_access_token(role_, login.user_) into access_token;
+  select role into role_
+  from auth.user
+  where username = user_;
+
+  if role_ is null then
+    raise sqlstate 'PT401'
+    using message = 'Unknown user';
+  end if;
+
+  select auth.generate_access_token(
+    role_,
+    user_,
+    current_setting('pgrst.jwt_secret')
+  ) into access_token;
 
   headers := '[{"Set-Cookie": "access_token=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;"}]';
   perform set_config('response.headers', headers, true);
