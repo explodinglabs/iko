@@ -29,8 +29,8 @@ begin
 
   -- Set cookie
   headers := '['
-  '{"Set-Cookie": "access_token=' || access_token || '; Domain=.screenpilot.com.au; Secure; Path=/; HttpOnly; SameSite=Strict;"},'
-  '{"Set-Cookie": "refresh_token=' || refresh_token || '; Domain=.screenpilot.com.au; Secure; Path=/refresh_token; HttpOnly; SameSite=Strict;"}'
+  '{"Set-Cookie": "access_token=' || access_token || '; Path=/; HttpOnly;"},'
+  '{"Set-Cookie": "refresh_token=' || refresh_token || '; Path=/rpc/refresh_token; HttpOnly;"}'
   ']';
   perform set_config('response.headers', headers, true);
 end;

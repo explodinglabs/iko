@@ -7,9 +7,12 @@ as $$
 declare
   access_token text;
 begin
-  select public.sign(row_to_json(r), secret) as access_token
-    -- from (select role_ as role, user_ as username, extract(epoch from now())::integer + 60 * 60 as exp) r into access_token;
-    from (select role_ as role, user_ as username, extract(epoch from now())::integer + 30 as exp) r into access_token;
+  select public.sign(row_to_json(r), secret) as access_token from (
+    select
+      role_ as role,
+      user_ as username,
+      extract(epoch from now())::integer + 600 as exp  -- 10 minutes expiry
+  ) r into access_token;
   return access_token;
 end;
 
