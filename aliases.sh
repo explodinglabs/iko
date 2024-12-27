@@ -200,6 +200,14 @@ function create-function-api-login {
     && show-files $change
 }
 
+function create-function-api-logout {
+  local change=${1:-create_function_api_logout}
+  sqitch add $change \
+    --template create_function_api_logout \
+    --note \'"Create function api.logout"\' \
+    && show-files $change
+}
+
 function create-function-api-refresh-token {
   local change=${1:-create_function_api_refresh_token}
   sqitch add $change \
