@@ -1,0 +1,13 @@
+do $$
+begin
+
+  assert (
+    select not exists (
+      select 1
+      from information_schema.schemata
+      where schema_name = '[% schema %]'
+    )
+  );
+
+end;
+$$;

@@ -1,0 +1,13 @@
+do $$
+begin
+
+  assert (
+    select has_function_privilege(
+      '[% role %]',
+      '[% schema %].[% function %][% params %]',
+      'execute'
+    )
+  );
+
+end;
+$$;

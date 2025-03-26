@@ -1,0 +1,12 @@
+do $$
+begin
+
+  assert (
+    select not exists (
+      select 1 from information_schema.tables
+      where table_schema = '[% schema %]'
+      and table='[% table %]'
+    )
+  );
+
+end; $$;

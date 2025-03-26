@@ -1,0 +1,41 @@
+begin;
+
+create function api.login(user_ text, pass text) returns void
+as $$
+declare
+  access_token text;
+  headers text;
+  refresh_token text;
+  role_ name;
+begin
+  -- Check username and password
+  select role into role_
+  from auth.user
+  where username = user_
+    and password = public.crypt(pass, password);
+
+  if role_ is null then
+    raise sqlstate 'PT401'
+    using message = 'Invalid user or password';
+  end if;
+
+  -- Generate an access token
+  select auth.generate_access_token(role_, user_, current_setting('pgrst.jwt_secret')) into access_token;
+
+  -- Generate and store a refresh token that expires in 7 days
+  refresh_token := public.gen_random_uuid();
+  insert into auth.refresh_token (token, username)
+  values (refresh_token, user_);
+
+  -- Set cookie
+  headers := '['
+  '{"Set-Cookie": "access_token=' || access_token || '; Path=/; HttpOnly;"},'
+  '{"Set-Cookie": "refresh_token=' || refresh_token || '; Path=/rpc/refresh_token; HttpOnly;"}'
+  ']';
+  perform set_config('response.headers', headers, true);
+end;
+$$
+language plpgsql
+security definer;
+
+commit;
