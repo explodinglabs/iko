@@ -1,15 +1,27 @@
-# sqitch-templates
+# Minimigrate
 
-Clone into `~/.sqitch/templates`:
+This is Sqitch's migration image with some templates and aliases built in to
+make life easier.
+
+## Usage
+
+To migrate, run the Docker container with no command (the default command is
+"sqitch deploy"):
 
 ```sh
-git clone https://github.com/explodinglabs/sqitch-templates ~/.sqitch/templates
+docker run --rm ghcr.io/minibasehq/minimigrate -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@postgres:5432/app
 ```
 
-Add an ad-hoc change:
+I recommend creating an alias:
 
 ```sh
-sqitch add [change] --note 'What it does'
+alias minimigrate="docker run ghcr.io/minibasehq/minimigrate -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@postgres:5432/app"
+```
+
+Then to create a migration:
+
+```sh
+minimigrate sqitch add my_change --note 'What it does'
 ```
 
 ## Schemas
@@ -137,4 +149,8 @@ Create view (Then edit the select statement):
 
 ```sh
 ./sqitch add create_view_api_teams --template create_view --set schema=api --set name=teams --note 'Add api.teams view'
+```
+
+```
+
 ```

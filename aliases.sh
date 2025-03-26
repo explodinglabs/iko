@@ -1,11 +1,10 @@
 #!/bin/bash
-shopt -s expand_aliases
-alias sqitch='./sqitch'
+# setopt aliases
+# alias sqitch='./sqitch'
 
 function show-files {
-local change=$1
-cat deploy/${change}.sql
-# for i in deploy verify revert; do cat $i/${change}.sql; done
+  local change=$1
+  cat deploy/${change}.sql
 }
 
 # Schema
