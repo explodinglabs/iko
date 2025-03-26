@@ -1,7 +1,7 @@
 # Minimigrate
 
-This is Sqitch's migration image with some templates and aliases built in to
-make life easier.
+Minimigrate is a **database migration tool** to make life easier. Technically
+it's a Sqitch migration image with some templates and aliases built in.
 
 ## Usage
 
