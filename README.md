@@ -1,27 +1,35 @@
-# Minimigrate
+# Minimig
 
-Minimigrate is a **database migration tool** to make life easier. Technically
-it's a Sqitch migration image with some templates and aliases built in.
+Minimig is a **Postgres database migration tool** with a simple DSL to make
+life easier. Internally it's a Sqitch Docker container with some templates and
+aliases built in.
+
+## Installation
+
+Create a `.env` file:
+
+```sh
+echo 'SQITCH_TARGET=postgres://user:pass@postgres:5432/app' >> .env
+```
+
+Create an alias:
+
+```sh
+alias minimig="docker run ghcr.io/minibasehq/minimig --env-file .env -v ./migrations:/repo:rw"
+```
 
 ## Usage
 
-To migrate, run the Docker container with no command (the default command is
-"sqitch deploy"):
+To migrate, simply type `minimig`:
 
 ```sh
-docker run --rm ghcr.io/minibasehq/minimigrate -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@postgres:5432/app
+minimig
 ```
 
-I recommend creating an alias:
+To create a migration:
 
 ```sh
-alias minimigrate="docker run ghcr.io/minibasehq/minimigrate -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@postgres:5432/app"
-```
-
-Then to create a migration:
-
-```sh
-minimigrate sqitch add my_change --note 'What it does'
+minimig sqitch add create_table_todos --note 'Create a todos table'
 ```
 
 ## Schemas
