@@ -14,8 +14,8 @@ alias mig="docker ghcr.io/minibasehq/mig -v ./migrations:/repo:rw --env SQITCH_T
 
 ## Create migrations
 
-Here we make a new schema named "api" (see the full list of migration
-commands):
+Let's make a new schema named "api" (see the [full list of migration
+commands](wiki)):
 
 ```sh
 mig create-schema api
