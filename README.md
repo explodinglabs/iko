@@ -25,7 +25,7 @@ Three SQL scripts are created – to deploy, verify and rollback the change. The
 deploy script is output to the terminal so you can see the change that will
 occur.
 
-### Deploying migrations
+### Deploy migrations
 
 To deploy migrations, simply type `mig` (or `mig sqitch deploy`):
 
