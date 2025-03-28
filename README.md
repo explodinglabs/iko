@@ -9,7 +9,7 @@ simple DSL for easy database changes.
 Create a `mig` alias which points to your Postgres database:
 
 ```sh
-alias mig="docker ghcr.io/minibasehq/mig -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
+alias mig="docker run --rm ghcr.io/minibasehq/mig -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
 ```
 
 ## Create migrations
