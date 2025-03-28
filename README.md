@@ -1,8 +1,8 @@
 # Mig
 
-_Mig_ is a **Postgres migration tool**. It extends the
-[Sqitch](https://sqitch.org/) container with templates and aliases, combining
-to create a simple DSL for easy database changes.
+_Mig_ is a **Postgres migration tool**. It extends
+[Sqitch](https://sqitch.org/) with templates and aliases, combining to create a
+simple DSL for easy database changes.
 
 ## Usage
 
