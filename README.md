@@ -1,24 +1,16 @@
 # Mig
 
-_Mig_ is a **Postgres migration tool** with a simple DSL to make database
-changes simple. It extends the [Sqitch](https://sqitch.org/) container with
-some templates and aliases.
+_Mig_ is a **Postgres migration tool**. It extends the
+[Sqitch](https://sqitch.org/) container with templates and aliases to create a
+simple DSL to make database changes easy.
 
-## Installation
-
-In a repository, create a `.env` file to set the Postgres target:
-
-```sh
-echo 'SQITCH_TARGET=postgres://user:pass@localhost:5432/app' >> .env
-```
+## Usage
 
 Create an alias:
 
 ```sh
-alias mig="docker run ghcr.io/minibasehq/mig --env-file .env -v ./migrations:/repo:rw"
+alias mig="docker run ghcr.io/minibasehq/mig .env -v ./migrations:/repo:rw  --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
 ```
-
-## Usage
 
 To migrate, simply type `mig`:
 
