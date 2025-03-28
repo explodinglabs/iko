@@ -27,7 +27,7 @@ occur.
 
 ## Deploying migrations
 
-To deploy migrations, simply type `mig`:
+To deploy migrations, simply type `mig` (or `mig sqitch deploy`):
 
 ```sh
 mig
