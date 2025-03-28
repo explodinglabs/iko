@@ -9,27 +9,26 @@ simple DSL for easy database changes.
 Create a `mig` alias which points to your Postgres database:
 
 ```sh
-alias mig="docker ghcr.io/minibasehq/mig .env -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
+alias mig="docker ghcr.io/minibasehq/mig -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
 ```
 
-## Create a migration
+## Create migrations
 
-To make a migration which creates a new scheme named "api":
+Here we make a new schema named "api" (see the full list of migration
+commands):
 
 ```sh
 mig create-schema api
 ```
 
-Three sql scripts are created – to deploy, verify and rollback the change – and
-the deploy script is output to the terminal so you can see what will be
-deployed.
+Three SQL scripts are created – to deploy, verify and rollback the change. The
+deploy script is output to the terminal so you can see the change that will
+occur.
 
-## Deploy migrations
+## Deploying migrations
 
 To deploy migrations, simply type `mig`:
 
 ```sh
 mig
 ```
-
-See the [full list of Mig commands](wiki).
