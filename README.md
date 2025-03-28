@@ -9,7 +9,7 @@ simple DSL for easy database changes.
 Create a `mig` alias:
 
 ```sh
-alias mig="docker minibasehq/mig .env -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
+alias mig="docker ghcr.io/minibasehq/mig .env -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
 ```
 
 To make a new migration to create a scheme named "api":
