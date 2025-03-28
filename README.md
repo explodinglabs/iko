@@ -1,15 +1,15 @@
 # Minimig
 
-Minimig is a **Postgres database migration tool** with a simple DSL to make
-life easier. Internally it's a Sqitch Docker container with some templates and
-aliases built in.
+Minimig is a **Postgres migration tool** with a simple DSL to make creating
+migrations easier. Technically, it extends the Sqitch container with some
+templates and aliases.
 
-## Installation
+## Usage
 
-Create a `.env` file:
+In a repository, create a `.env` file to set the Postgres target:
 
 ```sh
-echo 'SQITCH_TARGET=postgres://user:pass@postgres:5432/app' >> .env
+echo 'SQITCH_TARGET=postgres://user:pass@localhost:5432/app' >> .env
 ```
 
 Create an alias:
@@ -17,8 +17,6 @@ Create an alias:
 ```sh
 alias minimig="docker run ghcr.io/minibasehq/minimig --env-file .env -v ./migrations:/repo:rw"
 ```
-
-## Usage
 
 To migrate, simply type `minimig`:
 
