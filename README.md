@@ -6,7 +6,7 @@ for easy database changes.
 
 ## Usage
 
-Create a `mig` alias which points to your Postgres database:
+Create a `mig` alias (be sure to set the correct database connection URI):
 
 ```sh
 alias mig="docker run --rm ghcr.io/minibasehq/mig -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
