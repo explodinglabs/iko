@@ -2,24 +2,30 @@
 
 _Mig_ is a **Postgres migration tool**. It extends the
 [Sqitch](https://sqitch.org/) container with templates and aliases, combining
-to create a simple DSL to make database changes easy.
+to create a simple DSL for easy database changes.
 
 ## Usage
 
-Create an alias:
+Create a `mig` alias:
 
 ```sh
-alias mig="docker run ghcr.io/minibasehq/mig .env -v ./migrations:/repo:rw  --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
+alias mig="docker minibasehq/mig .env -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
 ```
 
-To migrate, simply type `mig`:
+To make a new migration to create a scheme named "api":
 
 ```sh
-mig sqitch deploy
+mig create-schema api
 ```
 
-To create a migration:
+Three sql scripts are created – to deploy, verify and rollback the change – and
+the deploy script is output to the terminal so you can see what will be
+deployed.
+
+To deploy migrations, simply type `mig`:
 
 ```sh
-mig sqitch add create_table_tasks --note 'Create tasks table'
+mig
 ```
+
+See the [full list of Mig commands](wiki).
