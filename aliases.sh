@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # setopt aliases
 # alias sqitch='./sqitch'
 

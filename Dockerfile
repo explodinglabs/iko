@@ -1,8 +1,9 @@
 FROM sqitch/sqitch:v1.5.1.0
 
 COPY ./templates /etc/sqitch/templates
-COPY ./aliases.sh /aliases.sh
-ENV BASH_ENV=/aliases.sh
+COPY ./aliases.sh /etc/bash_aliases
 
-ENTRYPOINT ""
-CMD sqitch deploy
+ENV BASH_ENV=/etc/bash_aliases
+
+ENTRYPOINT []
+CMD []

@@ -1,15 +1,21 @@
-# Mig
+# Ply
 
-_Mig_ is a **Postgres migration tool**. It extends
-[Sqitch](https://sqitch.org/) with templates and aliases to create a simple DSL
-for easy database changes.
+_Ply_ is a **Postgres database migration tool**. It extends
+[Sqitch](https://sqitch.org/) adding templates and functions to make performing
+common database changes easier.
 
 ## Usage
 
-Create a `mig` alias (be sure to set the correct database connection URI):
+Create a `ply` function (be sure to set the correct database connection URI):
 
 ```sh
-alias mig="docker run --rm ghcr.io/minibasehq/mig -v ./migrations:/repo:rw --env SQITCH_TARGET=postgres://user:pass@localhost:5432/app"
+ply() { docker run --rm --volume ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply "$@" }
+```
+
+Initialise Sqitch:
+
+```sh
+ply sqitch init --target postgres://user:pass@localhost:5432/app
 ```
 
 ### Create migrations
@@ -18,17 +24,16 @@ Let's make a new schema named "api" (see the [full list of migration
 commands](wiki)):
 
 ```sh
-mig create-schema api
+ply create-schema api
 ```
 
 Three SQL scripts are created – to deploy, verify and rollback the change. The
-deploy script is output to the terminal so you can see the change that will
-occur.
+deploy script is output so you can see the change that will occur.
 
 ### Deploy migrations
 
-To deploy migrations, simply type `mig` (or `mig sqitch deploy`):
+To deploy migrations, simply type `mig sqitch deploy`:
 
 ```sh
-mig
+mig sqitch deploy
 ```
