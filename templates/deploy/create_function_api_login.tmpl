@@ -1,5 +1,3 @@
-begin;
-
 create function api.login(user_ text, pass text) returns void
 as $$
 declare
@@ -37,5 +35,3 @@ end;
 $$
 language plpgsql
 security definer;
-
-commit;

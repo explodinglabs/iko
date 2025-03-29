@@ -1,5 +1,3 @@
-begin;
-
 create function auth.generate_access_token(
   role_ text, user_ text, secret text
 ) returns text
@@ -15,8 +13,5 @@ begin
   ) r into access_token;
   return access_token;
 end;
-
 $$
 language plpgsql;
-
-commit;

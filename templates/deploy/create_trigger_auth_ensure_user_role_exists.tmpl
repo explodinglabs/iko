@@ -1,5 +1,3 @@
-begin;
-
 -- We would like the role to be a foreign key to actual database roles, however
 -- PostgreSQL does not support these constraints against the pg_roles table. --
 -- We’ll use a trigger to manually enforce it.
@@ -7,5 +5,3 @@ begin;
 create constraint trigger ensure_user_role_exists
   after insert or update on auth.user
   for each row execute procedure auth.check_role_exists();
-
-commit;

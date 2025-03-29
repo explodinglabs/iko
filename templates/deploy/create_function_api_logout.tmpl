@@ -1,5 +1,3 @@
-begin;
-
 create function api.logout() returns void
 as $$
 declare
@@ -15,5 +13,3 @@ end;
 $$
 language plpgsql
 security definer;
-
-commit;
