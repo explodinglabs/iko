@@ -29,8 +29,8 @@ ply create-schema api
 Sqitch creates three SQL scripts – to deploy, verify and revert the change. The
 deploy script is output so you can see the change that will be deployed.
 
-You can write a script to perform many migrations at once. For example, create
-a `migrations/create-app.sh` like:
+You might write a script to perform many migrations at once. For example,
+create a `migrations/create-app.sh`:
 
 ```sh
 create-schema api
