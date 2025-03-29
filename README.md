@@ -6,7 +6,7 @@ common database changes easier.
 
 ## Usage
 
-Create a `ply` function (be sure to set the correct database connection URI):
+Create a `ply` function:
 
 ```sh
 ply() { docker run --rm --volume ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply "$@" }
@@ -20,8 +20,7 @@ ply sqitch init --target postgres://user:pass@localhost:5432/app
 
 ### Create migrations
 
-Let's make a new schema named "api" (see the [full list of migration
-commands](wiki)):
+Let's make a new schema named "api" (see the [full list of commands](wiki)):
 
 ```sh
 ply create-schema api
@@ -32,8 +31,8 @@ deploy script is output so you can see the change that will occur.
 
 ### Deploy migrations
 
-To deploy migrations, simply type `mig sqitch deploy`:
+To deploy migrations, simply type
 
 ```sh
-mig sqitch deploy
+ply sqitch deploy
 ```
