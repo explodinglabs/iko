@@ -9,13 +9,13 @@ common database changes easier.
 Create a `ply` function:
 
 ```sh
-ply() { docker run --rm --volume ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply "$@" }
+ply() { docker run --rm --volume ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply bash -c "$*" }
 ```
 
 Initialise Sqitch:
 
 ```sh
-ply sqitch init --target postgres://user:pass@localhost:5432/app
+ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
 ### Create migrations
