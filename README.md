@@ -19,23 +19,31 @@ Create a `ply` command by pasting this into your terminal (add it to your
 ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply" bash -c "$*" }
 ```
 
-Initialise Sqitch, configuring your database connection URI:
+## Usage
+
+### Initialize a Sqitch project
+
+Run the following command to initialize a Sqitch project:
 
 ```sh
 ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
-## Usage
+### Create a Migration
 
-Let's make a new schema named "api":
+Create a schema named `api` using Ply's DSL:
 
 ```sh
 ply create-schema api
 ```
 
-Sqitch creates three SQL files – one to deploy, one to verify and and one to
-revert the change. The deploy script is output so you can see the change that
-will be deployed, and decide if you need to make changes to it.
+|📖See the [full list of migration commands](wiki).
+
+Sqitch creates three SQL files – to deploy, verify and revert the change. The
+deploy script is output so you can see the change that will be deployed, and
+decide if you need to make changes to it.
+
+### Deploy Migrations
 
 Use Sqitch to deploy changes:
 
@@ -47,8 +55,9 @@ ply sqitch deploy
 
 You can write a script to define multiple migrations at once.
 
-For example, here we create an application schema. Create a
-`migrations/create-app.sh`:
+### Example: Creating an Application Schema
+
+Create a `migrations/create-app.sh`:
 
 ```sh
 create-schema api
@@ -67,7 +76,7 @@ grant-table-privilege insert api task basic_subscriber
 grant-table-privilege update api task basic_subscriber
 ```
 
-Then execute the script to create all migrations at once:
+Run the script to create all migrations at once:
 
 ```sh
 ply bash create-app.sh
