@@ -2,16 +2,16 @@
   <img alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
 </p>
 
-# Ply
-
-_Ply_ is a **Postgres migration tool** that make database changes easy.
+<p align="center">
+  A **Postgres migration tool** that make database changes easy.
+</p>
 
 ## Overview
 
 Ply extends [Sqitch](https://sqitch.org/) adding templates and commands to make
-the creation of migrations simple. For example to create a table named "tasks"
-you'd type `ply create-table tasks`. All Sqitch commands are also available,
-such as `ply sqitch deploy`.
+the creation of migrations simple. For example to create a table named `task`
+in the `api` schema, you'd type `ply create-table api task`. All Sqitch
+commands are also available, such as `ply sqitch deploy`.
 
 ## Installation
 
