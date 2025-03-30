@@ -4,8 +4,8 @@
 
 # Ply
 
-_Ply_ is a **Postgres database migration tool**, with a DSL to make database
-changes easy.
+_Ply_ is a **Postgres database migration tool** which aims to database changes
+reliable and easy.
 
 ## Overview
 
