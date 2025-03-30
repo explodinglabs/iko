@@ -46,8 +46,10 @@ ply sqitch deploy
 
 ## Bulk migration scripts
 
-You might write a script to perform many migrations at once. For example,
-create a `migrations/create-app.sh`:
+You can write a script to define multiple migrations at once.
+
+For example, here we create an application schema. Create a
+`migrations/create-app.sh`:
 
 ```sh
 create-schema api
