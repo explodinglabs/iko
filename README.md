@@ -11,7 +11,7 @@ changes easy.
 In a terminal, create a `ply` function:
 
 ```sh
-$ ply() { docker run --rm --volume ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply bash -c "$*" }
+ply() { docker run --rm --volume ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply bash -c "$*" }
 ```
 
 Initialise Sqitch:
