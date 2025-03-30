@@ -1,6 +1,8 @@
-<p align="center">
+<p align="right">
   <img alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
 </p>
+
+# Ply
 
 _Ply_ is a **Postgres database migration tool**, extending
 [Sqitch](https://sqitch.org/) with a DSL to make creating common database
