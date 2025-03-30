@@ -18,7 +18,7 @@ To create a `ply` command, paste this into your terminal:
 ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply" bash -c "$*" }
 ```
 
-> 💡Tip: Add this alias to your `~/.bashrc` or `~/.zshrc` for persistence.
+> 💡Add that to your `~/.bashrc` or `~/.zshrc` for persistence.
 
 Initialise Sqitch, configuring your database connection URI:
 
