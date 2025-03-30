@@ -16,7 +16,7 @@ are also available, such as `ply sqitch deploy`.
 ## Installation
 
 Ply runs inside a Docker container, so ensure you have [Docker
-installed](https://docs.docker.com/get-docker/) before proceeding.
+installed](https://docs.docker.com/get-docker/).
 
 Create a `ply` command by pasting this into your terminal:
 
