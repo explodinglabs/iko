@@ -45,7 +45,7 @@ ply create-schema api
 ```
 
 Sqitch creates three SQL files – to deploy, verify and revert the change. The
-deploy script is shown, so you can see the change that will be deployed.
+deploy script is output, so you can see the change that will be deployed.
 
 > 📖 See the [full list of migration commands](wiki).
 
@@ -57,7 +57,7 @@ Use Sqitch to deploy changes:
 ply sqitch deploy
 ```
 
-## Bulk Migration Scripts
+### Bulk Migration Scripts
 
 You can write a script to define multiple migrations at once.
 
@@ -65,17 +65,9 @@ For example, create file named `migrations/create-app.sh`:
 
 ```sh
 create-schema api
-
 create-table api task
 create-function api task_updated
 create-trigger api task task_updated task_updated
-
-create-role basic_subscriber
-grant-role-membership authenticator basic_subscriber
-grant-schema-usage api basic_subscriber
-grant-table-privilege select api task basic_subscriber
-grant-table-privilege insert api task basic_subscriber
-grant-table-privilege update api task basic_subscriber
 ```
 
 Run the script to create all migrations at once:
