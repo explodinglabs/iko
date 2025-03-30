@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Ply logo" height="35" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
+  <img alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
 </p>
 
 _Ply_ is a **Postgres database migration tool**, extending
