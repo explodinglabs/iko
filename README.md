@@ -5,31 +5,34 @@
 _Ply_ is a **Postgres database migration tool**, extending
 [Sqitch](https://sqitch.org/) with a DSL to make common database changes easy.
 
-## Usage
+## Quick Start
 
-Paste the following in a terminal to create a `ply` function:
+Install Docker.
 
-<small>Put it inside your shell's rc file for permanence. Functions are defined differently in some shells such as Fish.</small>
+Paste the following in a terminal to create a `ply` command (add to `~/.bashrc`
+or `~/.zshrc` for persistence. Some shells define functions differently.):
 
 ```sh
-ply() { docker run --rm --v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply bash -c "$*" }
+ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply bash -c "$*" }
 ```
 
-Initialise Sqitch:
+Initialise Sqitch, configuring your database connection URI:
 
 ```sh
 ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
-Let's make a new schema named "api" (See the [full list of migration
-commands](wiki)):
+## Usage
+
+Let's make a new schema named "api":
 
 ```sh
 ply create-schema api
 ```
 
-Sqitch creates three SQL scripts – to deploy, verify and revert the change. The
-deploy script is output so you can see the change that will be deployed.
+Sqitch creates three SQL files – one to deploy, one to verify and and one to
+revert the change. The deploy script is output so you can see the change that
+will be deployed, and decide if you need to make changes to it.
 
 Use Sqitch to deploy changes:
 
