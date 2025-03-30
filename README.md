@@ -8,10 +8,11 @@
 
 ## Overview
 
-Ply extends [Sqitch](https://sqitch.org/) adding templates and commands to make
-the creation of migrations simple. For example to create a table named `task`
-in the `api` schema, you'd type `ply create-table api task`. All Sqitch
-commands are also available, such as `ply sqitch deploy`.
+Ply extends the [Sqitch](https://sqitch.org/) Docker image, adding templates
+and commands to make creating common migrations simple. For example, to create
+a table named `task` in the `api` schema, you'd type `ply create-table api task`.
+
+All Sqitch commands are also available, such as `ply sqitch deploy`.
 
 ## Installation
 
