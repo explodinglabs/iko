@@ -52,7 +52,7 @@ Use Sqitch to deploy changes:
 ply sqitch deploy
 ```
 
-## Bulk migration scripts
+## Bulk Migration Scripts
 
 You can write a script to define multiple migrations at once.
 
