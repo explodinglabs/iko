@@ -38,11 +38,11 @@ Create a schema named `api` using Ply's DSL:
 ply create-schema api
 ```
 
-> 📖 See the [full list of migration commands](wiki).
-
 Sqitch creates three SQL files – to deploy, verify and revert the change. The
 deploy script is output so you can see the change that will be deployed, and
 decide if you need to make changes to it.
+
+> 📖 See the [full list of migration commands](wiki).
 
 ### Deploy Migrations
 
