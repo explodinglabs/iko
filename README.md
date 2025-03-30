@@ -65,17 +65,9 @@ For example, create file named `migrations/create-app.sh`:
 
 ```sh
 create-schema api
-
 create-table api task
 create-function api task_updated
 create-trigger api task task_updated task_updated
-
-create-role basic_subscriber
-grant-role-membership authenticator basic_subscriber
-grant-schema-usage api basic_subscriber
-grant-table-privilege select api task basic_subscriber
-grant-table-privilege insert api task basic_subscriber
-grant-table-privilege update api task basic_subscriber
 ```
 
 Run the script to create all migrations at once:
