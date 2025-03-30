@@ -4,8 +4,14 @@
 
 # Ply
 
-_Ply_ is a **Postgres database migration tool**, extending
-[Sqitch](https://sqitch.org/) with a DSL to make common database changes easy.
+_Ply_ is a **Postgres database migration tool**, with a DSL to make database
+changes easy.
+
+## Overview
+
+Ply extends the [Sqitch](https://sqitch.org/) container adding templates and
+functions. Sqitch commands are available with `ply sqitch ..`, along with other
+commands, for example to create a table named "tasks" you'd type `ply create-table tasks`.
 
 ## Installation
 
