@@ -20,9 +20,8 @@ Initialise Sqitch:
 ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
-### Create migrations
-
-Let's make a new schema named "api":
+Let's make a new schema named "api" (See the [full list of migration
+commands](wiki)):
 
 ```sh
 ply create-schema api
@@ -30,6 +29,14 @@ ply create-schema api
 
 Sqitch creates three SQL scripts – to deploy, verify and revert the change. The
 deploy script is output so you can see the change that will be deployed.
+
+Use Sqitch to deploy changes:
+
+```sh
+ply sqitch deploy
+```
+
+## Bulk migration scripts
 
 You might write a script to perform many migrations at once. For example,
 create a `migrations/create-app.sh`:
@@ -55,14 +62,4 @@ Then execute the script to create all migrations at once:
 
 ```sh
 ply bash create-app.sh
-```
-
-See the [full list of migration commands](wiki).
-
-### Deploy migrations
-
-Use Sqitch to deploy changes:
-
-```sh
-ply sqitch deploy
 ```
