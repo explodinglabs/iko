@@ -8,10 +8,10 @@ _Ply_ is a **Postgres migration tool** that make database changes easy.
 
 ## Overview
 
-Ply extends [Sqitch](https://sqitch.org/) adding Sqitch Templates and shell
-functions to make the creation of migrations simple. For example to create a
-table named "tasks" you'd type `ply create-table tasks`. All Sqitch commands
-are also available, such as `ply sqitch deploy`.
+Ply extends [Sqitch](https://sqitch.org/) adding templates and commands to make
+the creation of migrations simple. For example to create a table named "tasks"
+you'd type `ply create-table tasks`. All Sqitch commands are also available,
+such as `ply sqitch deploy`.
 
 ## Installation
 
