@@ -1,7 +1,7 @@
 # Ply
 
 _Ply_ is a **Postgres database migration tool**. It extends
-[Sqitch](https://sqitch.org/) adding a DSL to make performing common database
+[Sqitch](https://sqitch.org/) with a DSL to make performing common database
 changes easy.
 
 ## Usage
