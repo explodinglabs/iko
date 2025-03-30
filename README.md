@@ -58,7 +58,7 @@ You can write a script to define multiple migrations at once.
 
 ### Example: Creating an Application Schema
 
-Create a `migrations/create-app.sh`:
+Create file named `migrations/create-app.sh`:
 
 ```sh
 create-schema api
