@@ -2,6 +2,8 @@
   <img alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
 </p>
 
+# Ply
+
 _Ply_ is a **Postgres database migration tool**, extending
 [Sqitch](https://sqitch.org/) with a DSL to make common database changes easy.
 
@@ -13,7 +15,7 @@ Ply runs inside a Docker container. Ensure you have
 To create a `ply` command, paste this into your terminal:
 
 ```sh
-ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply bash -c "$*" }
+ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply" bash -c "$*" }
 ```
 
 > 💡Tip: Add this alias to your `~/.bashrc` or `~/.zshrc` for persistence.
