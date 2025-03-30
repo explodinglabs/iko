@@ -1,6 +1,4 @@
-<p align="right">
-  <img alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
-</p>
+<img alighn="right" alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
 
 # Ply
 
