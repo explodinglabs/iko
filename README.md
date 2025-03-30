@@ -8,7 +8,9 @@ changes easy.
 
 ## Usage
 
-In a terminal, create a `ply` function:
+Paste the following in a terminal to create a `ply` function:
+
+<small>Put it inside your shell's rc file for permanence. Functions are defined differently in some shells such as Fish.</small>
 
 ```sh
 ply() { docker run --rm --volume ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply bash -c "$*" }
