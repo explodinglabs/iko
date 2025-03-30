@@ -9,10 +9,10 @@ changes easy.
 
 ## Overview
 
-Ply extends the [Sqitch](https://sqitch.org/) container adding templates and
-functions. Sqitch commands are available with `ply sqitch ..`, along with other
-commands in it's own DSL. For example to create a table named "tasks" you'd
-type `ply create-table tasks`.
+Ply extends [Sqitch](https://sqitch.org/) adding Sqitch Templates and shell
+functions to make the creation of migrations simple. For example to create a
+table named "tasks" you'd type `ply create-table tasks`. All Sqitch commands
+are also available, such as `ply sqitch deploy`.
 
 ## Installation
 
