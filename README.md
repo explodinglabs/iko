@@ -12,7 +12,7 @@ _Ply_ is a **Postgres database migration tool**, extending
 Ply runs inside a Docker container. Ensure you have
 [Docker](https://docs.docker.com/get-docker/) installed before proceeding.
 
-To create a `ply` command, paste this into your terminal (add it to your
+Create a `ply` command by pasting this into your terminal (add it to your
 `~/.bashrc` or `~/.zshrc` for persistence):
 
 ```sh
