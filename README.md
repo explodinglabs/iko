@@ -67,12 +67,10 @@ For example, create file named `migrations/create-app.sh`:
 ```sh
 create-schema api
 
-# Create Tasks table
 create-table api task
 create-function api task_updated
 create-trigger api task task_updated task_updated
 
-# Create basic subscriber role
 create-role basic_subscriber
 grant-role-membership authenticator basic_subscriber
 grant-schema-usage api basic_subscriber
