@@ -11,7 +11,8 @@ changes easy.
 
 Ply extends the [Sqitch](https://sqitch.org/) container adding templates and
 functions. Sqitch commands are available with `ply sqitch ..`, along with other
-commands, for example to create a table named "tasks" you'd type `ply create-table tasks`.
+commands in it's own DSL. For example to create a table named "tasks" you'd
+type `ply create-table tasks`.
 
 ## Installation
 
