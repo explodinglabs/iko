@@ -30,7 +30,8 @@ Add it to your `~/.bashrc` or `~/.zshrc` for persistence.
 ### Initialize a Sqitch project
 
 Run the following command to [initialize a Sqitch
-project](https://sqitch.org/docs/manual/sqitch-init/):
+project](https://sqitch.org/docs/manual/sqitch-init/) (be sure to set the
+correct database connection URI):
 
 ```sh
 ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
