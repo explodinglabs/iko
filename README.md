@@ -46,7 +46,7 @@ Let's create a schema named `api` using Ply's DSL:
 ply create-schema api
 ```
 
-Sqitch creates three SQL files –
+Three SQL files are created –
 
 - `deploy/create_schema_api.sql` deploys the change,
 - `verify/create_schema_api.sql` verifies the change, and
@@ -64,6 +64,8 @@ Use Sqitch to deploy changes:
 ```sh
 ply sqitch deploy
 ```
+
+> 📖 Refer to the [Sqitch Manual](https://sqitch.org/docs/manual/).
 
 ## Bulk Migration Scripts
 
