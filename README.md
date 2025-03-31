@@ -45,7 +45,8 @@ ply create-schema api
 ```
 
 Sqitch creates three SQL files – to deploy, verify and revert the change. The
-deploy script is output so you can see the change that will be deployed.
+deploy script is output so you can see the change that will be deployed, and
+potentially make changes to it.
 
 > 📖 See the [full list of migration commands](wiki).
 
