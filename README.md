@@ -55,25 +55,3 @@ Use Sqitch to deploy changes:
 ```sh
 ply sqitch deploy
 ```
-
-## Bulk Migration Scripts
-
-You can write a script to define multiple migrations at once.
-
-For example, create a file named `migrations/create-app.sh`:
-
-```sh
-create-schema api
-create-table api task
-create-function api task_updated
-create-trigger api task task_updated task_updated
-```
-
-Run the script to create all migrations at once:
-
-```sh
-ply bash create-app.sh
-```
-
-Scripts let you define large change sets, or your entire application, at a high
-level.
