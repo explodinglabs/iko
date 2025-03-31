@@ -35,16 +35,16 @@ Run the following command to initialize a Sqitch project:
 ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
-### Create a Migration
+### Create Migrations
 
-Create a schema named `api` using Ply's DSL:
+To create a schema named `api` using Ply's DSL:
 
 ```sh
 ply create-schema api
 ```
 
 Sqitch creates three SQL files – to deploy, verify and revert the change. The
-deploy script is output, so you can see the change that will be deployed.
+deploy script is output so you can see the change that will be deployed.
 
 > 📖 See the [full list of migration commands](wiki).
 
