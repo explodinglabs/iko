@@ -60,7 +60,7 @@ ply sqitch deploy
 
 You can write a script to define multiple migrations at once.
 
-For example, create file named `migrations/create-app.sh`:
+For example, create a file named `migrations/create-app.sh`:
 
 ```sh
 create-schema api
