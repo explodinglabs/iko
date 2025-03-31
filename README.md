@@ -12,12 +12,10 @@ a table named `task` in the `api` schema, you'd type `ply create-table api task`
 
 All Sqitch commands are also available, such as `ply sqitch deploy`.
 
-## Quick Start
+## Installation
 
 Ply runs inside a Docker container, so ensure you have [Docker
 installed](https://docs.docker.com/get-docker/).
-
-### Installation
 
 Create a `ply` command by pasting this into your terminal:
 
@@ -26,6 +24,8 @@ ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply" ba
 ```
 
 Add it to your `~/.bashrc` or `~/.zshrc` for persistence.
+
+## Usage
 
 ### Initialize a Sqitch project
 
