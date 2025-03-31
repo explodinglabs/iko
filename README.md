@@ -24,7 +24,7 @@ Create a `ply` command by pasting this into your terminal:
 ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/minibasehq/ply" bash -c "$*" }
 ```
 
-Add it to your `~/.bashrc` or `~/.zshrc` for persistence.
+💡 Add it to your `~/.bashrc` or `~/.zshrc` for persistence.
 
 ## Usage
 
