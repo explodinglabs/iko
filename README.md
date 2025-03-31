@@ -2,9 +2,7 @@
   <img alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
 </p>
 
-<p align="center">
-  A **Postgres migration tool** that make database changes easy.
-</p>
+_Ply_ is a **Postgres migration tool** that make database changes easy.
 
 ## Overview
 
