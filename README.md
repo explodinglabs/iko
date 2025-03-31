@@ -75,5 +75,5 @@ Run the script to create all migrations at once:
 ply bash create-app.sh
 ```
 
-Using scripts lets you define large change sets, or an entire application, at a
-high level.
+Scripts let you define large change sets, or your entire application, at a high
+level.
