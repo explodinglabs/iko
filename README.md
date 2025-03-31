@@ -48,12 +48,12 @@ ply create-schema api
 
 Sqitch creates three SQL files –
 
-- to deploy,
-- to verify
-- to revert the change.
+- `deploy/create_schema_api.sql` deploys the change,
+- `verify/create_schema_api.sql` verifies the change, and
+- `revert/create_schema_api.sql` reverts the change.
 
 The deploy script is output so you can see the change that will be deployed.
-You may want to changes to it by editing the file.
+You may want to changes to it.
 
 > 📖 See the [full list of migration commands](wiki).
 
