@@ -62,7 +62,7 @@ ply sqitch deploy
 ## Bulk Migration Scripts
 
 Write scripts that create multiple migrations at once, enabling you to define
-large change sets, or an entire application, at a high level.
+change sets, or an entire application, at a high level.
 
 For example, create a file named `migrations/create-app.sh`:
 
