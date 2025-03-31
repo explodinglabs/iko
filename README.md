@@ -19,7 +19,7 @@ All Sqitch commands are also available, such as `ply sqitch deploy`.
 Ply runs inside a Docker container, so ensure you have [Docker
 installed](https://docs.docker.com/get-docker/).
 
-### Create a ply command
+### Installation
 
 Create a `ply` command by pasting this into your terminal:
 
@@ -58,7 +58,7 @@ Use Sqitch to deploy changes:
 ply sqitch deploy
 ```
 
-### Bulk Migration Scripts
+## Bulk Migration Scripts
 
 You can write a script to define multiple migrations at once.
 
