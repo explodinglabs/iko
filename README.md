@@ -2,15 +2,16 @@
   <img alt="Ply logo" height="100" src="https://github.com/minibasehq/ply/blob/main/.images/logo.png?raw=true" />
 </p>
 
+# Ply
+
 _Ply_ is a **Postgres migration tool** that makes database changes easy.
 
-## Overview
+It extends the [Sqitch](https://sqitch.org/) Docker image, adding simple
+[commands](#Commands) to create migrations. For example to create a new schema
+named "api", you'd type `ply create-schema api`.
 
-Ply extends the [Sqitch](https://sqitch.org/) Docker image, adding templates
-and commands to make common database migrations easy. For example, to create a
-schema named `api`, you'd type `ply create-schema api`.
-
-All Sqitch commands are also available, such as `ply sqitch deploy`.
+All Sqitch commands are also available, so to deploy your changes you'd type
+`ply sqitch deploy`.
 
 ## Installation
 
@@ -47,9 +48,9 @@ ply create-schema api
 
 Three SQL files are created –
 
-- `deploy/create_schema_api.sql` deploys the change,
-- `verify/create_schema_api.sql` verifies the change, and
-- `revert/create_schema_api.sql` reverts the change.
+- `deploy/create_schema_api.sql` to deploy the change,
+- `verify/create_schema_api.sql` to verify the change, and
+- `revert/create_schema_api.sql` to revert the change.
 
 The deploy script is output so you can see the change that will be deployed.
 You may want to changes to it.
@@ -58,7 +59,7 @@ You may want to changes to it.
 
 ### Deploy Migrations
 
-Use Sqitch to deploy changes:
+Use Sqitch to deploy the change:
 
 ```sh
 ply sqitch deploy
@@ -84,4 +85,14 @@ Run the script to create all migrations at once:
 
 ```sh
 ply bash create-app.sh
+```
+
+## Commands
+
+### Schema
+
+Create a schema:
+
+```sh
+ply create-schema <schema>
 ```
