@@ -1,5 +1,4 @@
-do
-$do$
+do $$
 begin
    if exists (
      select from pg_catalog.pg_roles
@@ -9,5 +8,4 @@ begin
    else
       create role authenticator noinherit login password 'mysecretpassword';
    end if;
-end
-$do$;
+end $$;

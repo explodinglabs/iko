@@ -1,50 +1,44 @@
-## Schemas
+### Schemas
 
 Create a schema:
 
 ```sh
-minimig create-schema <schema>
+ply create-schema <schema>
 ```
 
 Drop a schema (does not cascade, so drop everything in the schema first):
 
 ```sh
-minimig drop-schema <schema>
+ply drop-schema <schema>
 ```
 
-## Tables
+### Tables
 
 Create a table (after this command, edit the table):
 
 ```sh
-minimig create-table [schema] [table]
+ply create-table [schema] [table]
 ```
 
 Drop table:
 
 ```sh
-minimig drop-table api tasks
+ply drop-table api tasks
 ```
 
 Add column:
 
 ```sh
-minimig add-column api tasks name
+ply add-column api tasks name
 ```
 
 Drop column:
 
 ```sh
-minimig drop-column [schema] [table] [column]
+ply drop-column [schema] [table] [column]
 ```
 
-## Roles
-
-Create a role:
-
-```sh
-create-role [role] nologin
-```
+### Grants
 
 Grant schema usage:
 
@@ -73,7 +67,7 @@ grant [role] [role]
 ./sqitch add grant_role_membership_foo --template grant_role_membership --set from_role=web_user --set role=authenticator --note 'Grant web_user to authenticator'
 ```
 
-## Functions
+### Functions
 
 Create function:
 
@@ -91,7 +85,7 @@ To edit a function, just edit the "create function" deploy script and sqitch
 rebase, or if the project has been deployed to another environment, do a sqitch
 rework.
 
-## Triggers
+### Triggers
 
 Create trigger:
 
@@ -105,13 +99,13 @@ Drop trigger:
 
 ```
 
-## Extensions
+### Extensions
 
 ```sh
 create-extension [extension]
 ```
 
-## Views
+### Views
 
 Create view (Then edit the select statement):
 
