@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  Easy Postgres Migrations
+  _Easy Postgres Migrations_
 </p>
 
 # Ply
