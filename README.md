@@ -85,13 +85,3 @@ Run the script to create all migrations at once:
 ```sh
 ply bash create-app.sh
 ```
-
-## Commands
-
-### Schema
-
-Create a schema:
-
-```sh
-ply create-schema <schema>
-```
