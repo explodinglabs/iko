@@ -2,15 +2,12 @@
   <img alt="Ply logo" height="100" src="https://github.com/explodinglabs/ply/blob/main/.images/logo.png?raw=true" />
 </p>
 
-<p align="center">
-  _Easy Postgres Migrations_
-</p>
-
 # Ply
 
-It extends the [Sqitch](https://sqitch.org/) Docker image, adding simple
-[commands](#Commands) to create migrations. For example to create an "api"
-schema, you'd type `ply create-schema api`.
+_Ply_ is a Postgres migration tool that makes database changes easy.
+
+It extends [Sqitch](https://sqitch.org/), adding simple [commands](#Commands)
+to create migrations. For example to create an "api" schema, you'd type `ply create-schema api`.
 
 Sqitch is also available, so to deploy your changes you'd type `ply sqitch deploy`.
 

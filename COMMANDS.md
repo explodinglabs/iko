@@ -1,5 +1,6 @@
 # Commands
 
+- [Ad-hoc](#adhoc)
 - [Extensions](#extensions)
 - [Functions](#functions)
 - [Grants](#grants)
@@ -21,11 +22,11 @@ create-extension <extension>
 
 #### Example
 
+Create an extension named `pgcrypto`:
+
 ```sh
 create-extension pgcrypto
 ```
-
-Creates an extension named `pgcrypto`.
 
 ## Functions
 
@@ -41,18 +42,34 @@ Edit the function in the deploy script.
 
 #### Example
 
+Create a function named `update` in the `api` schema:
+
 ```sh
-create-function data playlist_updated
+create-function api update
 ```
 
+### create-function-as
+
+Create a function, writing the function inline:
+
+```sh
+create-function-as <schema> <function> <sql>
 ```
-create-function api asset_updated
-create-function-api-login
-create-function-api-logout
-create-function-api-refresh-token
-create-function-auth-check-role-exists
-create-function-auth-encrypt-pass
-create-function-auth-generate-access-token
+
+This is useful in [bulk migration scripts](/#bulk-migration-scripts).
+
+#### Example
+
+Create a function named `api.square`:
+
+```sh
+create-function api square $(cat << EOM
+create function square(@number int) returns int as
+begin
+    return @number * @number;
+end;
+EOM
+)
 ```
 
 ## Grants

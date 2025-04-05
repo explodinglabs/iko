@@ -168,6 +168,20 @@ function create-function {
     && show-files $change
 }
 
+function create-function-as {
+  local schema=$1
+  local function=$2
+  local sql=$(cat)
+  local change=${4:-create_function_${schema}_${function}}
+  sqitch add $change \
+    --template create_function_as \
+    --set schema=$schema \
+    --set function=$function \
+    --set sql="$sql" \
+    --note \'"Add ${schema}.${function} function"\' \
+    && show-files $change
+}
+
 function create-function-auth-check-role-exists {
   local change=${1:-create_function_auth_check_role_exists}
   sqitch add $change \
