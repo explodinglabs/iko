@@ -63,13 +63,12 @@ This is useful in [bulk migration scripts](/#bulk-migration-scripts).
 Create a function named `api.square`:
 
 ```sh
-create-function api square $(cat << EOM
-create function square(@number int) returns int as
+create-function-as api square <<EOF
+create function api.square(@number int) returns int as
 begin
     return @number * @number;
 end;
-EOM
-)
+EOF
 ```
 
 ## Grants
