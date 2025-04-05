@@ -73,40 +73,7 @@ EOF
 
 ## Grants
 
-### grant-usage
-
-Grant schema usage:
-
-```sh
-grant-usage <schema> <role>
-```
-
-#### Example
-
-```sh
-grant-usage
-```
-
-Grant select:
-
-```sh
-grant-select <schema> <table> <role>
-```
-
-Grant function execute (edit the function params):
-
-```sh
-./sqitch add grant_execute_api_foo --template grant_execute --set name=api.login --set role=web_user --note 'Grant execute on api.login to web_user'
-```
-
-Grant role membership (i.e. `grant [role] to [role]`.):
-
-```sh
-grant [role] [role]
-./sqitch add grant_role_membership_foo --template grant_role_membership --set from_role=web_user --set role=authenticator --note 'Grant web_user to authenticator'
-```
-
-## grant-execute
+### grant-execute
 
 Grants execute permission on a specific function to a role.
 
@@ -120,12 +87,56 @@ grant-execute <schema> <function> <signature> <role>
 grant-execute api login '(text,text)' anon
 ```
 
-This grants the `anon` role permission to execute the `login` function in the
-`api` schema with the `(text, text)` signature.
+This grants the `anon` role permission to execute the `api.login(text,text)`
+function.
 
-grant-role-membership authenticator anon
-grant-schema-usage amqp api_user # extension has its own 'amqp' schema
+### grant-schema-usage
+
+Grant schema usage:
+
+```sh
+grant-schema-usage <schema> <role>
+```
+
+#### Example
+
+```sh
+grant-schema-usage api api_user
+```
+
+Grants usage of the `api` schema to `api_user`.
+
+### grant-role-membership
+
+Grant role membership:
+
+```sh
+grant-role-membership <role_specification> <role>
+```
+
+Example:
+
+```sh
+grant-role-membership authenticator api_user
+```
+
+Grants membership in `authenticator` to `api_user`.
+
+### grant-table-privilege
+
+Grant table privilege:
+
+```sh
+grant-table-privilege <privilege> <schema> <table> <role>
+```
+
+For example:
+
+```sh
 grant-table-privilege insert api asset api_user
+```
+
+Allows an `api_user` to insert into the `api.asset` table.
 
 ## Roles
 

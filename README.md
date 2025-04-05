@@ -50,8 +50,8 @@ Sqitch creates three files –
 - `verify/create_schema_api.sql` to verify the change, and
 - `revert/create_schema_api.sql` to revert the change.
 
-The deploy script is output so you can see the change that will be deployed.
-You may want to make changes to it.
+The deploy script is outputted for you to review and modify as needed before
+deployment.
 
 > 📖 See the [full list of migration commands](/COMMANDS.md).
 
