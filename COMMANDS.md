@@ -56,7 +56,7 @@ Create a function, writing the function inline:
 create-function-as <schema> <function> <sql>
 ```
 
-This is useful in [bulk migration scripts](/#bulk-migration-scripts).
+This is useful in bulk migration scripts.
 
 #### Example
 
