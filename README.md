@@ -1,7 +1,8 @@
 <p align="center">
-  # Ply
   <img alt="Ply logo" height="200" src="https://github.com/explodinglabs/ply/blob/main/logo.png?raw=true" />
 </p>
+
+# Ply
 
 _Ply_ is a Postgres migration tool that makes database changes easy.
 
