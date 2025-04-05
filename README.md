@@ -29,8 +29,8 @@ ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply"
 ### Initialize a Sqitch project
 
 Run the following command to [initialize a Sqitch
-project](https://sqitch.org/docs/manual/sqitch-init/) (be sure to set the
-correct database connection URI):
+project](https://sqitch.org/docs/manual/sqitch-init/), ensuring the correct
+database connection URI is set:
 
 ```sh
 ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
@@ -44,14 +44,14 @@ Let's create a schema named `api` using Ply's DSL:
 ply create-schema api
 ```
 
-Three SQL files are created –
+Sqitch creates three files –
 
 - `deploy/create_schema_api.sql` to deploy the change,
 - `verify/create_schema_api.sql` to verify the change, and
 - `revert/create_schema_api.sql` to revert the change.
 
 The deploy script is output so you can see the change that will be deployed.
-You may want to changes to it.
+You may want to make changes to it.
 
 > 📖 See the [full list of migration commands](/COMMANDS.md).
 
