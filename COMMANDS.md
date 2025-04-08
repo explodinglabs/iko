@@ -14,53 +14,58 @@
 
 ### create-extension
 
-Create an extension:
+Load a new extension into the current database.
 
 ```sh
 create-extension <extension>
 ```
 
-#### Example
-
-Create an extension named `pgcrypto`:
+For example, to create an extension named `pgcrypto`:
 
 ```sh
 create-extension pgcrypto
+```
+
+Generates the following deploy script:
+
+```sql
+create extension "pgcrypto";
 ```
 
 ## Functions
 
 ### create-function
 
-Create a function:
+Defines a new function. Edit the function in the generated deploy script.
 
 ```sh
 create-function <schema> <function>
 ```
 
-Edit the function in the deploy script.
-
-#### Example
-
-Create a function named `update` in the `api` schema:
+For example, to create a function named `update` in the `api` schema:
 
 ```sh
 create-function api update
 ```
 
+Generates the following deploy script:
+
+```sql
+create or replace function api.update () returns void language plpgsql as
+begin
+  return;
+end;
+```
+
 ### create-function-as
 
-Create a function, writing the function inline:
+Define a function inline (useful in bulk migration scripts).
 
 ```sh
 create-function-as <schema> <function> <sql>
 ```
 
-This is useful in bulk migration scripts.
-
-#### Example
-
-Create a function named `api.square`:
+For example, to define a function named `api.square`:
 
 ```sh
 create-function-as api square <<EOF
@@ -75,68 +80,83 @@ EOF
 
 ### grant-execute
 
-Grants execute permission on a specific function to a role.
+Grants execute permission on a function to a role.
 
 ```sh
 grant-execute <schema> <function> <signature> <role>
 ```
 
-### Example
+For example, to grant execute permission on `api.login` to `dbuser`:
 
 ```sh
-grant-execute api login '(text,text)' anon
+grant-execute api login '(text,text)' dbuser
 ```
 
-This grants the `anon` role permission to execute the `api.login(text,text)`
-function.
+Generates the following deploy script:
+
+```sh
+grant execute on function api.login (text,text) to dbuser;
+```
 
 ### grant-schema-usage
 
-Grant schema usage:
+Grant schema usage to a role.
 
 ```sh
 grant-schema-usage <schema> <role>
 ```
 
-#### Example
+For example, to grant usage of the `api` schema to `dbuser`:
 
 ```sh
-grant-schema-usage api api_user
+grant-schema-usage api dbuser
 ```
 
-Grants usage of the `api` schema to `api_user`.
+Generates the following deploy script:
+
+```sql
+grant usage on schema api to dbuser;
+```
 
 ### grant-role-membership
 
-Grant role membership:
+Grant membership in a role.
 
 ```sh
 grant-role-membership <role_specification> <role>
 ```
 
-Example:
+For example, to grant membership in `authenticator` to `dbuser`:
 
 ```sh
-grant-role-membership authenticator api_user
+grant-role-membership authenticator dbuser
 ```
 
-Grants membership in `authenticator` to `api_user`.
+Generates the following deploy script:
 
-### grant-table-privilege
+```sql
+grant authenticator to dbuser;
+```
 
-Grant table privilege:
+### grant-privilege
+
+Grant privileges on a database object.
 
 ```sh
-grant-table-privilege <privilege> <schema> <table> <role>
+grant-privilege <privilege> <schema> <object> <role>
 ```
 
-For example:
+For example, to allow an `dbuser` to insert into the `api.asset` table:
 
 ```sh
-grant-table-privilege insert api asset api_user
+grant-privilege insert api asset dbuser
 ```
 
-Allows an `api_user` to insert into the `api.asset` table.
+Generates the following deploy script:
+
+```sql
+grant select on api.asset to dbuser;
+```
 
 ## Roles
 
@@ -148,85 +168,129 @@ Creates a `nologin` role.
 create-role <role>
 ```
 
-### Example:
+For example, to create a `dbuser` role:
 
 ```sh
 create-role dbuser
 ```
 
-Creates a role named `dbuser`.
+Generates the following deploy script:
 
-## create-role-login
+```sql
+$do$
+begin
+   if exists (
+     select from pg_catalog.pg_roles
+     where rolname = 'dbuser'
+   ) then
+      raise notice 'Role already exists, skipping.';
+   else
+      create role dbuser nologin;
+   end if;
+end
+$do$;
+```
 
-Creates a login role with a specified password.
+### create-role-login
+
+Creates a login role with a password.
 
 ```sh
 create-role-login <role> <password>
 ```
 
-### Example
+For example, to create a `dbuser` role with password, `securepass123`:
 
 ```sh
 create-role-login dbuser 'securepass123'
 ```
 
-This creates a login role named `dbuser` with the password `securepass123`.
+Generates the following deploy script:
+
+```sql
+do $$
+begin
+   if exists (
+     select from pg_catalog.pg_roles
+     where rolname = 'dbuser'
+   ) then
+      raise notice 'Role already exists, skipping.';
+   else
+      create role dbuser noinherit login password 'securepass123';
+   end if;
+end $$;
+```
 
 ## Schemas
 
 ### create-schema
 
-Create a schema:
+Enter a new schema into the database.
 
 ```sh
 create-schema <schema>
 ```
 
-#### Example
+For example, to create a schema named `api`:
 
 ```sh
 create-schema api
 ```
 
-Creates a schema named `api`.
+Generates the following deploy script:
+
+```sql
+create schema api;
+```
 
 ## Tables
 
-Create a table (after this command, edit the table):
+### create-table
+
+Create a new table in the database. Edit the table structure.
 
 ```sh
 create-table <schema> <table>
 ```
 
-#### Example
+For example, to create a table named `customer` in the `api` schema:
 
 ```sh
-create-table api asset
+create-table api customer
 ```
 
-Drop table:
+Generates the following deploy script:
+
+```sql
+create table api.customer (
+  id bigint generated always as identity primary key,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now(),
+  name text not null
+);
+```
+
+### create-table-as
+
+Create a new table in the database, inline.
+This is useful for bulk migration scripts.
 
 ```sh
-drop-table api tasks
+create-table <schema> <table> <sql>
 ```
 
-Add column:
+For example, to create a table named `customer` in the `api` schema:
 
 ```sh
-add-column api tasks name
+create-table api customer <<EOF
+create table api.customer (
+  id bigint generated always as identity primary key,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now(),
+  name text not null
+);
+EOF
 ```
-
-Drop column:
-
-```sh
-drop-column [schema] [table] [column]
-```
-
-create-table-auth-user
-create-table-auth-refresh-token
-create-table api asset
-create-table api playlist_asset
-create-table api playlist
 
 ## Triggers
 

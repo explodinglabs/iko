@@ -1,5 +1,4 @@
-create or replace function [% schema %].[% function %] () returns trigger language plpgsql as $$
+create or replace function [% schema %].[% function %] () returns void language plpgsql as
 begin
-  new.updated_at = now();
-  return new;
-end; $$;
+  return;
+end;

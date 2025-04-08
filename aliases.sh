@@ -44,6 +44,20 @@ function create-table {
     && show-files $change
 }
 
+function create-table-as {
+  local schema=$1
+  local table=$2
+  local sql=$(cat)
+  local change=${4:-create_table_${schema}_${table}}
+  sqitch add $change \
+    --template create_table_as \
+    --set schema=$schema \
+    --set table=$table \
+    --set sql="$sql" \
+    --note \'"Add ${schema}.${table} table"\' \
+    && show-files $change
+}
+
 function add-column {
 :
 # sqitch add alter_table_foo_bar_add_baz --template alter_table_add_column --set schema=foo --set table=bar --set column_name=baz --set column_type=integer --note 'Add foo.bar column baz'
@@ -122,14 +136,14 @@ function grant-schema-usage {
     && show-files $change
 }
 
-function grant-table-privilege {
+function grant-privilege {
   local type=$1
   local schema=$2
   local table=$3
   local role=$4
-  local change=${5:-grant_table_privilege_${type}_on_${schema}_${table}_to_${role}}
+  local change=${5:-grant_privilege_${type}_on_${schema}_${table}_to_${role}}
   sqitch add $change \
-    --template grant_table_privilege \
+    --template grant_privilege \
     --set role=$role \
     --set type=$type \
     --set schema=$schema \
