@@ -1,8 +1,3 @@
-#!/bin/bash
-
-# setopt aliases
-# alias sqitch='./sqitch'
-
 function show-files {
   local change=$1
   cat deploy/${change}.sql
@@ -247,17 +242,21 @@ function create-function-api-refresh-token {
 # Triggers
 
 function create-trigger {
-  local schema=$1
-  local table=$2
-  local function=$3
-  local trigger=$4
-  local change=${5:-create_trigger_${schema}_${table}_${trigger}}
+  local trigger=$1
+  local when=$2
+  local event=$3
+  local schema=$4
+  local table=$5
+  local function=$6
+  local change=${7:-create_trigger_${schema}_${table}_${trigger}}
   sqitch add $change \
     --template create_trigger \
+    --set trigger=$trigger \
+    --set when=$when \
+    --set event=$event \
     --set schema=$schema \
     --set table=$table \
     --set function=$function \
-    --set trigger=$trigger \
     --note \'"Add trigger $trigger on ${schema}.${table}"\' \
     && show-files $change
 }

@@ -1,4 +1,4 @@
-# Commands
+# Migration Commands
 
 - [Ad-hoc](#adhoc)
 - [Extensions](#extensions)
@@ -8,7 +8,15 @@
 - [Schemas](#schemas)
 - [Tables](#tables)
 - [Triggers](#triggers)
-- [Views](#views)
+
+## Ad-hoc
+
+To create a migration not listed below, use [sqitch
+add](https://sqitch.org/docs/manual/sqitch-add/):
+
+```sh
+ply sqitch add create_view -n 'Create a view'
+```
 
 ## Extensions
 
@@ -94,7 +102,7 @@ grant-execute api login '(text,text)' dbuser
 
 Generates the following deploy script:
 
-```sh
+```sql
 grant execute on function api.login (text,text) to dbuser;
 ```
 
@@ -294,28 +302,32 @@ EOF
 
 ## Triggers
 
-Create trigger:
+### create-trigger
+
+Create a trigger on a table.
 
 ```sh
-create-trigger [schema] [table] [trigger] [function]
+create-trigger <trigger> <when> <event> <schema> <table> <function>
 ```
 
-Drop trigger:
+For example, to create a trigger named `customer_updated` that fires before
+updating a row in `api.customer`, calling `api.customer_updated`:
 
 ```sh
-
+create-trigger customer_updated before update api customer customer_updated
 ```
 
-```
-create-trigger-auth-ensure-user-role-exists
-create-trigger-auth-encrypt-pass
-create-trigger api asset asset_updated asset_updated
-create-trigger api playlist playlist_updated playlist_updated
+Generates the following deploy script:
+
+```sql
+create trigger customer_updated
+  before update on api.customer
+  for each row execute function api.customer_updated();
 ```
 
 ## Views
 
-Create view (Then edit the select statement):
+Create a view. Edit the select statement.
 
 ```sh
 ./sqitch add create_view_api_teams --template create_view --set schema=api --set name=teams --note 'Add api.teams view'

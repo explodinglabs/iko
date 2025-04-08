@@ -1,3 +1,3 @@
 create trigger [% trigger %]
-before update on [% schema %].[% table %]
-for each row execute procedure [% schema %].[% function %]();
+  [% when %] [% event %] on [% schema %].[% table %]
+  for each row execute function [% schema %].[% function %]();
