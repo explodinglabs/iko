@@ -1,5 +1,4 @@
-$do$
-begin
+begin $$
    if exists (
      select from pg_catalog.pg_roles
      where rolname = '[% role %]'
@@ -8,5 +7,4 @@ begin
    else
       create role [% role %] nologin;
    end if;
-end
-$do$;
+end; $$

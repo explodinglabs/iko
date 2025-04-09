@@ -1,11 +1,10 @@
-do $$
-begin
+begin $$
    if exists (
      select from pg_catalog.pg_roles
-     where rolname = 'authenticator'
+     where rolname = [% role %]
    ) then
       raise notice 'Role already exists, skipping.';
    else
-      create role authenticator noinherit login password 'mysecretpassword';
+      create role [% role %] noinherit login password [% password %];
    end if;
-end $$;
+end; $$

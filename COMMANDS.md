@@ -1,6 +1,7 @@
 # Migration Commands
 
 - [Ad-hoc](#adhoc)
+- [Comments](#comments)
 - [Extensions](#extensions)
 - [Functions](#functions)
 - [Grants](#grants)
@@ -185,8 +186,7 @@ create-role dbuser
 Generates the following deploy script:
 
 ```sql
-$do$
-begin
+begin $$
    if exists (
      select from pg_catalog.pg_roles
      where rolname = 'dbuser'
@@ -195,22 +195,21 @@ begin
    else
       create role dbuser nologin;
    end if;
-end
-$do$;
+end; $$
 ```
 
-### create-role-login
+### create-login-role
 
 Creates a login role with a password.
 
 ```sh
-create-role-login <role> <password>
+create-login-role <role> <password>
 ```
 
 For example, to create a `dbuser` role with password, `securepass123`:
 
 ```sh
-create-role-login dbuser 'securepass123'
+create-login-role dbuser 'securepass123'
 ```
 
 Generates the following deploy script:
@@ -226,7 +225,7 @@ begin
    else
       create role dbuser noinherit login password 'securepass123';
    end if;
-end $$;
+end; $$
 ```
 
 ## Schemas
@@ -323,12 +322,4 @@ Generates the following deploy script:
 create trigger customer_updated
   before update on api.customer
   for each row execute function api.customer_updated();
-```
-
-## Views
-
-Create a view. Edit the select statement.
-
-```sh
-./sqitch add create_view_api_teams --template create_view --set schema=api --set name=teams --note 'Add api.teams view'
 ```
