@@ -1,3 +1,0 @@
-create trigger encrypt_pass
-  before insert or update on auth.user for each row
-  execute procedure auth.encrypt_pass ();

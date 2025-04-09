@@ -1,5 +1,0 @@
-create table auth.user (
-  username text primary key check (length(username) >= 3),
-  password text not null check (length(password) < 512),
-  role name not null check (length(role) < 512)
-);
