@@ -1,5 +1,3 @@
-SQITCH_ARGS='--edit'
-
 function show-files {
   local change=$1
   cat deploy/${change}.sql
