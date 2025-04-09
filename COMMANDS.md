@@ -215,8 +215,7 @@ create-login-role dbuser 'securepass123'
 Generates the following deploy script:
 
 ```sql
-do $$
-begin
+begin $$
    if exists (
      select from pg_catalog.pg_roles
      where rolname = 'dbuser'

@@ -1,6 +1,22 @@
+SQITCH_ARGS='--edit'
+
 function show-files {
   local change=$1
   cat deploy/${change}.sql
+}
+
+# Comment
+
+function comment {
+  local obj="${*%${!#}}"  # All except the last
+  local is="${@: -1}"  # Last parameter 
+  local change=${comment_${obj// /_}}
+  sqitch add $change \
+    --template comment \
+    --set obj=$obj \
+    --set is=$is \
+    --note \'"Comment $obj"\' \
+    && show-files $change
 }
 
 # Extensions
