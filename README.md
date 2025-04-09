@@ -19,7 +19,7 @@ installed](https://docs.docker.com/get-docker/).
 Create a `ply` command by pasting this into your terminal:
 
 ```sh
-ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply" bash -c "$*" }
+ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply" bash -c '"$@"' -- "$@" }
 ```
 
 💡 Add it to your `~/.bashrc` or `~/.zshrc` for persistence.
