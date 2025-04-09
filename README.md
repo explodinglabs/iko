@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Ply logo" height="130" src="https://github.com/explodinglabs/ply/blob/main/logo.png?raw=true" />
+  <img alt="Ply logo" height="115" src="https://github.com/explodinglabs/ply/blob/main/logo.png?raw=true" />
 </p>
 
 # Ply
