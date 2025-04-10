@@ -5,6 +5,11 @@
 
 _Ply_ is a **migration tool** for Postgres databases.
 
+<p align="center">
+  <a href="https://github.com/explodinglabs/minibase/wiki">Documentation</a> |
+  <a href="https://github.com/explodinglabs/minibase/discussions">Discussions</a>
+</p>
+
 It extends [Sqitch](https://sqitch.org/), providing simple
 [commands](/COMMANDS.md) for creating and performing migrations. For example,
 to create an `api` schema, you'd type `ply create-schema api`.
@@ -34,7 +39,12 @@ project](https://sqitch.org/docs/manual/sqitch-init/), ensuring the correct
 database connection URI is set:
 
 ```sh
-ply init --target postgres://user:pass@localhost:5432/app myapp
+$ ply init --target postgres://user:pass@localhost:5432/app myapp
+Created sqitch.conf
+Created sqitch.plan
+Created deploy/
+Created revert/
+Created verify/
 ```
 
 ### Create Migrations
@@ -42,17 +52,17 @@ ply init --target postgres://user:pass@localhost:5432/app myapp
 Let's create a schema named `api` using Ply's DSL:
 
 ```sh
-ply create-schema api
+$ ply create-schema api
+Created deploy/create_schema_api.sql
+Created revert/create_schema_api.sql
+Created verify/create_schema_api.sql
+Added "create_schema_api" to sqitch.plan
+create schema api;
 ```
 
-Sqitch creates three files –
-
-- `deploy/create_schema_api.sql` to deploy the change,
-- `verify/create_schema_api.sql` to verify the change, and
-- `revert/create_schema_api.sql` to revert the change.
-
-The deploy script is outputted for you to review and modify as needed before
-deployment.
+Sqitch created three files – a deploy script, a verify script, and a revert
+script. It then added the change to `sqitch.plan`. Ply then printed the deploy
+script for you to review and modify as needed before deployment.
 
 > 📖 See the [full list of migration commands](/COMMANDS.md).
 
