@@ -63,15 +63,13 @@ Added "create_schema_api" to sqitch.plan
 create schema api;
 ```
 
-Sqitch created three files – a deploy script, a verify script, and a revert
+Sqitch created three files – a deploy script, a verify script and a revert
 script. It then added the change to `sqitch.plan`. Ply then printed the deploy
-script for you to review and modify as needed before deployment.
+script for you to review.
 
 > 📖 See the [full list of migration commands](/COMMANDS.md).
 
 ### Deploy Migrations
-
-Use Sqitch to deploy the change:
 
 ```sh
 ply deploy
