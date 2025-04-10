@@ -3,8 +3,6 @@
   <img alt="Ply logo" height="35" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
-# Ply
-
 _Ply_ simplifies migrations on Postgres databases.
 
 It extends [Sqitch](https://sqitch.org/) providing simple
