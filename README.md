@@ -79,11 +79,9 @@ ply deploy
 
 Write scripts that generate multiple migrations at once.
 
-Here's an example script:
+Here's an example script named `migrations/create.sh`:
 
 ```sh
-# migrations/create.sh
-
 # Create an auth schema
 create-schema auth
 
@@ -108,6 +106,8 @@ end; $$
 EOF
 
 # Trigger the encrypt_pass function when a user is inserted or updated
+create-trigger encrypt_pass before insert or update on auth.user \
+  for each row execute procedure auth.encrypt_pass '()'
 create-trigger encrypt_pass 'before insert or update' auth user encrypt_pass
 ```
 
