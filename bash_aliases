@@ -4,6 +4,10 @@ function init {
   sqitch init "$@"
 }
 
+function add {
+  sqitch add "$@"
+}
+
 function deploy {
   sqitch deploy "$@"
 }
