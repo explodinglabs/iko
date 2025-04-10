@@ -3,10 +3,6 @@
   <img alt="Ply logo" height="35" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
-<p align="center">
-  PostgreSQL migration tool
-</p>
-
 # Ply
 
 _Ply_ simplifies migrations on a Postgres database.
