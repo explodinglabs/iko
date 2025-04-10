@@ -10,7 +10,7 @@ It extends [Sqitch](https://sqitch.org/), providing simple
 to create an `api` schema, you'd type `ply create-schema api`.
 
 Sqitch is available as `ply sqitch`, though some common Sqitch commands are
-aliased (`ply deploy` is an alias for `ply sqitch deploy`).
+aliased (e.g. `ply sqitch deploy` is aliased as `ply deploy`).
 
 ## Installation
 
