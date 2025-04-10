@@ -1,4 +1,11 @@
-SQITCH_ARGS='--edit'
+# Aliases
+
+alias init='sqitch init'
+alias deploy='sqitch deploy'
+alias verify='sqitch verify'
+alias revert='sqitch revert'
+
+# Functions
 
 function show-files {
   local change=$1

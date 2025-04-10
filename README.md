@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Ply logo" height="130" src="https://github.com/explodinglabs/ply/blob/main/logo.png?raw=true" />
+  <img alt="Ply logo" height="115" src="https://github.com/explodinglabs/ply/blob/main/logo.png?raw=true" />
 </p>
 
 <p align="center">
@@ -10,11 +10,15 @@
 
 _Ply_ simplifies migrations on a Postgres database.
 
-It extends [Sqitch](https://sqitch.org/) to provide simple
-[commands](/COMMANDS.md) for creating and performing migrations. For example,
-use `ply create-schema api` to create an api schema.
+It extends [Sqitch](https://sqitch.org/) providing simple
+[commands](/COMMANDS.md) for creating and performing migrations.
 
-Sqitch is also available, for example `ply deploy`.
+For example, in a terminal type `ply create-schema api` to generate a migration
+to create an `api` schema. Or in a shell script simply enter `create-schema api`.
+
+Sqitch is also available, for example `ply sqitch --help` (although shortcuts
+are available for some common Sqitch commands, for example `ply deploy` is an
+alias for `ply sqitch deploy`).
 
 ## Installation
 
@@ -38,7 +42,7 @@ project](https://sqitch.org/docs/manual/sqitch-init/), ensuring the correct
 database connection URI is set:
 
 ```sh
-ply sqitch init --target postgres://user:pass@localhost:5432/app myapp
+ply init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
 ### Create Migrations
@@ -65,7 +69,7 @@ deployment.
 Use Sqitch to deploy the change:
 
 ```sh
-ply sqitch deploy
+ply deploy
 ```
 
 > 📖 Refer to the [Sqitch Manual](https://sqitch.org/docs/manual/).
