@@ -1,6 +1,4 @@
-do $$
-begin
-
+begin $$
   assert (
     select exists (
       select 1 from information_schema.routines
@@ -8,5 +6,4 @@ begin
       and routine_name = '[% function %]'
     )
   );
-
-end; $$;
+end; $$

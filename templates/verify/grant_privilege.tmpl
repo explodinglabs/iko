@@ -1,6 +1,4 @@
-do $$
-begin
-
+begin $$
   assert (
     select exists (
       select 1 from information_schema.table_privileges
@@ -10,5 +8,4 @@ begin
       and grantee = '[% role %]'
     )
   );
-
-end; $$;
+end; $$

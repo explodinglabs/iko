@@ -1,6 +1,4 @@
-do $$
-begin
-
+begin $$
   assert (
     select exists (
       select 1 from information_schema.triggers
@@ -9,5 +7,4 @@ begin
       and event_object_table = '[% table %]'
     )
   );
-
-end; $$;
+end; $$

@@ -1,10 +1,7 @@
-do $$
-begin
-
+begin $$
   assert (
     select exists (
       select pg_has_role('[% role %]', '[% role_specification %]', 'member')
     )
   );
-
-end; $$;
+end; $$

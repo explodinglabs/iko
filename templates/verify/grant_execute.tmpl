@@ -1,6 +1,4 @@
-do $$
-begin
-
+begin $$
   assert (
     select has_function_privilege(
       '[% role %]',
@@ -8,6 +6,4 @@ begin
       'execute'
     )
   );
-
-end;
-$$;
+end; $$

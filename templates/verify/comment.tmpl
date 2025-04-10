@@ -5,7 +5,5 @@ begin $$
       from pg_namespace n
       where obj_description(n.oid, 'pg_namespace') = [% comment %]
     )
-  ), 'Expected database object to have the comment.';
-);
-
-end $$;
+  );
+end; $$

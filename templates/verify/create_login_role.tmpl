@@ -1,6 +1,4 @@
-do $$
-begin
-
+begin $$
   assert (
     select exists (
       select 1
@@ -8,5 +6,4 @@ begin
       where role_name = 'authenticator'
     )
   );
-
-end; $$;
+end; $$
