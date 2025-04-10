@@ -17,6 +17,9 @@ to create an `api` schema, you'd type `ply create-schema api`.
 Sqitch is available as `ply sqitch`, though some common commands are aliased
 (e.g. `ply deploy` is an alias for `ply sqitch deploy`).
 
+Combine the commands into a [script](#migration-scripts) to define an entire
+database structure at once.
+
 ## Installation
 
 Ply runs inside a Docker container, so ensure [Docker is
