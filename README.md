@@ -46,7 +46,8 @@ Created revert/
 Created verify/
 ```
 
-> 📖 Refer to the manual for `[sqitch init](https://sqitch.org/docs/manual/sqitch-init/)`.
+> 📖 Refer to the manual for [sqitch
+> init](https://sqitch.org/docs/manual/sqitch-init/).
 
 ### Create Migrations
 
@@ -73,7 +74,7 @@ script for you to review.
 ply deploy
 ```
 
-> 📖 Refer to the manual for `[sqitch deploy](https://sqitch.org/docs/manual/sqitch-deploy/)`.
+> 📖 Refer to the manual for [sqitch deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
 
 ## Scripting
 
