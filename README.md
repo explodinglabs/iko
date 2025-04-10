@@ -4,18 +4,18 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/explodinglabs/minibase/wiki">Documentation</a> |
-  <a href="https://github.com/explodinglabs/minibase/discussions">Discussions</a>
+  <a href="https://github.com/explodinglabs/ply/wiki">Documentation</a> |
+  <a href="https://github.com/explodinglabs/ply/discussions">Discussions</a>
 </p>
 
 _Ply_ is a **migration tool** for PostgreSQL databases.
 
-It extends [Sqitch](https://sqitch.org/), providing simple
-[commands](/COMMANDS.md) for creating and performing migrations. For example,
-to create an `api` schema, you'd type `ply create-schema api`.
+It extends [Sqitch](https://sqitch.org/), adding [commands](/COMMANDS.md) to
+simplify creating and performing migrations. For example, to create an `api`
+schema, you'd type `ply create-schema api`.
 
-Combine the commands into a [script](#scripting) to define an entire database
-structure at once.
+Combine the commands into a [script](#scripting) to define many migrations, or
+an entire database structure, in one place.
 
 ## Installation
 
@@ -35,7 +35,7 @@ ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply"
 ### Initialise a project
 
 Run the following command to initialise a project, ensuring the correct
-database connection URI is set:
+database connection URI is set.
 
 ```sh
 $ ply init --target postgres://user:pass@localhost:5432/app myapp
@@ -50,7 +50,7 @@ Created verify/
 
 ### Create Migrations
 
-Let's create a schema named `api` using Ply's DSL:
+Let's create a schema named `api`:
 
 ```sh
 $ ply create-schema api
@@ -61,7 +61,7 @@ Added "create_schema_api" to sqitch.plan
 create schema api;
 ```
 
-Sqitch created three files – a deploy script, a verify script and a revert
+Sqitch created three files – a deploy script, a revert script and a verify
 script. It then added the change to `sqitch.plan`. Ply then printed the deploy
 script for you to review.
 
