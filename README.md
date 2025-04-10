@@ -7,7 +7,7 @@ _Ply_ is a **migration tool** for Postgres databases.
 
 It extends [Sqitch](https://sqitch.org/), providing simple
 [commands](/COMMANDS.md) for creating and performing migrations. For example,
-to generate a migration to create an `api` schema, you'd type `ply create-schema api`.
+to create an `api` schema, you'd type `ply create-schema api`.
 
 Sqitch is available as `ply sqitch`, though some common Sqitch commands are
 aliased (`ply deploy` is an alias for `ply sqitch deploy`).
