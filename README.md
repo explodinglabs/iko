@@ -84,7 +84,10 @@ Here's an example script:
 ```sh
 # migrations/create.sh
 
+# Create an auth schema
 create-schema auth
+
+# Create an auth.user table
 create-table-as auth user <<EOF
 create table auth.user (
   username text primary key check (length(username) >= 3),
@@ -92,6 +95,8 @@ create table auth.user (
   role name not null check (length(role) < 512)
 );
 EOF
+
+# Create a function to encrypt the password
 create-function-as auth encrypt_pass <<EOF
 create function auth.encrypt_pass () returns trigger language plpgsql as $$
 begin
@@ -101,9 +106,9 @@ begin
   return new;
 end; $$
 EOF
-create trigger encrypt_pass
-  before insert or update on auth.user for each row
-  execute procedure auth.encrypt_pass ();
+
+# Trigger the encrypt_pass function when a user is inserted or updated
+create-trigger encrypt_pass 'before insert or update' auth user encrypt_pass
 ```
 
 Run the script to create all migrations at once:
