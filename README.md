@@ -14,8 +14,8 @@ It extends [Sqitch](https://sqitch.org/), providing simple
 [commands](/COMMANDS.md) for creating and performing migrations. For example,
 to create an `api` schema, you'd type `ply create-schema api`.
 
-Combine commands into a [script](#migration-scripts) to define an entire
-database structure at once.
+Combine the commands into a [script](#scripting) to define an entire database
+structure at once.
 
 ## Installation
 
@@ -32,10 +32,9 @@ ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply"
 
 ## Usage
 
-### Initialize a Sqitch project
+### Initialise a project
 
-Run the following command to [initialize a Sqitch
-project](https://sqitch.org/docs/manual/sqitch-init/), ensuring the correct
+Run the following command to initialise a project, ensuring the correct
 database connection URI is set:
 
 ```sh
@@ -46,6 +45,8 @@ Created deploy/
 Created revert/
 Created verify/
 ```
+
+> 📖 See [Sqitch init](https://sqitch.org/docs/manual/sqitch-init/).
 
 ### Create Migrations
 
@@ -64,7 +65,7 @@ Sqitch created three files – a deploy script, a verify script and a revert
 script. It then added the change to `sqitch.plan`. Ply then printed the deploy
 script for you to review.
 
-> 📖 See the [full list of migration commands](/COMMANDS.md).
+> 📖 See the [full list of Ply commands](/COMMANDS.md).
 
 ### Deploy Migrations
 
@@ -74,7 +75,7 @@ ply deploy
 
 > 📖 Refer to the [Sqitch Manual](https://sqitch.org/docs/manual/).
 
-## Scripts
+## Scripting
 
 Write scripts that create multiple migrations at once. This enables you to
 define change sets, or an entire application, at a high level.
