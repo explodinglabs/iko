@@ -24,14 +24,14 @@ function show-files {
 # Comment
 
 function comment {
-  local obj="${*%${!#}}"  # All except the last
+  local object="${*%${!#}}"  # All except the last
   local is="${@: -1}"  # Last parameter 
-  local change=${comment_${obj// /_}}
+  local change=${comment_${object// /_}}
   sqitch add $change \
     --template comment \
-    --set obj=$obj \
-    --set is=$is \
-    --note \'"Comment $obj"\' \
+    --set object=$object \
+    --set comment=$is \
+    --note \'"Comment on $object"\' \
     && show-files $change
 }
 
