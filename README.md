@@ -46,7 +46,8 @@ Created revert/
 Created verify/
 ```
 
-> 📖 See [Sqitch init](https://sqitch.org/docs/manual/sqitch-init/).
+> 📖 `init` is an alias for [sqitch
+> init](https://sqitch.org/docs/manual/sqitch-init/).
 
 ### Create Migrations
 
@@ -73,7 +74,8 @@ script for you to review.
 ply deploy
 ```
 
-> 📖 Refer to the [Sqitch Manual](https://sqitch.org/docs/manual/).
+> 📖 `deploy` is an alias for `sqitch deploy`. Refer to the [Sqitch
+> Manual](https://sqitch.org/docs/manual/).
 
 ## Scripting
 
