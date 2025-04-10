@@ -1,11 +1,20 @@
-# Aliases
+# Alias some common sqitch commands
 
-alias init='sqitch init'
-alias deploy='sqitch deploy'
-alias verify='sqitch verify'
-alias revert='sqitch revert'
+function init {
+  sqitch init "$@"
+}
 
-# Functions
+function deploy {
+  sqitch deploy "$@"
+}
+
+function verify {
+  sqitch verify "$@"
+}
+
+function revert {
+  sqitch revert "$@"
+}
 
 function show-files {
   local change=$1
