@@ -9,8 +9,8 @@ It extends [Sqitch](https://sqitch.org/), providing simple
 [commands](/COMMANDS.md) for creating and performing migrations. For example,
 to create an `api` schema, you'd type `ply create-schema api`.
 
-Sqitch is available as `ply sqitch`, though some common Sqitch commands are
-aliased (e.g. `ply sqitch deploy` is aliased as `ply deploy`).
+Sqitch is available as `ply sqitch`, though some common commands are aliased
+(e.g. `ply deploy` is an alias for `ply sqitch deploy`).
 
 ## Installation
 
