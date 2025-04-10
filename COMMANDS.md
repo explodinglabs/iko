@@ -19,6 +19,28 @@ add](https://sqitch.org/docs/manual/sqitch-add/):
 ply sqitch add create_view -n 'Create a view'
 ```
 
+## Comments
+
+### comment
+
+Add a comment to a database object.
+
+```sh
+comment <object> <comment>
+```
+
+For example, to add a comment to the `api` schema:
+
+```sh
+comment schema api 'Schema for the public API endpoints'
+```
+
+Generates the following deploy script:
+
+```sql
+comment on schema api is 'Schema for the public API endpoints';
+```
+
 ## Extensions
 
 ### create-extension
