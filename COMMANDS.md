@@ -1,6 +1,24 @@
-# Migration Commands
+# Commands
 
-- [Ad-hoc](#adhoc)
+Ply provides aliases for the following Sqitch commands:
+
+- add
+- deploy
+- init
+- revert
+- verify
+
+For example, to create an ad-hoc migration not listed below, use:
+
+```sh
+ply add create_view -n 'Create a view'
+```
+
+Then to deploy, `ply deploy`.
+
+Other commands are below.
+
+- [General](#general)
 - [Comments](#comments)
 - [Extensions](#extensions)
 - [Functions](#functions)
@@ -9,15 +27,6 @@
 - [Schemas](#schemas)
 - [Tables](#tables)
 - [Triggers](#triggers)
-
-## Ad-hoc
-
-To create a migration not listed below, use [sqitch
-add](https://sqitch.org/docs/manual/sqitch-add/):
-
-```sh
-ply sqitch add create_view -n 'Create a view'
-```
 
 ## Comments
 
