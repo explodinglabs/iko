@@ -25,7 +25,7 @@ installed](https://docs.docker.com/get-docker/).
 Create a `ply` command by pasting this into your terminal:
 
 ```sh
-ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply" bash -c '"$@"' -- "$@" }
+ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply bash -c '"$@"' -- "$@" }
 ```
 
 💡 Add it to your `~/.bashrc` or `~/.zshrc` for persistence.
@@ -77,20 +77,37 @@ ply deploy
 
 ## Scripting
 
-Write scripts that create multiple migrations at once. This enables you to
-define change sets, or an entire application, at a high level.
+Write scripts that generate multiple migrations at once.
 
-For example, create a file named `migrations/create-app.sh`:
+Here's an example script:
 
 ```sh
-create-schema api
-create-table api task
-create-function api task_updated
-create-trigger api task task_updated task_updated
+# migrations/create.sh
+
+create-schema auth
+create-table-as auth user <<EOF
+create table auth.user (
+  username text primary key check (length(username) >= 3),
+  password text not null check (length(password) < 512),
+  role name not null check (length(role) < 512)
+);
+EOF
+create-function-as auth encrypt_pass <<EOF
+create function auth.encrypt_pass () returns trigger language plpgsql as $$
+begin
+  if tg_op = 'INSERT' or new.password <> old.password then
+    new.password = crypt(new.password, gen_salt('bf'));
+  end if;
+  return new;
+end; $$
+EOF
+create trigger encrypt_pass
+  before insert or update on auth.user for each row
+  execute procedure auth.encrypt_pass ();
 ```
 
 Run the script to create all migrations at once:
 
 ```sh
-ply bash create-app.sh
+ply bash create.sh
 ```
