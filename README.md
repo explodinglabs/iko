@@ -3,12 +3,12 @@
   <img alt="Ply logo" height="35" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
-_Ply_ is a **migration tool** for Postgres databases.
-
 <p align="center">
   <a href="https://github.com/explodinglabs/minibase/wiki">Documentation</a> |
   <a href="https://github.com/explodinglabs/minibase/discussions">Discussions</a>
 </p>
+
+_Ply_ is a **migration tool** for Postgres databases.
 
 It extends [Sqitch](https://sqitch.org/), providing simple
 [commands](/COMMANDS.md) for creating and performing migrations. For example,
