@@ -8,7 +8,7 @@
   <a href="https://github.com/explodinglabs/minibase/discussions">Discussions</a>
 </p>
 
-_Ply_ is a **migration tool** for Postgres databases.
+_Ply_ is a **migration tool** for PostgreSQL databases.
 
 It extends [Sqitch](https://sqitch.org/), providing simple
 [commands](/COMMANDS.md) for creating and performing migrations. For example,
