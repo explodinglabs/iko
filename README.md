@@ -74,7 +74,7 @@ ply deploy
 
 > 📖 Refer to the [Sqitch Manual](https://sqitch.org/docs/manual/).
 
-## Migration Scripts
+## Scripts
 
 Write scripts that create multiple migrations at once. This enables you to
 define change sets, or an entire application, at a high level.
