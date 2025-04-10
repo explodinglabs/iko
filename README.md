@@ -2,14 +2,19 @@
   <img alt="Ply logo" height="130" src="https://github.com/explodinglabs/ply/blob/main/logo.png?raw=true" />
 </p>
 
+<p align="center">
+  PostgreSQL migration tool
+</p>
+
 # Ply
 
-_Ply_ is a PostgreSQL migration tool that simplifies database changes.
+_Ply_ simplifies migrations on a Postgres database.
 
-It leverages [Sqitch](https://sqitch.org/) to provide simple
-[commands](/COMMANDS.md) for creating migrations. For example, use `ply create-schema api` to create an api schema.
+It extends [Sqitch](https://sqitch.org/) to provide simple
+[commands](/COMMANDS.md) for creating and performing migrations. For example,
+use `ply create-schema api` to create an api schema.
 
-Sqitch is also available, so you can deploy changes with `ply sqitch deploy`.
+Sqitch is also available, for example `ply deploy`.
 
 ## Installation
 
