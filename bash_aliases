@@ -45,13 +45,18 @@ function revert {
 # Comment
 
 function comment {
-  local object="${*%${!#}}"  # Get all args except the last
-  local is="${@: -1}"  # Get the last arg (the comment)
-  local change=${comment_${object// /_}}
+  local comment_="${@: -1}"  # Get the last arg (the comment)
+  # Get the object - all args except the last, stripping non-alphanum chars
+  args=("$@")
+  unset 'args[-1]'
+  local object="${args[*]}"  
+  local underscores="comment_${object// /_}"
+  local change=${underscores//[^a-zA-Z0-9_]}
+
   sqitch add $change \
     --template comment \
-    --set object=$object \
-    --set comment=$is \
+    --set object="$object" \
+    --set comment="$comment_" \
     --note \'"Comment on $object"\' \
     && show-files $change
 }

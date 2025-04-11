@@ -34,13 +34,9 @@ Other commands are below.
 
 Define or change the comment of an object.
 
-#### Usage
-
 ```sh
 comment <object> <comment>
 ```
-
-Parameters:
 
 - **object:** The database object to add a comment to. Can be schema-qualified.
 - **comment:** The comment to apply.
@@ -48,10 +44,12 @@ Parameters:
 The last argument is taken as the comment; everything before that is considered
 the object.
 
-#### Example
+#### Examples
 
 ```sh
 comment schema api 'Schema for the API endpoints'
+comment table api.customer 'Customer information'
+comment function my_function '(timestamp)' 'Returns Roman Numeral'
 ```
 
 Generates the following deploy script:
