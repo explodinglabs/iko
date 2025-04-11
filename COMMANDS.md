@@ -38,19 +38,22 @@ Define or change the comment of an object.
 comment <object> <comment>
 ```
 
-- **object:** The database object to add a comment to. Can be schema-qualified.
-- **comment:** The comment to apply.
-
 The last argument is taken as the comment; everything before that is considered
 the object.
 
-#### Examples
+For example, setting a comment on the `api` schema:
 
 ```sh
 comment schema api 'Schema for the API endpoints'
-comment table api.customer 'Customer information'
-comment function my_function '(timestamp)' 'Returns Roman Numeral'
 ```
+
+Generates the following deploy script:
+
+```sql
+comment on schema api is 'Schema for the API endpoints';
+```
+
+> 📖 Refer to Postgres [COMMENT](https://www.postgresql.org/docs/current/sql-comment.html).
 
 ## Extensions
 
