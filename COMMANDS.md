@@ -52,12 +52,6 @@ comment table api.customer 'Customer information'
 comment function my_function '(timestamp)' 'Returns Roman Numeral'
 ```
 
-Generates the following deploy script:
-
-```sql
-comment on schema api is 'Schema for the API endpoints';
-```
-
 ## Extensions
 
 ### create-extension
