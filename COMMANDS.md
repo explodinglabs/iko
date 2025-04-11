@@ -30,6 +30,9 @@ Other commands are below.
 
 ## Comments
 
+> 📖 Refer to the Postgres documentation for
+> [COMMENT](https://www.postgresql.org/docs/current/sql-comment.html).
+
 ### comment
 
 Define or change the comment of an object.
@@ -53,9 +56,10 @@ Generates the following deploy script:
 comment on schema api is 'Schema for the API endpoints';
 ```
 
-> 📖 Refer to Postgres [COMMENT](https://www.postgresql.org/docs/current/sql-comment.html).
-
 ## Extensions
+
+> 📖 Refer to the Postgres documentation for
+> [CREATE EXTENSION](https://www.postgresql.org/docs/current/sql-comment.html).
 
 ### create-extension
 
@@ -78,6 +82,9 @@ create extension "pgcrypto";
 ```
 
 ## Functions
+
+> 📖 Refer to the Postgres documentation for [CREATE
+> FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
 
 ### create-function
 
@@ -125,6 +132,9 @@ EOF
 
 ## Grants
 
+> 📖 Refer to the Postgres documentation for
+> [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
+
 ### grant-execute
 
 Grants execute permission on a function to a role.
@@ -142,7 +152,7 @@ grant-execute login '(text,text)' dbuser
 Generates the following deploy script:
 
 ```sql
-grant execute on function login (text,text) to dbuser;
+grant execute on function public.login (text,text) to dbuser;
 ```
 
 ### grant-schema-usage
@@ -185,12 +195,12 @@ Generates the following deploy script:
 grant authenticator to dbuser;
 ```
 
-### grant-privilege
+### grant-table-privilege
 
-Grant privileges on a database object.
+Grant privileges on a table.
 
 ```sh
-grant-privilege <privilege> <object> <role>
+grant-table-privilege <privilege> <table> <role>
 ```
 
 For example, to allow an `dbuser` to insert into the `asset` table:
