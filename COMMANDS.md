@@ -34,7 +34,7 @@ Other commands are below.
 
 Define or change the comment of an object.
 
-### Usage
+#### Usage
 
 ```sh
 comment <object> <comment>
@@ -48,7 +48,7 @@ Parameters:
 The last argument is taken as the comment; everything before that is considered
 the object.
 
-### Example
+#### Example
 
 ```sh
 comment schema api 'Schema for the API endpoints'
