@@ -32,30 +32,39 @@ Other commands are below.
 
 ### comment
 
-[COMMENT](https://www.postgresql.org/docs/current/sql-comment.html)
--- Define or change the comment of an object.
+Define or change the comment of an object.
+
+### Usage
 
 ```sh
 comment <object> <comment>
 ```
 
-For example, to add a comment to the `api` schema:
+Parameters:
+
+- **object:** The database object to add a comment to. Can be schema-qualified.
+- **comment:** The comment to apply.
+
+The last argument is taken as the comment; everything before that is considered
+the object.
+
+### Example
 
 ```sh
-comment schema api 'Schema for the public API endpoints'
+comment schema api 'Schema for the API endpoints'
 ```
 
 Generates the following deploy script:
 
 ```sql
-comment on schema api is 'Schema for the public API endpoints';
+comment on schema api is 'Schema for the API endpoints';
 ```
 
 ## Extensions
 
 ### create-extension
 
-Load a new extension into the current database.
+Install an extension.
 
 ```sh
 create-extension <extension>
@@ -77,13 +86,13 @@ create extension "pgcrypto";
 
 ### create-function
 
-Defines a new function.
+Define a new function.
 
 ```sh
 create-function <function>
 ```
 
-For example, to create a function named `create_user` in the `api` schema:
+For example, to create a function named `create_user`:
 
 ```sh
 create-function create_user
@@ -98,9 +107,11 @@ begin
 end;
 ```
 
+The editor is launched for you to edit the function.
+
 ### create-function-as
 
-Define a function inline (useful in bulk migration scripts).
+Define a new function inline (useful in scripts).
 
 ```sh
 create-function-as <function> <sql>
@@ -308,6 +319,8 @@ create table public.customer (
 );
 ```
 
+The editor is launched for you to edit the function.
+
 ### create-table-as
 
 Create a new table in the database, inline.
@@ -337,7 +350,7 @@ EOF
 Create a on a table.
 
 ```sh
-create-trigger <trigger> <when> <event> <table> <function>
+create-trigger <trigger> <when> <table> <function>
 ```
 
 For example, to create a trigger named `customer_updated` that fires before
