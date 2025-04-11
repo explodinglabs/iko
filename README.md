@@ -78,9 +78,9 @@ ply deploy
 
 ## Scripting
 
-Write scripts that generate multiple migrations at once.
+Write reusable scripts that generate migrations, like:
 
-Here's an example script named `migrations/create.sh`:
+<h5 a><strong><code>migrations/create.sh</code></strong></h5>
 
 ```sh
 # Create an auth schema
