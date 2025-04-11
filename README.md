@@ -80,14 +80,12 @@ ply deploy
 
 Write reusable scripts that generate migrations, like:
 
-<h5 a><strong><code>migrations/create.sh</code></strong></h5>
-
 ```sh
 # Create an auth schema
 create-schema auth
 
 # Create an auth.user table
-create-table-as auth user <<EOF
+create-table-as auth.user <<EOF
 create table auth.user (
   username text primary key check (length(username) >= 3),
   password text not null check (length(password) < 512),
@@ -96,7 +94,7 @@ create table auth.user (
 EOF
 
 # Create a function to encrypt the password
-create-function-as auth encrypt_pass <<EOF
+create-function-as auth.encrypt_pass <<EOF
 create function auth.encrypt_pass () returns trigger language plpgsql as $$
 begin
   if tg_op = 'INSERT' or new.password <> old.password then
@@ -107,12 +105,10 @@ end; $$
 EOF
 
 # Trigger the encrypt_pass function when a user is inserted or updated
-create-trigger encrypt_pass before insert or update on auth.user \
-  for each row execute procedure auth.encrypt_pass '()'
-create-trigger encrypt_pass 'before insert or update' auth user encrypt_pass
+create-trigger encrypt_pass before insert or update auth.user auth.encrypt_pass
 ```
 
-Run the script to create all migrations at once:
+Place it in `migrations/create.sh` then run:
 
 ```sh
 ply bash create.sh

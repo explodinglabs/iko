@@ -32,7 +32,8 @@ Other commands are below.
 
 ### comment
 
-Add a comment to a database object.
+[COMMENT](https://www.postgresql.org/docs/current/sql-comment.html)
+-- Define or change the comment of an object.
 
 ```sh
 comment <object> <comment>
@@ -76,22 +77,22 @@ create extension "pgcrypto";
 
 ### create-function
 
-Defines a new function. Edit the function in the generated deploy script.
+Defines a new function.
 
 ```sh
-create-function <schema> <function>
+create-function <function>
 ```
 
-For example, to create a function named `update` in the `api` schema:
+For example, to create a function named `create_user` in the `api` schema:
 
 ```sh
-create-function api update
+create-function create_user
 ```
 
 Generates the following deploy script:
 
 ```sql
-create or replace function api.update () returns void language plpgsql as
+create or replace function public.create_user () returns void language plpgsql as
 begin
   return;
 end;
@@ -102,14 +103,14 @@ end;
 Define a function inline (useful in bulk migration scripts).
 
 ```sh
-create-function-as <schema> <function> <sql>
+create-function-as <function> <sql>
 ```
 
-For example, to define a function named `api.square`:
+For example, to define a function named `square`:
 
 ```sh
-create-function-as api square <<EOF
-create function api.square(@number int) returns int as
+create-function-as square <<EOF
+create function public.square(@number int) returns int as
 begin
     return @number * @number;
 end;
@@ -123,19 +124,19 @@ EOF
 Grants execute permission on a function to a role.
 
 ```sh
-grant-execute <schema> <function> <signature> <role>
+grant-execute <function> <signature> <role>
 ```
 
-For example, to grant execute permission on `api.login` to `dbuser`:
+For example, to grant execute permission on `login` to `dbuser`:
 
 ```sh
-grant-execute api login '(text,text)' dbuser
+grant-execute login '(text,text)' dbuser
 ```
 
 Generates the following deploy script:
 
 ```sql
-grant execute on function api.login (text,text) to dbuser;
+grant execute on function login (text,text) to dbuser;
 ```
 
 ### grant-schema-usage
@@ -183,19 +184,19 @@ grant authenticator to dbuser;
 Grant privileges on a database object.
 
 ```sh
-grant-privilege <privilege> <schema> <object> <role>
+grant-privilege <privilege> <object> <role>
 ```
 
-For example, to allow an `dbuser` to insert into the `api.asset` table:
+For example, to allow an `dbuser` to insert into the `asset` table:
 
 ```sh
-grant-privilege insert api asset dbuser
+grant-privilege insert asset dbuser
 ```
 
 Generates the following deploy script:
 
 ```sql
-grant select on api.asset to dbuser;
+grant select on public.asset to dbuser;
 ```
 
 ## Roles
@@ -284,22 +285,22 @@ create schema api;
 
 ### create-table
 
-Create a new table in the database. Edit the table structure.
+Generates a migration to create a table, and launches the editor.
 
 ```sh
-create-table <schema> <table>
+create-table <table>
 ```
 
-For example, to create a table named `customer` in the `api` schema:
+For example, to create a table named `customer`:
 
 ```sh
-create-table api customer
+create-table customer
 ```
 
 Generates the following deploy script:
 
 ```sql
-create table api.customer (
+create table public.customer (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
   updated_at timestamp not null default now(),
@@ -313,14 +314,14 @@ Create a new table in the database, inline.
 This is useful for bulk migration scripts.
 
 ```sh
-create-table <schema> <table> <sql>
+create-table-as <table> <sql>
 ```
 
-For example, to create a table named `customer` in the `api` schema:
+For example, to create a table named `customer`:
 
 ```sh
-create-table api customer <<EOF
-create table api.customer (
+create-table-as customer <<EOF
+create table public.customer (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
   updated_at timestamp not null default now(),
@@ -333,23 +334,25 @@ EOF
 
 ### create-trigger
 
-Create a trigger on a table.
+Create a on a table.
 
 ```sh
-create-trigger <trigger> <when> <event> <schema> <table> <function>
+create-trigger <trigger> <when> <event> <table> <function>
 ```
 
 For example, to create a trigger named `customer_updated` that fires before
-updating a row in `api.customer`, calling `api.customer_updated`:
+updating a row in `customer`, calling `customer_updated`:
 
 ```sh
-create-trigger customer_updated before update api customer customer_updated
+create-trigger customer_updated before insert or update user customer_updated
 ```
 
 Generates the following deploy script:
 
 ```sql
 create trigger customer_updated
-  before update on api.customer
-  for each row execute function api.customer_updated();
+  before update on public.customer
+  for each row execute function customer_updated();
 ```
+
+> 📖 See [CREATE TRIGGER](https://www.postgresql.org/docs/current/sql-createtrigger.html).

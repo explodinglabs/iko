@@ -1,3 +1,25 @@
+# Utility functions
+
+function extract-schema {
+  # Extract the schema from a dot-delimited string, defaulting to "public".
+  # e.g. login -> public
+  # e.g. api.login -> api
+  local schema="${1%%.*}"
+  [[ "$1" == "$schema" ]] && schema="public" # Default to "public" if no dot
+  echo "$schema"
+}
+
+function extract-object {
+  # Extract the schema from a dot-delimited string, defaulting to "public".
+  # e.g. login -> login
+  # e.g. api.login -> login
+  echo "$1" | cut -d . -f2
+}
+
+function show-files {
+  cat deploy/${1}.sql
+}
+
 # Alias some common sqitch commands
 
 function init {
@@ -20,16 +42,11 @@ function revert {
   sqitch revert "$@"
 }
 
-function show-files {
-  local change=$1
-  cat deploy/${change}.sql
-}
-
 # Comment
 
 function comment {
-  local object="${*%${!#}}"  # All except the last
-  local is="${@: -1}"  # Last parameter 
+  local object="${*%${!#}}"  # Get all args except the last
+  local is="${@: -1}"  # Get the last arg (the comment)
   local change=${comment_${object// /_}}
   sqitch add $change \
     --template comment \
@@ -54,9 +71,9 @@ function create-extension {
 # Functions
 
 function create-function {
-  local schema=$1
-  local function=$2
-  local change=${3:-create_function_${schema}_${function}}
+  local schema=$(extract-schema $1)
+  local function=$(extract-object $1)
+  local change=${2:-create_function_${schema}_${function}}
   sqitch add $change \
     --template create_function \
     --set schema=$schema \
