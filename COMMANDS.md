@@ -1,5 +1,7 @@
 # Commands
 
+## Sqitch aliases
+
 Ply provides aliases for the following Sqitch commands:
 
 - add
@@ -30,7 +32,7 @@ Other commands are below.
 
 ## Comments
 
-> 📖 Refer to the Postgres documentation for
+> 📖 PostgreSQL documentation for
 > [COMMENT](https://www.postgresql.org/docs/current/sql-comment.html).
 
 ### comment
@@ -46,7 +48,7 @@ the object.
 
 #### 🧪 Example Usage
 
-For example, setting a comment on the `api` schema:
+To set a comment on the `api` schema:
 
 ```sh
 comment schema api 'Schema for the API endpoints'
@@ -60,20 +62,20 @@ comment on schema api is 'Schema for the API endpoints';
 
 ## Extensions
 
-> 📖 Refer to the Postgres documentation for
+> 📖 PostgreSQL documentation for
 > [CREATE EXTENSION](https://www.postgresql.org/docs/current/sql-comment.html).
 
-### create-extension
+### create_extension
 
 Install an extension.
 
 ```sh
-create-extension <extension>
+create_extension <extension>
 ```
 
 #### 🧪 Example Usage
 
-For example, to create an extension named `pgcrypto`:
+To create an extension named `pgcrypto`:
 
 ```sh
 create-extension pgcrypto
@@ -87,7 +89,7 @@ create extension "pgcrypto";
 
 ## Functions
 
-> 📖 Refer to the Postgres documentation for [CREATE
+> 📖 PostgreSQL documentation for [CREATE
 > FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
 
 ### create-function
@@ -100,7 +102,7 @@ create-function <function>
 
 #### 🧪 Example Usage
 
-For example, to create a function named `create_user`:
+To create a function named `create_user`:
 
 ```sh
 create-function create_user
@@ -127,7 +129,7 @@ create-function-as <function> <sql>
 
 #### 🧪 Example Usage
 
-For example, to define a function named `square`:
+To define a function named `square`:
 
 ```sh
 create-function-as square <<EOF
@@ -140,7 +142,7 @@ EOF
 
 ## Grants
 
-> 📖 Refer to the Postgres documentation for
+> 📖 PostgreSQL documentation for
 > [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
 
 ### grant-execute
@@ -153,7 +155,7 @@ grant-execute <function> <signature> <role>
 
 #### 🧪 Example Usage
 
-For example, to grant execute permission on `login` to `dbuser`:
+To grant execute permission on `login` to `dbuser`:
 
 ```sh
 grant-execute login '(text,text)' dbuser
@@ -175,7 +177,7 @@ grant-schema-usage <schema> <role>
 
 #### 🧪 Example Usage
 
-For example, to grant usage of the `api` schema to `dbuser`:
+To grant usage of the `api` schema to `dbuser`:
 
 ```sh
 grant-schema-usage api dbuser
@@ -197,7 +199,7 @@ grant-role-membership <role_specification> <role>
 
 #### 🧪 Example Usage
 
-For example, to grant membership in `authenticator` to `dbuser`:
+To grant membership in `authenticator` to `dbuser`:
 
 ```sh
 grant-role-membership authenticator dbuser
@@ -219,7 +221,7 @@ grant-table-privilege <privilege> <table> <role>
 
 #### 🧪 Example Usage
 
-For example, to allow an `dbuser` to insert into the `asset` table:
+To allow an `dbuser` to insert into the `asset` table:
 
 ```sh
 grant-privilege insert asset dbuser
@@ -233,6 +235,9 @@ grant select on public.asset to dbuser;
 
 ## Roles
 
+> 📖 PostgreSQL documentation for [CREATE
+> ROLE](https://www.postgresql.org/docs/current/sql-createrole.html).
+
 ### create-role
 
 Creates a `nologin` role.
@@ -243,7 +248,7 @@ create-role <role>
 
 #### 🧪 Example Usage
 
-For example, to create a `dbuser` role:
+To create a `dbuser` role:
 
 ```sh
 create-role dbuser
@@ -272,7 +277,9 @@ Creates a login role with a password.
 create-login-role <role> <password>
 ```
 
-For example, to create a `dbuser` role with password, `securepass123`:
+#### 🧪 Example Usage
+
+To create a `dbuser` role with password, `securepass123`:
 
 ```sh
 create-login-role dbuser 'securepass123'
@@ -295,6 +302,9 @@ end; $$
 
 ## Schemas
 
+> 📖 PostgreSQL documentation for [CREATE
+> SCHEMA](https://www.postgresql.org/docs/current/sql-createschema.html).
+
 ### create-schema
 
 Enter a new schema into the database.
@@ -305,7 +315,7 @@ create-schema <schema>
 
 #### 🧪 Example Usage
 
-For example, to create a schema named `api`:
+To create a schema named `api`:
 
 ```sh
 create-schema api
@@ -319,6 +329,9 @@ create schema api;
 
 ## Tables
 
+> 📖 PostgreSQL documentation for [CREATE
+> TABLE](https://www.postgresql.org/docs/current/sql-createtable.html).
+
 ### create-table
 
 Generates a migration to create a table, and launches the editor.
@@ -329,7 +342,7 @@ create-table <table>
 
 #### 🧪 Example Usage
 
-For example, to create a table named `customer`:
+To create a table named `customer`:
 
 ```sh
 create-table customer
@@ -359,7 +372,7 @@ create-table-as <table> <sql>
 
 #### 🧪 Example Usage
 
-For example, to create a table named `customer`:
+To create a table named `customer`:
 
 ```sh
 create-table-as customer <<EOF
@@ -374,16 +387,21 @@ EOF
 
 ## Triggers
 
-### create-trigger
+> 📖 PostgreSQL documentation for [CREATE
+> TRIGGER](https://www.postgresql.org/docs/current/sql-createtrigger.html).
 
-Create a on a table.
+### create_trigger
+
+Create a trigger on a table.
 
 ```sh
 create-trigger <trigger> <when> <table> <function>
 ```
 
-For example, to create a trigger named `customer_updated` that fires before
-updating a row in `customer`, calling `customer_updated`:
+#### 🧪 Example Usage
+
+To create a trigger named `customer_updated` that fires before updating a row
+in `customer`, calling `customer_updated`:
 
 ```sh
 create-trigger customer_updated before insert or update user customer_updated
@@ -398,5 +416,3 @@ create trigger customer_updated
   before update on public.customer
   for each row execute function customer_updated();
 ```
-
-> 📖 See [CREATE TRIGGER](https://www.postgresql.org/docs/current/sql-createtrigger.html).
