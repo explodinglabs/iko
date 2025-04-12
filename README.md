@@ -12,7 +12,7 @@ _Ply_ is a **migration tool** for PostgreSQL databases.
 
 It extends [Sqitch](https://sqitch.org/), adding [commands](/COMMANDS.md) to
 simplify creating and performing migrations. For example, to create an `api`
-schema, you'd type `ply create-schema api`.
+schema, you'd type `ply create_schema api`.
 
 Combine the commands into a [script](#scripting) to define many migrations, or
 an entire database structure, in one place.
@@ -32,7 +32,7 @@ ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply 
 
 ## Usage
 
-### Initialise a project
+### Initialise a Project
 
 Run the following command to initialise a project, ensuring the correct
 database connection URI is set.
@@ -54,7 +54,7 @@ Created verify/
 Let's create a schema named `api`:
 
 ```sh
-$ ply create-schema api
+$ ply create_schema api
 Created deploy/create_schema_api.sql
 Created revert/create_schema_api.sql
 Created verify/create_schema_api.sql
@@ -74,7 +74,8 @@ script for you to review.
 ply deploy
 ```
 
-> 📖 Refer to the manual for [sqitch deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
+> 📖 Refer to the Sqitch manual for
+> [deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
 
 ## Scripting
 
@@ -82,10 +83,10 @@ Write reusable scripts that generate migrations, like:
 
 ```sh
 # Create an auth schema
-create-schema auth
+create_schema auth
 
 # Create an auth.user table
-create-table-as auth.user <<EOF
+create_table_as auth.user <<EOF
 create table auth.user (
   username text primary key check (length(username) >= 3),
   password text not null check (length(password) < 512),
@@ -93,8 +94,8 @@ create table auth.user (
 );
 EOF
 
-# Create a function to encrypt the password
-create-function-as auth.encrypt_pass <<EOF
+# Create a function that encrypts passwords
+create_function_as auth.encrypt_pass <<EOF
 create function auth.encrypt_pass () returns trigger language plpgsql as $$
 begin
   if tg_op = 'INSERT' or new.password <> old.password then
@@ -104,8 +105,8 @@ begin
 end; $$
 EOF
 
-# Trigger the encrypt_pass function when a user is inserted or updated
-create-trigger encrypt_pass before insert or update auth.user auth.encrypt_pass
+# Call encrypt_pass when a user is inserted or updated
+create_trigger encrypt_pass auth.user auth.encrypt_pass
 ```
 
 Place it in `migrations/create.sh` then run:

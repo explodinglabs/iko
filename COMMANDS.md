@@ -78,7 +78,7 @@ create_extension <extension>
 To create an extension named `pgcrypto`:
 
 ```sh
-create-extension pgcrypto
+create_extension pgcrypto
 ```
 
 Generates the following deploy script:
@@ -89,15 +89,15 @@ create extension "pgcrypto";
 
 ## Functions
 
-> 📖 PostgreSQL documentation for [CREATE
+> 📖 PostgreSQL [CREATE
 > FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
 
-### create-function
+### create_function
 
 Define a new function.
 
 ```sh
-create-function <function>
+create_function <function>
 ```
 
 #### 🧪 Example Usage
@@ -105,7 +105,7 @@ create-function <function>
 To create a function named `create_user`:
 
 ```sh
-create-function create_user
+create_function create_user
 ```
 
 Generates the following deploy script:
@@ -119,12 +119,12 @@ end;
 
 The editor is launched for you to edit the function.
 
-### create-function-as
+### create_function_as
 
 Define a new function inline (useful in scripts).
 
 ```sh
-create-function-as <function> <sql>
+create_function_as <function> <sql>
 ```
 
 #### 🧪 Example Usage
@@ -132,7 +132,7 @@ create-function-as <function> <sql>
 To define a function named `square`:
 
 ```sh
-create-function-as square <<EOF
+create_function_as square <<EOF
 create function public.square(@number int) returns int as
 begin
     return @number * @number;
@@ -145,12 +145,12 @@ EOF
 > 📖 PostgreSQL documentation for
 > [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
 
-### grant-execute
+### grant_execute
 
 Grants execute permission on a function to a role.
 
 ```sh
-grant-execute <function> <signature> <role>
+grant_execute <function> <signature> <role>
 ```
 
 #### 🧪 Example Usage
@@ -158,7 +158,7 @@ grant-execute <function> <signature> <role>
 To grant execute permission on `login` to `dbuser`:
 
 ```sh
-grant-execute login '(text,text)' dbuser
+grant_execute login '(text,text)' dbuser
 ```
 
 Generates the following deploy script:
@@ -167,12 +167,12 @@ Generates the following deploy script:
 grant execute on function public.login (text,text) to dbuser;
 ```
 
-### grant-schema-usage
+### grant_schema_usage
 
 Grant schema usage to a role.
 
 ```sh
-grant-schema-usage <schema> <role>
+grant_schema_usage <schema> <role>
 ```
 
 #### 🧪 Example Usage
@@ -180,7 +180,7 @@ grant-schema-usage <schema> <role>
 To grant usage of the `api` schema to `dbuser`:
 
 ```sh
-grant-schema-usage api dbuser
+grant_schema_usage api dbuser
 ```
 
 Generates the following deploy script:
@@ -189,12 +189,12 @@ Generates the following deploy script:
 grant usage on schema api to dbuser;
 ```
 
-### grant-role-membership
+### grant_role_membership
 
 Grant membership in a role.
 
 ```sh
-grant-role-membership <role_specification> <role>
+grant_role_membership <role_specification> <role>
 ```
 
 #### 🧪 Example Usage
@@ -202,7 +202,7 @@ grant-role-membership <role_specification> <role>
 To grant membership in `authenticator` to `dbuser`:
 
 ```sh
-grant-role-membership authenticator dbuser
+grant_role_membership authenticator dbuser
 ```
 
 Generates the following deploy script:
@@ -211,12 +211,12 @@ Generates the following deploy script:
 grant authenticator to dbuser;
 ```
 
-### grant-table-privilege
+### grant_table_privilege
 
 Grant privileges on a table.
 
 ```sh
-grant-table-privilege <privilege> <table> <role>
+grant_table_privilege <type> <table> <role>
 ```
 
 #### 🧪 Example Usage
@@ -224,7 +224,7 @@ grant-table-privilege <privilege> <table> <role>
 To allow an `dbuser` to insert into the `asset` table:
 
 ```sh
-grant-privilege insert asset dbuser
+grant_privilege insert asset dbuser
 ```
 
 Generates the following deploy script:
@@ -235,7 +235,7 @@ grant select on public.asset to dbuser;
 
 ## Roles
 
-> 📖 PostgreSQL documentation for [CREATE
+> 📖 PostgreSQL [CREATE
 > ROLE](https://www.postgresql.org/docs/current/sql-createrole.html).
 
 ### create-role
@@ -243,7 +243,7 @@ grant select on public.asset to dbuser;
 Creates a `nologin` role.
 
 ```sh
-create-role <role>
+create_role <role>
 ```
 
 #### 🧪 Example Usage
@@ -251,7 +251,7 @@ create-role <role>
 To create a `dbuser` role:
 
 ```sh
-create-role dbuser
+create_role dbuser
 ```
 
 Generates the following deploy script:
@@ -269,12 +269,12 @@ begin $$
 end; $$
 ```
 
-### create-login-role
+### create_login_role
 
 Creates a login role with a password.
 
 ```sh
-create-login-role <role> <password>
+create_login_role <role> <password>
 ```
 
 #### 🧪 Example Usage
@@ -282,7 +282,7 @@ create-login-role <role> <password>
 To create a `dbuser` role with password, `securepass123`:
 
 ```sh
-create-login-role dbuser 'securepass123'
+create_login_role dbuser 'securepass123'
 ```
 
 Generates the following deploy script:
@@ -302,15 +302,15 @@ end; $$
 
 ## Schemas
 
-> 📖 PostgreSQL documentation for [CREATE
+> 📖 PostgreSQL [CREATE
 > SCHEMA](https://www.postgresql.org/docs/current/sql-createschema.html).
 
-### create-schema
+### create_schema
 
 Enter a new schema into the database.
 
 ```sh
-create-schema <schema>
+create_schema <schema>
 ```
 
 #### 🧪 Example Usage
@@ -318,7 +318,7 @@ create-schema <schema>
 To create a schema named `api`:
 
 ```sh
-create-schema api
+create_schema api
 ```
 
 Generates the following deploy script:
@@ -329,15 +329,15 @@ create schema api;
 
 ## Tables
 
-> 📖 PostgreSQL documentation for [CREATE
+> 📖 PostgreSQL [CREATE
 > TABLE](https://www.postgresql.org/docs/current/sql-createtable.html).
 
-### create-table
+### create_table
 
 Generates a migration to create a table, and launches the editor.
 
 ```sh
-create-table <table>
+create_table <table>
 ```
 
 #### 🧪 Example Usage
@@ -345,7 +345,7 @@ create-table <table>
 To create a table named `customer`:
 
 ```sh
-create-table customer
+create_table customer
 ```
 
 Generates the following deploy script:
@@ -361,13 +361,13 @@ create table public.customer (
 
 The editor is launched for you to edit the function.
 
-### create-table-as
+### create_table_as
 
 Create a new table in the database, inline.
 This is useful for bulk migration scripts.
 
 ```sh
-create-table-as <table> <sql>
+create_table_as <table> <sql>
 ```
 
 #### 🧪 Example Usage
@@ -375,7 +375,7 @@ create-table-as <table> <sql>
 To create a table named `customer`:
 
 ```sh
-create-table-as customer <<EOF
+create_table_as customer <<EOF
 create table public.customer (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
@@ -387,7 +387,7 @@ EOF
 
 ## Triggers
 
-> 📖 PostgreSQL documentation for [CREATE
+> 📖 PostgreSQL [CREATE
 > TRIGGER](https://www.postgresql.org/docs/current/sql-createtrigger.html).
 
 ### create_trigger
@@ -395,7 +395,7 @@ EOF
 Create a trigger on a table.
 
 ```sh
-create-trigger <trigger> <when> <table> <function>
+create_trigger <trigger> <table> <function>
 ```
 
 #### 🧪 Example Usage
@@ -403,8 +403,10 @@ create-trigger <trigger> <when> <table> <function>
 To create a trigger named `customer_updated` that fires before updating a row
 in `customer`, calling `customer_updated`:
 
+### create_trigger_as
+
 ```sh
-create-trigger customer_updated before insert or update user customer_updated
+create_trigger_as customer_updated before insert or update user customer_updated
 ```
 
 #### 🧪 Example Usage
