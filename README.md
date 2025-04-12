@@ -73,8 +73,8 @@ script for you to review.
 ply deploy
 ```
 
-> 📖 Refer to the Sqitch manual for
-> [deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
+> 📖 Refer to the [Sqitch manual for
+> deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
 
 ## Scripting
 
