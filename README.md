@@ -8,7 +8,7 @@
   <a href="https://github.com/explodinglabs/ply/discussions">Discussions</a>
 </p>
 
-_Ply_ is a **migration tool** for PostgreSQL databases.
+_Ply_ is a **migration tool** for PostgreSQL databases, that allows you to quickly create common migrations from the command line, or in a script. 
 
 It extends [Sqitch](https://sqitch.org/), adding [commands](/COMMANDS.md) to
 simplify creating and performing migrations. For example, to create an `api`
