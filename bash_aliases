@@ -1,4 +1,60 @@
 # Utility functions
+#
+parse_args() {
+  local -n _allowed_flags=$1   # First arg: array of allowed named flags
+  local min_positionals=$2     # Second arg: minimum required positionals
+  shift 2
+
+  declare -gA named=()
+  declare -ga positionals=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --*=*) # --key=value
+        key="${1%%=*}"
+        val="${1#*=}"
+        key="${key#--}"
+        if [[ ! " ${_allowed_flags[*]} " =~ " $key " ]]; then
+          echo "❌ Unknown flag: --$key" >&2
+          return 1
+        fi
+        named["$key"]="$val"
+        ;;
+      --*) # --flag (no value, assume true)
+        key="${1#--}"
+        if [[ ! " ${_allowed_flags[*]} " =~ " $key " ]]; then
+          echo "❌ Unknown flag: --$key" >&2
+          return 1
+        fi
+        named["$key"]="true"
+        ;;
+      --) # End of options
+        shift
+        positionals+=("$@")
+        break
+        ;;
+      -*)
+        echo "❌ Unknown option: $1" >&2
+        return 1
+        ;;
+      *)
+        positionals+=("$1")
+        ;;
+    esac
+    shift
+  done
+
+  # Export named args
+  for key in "${!named[@]}"; do
+    declare -g "$key"="${named[$key]}"
+  done
+
+  # Validate minimum number of positionals
+  if (( ${#positionals[@]} < min_positionals )); then
+    echo "❌ At least $min_positionals positional argument(s) required." >&2
+    return 1
+  fi
+}
 
 function extract-schema {
   # Extract the schema from a dot-delimited string, defaulting to "public".

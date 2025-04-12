@@ -44,6 +44,8 @@ comment <object> <comment>
 The last argument is taken as the comment; everything before that is considered
 the object.
 
+#### 🧪 Example Usage
+
 For example, setting a comment on the `api` schema:
 
 ```sh
@@ -68,6 +70,8 @@ Install an extension.
 ```sh
 create-extension <extension>
 ```
+
+#### 🧪 Example Usage
 
 For example, to create an extension named `pgcrypto`:
 
@@ -94,6 +98,8 @@ Define a new function.
 create-function <function>
 ```
 
+#### 🧪 Example Usage
+
 For example, to create a function named `create_user`:
 
 ```sh
@@ -119,6 +125,8 @@ Define a new function inline (useful in scripts).
 create-function-as <function> <sql>
 ```
 
+#### 🧪 Example Usage
+
 For example, to define a function named `square`:
 
 ```sh
@@ -143,6 +151,8 @@ Grants execute permission on a function to a role.
 grant-execute <function> <signature> <role>
 ```
 
+#### 🧪 Example Usage
+
 For example, to grant execute permission on `login` to `dbuser`:
 
 ```sh
@@ -162,6 +172,8 @@ Grant schema usage to a role.
 ```sh
 grant-schema-usage <schema> <role>
 ```
+
+#### 🧪 Example Usage
 
 For example, to grant usage of the `api` schema to `dbuser`:
 
@@ -183,6 +195,8 @@ Grant membership in a role.
 grant-role-membership <role_specification> <role>
 ```
 
+#### 🧪 Example Usage
+
 For example, to grant membership in `authenticator` to `dbuser`:
 
 ```sh
@@ -202,6 +216,8 @@ Grant privileges on a table.
 ```sh
 grant-table-privilege <privilege> <table> <role>
 ```
+
+#### 🧪 Example Usage
 
 For example, to allow an `dbuser` to insert into the `asset` table:
 
@@ -224,6 +240,8 @@ Creates a `nologin` role.
 ```sh
 create-role <role>
 ```
+
+#### 🧪 Example Usage
 
 For example, to create a `dbuser` role:
 
@@ -285,6 +303,8 @@ Enter a new schema into the database.
 create-schema <schema>
 ```
 
+#### 🧪 Example Usage
+
 For example, to create a schema named `api`:
 
 ```sh
@@ -306,6 +326,8 @@ Generates a migration to create a table, and launches the editor.
 ```sh
 create-table <table>
 ```
+
+#### 🧪 Example Usage
 
 For example, to create a table named `customer`:
 
@@ -334,6 +356,8 @@ This is useful for bulk migration scripts.
 ```sh
 create-table-as <table> <sql>
 ```
+
+#### 🧪 Example Usage
 
 For example, to create a table named `customer`:
 
@@ -364,6 +388,8 @@ updating a row in `customer`, calling `customer_updated`:
 ```sh
 create-trigger customer_updated before insert or update user customer_updated
 ```
+
+#### 🧪 Example Usage
 
 Generates the following deploy script:
 
