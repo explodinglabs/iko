@@ -33,7 +33,6 @@ get_positionals() {
   done
 }
 
-
 get_positionals_as() {
   local -a args=()
   local -a names=()
@@ -113,7 +112,8 @@ function strip_schema {
 }
 
 function show_files {
-  batcat --style=plain deploy/${1}.sql
+  # batcat adds ^M chars to the output unless --paging=never is used
+  batcat --style=plain --paging=never deploy/${1}.sql
 }
 
 # Alias some common sqitch commands
@@ -153,7 +153,7 @@ function comment {
   local comment_="${positionals[-1]}"
 
   sqitch add $options \
-    --change$change \
+    --change $change \
     --template comment \
     --set object="$object" \
     --set comment="$comment_" \
@@ -386,7 +386,7 @@ function create_trigger {
     --set schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
     --set schema_qualified_function=$schema_qualified_function \
-    --note \'"Add trigger $trigger on $schema_qualified_table"\' \
+    --note \'"Add trigger $trigger on $schema_qualified_table"\'
 
   show_files $change
 }
@@ -406,7 +406,7 @@ function create_trigger_as {
     --set table=$(strip_schema $schema_qualified_table) \
     --set schema_qualified_function=$schema_qualified_function \
     --set sql=$sql \
-    --note \'"Add trigger $trigger on $schema_qualified_table"\' \
+    --note \'"Add trigger $trigger on $schema_qualified_table"\'
 
   show_files $change
 }
