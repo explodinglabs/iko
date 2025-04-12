@@ -45,7 +45,7 @@ Created revert/
 Created verify/
 ```
 
-> 📖 Refer to the manual for [sqitch
+> 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
 
 ### Create Migrations
