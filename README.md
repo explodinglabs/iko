@@ -14,8 +14,7 @@ It extends [Sqitch](https://sqitch.org/), adding [commands](/COMMANDS.md) to
 simplify creating and performing migrations. For example, to create an `api`
 schema, you'd type `ply create_schema api`.
 
-Combine the commands into a [script](#scripting) to define many migrations, or
-an entire database structure, in one place.
+Combine the commands into a [script](#scripting) to generate many migrations at once.
 
 ## Installation
 
