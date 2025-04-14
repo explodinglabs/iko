@@ -243,14 +243,14 @@ function grant_execute {
 function grant_schema_usage {
   get_options "$@"
   get_positionals_as "$@" -- schema role change
-  local change=${change:-grant_schema_usage_${schema}_to_${role}}
+  local change=${change:-grant_${schema}_schema_usage_to_${role}}
 
   sqitch add $options \
     --change $change \
     --template grant_schema_usage \
     --set role=$role \
     --set schema=$schema \
-    --note \'"Grant $schema to $role"\'
+    --note \'"Grant $schema schema usage to $role"\'
 
   show_files $change
 }
@@ -258,14 +258,14 @@ function grant_schema_usage {
 function grant_role_membership {
   get_options "$@"
   get_positionals_as "$@" -- role role_specification change
-  local change=${change:-grant_role_membership_${role}_to_${role_specification}}
+  local change=${change:-grant_${role}_membership_to_${role_specification}}
 
   sqitch add $options \
     --change $change \
     --template grant_role_membership \
-    --set role=$role \
     --set role_specification=$role_specification \
-    --note \'"Grant $role to $role_specification"\'
+    --set role=$role \
+    --note \'"Grant $role membership to $role_specification"\'
 
   show_files $change
 }
@@ -273,7 +273,7 @@ function grant_role_membership {
 function grant_table_privilege {
   get_options "$@"
   get_positionals_as "$@" -- type schema_qualified_table role change
-  local change=${change:-grant_table_privilege_${type}_on_${schema_qualified_table//\./_}_to_${role}_to_${role}}
+  local change=${change:-grant_${type}_on_${schema_qualified_table//\./_}_table_to_${role}}
 
   sqitch add $options \
     --change $change \
@@ -283,7 +283,7 @@ function grant_table_privilege {
     --set schema_qualified_table=$schema_qualified_table \
     --set schema=$schema \
     --set table=$table \
-    --note \'"Grant $type on $schema_qualified_table to $role"\'
+    --note \'"Grant $type on $schema_qualified_table table to $role"\'
 
   show_files $change
 }
