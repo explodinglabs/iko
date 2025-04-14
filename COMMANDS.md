@@ -111,7 +111,7 @@ create_function create_user
 Generates the following deploy script:
 
 ```sql
-create or replace function public.create_user () returns void language plpgsql as
+create or replace function create_user () returns void language plpgsql as
 begin
   return;
 end;
@@ -133,7 +133,7 @@ To define a function named `square`:
 
 ```sh
 create_function_as square <<EOF
-create function public.square(@number int) returns int as
+create function square(@number int) returns int as
 begin
     return @number * @number;
 end;
@@ -164,7 +164,7 @@ grant_execute login '(text,text)' dbuser
 Generates the following deploy script:
 
 ```sql
-grant execute on function public.login (text,text) to dbuser;
+grant execute on function login (text,text) to dbuser;
 ```
 
 ### grant_schema_usage
@@ -230,7 +230,7 @@ grant_privilege insert asset dbuser
 Generates the following deploy script:
 
 ```sql
-grant select on public.asset to dbuser;
+grant select on asset to dbuser;
 ```
 
 ## Roles
@@ -351,7 +351,7 @@ create_table customer
 Generates the following deploy script:
 
 ```sql
-create table public.customer (
+create table customer (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
   updated_at timestamp not null default now(),
@@ -376,7 +376,7 @@ To create a table named `customer`:
 
 ```sh
 create_table_as customer <<EOF
-create table public.customer (
+create table customer (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
   updated_at timestamp not null default now(),
@@ -415,6 +415,6 @@ Generates the following deploy script:
 
 ```sql
 create trigger customer_updated
-  before update on public.customer
+  before update on customer
   for each row execute function customer_updated();
 ```
