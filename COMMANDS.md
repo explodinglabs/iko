@@ -32,7 +32,7 @@ Other commands are below.
 
 ## Comments
 
-> 📖 PostgreSQL documentation for
+> 📖 See Postgres
 > [COMMENT](https://www.postgresql.org/docs/current/sql-comment.html).
 
 ### comment
@@ -62,8 +62,8 @@ comment on schema api is 'Schema for the API endpoints';
 
 ## Extensions
 
-> 📖 PostgreSQL documentation for
-> [CREATE EXTENSION](https://www.postgresql.org/docs/current/sql-comment.html).
+> 📖 See Postgres [CREATE
+> EXTENSION](https://www.postgresql.org/docs/current/sql-comment.html).
 
 ### create_extension
 
@@ -89,12 +89,12 @@ create extension "pgcrypto";
 
 ## Functions
 
-> 📖 PostgreSQL [CREATE
+> 📖 See Postgres [CREATE
 > FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
 
 ### create_function
 
-Define a new function.
+Define a new function. Use with `--edit`.
 
 ```sh
 create_function <function>
@@ -117,11 +117,9 @@ begin
 end;
 ```
 
-The editor is launched for you to edit the function.
-
 ### create_function_as
 
-Define a new function inline (useful in scripts).
+Define a new function inline. Useful in scripts.
 
 ```sh
 create_function_as <function> <sql>
@@ -142,7 +140,7 @@ EOF
 
 ## Grants
 
-> 📖 PostgreSQL documentation for
+> 📖 See Postgres
 > [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
 
 ### grant_execute
@@ -235,7 +233,7 @@ grant select on asset to dbuser;
 
 ## Roles
 
-> 📖 PostgreSQL [CREATE
+> 📖 See Postgres [CREATE
 > ROLE](https://www.postgresql.org/docs/current/sql-createrole.html).
 
 ### create-role
@@ -302,7 +300,7 @@ end; $$
 
 ## Schemas
 
-> 📖 PostgreSQL [CREATE
+> 📖 See Postgres [CREATE
 > SCHEMA](https://www.postgresql.org/docs/current/sql-createschema.html).
 
 ### create_schema
@@ -329,12 +327,12 @@ create schema api;
 
 ## Tables
 
-> 📖 PostgreSQL [CREATE
+> 📖 See Postgres [CREATE
 > TABLE](https://www.postgresql.org/docs/current/sql-createtable.html).
 
 ### create_table
 
-Generates a migration to create a table, and launches the editor.
+Generates a migration to create a table. Use with `--edit`.
 
 ```sh
 create_table <table>
@@ -363,8 +361,7 @@ The editor is launched for you to edit the function.
 
 ### create_table_as
 
-Create a new table in the database, inline.
-This is useful for bulk migration scripts.
+Create a new table in the database, inline. Useful in scripts.
 
 ```sh
 create_table_as <table> <sql>
@@ -387,7 +384,7 @@ EOF
 
 ## Triggers
 
-> 📖 PostgreSQL [CREATE
+> 📖 See Postgres [CREATE
 > TRIGGER](https://www.postgresql.org/docs/current/sql-createtrigger.html).
 
 ### create_trigger
