@@ -69,3 +69,30 @@ Created revert/create_api_schema.sql
 Created verify/create_api_schema.sql
 Added "create_api_schema" to sqitch.plan
 create schema api;
+Created deploy/create_customer_table.sql
+Created revert/create_customer_table.sql
+Created verify/create_customer_table.sql
+Added "create_customer_table" to sqitch.plan
+create table customer (
+  id bigint generated always as identity primary key,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now(),
+  name text not null
+);
+Created deploy/create_movie_table.sql
+Created revert/create_movie_table.sql
+Created verify/create_movie_table.sql
+Added "create_movie_table" to sqitch.plan
+create table movie (
+  id bigint generated always as identity primary key,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now(),
+  name text not null
+);
+Created deploy/create_update_trigger_on_customer.sql
+Created revert/create_update_trigger_on_customer.sql
+Created verify/create_update_trigger_on_customer.sql
+Added "create_update_trigger_on_customer" to sqitch.plan
+create trigger update
+  before insert or update on customer
+  for each row execute function update_table();

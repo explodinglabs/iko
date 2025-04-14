@@ -13,3 +13,13 @@ grant_table_privilege select asset dbuser
 create_role dbuser
 create_login_role adam 'securepass123'
 create_schema api
+create_table customer
+create_table_as movie <<EOF
+create table movie (
+  id bigint generated always as identity primary key,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now(),
+  name text not null
+);
+EOF
+create_trigger update customer update_table
