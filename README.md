@@ -8,14 +8,13 @@
   <a href="https://github.com/explodinglabs/ply/discussions">Discussions</a>
 </p>
 
-_Ply_ is a **migration tool** for PostgreSQL databases.
+_Ply_ is a **migration tool** for PostgreSQL databases, that allows you to quickly create migrations from the command line, or in a script. 
 
 It extends [Sqitch](https://sqitch.org/), adding [commands](/COMMANDS.md) to
 simplify creating and performing migrations. For example, to create an `api`
 schema, you'd type `ply create_schema api`.
 
-Combine the commands into a [script](#scripting) to define many migrations, or
-an entire database structure, in one place.
+Combine the commands into a [script](#scripting) to generate many migrations at once.
 
 ## Installation
 
@@ -46,7 +45,7 @@ Created revert/
 Created verify/
 ```
 
-> 📖 Refer to the manual for [sqitch
+> 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
 
 ### Create Migrations
@@ -74,8 +73,8 @@ script for you to review.
 ply deploy
 ```
 
-> 📖 Refer to the Sqitch manual for
-> [deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
+> 📖 Refer to the [Sqitch manual for
+> deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
 
 ## Scripting
 
