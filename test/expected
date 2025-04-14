@@ -104,3 +104,10 @@ Added "create_update_trigger_on_customer" to sqitch.plan
 create trigger update
   before insert or update on customer
   for each row execute function update_table();
+Created deploy/create_modify_trigger_on_contact.sql
+Created revert/create_modify_trigger_on_contact.sql
+Created verify/create_modify_trigger_on_contact.sql
+Added "create_modify_trigger_on_contact" to sqitch.plan
+create trigger modify
+  after insert or update on contact
+  for each row execute function modify_record();

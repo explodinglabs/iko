@@ -394,18 +394,18 @@ function create_trigger {
 function create_trigger_as {
   get_options "$@"
   get_positionals_as "$@" -- trigger schema_qualified_table schema_qualified_function change
-  local change=${change:-create_$trigger_trigger_on_${schema_qualified_table//\./_}}
+  local change=${change:-create_${trigger}_trigger_on_${schema_qualified_table//\./_}}
   local sql=$(cat)
 
   sqitch add $options \
     --change $change \
-    --template create_trigger \
+    --template create_trigger_as \
     --set trigger=$trigger \
     --set schema_qualified_table=$schema_qualified_table \
     --set schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
     --set schema_qualified_function=$schema_qualified_function \
-    --set sql=$sql \
+    --set sql="$sql" \
     --note \'"Add $trigger trigger on $schema_qualified_table"\'
 
   show_files $change

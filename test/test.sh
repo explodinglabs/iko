@@ -24,3 +24,8 @@ create table movie (
 );
 EOF
 create_trigger update customer update_table
+create_trigger_as modify contact modify_record <<EOF
+create trigger modify
+  after insert or update on contact
+  for each row execute function modify_record();
+EOF
