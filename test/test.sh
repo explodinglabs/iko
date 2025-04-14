@@ -1,5 +1,6 @@
 comment schema api 'This is my comment'
 create_extension pgcrypto
+create_function myfunc
 create_function_as square <<EOF
 create function square(@number int) returns int as
 begin

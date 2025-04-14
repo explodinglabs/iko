@@ -8,6 +8,14 @@ Created revert/create_pgcrypto_extension.sql
 Created verify/create_pgcrypto_extension.sql
 Added "create_pgcrypto_extension" to sqitch.plan
 create extension "pgcrypto";  -- Double-quotes in case of hyphens
+Created deploy/create_myfunc_function.sql
+Created revert/create_myfunc_function.sql
+Created verify/create_myfunc_function.sql
+Added "create_myfunc_function" to sqitch.plan
+create or replace function myfunc () returns void language plpgsql as
+begin
+  return;
+end;
 Created deploy/create_square_function.sql
 Created revert/create_square_function.sql
 Created verify/create_square_function.sql
