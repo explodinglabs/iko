@@ -1,0 +1,5 @@
+syntax on
+filetype plugin indent on
+
+nmap J :tabn<CR>
+nmap K :tabp<CR>
