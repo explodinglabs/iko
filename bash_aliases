@@ -167,7 +167,7 @@ function comment {
 function create_extension {
   get_options "$@"
   get_positionals_as "$@" -- extension change
-  local change=${change:-create_extension_$extension}
+  local change=${change:-create_${extension}_extension}
 
   sqitch add $options \
     --change $change \
@@ -185,7 +185,7 @@ function create_function {
   get_positionals_as "$@" -- schema_qualified_function change
   local schema=$(extract_schema $schema_qualified_function)
   local function=$(strip_schema $schema_qualified_function)
-  local change=${change:-create_function_${schema_qualified_function//\./_}}
+  local change=${change:-create_${schema_qualified_function//\./_}_function}
 
   sqitch add $options \
     --change $change \
@@ -203,7 +203,7 @@ function create_function_as {
   get_positionals_as "$@" -- schema_qualified_function change
   local schema=$(extract_schema $schema_qualified_function)
   local function=$(strip_schema $schema_qualified_function)
-  local change=${change:-create_function_${schema_qualified_function//\./_}}
+  local change=${change:-create_${schema_qualified_function//\./_}_function}
   local sql=$(cat)
 
   sqitch add $options \
@@ -235,7 +235,7 @@ function grant_execute {
     --set function=$function \
     --set params=$params \
     --set role=$role \
-    --note \'"Grant execute on $schema_qualified_function to $role"\'
+    --note \'"Grant execute $schema_qualified_function to $role"\'
 
   show_files $change
 }
@@ -293,7 +293,7 @@ function grant_table_privilege {
 function create_role {
   get_options "$@"
   get_positionals_as "$@" -- role change
-  local change=${change:-create_role_${role}}
+  local change=${change:-create_${role}_role}
 
   sqitch add $options \
     --change $change \
@@ -307,11 +307,11 @@ function create_role {
 function create_login_role {
   get_options "$@"
   get_positionals_as "$@" -- role password change
-  local change=${change:-create_role_${role}}
+  local change=${change:-create_${role}_role}
 
   sqitch add $options \
     --change $change \
-    --template create_login_role
+    --template create_login_role \
     --set role=$role \
     --set password=$password \
     --note \'"Create $role role"\'
@@ -324,7 +324,7 @@ function create_login_role {
 function create_schema {
   get_options "$@"
   get_positionals_as "$@" -- schema change
-  local change=${change:-create_schema_$schema}
+  local change=${change:-create_${schema}_schema}
 
   sqitch add $options \
     --change $change \
@@ -340,7 +340,7 @@ function create_schema {
 function create_table {
   get_options "$@"
   get_positionals_as "$@" -- schema_qualified_table change
-  local change=${change:-create_table_${schema_qualified_table//\./_}}
+  local change=${change:-create_${schema_qualified_table//\./_}_table}
 
   sqitch add $options \
     --change $change \
@@ -356,7 +356,7 @@ function create_table {
 function create_table_as {
   get_options "$@"
   get_positionals_as "$@" -- schema_qualified_table change
-  local change=${change:-create_table_${schema_qualified_table//\./_}}
+  local change=${change:-create_${schema_qualified_table//\./_}_table}
   local sql=$(cat)
 
   sqitch add $options \
@@ -376,7 +376,7 @@ function create_table_as {
 function create_trigger {
   get_options "$@"
   get_positionals_as "$@" -- trigger schema_qualified_table schema_qualified_function change
-  local change=${change:-create_trigger_$trigger_on_${schema_qualified_table//\./_}}
+  local change=${change:-create_${trigger}_trigger_on_${schema_qualified_table//\./_}}
 
   sqitch add $options \
     --change $change \
@@ -386,7 +386,7 @@ function create_trigger {
     --set schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
     --set schema_qualified_function=$schema_qualified_function \
-    --note \'"Add trigger $trigger on $schema_qualified_table"\'
+    --note \'"Add $trigger trigger on $schema_qualified_table"\'
 
   show_files $change
 }
@@ -394,7 +394,7 @@ function create_trigger {
 function create_trigger_as {
   get_options "$@"
   get_positionals_as "$@" -- trigger schema_qualified_table schema_qualified_function change
-  local change=${change:-create_trigger_$trigger_on_${schema_qualified_table//\./_}}
+  local change=${change:-create_$trigger_trigger_on_${schema_qualified_table//\./_}}
   local sql=$(cat)
 
   sqitch add $options \
@@ -406,7 +406,7 @@ function create_trigger_as {
     --set table=$(strip_schema $schema_qualified_table) \
     --set schema_qualified_function=$schema_qualified_function \
     --set sql=$sql \
-    --note \'"Add trigger $trigger on $schema_qualified_table"\'
+    --note \'"Add $trigger trigger on $schema_qualified_table"\'
 
   show_files $change
 }

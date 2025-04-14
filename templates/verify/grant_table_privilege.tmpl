@@ -3,9 +3,7 @@ begin $$
     select exists (
       select 1 from information_schema.table_privileges
       where lower(privilege_type) = '[% type %]'
-      [% IF %]
       and table_schema = '[% schema %]'
-      [% ENDIF %]
       and table_name = '[% table %]'
       and grantee = '[% role %]'
     )

@@ -3,7 +3,7 @@ begin $$
     select exists (
       select 1
       from information_schema.enabled_roles
-      where role_name = 'authenticator'
+      where role_name = '[% role %]'
     )
   );
 end; $$

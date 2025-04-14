@@ -5,6 +5,6 @@ begin $$
    ) then
       raise notice 'Role already exists, skipping.';
    else
-      create role [% role %] nologin;
+      create role '[% role %]' nologin;
    end if;
 end; $$
