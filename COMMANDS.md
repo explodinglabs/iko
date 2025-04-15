@@ -100,6 +100,8 @@ Define a new function. Use with `--edit`.
 create_function <function>
 ```
 
+`<function>` can be schema-qualified.
+
 #### 🧪 Example Usage
 
 To create a function named `create_user`:
@@ -124,6 +126,8 @@ Define a new function inline. Useful in scripts.
 ```sh
 create_function_as <function> <sql>
 ```
+
+`<function>` can be schema-qualified.
 
 #### 🧪 Example Usage
 
@@ -150,6 +154,8 @@ Grants execute permission on a function to a role.
 ```sh
 grant_execute <function> <signature> <role>
 ```
+
+`<function>` can be schema-qualified.
 
 #### 🧪 Example Usage
 
@@ -216,6 +222,8 @@ Grant privileges on a table.
 ```sh
 grant_table_privilege <type> <table> <role>
 ```
+
+`<table>` can be schema-qualified.
 
 #### 🧪 Example Usage
 
@@ -338,6 +346,8 @@ Generates a migration to create a table. Use with `--edit`.
 create_table <table>
 ```
 
+`<table>` can be schema-qualified.
+
 #### 🧪 Example Usage
 
 To create a table named `customer`:
@@ -367,6 +377,8 @@ Create a new table in the database, inline. Useful in scripts.
 create_table_as <table> <sql>
 ```
 
+`<table>` can be schema-qualified.
+
 #### 🧪 Example Usage
 
 To create a table named `customer`:
@@ -395,6 +407,8 @@ Create a trigger on a table.
 create_trigger <trigger> <table> <function>
 ```
 
+`<table>` and `<function>` can be schema-qualified.
+
 #### 🧪 Example Usage
 
 To create a trigger named `customer_updated` that fires before updating a row
@@ -402,16 +416,28 @@ in `customer`, calling `customer_updated`:
 
 ### create_trigger_as
 
+Create a trigger on a table, inline.
+
 ```sh
 create_trigger_as customer_updated before insert or update user customer_updated
 ```
 
+`<table>` and `<function>` can be schema-qualified.
+
 #### 🧪 Example Usage
+
+```sh
+create_trigger_as modify contact modify_record <<EOF
+create trigger modify
+  after insert or update on contact
+  for each row execute function modify_record();
+EOF
+```
 
 Generates the following deploy script:
 
 ```sql
-create trigger customer_updated
-  before update on customer
-  for each row execute function customer_updated();
+create trigger modify
+  after insert or update on contact
+  for each row execute function modify_record();
 ```
