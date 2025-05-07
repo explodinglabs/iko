@@ -8,13 +8,14 @@
 </p>
 
 _Ply_ is a **migration tool** for PostgreSQL databases, that allows you to
-quickly create migrations from the command line, or in a script.
+quickly create migrations from the command-line or in a script.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
-to simplify creating and performing migrations. For example, to create an `api`
-schema, you'd type `ply create_schema api`.
+to simplify creating migrations. For example, to create an `api` schema, you'd
+type `ply create_schema api`.
 
-Combine the commands into a [script](#scripting) to generate many migrations at once.
+Combine the commands into a [script](#scripting) to generate many migrations at
+once.
 
 ## Installation
 
@@ -27,7 +28,8 @@ Create a `ply` command by pasting this into your terminal:
 ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply bash -c '"$@"' -- "$@" }
 ```
 
-💡 Add it to your `~/.bashrc` or `~/.zshrc` for persistence.
+💡 Add it to your shell startup file for persistence (e.g., `.bashrc`,
+`.zshrc`).
 
 ## Usage
 
