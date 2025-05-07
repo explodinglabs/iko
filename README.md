@@ -3,6 +3,10 @@
   <img alt="Ply logo" height="50" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
+<p align="center">
+  <i>Postgres Migrations</i>
+</p>
+
 _Ply_ is a **migration tool** for PostgreSQL databases, that allows you to
 quickly create migrations from the command line, or in a script.
 
