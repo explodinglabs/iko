@@ -35,8 +35,8 @@ ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply 
 
 ### Initialise a Project
 
-Run the following command to initialise a project, ensuring the correct
-database connection URI is set.
+Run the following command to initialize a project. Ensure the correct database
+URI is set.
 
 ```sh
 $ ply init --target postgres://user:pass@localhost:5432/app myapp
@@ -80,7 +80,9 @@ ply deploy
 
 ## Scripting
 
-Write reusable scripts that generate migrations, like:
+Write reusable scripts that generate migrations, for example:
+
+**migrations/auth.sh**
 
 ```sh
 # Create an auth schema
@@ -110,8 +112,8 @@ EOF
 create_trigger encrypt_pass auth.user auth.encrypt_pass
 ```
 
-Place it in `migrations/create.sh` then run:
+Place it in `migrations/auth.sh` then run:
 
 ```sh
-ply bash create.sh
+ply bash auth.sh
 ```
