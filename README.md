@@ -7,8 +7,8 @@
   <i>Postgres Migrations</i>
 </p>
 
-_Ply_ is a **migration tool** for PostgreSQL databases, that allows you to
-quickly create migrations from the command-line or in a script.
+_Ply_ is a **migration tool** for PostgreSQL databases. It lets you quickly
+create migrations from the command-line.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
 to simplify creating migrations. For example, to create an `api` schema, you'd
