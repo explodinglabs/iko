@@ -1,11 +1,6 @@
 <p align="center">
-  <img alt="Ply logo" height="35" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-light.png?raw=true#gh-light-mode-only" />
-  <img alt="Ply logo" height="35" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-dark.png?raw=true#gh-dark-mode-only" />
-</p>
-
-<p align="center">
-  <a href="https://github.com/explodinglabs/ply/wiki">Documentation</a> |
-  <a href="https://github.com/explodinglabs/ply/discussions">Discussions</a>
+  <img alt="Ply logo" height="50" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-light.png?raw=true#gh-light-mode-only" />
+  <img alt="Ply logo" height="50" src="https://github.com/explodinglabs/ply/blob/main/.images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
 _Ply_ is a **migration tool** for PostgreSQL databases, that allows you to
