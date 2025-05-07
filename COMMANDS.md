@@ -20,7 +20,6 @@ Then to deploy, `ply deploy`.
 
 Other commands are below.
 
-- [General](#general)
 - [Comments](#comments)
 - [Extensions](#extensions)
 - [Functions](#functions)
