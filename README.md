@@ -67,8 +67,8 @@ create schema api;
 ```
 
 Sqitch created three files – a deploy script, a revert script and a verify
-script. It then added the change to `sqitch.plan`. Ply then printed the deploy
-script for you to review.
+script. It then added the change to `sqitch.plan`. Lastly, it printed the
+deploy script for you to review.
 
 > 📖 See the [full list of Ply commands](/COMMANDS.md).
 
