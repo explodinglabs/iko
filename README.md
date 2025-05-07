@@ -38,8 +38,8 @@ ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply 
 
 ### Initialise a Project
 
-Run the following command to initialize a project. Ensure the correct database
-URI is set.
+Run the following command to initialize a project (ensure the correct database
+URI is set):
 
 ```sh
 $ ply init --target postgres://user:pass@localhost:5432/app myapp
@@ -73,6 +73,8 @@ script for you to review.
 > 📖 See the [full list of Ply commands](/COMMANDS.md).
 
 ### Deploy Migrations
+
+Make sure Postgres is running, then type:
 
 ```sh
 ply deploy
