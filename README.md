@@ -1,6 +1,6 @@
 <p align="center">
-  <img alt="Pig logo" height="300" src="https://github.com/explodinglabs/ply/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
-  <img alt="Pig logo" height="300" src="https://github.com/explodinglabs/ply/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
+  <img alt="Pig logo" height="200" src="https://github.com/explodinglabs/ply/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
+  <img alt="Pig logo" height="200" src="https://github.com/explodinglabs/ply/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
 <p align="center">
