@@ -42,7 +42,7 @@ Run the following command to initialize a project (ensure the correct database
 URI is set):
 
 ```sh
-$ pig init --target postgres://user:pass@localhost:5432/app myapp
+pig init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
 ```
