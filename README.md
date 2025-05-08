@@ -1,20 +1,20 @@
 <p align="center">
-  <img alt="Ply logo" height="300" src="https://github.com/explodinglabs/ply/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
-  <img alt="Ply logo" height="300" src="https://github.com/explodinglabs/ply/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
+  <img alt="Pig logo" height="300" src="https://github.com/explodinglabs/pig/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
+  <img alt="Pig logo" height="300" src="https://github.com/explodinglabs/pig/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
 <p align="center">
   <i>Easy Postgres Migrations</i>
 </p>
 
-_Ply_ is a **migration tool** for PostgreSQL databases.
+_Pig_ is a **migration tool** for PostgreSQL databases.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
 to simplify creating migrations from the command-line. For example, to create
-an `api` schema, you'd simply type:
+an `api` schema, you'd simpig type:
 
 ```sh
-ply create_schema api
+pig create_schema api
 ```
 
 Combine the commands into a [script](#scripting) to generate many migrations at
@@ -22,13 +22,13 @@ once.
 
 ## Installation
 
-Ply runs inside a Docker container, so ensure [Docker is
+Pig runs inside a Docker container, so ensure [Docker is
 installed](https://docs.docker.com/get-docker/).
 
-Create a `ply` command by pasting this into your terminal:
+Create a `pig` command by pasting this into your terminal:
 
 ```sh
-ply() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/ply bash -c '"$@"' -- "$@" }
+pig() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/pig bash -c '"$@"' -- "$@" }
 ```
 
 💡 Add it to your shell startup file for persistence (e.g., `.bashrc`,
@@ -42,7 +42,7 @@ Run the following command to initialize a project (ensure the correct database
 URI is set):
 
 ```sh
-$ ply init --target postgres://user:pass@localhost:5432/app myapp
+$ pig init --target postgres://user:pass@localhost:5432/app myapp
 Created sqitch.conf
 Created sqitch.plan
 Created deploy/
@@ -58,7 +58,7 @@ Created verify/
 Let's create a schema named `api`:
 
 ```sh
-$ ply create_schema api
+$ pig create_schema api
 Created deploy/create_schema_api.sql
 Created revert/create_schema_api.sql
 Created verify/create_schema_api.sql
@@ -70,14 +70,14 @@ Sqitch created three files – a deploy script, a revert script and a verify
 script. It then added the change to `sqitch.plan`. Lastly, it printed the
 deploy script for you to review.
 
-> 📖 See the [full list of Ply commands](/COMMANDS.md).
+> 📖 See the [full list of Pig commands](/COMMANDS.md).
 
 ### Deploy Migrations
 
 Make sure Postgres is running, then type:
 
 ```sh
-ply deploy
+pig deploy
 ```
 
 > 📖 Refer to the [Sqitch manual for
@@ -120,5 +120,5 @@ create_trigger encrypt_pass auth.user auth.encrypt_pass
 Place it in `migrations/auth.sh` then run:
 
 ```sh
-ply bash auth.sh
+pig bash auth.sh
 ```
