@@ -61,9 +61,12 @@ Added "create_schema_api" to sqitch.plan
 create schema api;
 ```
 
-Sqitch created three files – a deploy script, a revert script and a verify
-script. It then added the change to `sqitch.plan`. Lastly, the deploy script is
-printed for you to review.
+Here's what happened:
+
+1. Three files were generated – a deploy script, a revert script and a verify
+   script.
+2. The change was added to `sqitch.plan`.
+3. The deploy script is printed for you to review.
 
 > 📖 See the [full list of Pig commands](/COMMANDS.md).
 

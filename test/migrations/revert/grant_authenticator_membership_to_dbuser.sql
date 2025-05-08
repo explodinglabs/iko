@@ -1,0 +1,1 @@
+revoke dbuser from authenticator;

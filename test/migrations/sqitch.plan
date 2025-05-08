@@ -1,0 +1,18 @@
+%syntax-version=1.0.0
+%project=myapp
+
+comment_schema_api 2025-05-08T23:37:24Z sqitch <sqitch@0920c3411a41> # 'Comment on schema api'
+create_pgcrypto_extension 2025-05-08T23:37:25Z sqitch <sqitch@0920c3411a41> # 'Create pgcrypto extension'
+create_myfunc_function 2025-05-08T23:37:25Z sqitch <sqitch@0920c3411a41> # 'Add myfunc function'
+create_square_function 2025-05-08T23:37:25Z sqitch <sqitch@0920c3411a41> # 'Add square function'
+grant_execute_login_to_dbuser 2025-05-08T23:37:26Z sqitch <sqitch@0920c3411a41> # 'Grant execute login to dbuser'
+grant_api_schema_usage_to_dbuser 2025-05-08T23:37:26Z sqitch <sqitch@0920c3411a41> # 'Grant api schema usage to dbuser'
+grant_authenticator_membership_to_dbuser 2025-05-08T23:37:27Z sqitch <sqitch@0920c3411a41> # 'Grant authenticator membership to dbuser'
+grant_select_on_asset_table_to_dbuser 2025-05-08T23:37:27Z sqitch <sqitch@0920c3411a41> # 'Grant select on asset table to dbuser'
+create_dbuser_role 2025-05-08T23:37:28Z sqitch <sqitch@0920c3411a41> # 'Create dbuser role'
+create_adam_role 2025-05-08T23:37:28Z sqitch <sqitch@0920c3411a41> # 'Create adam role'
+create_api_schema 2025-05-08T23:37:29Z sqitch <sqitch@0920c3411a41> # 'Create api schema'
+create_customer_table 2025-05-08T23:37:29Z sqitch <sqitch@0920c3411a41> # 'Create customer table'
+create_movie_table 2025-05-08T23:37:29Z sqitch <sqitch@0920c3411a41> # 'Add movie table'
+create_update_trigger_on_customer 2025-05-08T23:37:30Z sqitch <sqitch@0920c3411a41> # 'Add update trigger on customer'
+create_modify_trigger_on_contact 2025-05-08T23:37:30Z sqitch <sqitch@0920c3411a41> # 'Add modify trigger on contact'
