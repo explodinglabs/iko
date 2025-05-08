@@ -43,6 +43,9 @@ URI is set):
 
 ```sh
 $ pig init --target postgres://user:pass@localhost:5432/app myapp
+```
+
+```
 Created sqitch.conf
 Created sqitch.plan
 Created deploy/
