@@ -45,14 +45,6 @@ URI is set):
 pig init --target postgres://user:pass@localhost:5432/app myapp
 ```
 
-```
-Created sqitch.conf
-Created sqitch.plan
-Created deploy/
-Created revert/
-Created verify/
-```
-
 > 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
 
@@ -61,7 +53,10 @@ Created verify/
 Let's create a schema named `api`:
 
 ```sh
-$ pig create_schema api
+pig create_schema api
+```
+
+```
 Created deploy/create_schema_api.sql
 Created revert/create_schema_api.sql
 Created verify/create_schema_api.sql
