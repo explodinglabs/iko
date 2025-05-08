@@ -11,7 +11,7 @@ _Pig_ is a **migration tool** for PostgreSQL databases.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
 to simplify creating migrations from the command-line. For example, to create
-an `api` schema, you'd simpig type:
+an `api` schema, you'd simply type:
 
 ```sh
 pig create_schema api
