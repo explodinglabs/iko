@@ -1,6 +1,6 @@
 <p align="center">
-  <img alt="Ply logo" height="60" src="https://github.com/explodinglabs/ply/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
-  <img alt="Ply logo" height="60" src="https://github.com/explodinglabs/ply/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
+  <img alt="Ply logo" height="300" src="https://github.com/explodinglabs/ply/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
+  <img alt="Ply logo" height="300" src="https://github.com/explodinglabs/ply/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
 <p align="center">
