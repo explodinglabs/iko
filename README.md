@@ -53,10 +53,7 @@ pig init --target postgres://user:pass@localhost:5432/app myapp
 Let's create a schema named `api`:
 
 ```sh
-pig create_schema api
-```
-
-```
+$ pig create_schema api
 Created deploy/create_schema_api.sql
 Created revert/create_schema_api.sql
 Created verify/create_schema_api.sql
