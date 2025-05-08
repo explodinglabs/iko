@@ -2,7 +2,9 @@ begin $$
   assert (
     select exists (
       select 1 from information_schema.routines
+      [% IF schema %]
       where specific_schema = '[% schema %]'
+      [% END -%]
       and routine_name = '[% function %]'
     )
   );

@@ -377,6 +377,7 @@ function create_trigger {
   get_options "$@"
   get_positionals_as "$@" -- trigger schema_qualified_table schema_qualified_function change
   local change=${change:-create_${trigger}_trigger_on_${schema_qualified_table//\./_}}
+  echo $schema_qualified_table
 
   sqitch add $options \
     --change $change \

@@ -2,8 +2,10 @@ begin $$
   assert (
     select exists (
       select 1 from information_schema.tables
-      where table_schema = '[% schema %]'
-      and table_name = '[% table %]'
+      where table_name = '[% table %]'
+      [% IF schema %]
+      and table_schema = '[% schema %]'
+      [% END -%]
     )
   );
 end; $$

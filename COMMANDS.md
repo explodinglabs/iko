@@ -413,20 +413,26 @@ create_trigger <trigger> <table> <function>
 To create a trigger named `customer_updated` that fires before updating a row
 in `customer`, calling `customer_updated`:
 
+```sh
+create_trigger customer_updated customer customer_updated
+```
+
 ### create_trigger_as
 
 Create a trigger on a table, inline.
 
 ```sh
-create_trigger_as customer_updated before insert or update user customer_updated
+create_trigger_as <trigger> <table> <sql>
 ```
 
-`<table>` and `<function>` can be schema-qualified.
+`<table>` can be schema-qualified.
 
 #### 🧪 Example Usage
 
+Create a trigger `modify` on table `contact` calling `modify_record`:
+
 ```sh
-create_trigger_as modify contact modify_record <<EOF
+create_trigger_as modify contact <<EOF
 create trigger modify
   after insert or update on contact
   for each row execute function modify_record();
