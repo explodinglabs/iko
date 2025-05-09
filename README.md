@@ -3,6 +3,10 @@
   <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/iko/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
+<h1 align="center">
+  IKO
+</h1>
+
 <p align="center">
   <i>Easy Postgres Migrations</i>
 </p>
