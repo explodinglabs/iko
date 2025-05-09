@@ -1,3 +1,4 @@
+do $$
 begin $$
   assert (
     select exists (
@@ -10,4 +11,5 @@ begin $$
       and grantee = '[% role %]'
     )
   );
-end; $$
+end;
+$$ language plpgsql;

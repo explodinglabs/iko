@@ -1,4 +1,5 @@
-begin $$
+do $$
+begin
   assert (
     select exists (
       select 1
@@ -6,4 +7,5 @@ begin $$
       where role_name = '[% role %]'
     )
   );
-end; $$
+end;
+$$ language plpgsql;
