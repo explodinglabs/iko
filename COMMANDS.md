@@ -2,7 +2,7 @@
 
 ## Sqitch aliases
 
-Ply provides aliases for the following Sqitch commands:
+Iko provides aliases for the following Sqitch commands:
 
 - add
 - deploy
@@ -13,10 +13,10 @@ Ply provides aliases for the following Sqitch commands:
 For example, to create an ad-hoc migration not listed below, use:
 
 ```sh
-ply add create_view -n 'Create a view'
+iko add create_view -n 'Create a view'
 ```
 
-Then to deploy, `ply deploy`.
+Then to deploy, `iko deploy`.
 
 Other commands are below.
 

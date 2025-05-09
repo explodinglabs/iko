@@ -1,6 +1,6 @@
 <p align="center">
-  <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/ply/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
-  <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/ply/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
+  <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/iko/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
+  <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/iko/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
 <p align="center">
@@ -10,12 +10,7 @@
 _Iko_ is a **migration tool** for PostgreSQL databases.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
-to simplify creating migrations from the command-line. For example, to create
-an `api` schema, you'd simply type:
-
-```sh
-iko create_schema api
-```
+to simplify creating migrations from the command-line.
 
 Combine the commands into a [script](#scripting) to generate many migrations at
 once.
