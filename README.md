@@ -7,7 +7,7 @@
   ikō
 </h1>
 
-_Iko_ is a **PostgreSQL database migration** tool.
+_Iko_ is a **PostgreSQL database schema migration** tool.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
 to simplify creating common migrations from the command-line.
