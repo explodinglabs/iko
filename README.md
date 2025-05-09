@@ -112,3 +112,5 @@ Place it in `migrations/auth.sh` then run:
 ```sh
 iko bash auth.sh
 ```
+
+Next: See [Iko's full command set](COMMANDS.md). 
