@@ -2,7 +2,30 @@ set -e
 
 # Alias some common sqitch commands
 
-for cmd in init add deploy verify; do
+sqitch_commands=(
+  config
+  init
+  engine
+  target
+  help
+  add
+  bundle
+  checkout
+  check
+  plan
+  rebase
+  rework
+  show
+  tag
+  deploy
+  log
+  revert
+  status
+  uograde
+  verify
+)
+
+for cmd in "${sqitch_commands[@]}"; do
   eval "
   function $cmd {
     sqitch $cmd \"\$@\"
