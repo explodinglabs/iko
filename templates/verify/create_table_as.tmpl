@@ -3,9 +3,9 @@ begin $$
     select exists (
       select 1 from information_schema.tables
       where table_name = '[% table %]'
-      [% IF schema %]
+[% IF schema -%]
       and table_schema = '[% schema %]'
-      [% END -%]
+[% END -%]
     )
   );
 end; $$

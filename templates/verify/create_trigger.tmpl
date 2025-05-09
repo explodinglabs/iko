@@ -3,9 +3,9 @@ begin $$
     select exists (
       select 1 from information_schema.triggers
       where trigger_name = '[% trigger %]'
-      [% IF schema %]
+[% IF schema -%]
       and event_object_schema = '[% schema %]'
-      [% END -%]
+[% END -%]
       and event_object_table = '[% table %]'
     )
   );
