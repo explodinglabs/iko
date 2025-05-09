@@ -4,7 +4,7 @@
 </p>
 
 <h1 align="center">
-  IKO
+  ikō
 </h1>
 
 _Iko_ is a **migration tool** for PostgreSQL databases.
