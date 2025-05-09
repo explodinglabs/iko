@@ -1,13 +1,13 @@
 <p align="center">
-  <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/iko/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
-  <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/iko/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
+  <img alt="Iko logo" height="150" src="https://github.com/explodinglabs/iko/blob/main/images/logo-light.png?raw=true#gh-light-mode-only" />
+  <img alt="Iko logo" height="150" src="https://github.com/explodinglabs/iko/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
 <h1 align="center">
   ikō
 </h1>
 
-_Iko_ is a **migration tool** for PostgreSQL databases.
+_Iko_ is a **PostgreSQL database migration tool**.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
 to simplify creating migrations from the command-line.
