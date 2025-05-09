@@ -1,6 +1,6 @@
 set -e
 
-# Alias some common sqitch commands
+# Alias sqitch commands
 
 sqitch_commands=(
   config
