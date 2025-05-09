@@ -20,7 +20,7 @@ once.
 Iko runs inside a Docker container, so ensure [Docker is
 installed](https://docs.docker.com/get-docker/).
 
-Create a `iko` command by pasting this into your terminal:
+Create an `iko` command by pasting the following into your terminal:
 
 ```sh
 iko() { docker run --rm -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko bash -c '"$@"' -- "$@" }
@@ -84,7 +84,7 @@ Write reusable scripts that generate migrations, for example:
 create_schema auth
 
 # Create an auth.user table
-create_table_as auth.user <<EOF
+create_table_as auth.user <<'EOF'
 create table auth.user (
   username text primary key check (length(username) >= 3),
   password text not null check (length(password) < 512),
@@ -93,7 +93,7 @@ create table auth.user (
 EOF
 
 # Create a function that encrypts passwords
-create_function_as auth.encrypt_pass <<EOF
+create_function_as auth.encrypt_pass <<'EOF'
 create function auth.encrypt_pass () returns trigger language plpgsql as $$
 begin
   if tg_op = 'INSERT' or new.password <> old.password then
