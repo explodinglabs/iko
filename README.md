@@ -3,7 +3,9 @@
   <img alt="Iko logo" height="200" src="https://github.com/explodinglabs/iko/blob/main/images/logo-dark.png?raw=true#gh-dark-mode-only" />
 </p>
 
-# IKO
+<h1 align="center">
+  IKO
+</h1>
 
 _Iko_ is a **migration tool** for PostgreSQL databases.
 
