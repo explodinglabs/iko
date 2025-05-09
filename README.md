@@ -57,7 +57,7 @@ create schema api;
 ```
 
 Three sql scripts were generated – to deploy, revert and verify the change. 
-The change was added to `sqitch.plan`. Lastly, the deploy script is
+The change was added to `sqitch.plan`. Lastly, the deploy script was
 printed for you to review.
 
 > 📖 See the [full list of Iko commands](/COMMANDS.md).
