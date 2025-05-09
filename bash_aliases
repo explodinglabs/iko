@@ -118,25 +118,12 @@ function show_files {
 
 # Alias some common sqitch commands
 
-function init {
-  sqitch init "$@"
-}
-
-function add {
-  sqitch add "$@"
-}
-
-function deploy {
-  sqitch deploy "$@"
-}
-
-function verify {
-  sqitch verify "$@"
-}
-
-function revert {
-  sqitch revert "$@"
-}
+for cmd in init add deploy verify; do
+  eval "
+  function $cmd {
+    sqitch $cmd \"\$@\"
+  }"
+done
 
 # Comment
 
