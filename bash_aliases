@@ -1,5 +1,14 @@
 set -e
 
+# Alias some common sqitch commands
+
+for cmd in init add deploy verify; do
+  eval "
+  function $cmd {
+    sqitch $cmd \"\$@\"
+  }"
+done
+
 # Utility functions
 
 get_options() {
@@ -115,15 +124,6 @@ function show_files {
   # batcat adds ^M chars to the output unless --paging=never is used
   batcat --style=plain --paging=never deploy/${1}.sql
 }
-
-# Alias some common sqitch commands
-
-for cmd in init add deploy verify; do
-  eval "
-  function $cmd {
-    sqitch $cmd \"\$@\"
-  }"
-done
 
 # Comment
 
