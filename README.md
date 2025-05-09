@@ -7,10 +7,6 @@
   IKO
 </h1>
 
-<p align="center">
-  <i>Easy Postgres Migrations</i>
-</p>
-
 _Iko_ is a **migration tool** for PostgreSQL databases.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
