@@ -1,24 +1,19 @@
 # Commands
 
-## Sqitch aliases
+## Sqitch commands
 
-Iko provides aliases for the following Sqitch commands:
+Iko aliases the [Sqitch commands](https://sqitch.org/docs/manual/), such as
+`sqitch status` (`iko status`), `sqitch check` (`iko check`), etc.
 
-- add
-- deploy
-- init
-- revert
-- verify
-
-For example, to create an ad-hoc migration not listed below, use:
+So to create a migration not listed below, you can use:
 
 ```sh
 iko add create_view -n 'Create a view'
 ```
 
-Then to deploy, `iko deploy`.
+Then to deploy and verify, `iko deploy --verify`.
 
-Other commands are below.
+## Generate Migrations
 
 - [Comments](#comments)
 - [Extensions](#extensions)
