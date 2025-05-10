@@ -13,7 +13,7 @@ compatible databases are supported.
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
 to simplify creating common migrations from the command-line.
 
-Combine the commands into a [script](#scripting) to generate many migrations at
+Combine the commands into [scripts](#scripting) to generate many migrations at
 once.
 
 ## Installation
