@@ -156,7 +156,7 @@ function comment {
 
   # Get the object - all args except the last
   local object="${positionals[@]:0:${#positionals[@]}-1}"
-  # Get the change name, stripping non alphanum chars
+  # Get the change name, stripping non alphanumeric chars
   local underscores="comment_${object// /_}"
   local change=${underscores//[^a-zA-Z0-9_]}
   # Get the comment (the last param)

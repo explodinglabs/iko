@@ -24,7 +24,7 @@ installed](https://docs.docker.com/get-docker/).
 Create an `iko` command by pasting the following into your terminal:
 
 ```sh
-iko() { docker run --rm --tty -v ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko bash -c '"$@"' -- "$@" }
+iko() { docker run --rm --interactive --tty --volume ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko bash -c '"$@"' -- "$@" }
 ```
 
 💡 Add it to your shell startup file for persistence (e.g., `.bashrc`,
@@ -78,7 +78,7 @@ iko deploy
 
 Write reusable scripts that generate migrations, for example:
 
-**migrations/auth.sh**
+**scripts/auth.sh**
 
 ```sh
 # Create an auth schema
@@ -108,7 +108,7 @@ EOF
 create_trigger encrypt_pass auth.user auth.encrypt_pass
 ```
 
-Place it in `migrations/auth.sh` then run:
+Place it in `scripts/auth.sh` then run:
 
 ```sh
 iko bash auth.sh
