@@ -1,5 +1,6 @@
 FROM sqitch/sqitch:v1.5.1.0
-LABEL org.opencontainers.image.title="iko" \
+LABEL maintainer="support@explodinglabs.com" \
+      org.opencontainers.image.title="iko" \
       org.opencontainers.image.version="0.1.0" \
       org.opencontainers.image.source="https://github.com/explodinglabs/iko" \
       org.opencontainers.image.licenses="MIT"
