@@ -403,6 +403,11 @@ create_trigger <trigger> <table> <function>
 
 `<table>` and `<function>` can be schema-qualified.
 
+Note: Don't schema-qualify the `<trigger>`. From the Postgres docs:
+
+> The name cannot be schema-qualified — the trigger inherits the schema of its
+> table.
+
 #### 🧪 Example Usage
 
 To create a trigger named `customer_updated` that fires before updating a row
