@@ -16,6 +16,9 @@ to simplify creating common migrations from the command-line.
 Combine the commands into [scripts](#scripting) to generate many migrations at
 once.
 
+Iko is named after the Japanese word “移行” (ikō), which means _migration_ or
+_transition_.
+
 ## Installation
 
 Iko runs inside a Docker container, so ensure [Docker is
