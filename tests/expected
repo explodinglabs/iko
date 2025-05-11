@@ -1,0 +1,113 @@
+Created deploy/comment_schema_api.sql
+Created revert/comment_schema_api.sql
+Created verify/comment_schema_api.sql
+Added "comment_schema_api" to sqitch.plan
+comment on schema api is 'This is my comment';
+Created deploy/create_pgcrypto_extension.sql
+Created revert/create_pgcrypto_extension.sql
+Created verify/create_pgcrypto_extension.sql
+Added "create_pgcrypto_extension" to sqitch.plan
+create extension "pgcrypto";  -- Double-quotes in case of hyphens
+Created deploy/create_myfunc_function.sql
+Created revert/create_myfunc_function.sql
+Created verify/create_myfunc_function.sql
+Added "create_myfunc_function" to sqitch.plan
+create or replace function myfunc () returns void language plpgsql as
+begin
+  return;
+end;
+Created deploy/create_square_function.sql
+Created revert/create_square_function.sql
+Created verify/create_square_function.sql
+Added "create_square_function" to sqitch.plan
+create function square(@number int) returns int as
+begin
+    return @number * @number;
+end;
+Created deploy/grant_execute_login_to_dbuser.sql
+Created revert/grant_execute_login_to_dbuser.sql
+Created verify/grant_execute_login_to_dbuser.sql
+Added "grant_execute_login_to_dbuser" to sqitch.plan
+grant execute on function login (text,text) to dbuser;
+Created deploy/grant_api_schema_usage_to_dbuser.sql
+Created revert/grant_api_schema_usage_to_dbuser.sql
+Created verify/grant_api_schema_usage_to_dbuser.sql
+Added "grant_api_schema_usage_to_dbuser" to sqitch.plan
+grant usage on schema api to dbuser;
+Created deploy/grant_authenticator_membership_to_dbuser.sql
+Created revert/grant_authenticator_membership_to_dbuser.sql
+Created verify/grant_authenticator_membership_to_dbuser.sql
+Added "grant_authenticator_membership_to_dbuser" to sqitch.plan
+grant dbuser to authenticator;
+Created deploy/grant_select_on_asset_table_to_dbuser.sql
+Created revert/grant_select_on_asset_table_to_dbuser.sql
+Created verify/grant_select_on_asset_table_to_dbuser.sql
+Added "grant_select_on_asset_table_to_dbuser" to sqitch.plan
+grant select on asset to dbuser;
+Created deploy/create_dbuser_role.sql
+Created revert/create_dbuser_role.sql
+Created verify/create_dbuser_role.sql
+Added "create_dbuser_role" to sqitch.plan
+begin $$
+   if exists (
+     select from pg_catalog.pg_roles
+     where rolname = 'dbuser'
+   ) then
+      raise notice 'Role already exists, skipping.';
+   else
+      create role 'dbuser' nologin;
+   end if;
+end; $$
+Created deploy/create_adam_role.sql
+Created revert/create_adam_role.sql
+Created verify/create_adam_role.sql
+Added "create_adam_role" to sqitch.plan
+begin $$
+   if exists (
+     select from pg_catalog.pg_roles
+     where rolname = 'adam'
+   ) then
+      raise notice 'Role already exists, skipping.';
+   else
+      create role 'adam' noinherit login password 'securepass123';
+   end if;
+end; $$
+Created deploy/create_api_schema.sql
+Created revert/create_api_schema.sql
+Created verify/create_api_schema.sql
+Added "create_api_schema" to sqitch.plan
+create schema api;
+Created deploy/create_customer_table.sql
+Created revert/create_customer_table.sql
+Created verify/create_customer_table.sql
+Added "create_customer_table" to sqitch.plan
+create table customer (
+  id bigint generated always as identity primary key,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now(),
+  name text not null
+);
+Created deploy/create_movie_table.sql
+Created revert/create_movie_table.sql
+Created verify/create_movie_table.sql
+Added "create_movie_table" to sqitch.plan
+create table movie (
+  id bigint generated always as identity primary key,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now(),
+  name text not null
+);
+Created deploy/create_update_trigger_on_customer.sql
+Created revert/create_update_trigger_on_customer.sql
+Created verify/create_update_trigger_on_customer.sql
+Added "create_update_trigger_on_customer" to sqitch.plan
+create trigger update
+  before insert or update on customer
+  for each row execute function update_table();
+Created deploy/create_modify_trigger_on_contact.sql
+Created revert/create_modify_trigger_on_contact.sql
+Created verify/create_modify_trigger_on_contact.sql
+Added "create_modify_trigger_on_contact" to sqitch.plan
+create trigger modify
+  after insert or update on contact
+  for each row execute function modify_record();

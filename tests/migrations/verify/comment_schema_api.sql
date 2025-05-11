@@ -1,0 +1,9 @@
+begin $$
+  assert (
+    select exists (
+      select 1
+      from pg_namespace n
+      where obj_description(n.oid, 'pg_namespace') = 'This is my comment'
+    )
+  );
+end; $$
