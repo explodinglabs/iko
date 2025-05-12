@@ -8,7 +8,7 @@
 </h1>
 
 <p align="center">
-  “移行” (ikō) – _Migration_
+  “移行” (ikō) – <i>Migration</i>
 </p>
 
 _Iko_ is a **database schema migration** tool. Currently only PostgreSQL and
