@@ -7,6 +7,10 @@
   ikō
 </h1>
 
+<p align="center">
+  “移行” (ikō) – _Migration_
+</p>
+
 _Iko_ is a **database schema migration** tool. Currently only PostgreSQL and
 compatible databases are supported.
 
@@ -15,9 +19,6 @@ to simplify creating common migrations from the command-line.
 
 Combine the commands into [scripts](#scripting) to generate many migrations at
 once.
-
-Iko is named after the Japanese word “移行” (ikō), which means _migration_ or
-_transition_.
 
 ## Installation
 

@@ -2,8 +2,7 @@
 
 ## Sqitch commands
 
-Iko aliases the [Sqitch commands](https://sqitch.org/docs/manual/), such as
-`sqitch status` (`iko status`), `sqitch check` (`iko check`), etc.
+Iko aliases all Sqitch commands.
 
 So to create a migration not listed below, you can use:
 
@@ -11,9 +10,17 @@ So to create a migration not listed below, you can use:
 iko add create_view -n 'Create a view'
 ```
 
-Then to deploy and verify, `iko deploy --verify`.
+Which is the same as you would do `sqitch add ...`.
 
-## Generate Migrations
+You can also access `sqitch` directly, e.g.
+
+```sh
+iko sqitch --version
+```
+
+[See the full list of Sqitch commands.](https://sqitch.org/docs/manual/)
+
+## Migrations
 
 - [Comments](#comments)
 - [Extensions](#extensions)
