@@ -7,11 +7,7 @@
   ikō
 </h1>
 
-<p align="center">
-  <b>“移行” (ikō)</b> – <i>"Migration"</i>
-</p>
-
-_Iko_ is a **database schema migration** tool. Currently only PostgreSQL and
+_Iko_ is a database **schema migration tool**. Currently only PostgreSQL and
 compatible databases are supported.
 
 It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
@@ -28,7 +24,7 @@ installed](https://docs.docker.com/get-docker/).
 Create an `iko` command by pasting the following into your terminal:
 
 ```sh
-iko() { docker run --rm --interactive --tty --volume ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko bash -c '"$@"' -- "$@" }
+iko() { docker run --rm --interactive --tty --volume ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko:0.1.0 bash -c '"$@"' -- "$@" }
 ```
 
 💡 Add it to your shell startup file for persistence (e.g., `.bashrc`,
