@@ -24,7 +24,7 @@ installed](https://docs.docker.com/get-docker/).
 Create an `iko` command by pasting the following into your terminal:
 
 ```sh
-iko() { docker run --rm --interactive --tty --volume ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko:0.1.0 bash -c '"$@"' -- "$@" }
+iko() { docker run --rm -it --volume ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko:0.1.0 bash -c '"$@"' -- "$@" }
 ```
 
 💡 Add it to your shell startup file for persistence (e.g., `.bashrc`,
