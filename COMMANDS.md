@@ -245,7 +245,7 @@ grant select on asset to dbuser;
 > 📖 See Postgres [CREATE
 > ROLE](https://www.postgresql.org/docs/current/sql-createrole.html).
 
-### create-role
+### create_role
 
 Creates a `nologin` role.
 
