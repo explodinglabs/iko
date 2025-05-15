@@ -2,12 +2,13 @@ do $$
 begin
   assert (
     select exists (
-      select 1 from information_schema.triggers
+      select 1
+      from information_schema.triggers
       where trigger_name = '[% trigger %]'
 [% IF schema -%]
-      and event_object_schema = '[% schema %]'
+        and event_object_schema = '[% schema %]'
 [% END -%]
-      and event_object_table = '[% table %]'
+        and event_object_table = '[% table %]'
     )
   );
 end;

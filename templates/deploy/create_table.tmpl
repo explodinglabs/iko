@@ -1,6 +1,6 @@
-create table [% schema_qualified_table %] (
+create table "[% schema_qualified_table %]" (
   id bigint generated always as identity primary key,
-  created_at timestamp not null default now(),
-  updated_at timestamp not null default now(),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
   name text not null
 );

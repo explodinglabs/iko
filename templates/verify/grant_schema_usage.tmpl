@@ -1,9 +1,6 @@
 do $$
-begin $$
-  assert (
-    select exists (
-      select pg_has_role('[% role %]', '[% schema %]', 'usage')
-    )
-  );
+begin
+  assert pg_has_role('[% role %]', '[% schema %]', 'USAGE'),
+    format('Role %s must have USAGE on schema %s', '[% role %]', '[% schema %]');
 end;
 $$ language plpgsql;
