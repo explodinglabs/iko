@@ -55,12 +55,6 @@ To set a comment on the `api` schema:
 comment schema api 'Schema for the API endpoints'
 ```
 
-Generates the following deploy script:
-
-```sql
-comment on schema api is 'Schema for the API endpoints';
-```
-
 ## Extensions
 
 > 📖 See Postgres [CREATE
@@ -80,12 +74,6 @@ To create an extension named `pgcrypto`:
 
 ```sh
 create_extension pgcrypto
-```
-
-Generates the following deploy script:
-
-```sql
-create extension "pgcrypto";
 ```
 
 ## Functions
@@ -109,15 +97,6 @@ To create a function named `create_user`:
 
 ```sh
 create_function create_user
-```
-
-Generates the following deploy script:
-
-```sql
-create or replace function create_user () returns void language plpgsql as
-begin
-  return;
-end;
 ```
 
 ### create_function_as
@@ -166,12 +145,6 @@ To grant execute permission on `login` to `dbuser`:
 grant_execute login '(text,text)' dbuser
 ```
 
-Generates the following deploy script:
-
-```sql
-grant execute on function login (text,text) to dbuser;
-```
-
 ### grant_schema_usage
 
 Grant schema usage to a role.
@@ -186,12 +159,6 @@ To grant usage of the `api` schema to `dbuser`:
 
 ```sh
 grant_schema_usage api dbuser
-```
-
-Generates the following deploy script:
-
-```sql
-grant usage on schema api to dbuser;
 ```
 
 ### grant_role_membership
@@ -210,12 +177,6 @@ To grant membership in `authenticator` to `dbuser`:
 grant_role_membership authenticator dbuser
 ```
 
-Generates the following deploy script:
-
-```sql
-grant authenticator to dbuser;
-```
-
 ### grant_table_privilege
 
 Grant privileges on a table.
@@ -232,12 +193,6 @@ To allow an `dbuser` to insert into the `asset` table:
 
 ```sh
 grant_privilege insert asset dbuser
-```
-
-Generates the following deploy script:
-
-```sql
-grant select on asset to dbuser;
 ```
 
 ## Roles
@@ -261,21 +216,6 @@ To create a `dbuser` role:
 create_role dbuser
 ```
 
-Generates the following deploy script:
-
-```sql
-begin $$
-   if exists (
-     select from pg_catalog.pg_roles
-     where rolname = 'dbuser'
-   ) then
-      raise notice 'Role already exists, skipping.';
-   else
-      create role dbuser nologin;
-   end if;
-end; $$
-```
-
 ### create_login_role
 
 Creates a login role with a password.
@@ -290,21 +230,6 @@ To create a `dbuser` role with password, `securepass123`:
 
 ```sh
 create_login_role dbuser 'securepass123'
-```
-
-Generates the following deploy script:
-
-```sql
-begin $$
-   if exists (
-     select from pg_catalog.pg_roles
-     where rolname = 'dbuser'
-   ) then
-      raise notice 'Role already exists, skipping.';
-   else
-      create role dbuser noinherit login password 'securepass123';
-   end if;
-end; $$
 ```
 
 ## Schemas
@@ -328,12 +253,6 @@ To create a schema named `api`:
 create_schema api
 ```
 
-Generates the following deploy script:
-
-```sql
-create schema api;
-```
-
 ## Tables
 
 > 📖 See Postgres [CREATE
@@ -355,17 +274,6 @@ To create a table named `customer`:
 
 ```sh
 create_table customer
-```
-
-Generates the following deploy script:
-
-```sql
-create table customer (
-  id bigint generated always as identity primary key,
-  created_at timestamp not null default now(),
-  updated_at timestamp not null default now(),
-  name text not null
-);
 ```
 
 The editor is launched for you to edit the function.
@@ -444,12 +352,4 @@ create trigger modify
   after insert or update on contact
   for each row execute function modify_record();
 EOF
-```
-
-Generates the following deploy script:
-
-```sql
-create trigger modify
-  after insert or update on contact
-  for each row execute function modify_record();
 ```
