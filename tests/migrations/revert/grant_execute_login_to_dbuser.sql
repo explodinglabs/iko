@@ -1,1 +1,1 @@
-revoke execute on function login from dbuser;
+revoke execute on function "login" from "dbuser";

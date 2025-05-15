@@ -1,4 +1,5 @@
-begin $$
+do $$
+begin
   assert (
     select exists (
       select 1 from information_schema.routines
@@ -6,4 +7,5 @@ begin $$
       and specific_schema = 'myfunc'
     )
   );
-end; $$
+end;
+$$ language plpgsql;

@@ -1,1 +1,1 @@
-drop function square;
+drop function "square";

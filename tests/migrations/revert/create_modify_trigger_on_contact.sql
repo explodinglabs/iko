@@ -1,1 +1,1 @@
-drop trigger modify on contact;
+drop trigger "modify" on "contact";

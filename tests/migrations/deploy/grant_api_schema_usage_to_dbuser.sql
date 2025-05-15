@@ -1,1 +1,1 @@
-grant usage on schema api to dbuser;
+grant usage on schema api to "dbuser";

@@ -1,4 +1,5 @@
-begin $$
+do $$
+begin
   assert (
     select has_function_privilege(
       'dbuser',
@@ -6,4 +7,5 @@ begin $$
       'execute'
     )
   );
-end; $$
+end;
+$$ language plpgsql;

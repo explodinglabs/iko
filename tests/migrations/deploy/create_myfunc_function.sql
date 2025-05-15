@@ -1,4 +1,8 @@
-create or replace function myfunc () returns void language plpgsql as
+create function "myfunc"() returns void
+language plpgsql
+as $$
 begin
+  -- TODO: implement logic
   return;
 end;
+$$;

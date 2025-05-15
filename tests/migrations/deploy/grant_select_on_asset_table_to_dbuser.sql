@@ -1,1 +1,1 @@
-grant select on asset to dbuser;
+grant select on "asset" to "dbuser";

@@ -1,1 +1,1 @@
-drop role dbuser;
+drop role "dbuser";

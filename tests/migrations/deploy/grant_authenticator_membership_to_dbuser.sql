@@ -1,1 +1,1 @@
-grant dbuser to authenticator;
+grant dbuser to "authenticator";

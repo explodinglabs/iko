@@ -1,1 +1,1 @@
-revoke select on asset from dbuser;
+revoke select on "asset" from "dbuser";

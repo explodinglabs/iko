@@ -1,1 +1,1 @@
-revoke usage on schema api from dbuser;
+revoke usage on schema "api" from "dbuser";

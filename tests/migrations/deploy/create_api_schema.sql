@@ -1,1 +1,1 @@
-create schema api;
+create schema "api";

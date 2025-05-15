@@ -1,1 +1,1 @@
-drop role 'adam';
+drop role "adam";

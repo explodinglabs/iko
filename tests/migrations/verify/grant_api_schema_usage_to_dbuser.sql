@@ -1,7 +1,6 @@
-begin $$
-  assert (
-    select exists (
-      select pg_has_role('dbuser', 'api', 'usage')
-    )
-  );
-end; $$
+do $$
+begin
+  assert pg_has_role('dbuser', 'api', 'USAGE'),
+    format('Role %s must have USAGE on schema %s', 'dbuser', 'api');
+end;
+$$ language plpgsql;

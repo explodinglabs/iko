@@ -1,1 +1,1 @@
-drop trigger update on customer;
+drop trigger "update" on "customer";

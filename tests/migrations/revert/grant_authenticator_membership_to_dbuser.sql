@@ -1,1 +1,1 @@
-revoke dbuser from authenticator;
+revoke dbuser from "authenticator";

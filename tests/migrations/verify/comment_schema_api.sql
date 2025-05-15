@@ -1,9 +1,13 @@
-begin $$
+do $$
+begin
   assert (
     select exists (
       select 1
-      from pg_namespace n
-      where obj_description(n.oid, 'pg_namespace') = 'This is my comment'
+      from information_schema.table_privileges
+      where lower(privilege_type) = ''
+        and table_name = ''
+        and grantee = ''
     )
   );
-end; $$
+end;
+$$ language plpgsql;

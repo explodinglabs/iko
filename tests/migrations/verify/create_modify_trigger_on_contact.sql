@@ -1,10 +1,13 @@
-begin $$
+do $$
+begin
   assert (
     select exists (
-      select 1 from information_schema.triggers
+      select 1
+      from information_schema.triggers
       where trigger_name = 'modify'
-      and event_object_schema = 'contact'
-      and event_object_table = 'contact'
+        and event_object_schema = 'contact'
+        and event_object_table = 'contact'
     )
   );
-end; $$
+end;
+$$ language plpgsql;

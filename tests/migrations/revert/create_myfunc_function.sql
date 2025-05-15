@@ -1,1 +1,1 @@
-drop function myfunc;
+drop function "myfunc";

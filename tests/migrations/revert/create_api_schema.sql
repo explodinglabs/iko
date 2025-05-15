@@ -1,1 +1,1 @@
-drop schema api;
+drop schema "api";
