@@ -1,17 +1,16 @@
 do $$
 begin
-  -- Check if the role has the specified privilege on the table
-  if not exists (
-    select 1
-    from information_schema.table_privileges
-    where lower(privilege_type) = '[% type %]'
+  assert (
+    select exists (
+      select 1
+      from information_schema.table_privileges
+      where lower(privilege_type) = '[% type %]'
 [% IF schema -%]
         and table_schema = '[% schema %]'
 [% END -%]
-      and table_name = '[% table %]'
-      and grantee = '[% role %]'
-  ) then
-    raise exception 'Role [% role %] does not have [% type %] privilege on table [% table %] [% if schema %]in schema [% schema %] [% end %].';
-  end if;
-end
+        and table_name = '[% table %]'
+        and grantee = '[% role %]'
+    )
+  );
+end;
 $$ language plpgsql;
