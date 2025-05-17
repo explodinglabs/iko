@@ -25,7 +25,7 @@ ENV BASH_ENV=/etc/bash_aliases
 ENV PATH="/scripts:${PATH}"
 
 # Custom entrypoint script, to ensure bash aliases are loaded and bash shell is used instead of sh
-COPY iko-entry.sh /usr/local/bin/iko-entry.sh
+COPY entry.sh /usr/local/bin/iko-entry.sh
 USER root
 RUN chmod +x /usr/local/bin/iko-entry.sh
 USER sqitch
