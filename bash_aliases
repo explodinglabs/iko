@@ -1,4 +1,4 @@
-set -e
+set -euo pipefail
 
 # Alias sqitch commands
 
@@ -35,24 +35,26 @@ done
 # Utility functions
 
 get_options() {
-  options=()
+  local -n _result=$1
+  shift
+  _result=()
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      --*=*|-?=*)  # --key=value or -k=value
-        options+=("$1")
-        ;;
-      --*|-?)  # --flag or -f (no value)
-        options+=("$1")
-        ;;
+      --*=*|-?=*) _result+=("$1") ;;
+      --*|-?)    _result+=("$1") ;;
     esac
     shift
   done
 }
 
+
 get_positionals() {
+  local -n _out=$1
+  shift
+
   local arg
   local seen_double_dash=0
-  positionals=()
+  _out=()
 
   for arg in "$@"; do
     if [[ "$arg" == -- ]]; then
@@ -60,7 +62,7 @@ get_positionals() {
       continue
     fi
     if [[ $seen_double_dash == 1 || "$arg" != -* ]]; then
-      positionals+=("$arg")
+      _out+=("$arg")
     fi
   done
 }
@@ -107,7 +109,11 @@ get_positionals_as() {
   # Assign positionals to the provided variable names (globally)
   for i in "${!names[@]}"; do
     local var="${names[$i]}"
-    local val="${values[$i]}"
+    if [[ $i -lt ${#values[@]} ]]; then
+      val="${values[$i]}"
+    else
+      val=""
+    fi
     printf -v "$var" %s "$val"
   done
 }
@@ -151,18 +157,21 @@ function show_files {
 # Comment
 
 function comment {
-  get_options "$@"
-  get_positionals "$@"
+  local -a options
+  local object underscores change comment_
+  declare -a positionals
+  get_options options "$@"
+  get_positionals positionals "$@"
 
   # Get the object - all args except the last
-  local object="${positionals[@]:0:${#positionals[@]}-1}"
+  object="${positionals[@]:0:${#positionals[@]}-1}"
   # Get the change name, stripping non alphanumeric chars
-  local underscores="comment_${object// /_}"
-  local change=${underscores//[^a-zA-Z0-9_]}
+  underscores="comment_${object// /_}"
+  change=${underscores//[^a-zA-Z0-9_]}
   # Get the comment (the last param)
-  local comment_="${positionals[-1]}"
+  comment_="${positionals[-1]}"
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template comment \
     --set object="$object" \
@@ -175,11 +184,13 @@ function comment {
 # Extensions
 
 function create_extension {
-  get_options "$@"
+  local -a options
+  local extension change
+  get_options options "$@"
   get_positionals_as "$@" -- extension change
-  local change=${change:-create_${extension}_extension}
+  change=${change:-create_${extension}_extension}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_extension \
     --set extension=$extension \
@@ -191,13 +202,15 @@ function create_extension {
 # Functions
 
 function create_function {
-  get_options "$@"
+  local -a options
+  local schema_qualified_function change schema function
+  get_options options "$@"
   get_positionals_as "$@" -- schema_qualified_function change
-  local schema=$(extract_schema $schema_qualified_function)
-  local function=$(strip_schema $schema_qualified_function)
-  local change=${change:-create_${schema_qualified_function//\./_}_function}
+  schema=$(extract_schema $schema_qualified_function)
+  function=$(strip_schema $schema_qualified_function)
+  change=${change:-create_${schema_qualified_function//\./_}_function}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_function \
     --set schema_qualified_function=$schema_qualified_function \
@@ -209,14 +222,16 @@ function create_function {
 }
 
 function create_function_as {
-  get_options "$@"
+  local -a options
+  local schema_qualified_function change schema function change sql
+  get_options options "$@"
   get_positionals_as "$@" -- schema_qualified_function change
-  local schema=$(extract_schema $schema_qualified_function)
-  local function=$(strip_schema $schema_qualified_function)
-  local change=${change:-create_${schema_qualified_function//\./_}_function}
-  local sql=$(cat)
+  schema=$(extract_schema $schema_qualified_function)
+  function=$(strip_schema $schema_qualified_function)
+  change=${change:-create_${schema_qualified_function//\./_}_function}
+  sql=$(cat)
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_function_as \
     --set schema_qualified_function=$schema_qualified_function \
@@ -231,13 +246,15 @@ function create_function_as {
 # Grants
 
 function grant_execute {
-  get_options "$@"
+  local -a options
+  local schema_qualified_function params role change schema function
+  get_options options "$@"
   get_positionals_as "$@" -- schema_qualified_function params role change
-  local schema=$(extract_schema $schema_qualified_function)
-  local function=$(strip_schema $schema_qualified_function)
-  local change=${change:-grant_execute_${schema_qualified_function//\./_}_to_${role}}
+  schema=$(extract_schema $schema_qualified_function)
+  function=$(strip_schema $schema_qualified_function)
+  change=${change:-grant_execute_${schema_qualified_function//\./_}_to_${role}}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template grant_execute \
     --set schema_qualified_function=$schema_qualified_function \
@@ -251,11 +268,13 @@ function grant_execute {
 }
 
 function grant_schema_usage {
-  get_options "$@"
+  local -a options
+  local schema role change
+  get_options options "$@"
   get_positionals_as "$@" -- schema role change
-  local change=${change:-grant_${schema}_schema_usage_to_${role}}
+  change=${change:-grant_${schema}_schema_usage_to_${role}}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template grant_schema_usage \
     --set role=$role \
@@ -266,11 +285,12 @@ function grant_schema_usage {
 }
 
 function grant_role_membership {
-  get_options "$@"
+  local -a options role role_specification change
+  get_options options "$@"
   get_positionals_as "$@" -- role role_specification change
-  local change=${change:-grant_${role}_membership_to_${role_specification}}
+  change=${change:-grant_${role}_membership_to_${role_specification}}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template grant_role_membership \
     --set role_specification=$role_specification \
@@ -281,11 +301,13 @@ function grant_role_membership {
 }
 
 function grant_table_privilege {
-  get_options "$@"
+  local -a options
+  local type schema_qualified_table role change
+  get_options options "$@"
   get_positionals_as "$@" -- type schema_qualified_table role change
-  local change=${change:-grant_${type}_on_${schema_qualified_table//\./_}_table_to_${role}}
+  change=${change:-grant_${type}_on_${schema_qualified_table//\./_}_table_to_${role}}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template grant_table_privilege \
     --set role=$role \
@@ -301,11 +323,13 @@ function grant_table_privilege {
 # Roles
 
 function create_role {
-  get_options "$@"
+  local -a options
+  local role change
+  get_options options "$@"
   get_positionals_as "$@" -- role change
-  local change=${change:-create_${role}_role}
+  change=${change:-create_${role}_role}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_role \
     --set role=$role \
@@ -315,11 +339,13 @@ function create_role {
 }
 
 function create_login_role {
-  get_options "$@"
+  local -a options
+  local role password change
+  get_options options "$@"
   get_positionals_as "$@" -- role password change
-  local change=${change:-create_${role}_role}
+  change=${change:-create_${role}_role}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_login_role \
     --set role=$role \
@@ -332,11 +358,13 @@ function create_login_role {
 # Schema
 
 function create_schema {
-  get_options "$@"
+  local -a options
+  local schema change
+  get_options options "$@"
   get_positionals_as "$@" -- schema change
-  local change=${change:-create_${schema}_schema}
+  change=${change:-create_${schema}_schema}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_schema \
     --set schema=$schema \
@@ -348,11 +376,13 @@ function create_schema {
 # Tables
 
 function create_table {
-  get_options "$@"
+  local -a options
+  local schema_qualified_table change
+  get_options options "$@"
   get_positionals_as "$@" -- schema_qualified_table change
-  local change=${change:-create_${schema_qualified_table//\./_}_table}
+  change=${change:-create_${schema_qualified_table//\./_}_table}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_table \
     --set schema_qualified_table=$schema_qualified_table \
@@ -364,12 +394,14 @@ function create_table {
 }
 
 function create_table_as {
-  get_options "$@"
+  local -a options
+  local schema_qualified_table change sql
+  get_options options "$@"
   get_positionals_as "$@" -- schema_qualified_table change
-  local change=${change:-create_${schema_qualified_table//\./_}_table}
-  local sql=$(cat)
+  change=${change:-create_${schema_qualified_table//\./_}_table}
+  sql=$(cat)
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_table_as \
     --set schema_qualified_table=$schema_qualified_table \
@@ -384,11 +416,13 @@ function create_table_as {
 # Triggers
 
 function create_trigger {
-  get_options "$@"
+  local -a options
+  local trigger schema_qualified_table schema_qualified_function change
+  get_options options "$@"
   get_positionals_as "$@" -- trigger schema_qualified_table schema_qualified_function change
-  local change=${change:-create_${trigger}_trigger_on_${schema_qualified_table//\./_}}
+  change=${change:-create_${trigger}_trigger_on_${schema_qualified_table//\./_}}
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_trigger \
     --set trigger=$trigger \
@@ -402,12 +436,14 @@ function create_trigger {
 }
 
 function create_trigger_as {
-  get_options "$@"
+  local -a options
+  local trigger schema_qualified_table schema_qualified_function change sql
+  get_options options "$@"
   get_positionals_as "$@" -- trigger schema_qualified_table schema_qualified_function change
-  local change=${change:-create_${trigger}_trigger_on_${schema_qualified_table//\./_}}
-  local sql=$(cat)
+  change=${change:-create_${trigger}_trigger_on_${schema_qualified_table//\./_}}
+  sql=$(cat)
 
-  sqitch add $options \
+  sqitch add "${options[@]}" \
     --change $change \
     --template create_trigger_as \
     --set trigger=$trigger \
