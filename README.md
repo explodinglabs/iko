@@ -41,6 +41,8 @@ If you get a command not found error, make sure `~/.local/bin` is in your
 
 ## Usage
 
+> 📖 [Sqitch tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
+
 ### Initialise a Project
 
 Run the following command to initialize a project, ensuring the correct
@@ -50,13 +52,11 @@ database URI is set:
 iko init --target db:pg://user@postgres/dbname myapp
 ```
 
-Keep in mind Iko is running inside a container so it uses Docker's networking;
-`localhost` doesn't refer to the host machine.
+Keep in mind Iko is running inside a container, so it uses Docker's networking.
+`localhost` doesn't refer to the host machine. You may need to use
 
 > 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
-
-> 📖 Read the [Sqitch tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
 
 ### Create Migrations
 
