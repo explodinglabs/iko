@@ -21,28 +21,48 @@ once.
 Iko runs inside a Docker container, so ensure [Docker is
 installed](https://docs.docker.com/get-docker/).
 
-Create an `iko` command by pasting the following into your terminal:
+To install the `iko` command, run:
 
 ```sh
-iko() { docker run --rm -it --volume ${PWD}/migrations:/repo:rw ghcr.io/explodinglabs/iko:0.1.0 "$@" }
+curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
 
-💡 Add it to your shell startup file for persistence (e.g., `.bashrc`,
-`.zshrc`).
+This creates a simple executable script at `~/.local/bin/iko`.
+
+Test it's working:
+
+```sh
+$ iko check
+No project configuration found. Run the "init" command to initialize a project
+```
 
 ## Usage
 
 ### Initialise a Project
 
-Run the following command to initialize a project (ensure the correct database
-URI is set):
+Run the following command to initialize a project -- ensuring the correct
+database URI is set.
 
 ```sh
-iko init --target postgres://user:pass@postgres:5432/app myapp
+iko init myapp
 ```
 
 > 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
+
+### Set a target database
+
+Set the default target database:
+
+```sh
+iko config --local deploy.target db:pg://user@localhost/dbname
+```
+
+Keep in mind Iko is running inside a container so it uses Docker's networking.
+`localhost` doesn't refer to the host machine.
+
+> 📖 Refer to [Sqitch
+> tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
 
 ### Create Migrations
 
