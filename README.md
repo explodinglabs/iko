@@ -27,7 +27,7 @@ To install the `iko` command, run:
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
 
-This creates a simple executable script at `~/.local/bin/iko`.
+This creates an executable script at `~/.local/bin/iko`.
 
 Test it's working:
 
@@ -36,33 +36,27 @@ $ iko check
 No project configuration found. Run the "init" command to initialize a project
 ```
 
+If you get a command not found error, make sure `~/.local/bin` is in your
+`$PATH`.
+
 ## Usage
 
 ### Initialise a Project
 
-Run the following command to initialize a project -- ensuring the correct
-database URI is set.
+Run the following command to initialize a project, ensuring the correct
+database URI is set:
 
 ```sh
-iko init myapp
+iko init --target db:pg://user@postgres/dbname myapp
 ```
+
+Keep in mind Iko is running inside a container so it uses Docker's networking;
+`localhost` doesn't refer to the host machine.
 
 > 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
 
-### Set a target database
-
-Set the default target database:
-
-```sh
-iko config --local deploy.target db:pg://user@localhost/dbname
-```
-
-Keep in mind Iko is running inside a container so it uses Docker's networking.
-`localhost` doesn't refer to the host machine.
-
-> 📖 Refer to [Sqitch
-> tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
+> 📖 Read the [Sqitch tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
 
 ### Create Migrations
 
@@ -77,9 +71,11 @@ Added "create_schema_api" to sqitch.plan
 create schema api;
 ```
 
-Three scripts were created – to _deploy_, _revert_ and _verify_ the change. The
-change was then added to `sqitch.plan`. Lastly, the deploy script was printed
-for you to review.
+Here's what happened:
+
+1. Three scripts were created – to _deploy_, _revert_ and _verify_ the change.
+2. The change was then added to `sqitch.plan`.
+3. Lastly, the deploy script was printed for you to review.
 
 > 📖 See the [full list of Iko commands](/COMMANDS.md).
 
