@@ -32,7 +32,6 @@ Test it's working:
 
 ```sh
 iko sqitch --version
-sqitch (App::Sqitch) v1.5.1
 ```
 
 If you get a _command not found_ error, make sure `~/.local/bin` is in your
