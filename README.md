@@ -32,16 +32,17 @@ This creates an executable script at `~/.local/bin/iko`.
 Test it's working:
 
 ```sh
-$ iko check
-No project configuration found. Run the "init" command to initialize a project
+iko sqitch --version
+sqitch (App::Sqitch) v1.5.1
 ```
 
-If you get a command not found error, make sure `~/.local/bin` is in your
+If you get a _command not found_ error, make sure `~/.local/bin` is in your
 `$PATH`.
 
 ## Usage
 
-> 📖 [Sqitch tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
+> 📖 Recommended: [Sqitch
+> tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
 
 ### Initialise a Project
 
@@ -49,11 +50,11 @@ Run the following command to initialize a project, ensuring the correct
 database URI is set:
 
 ```sh
-iko init --target db:pg://user@postgres/dbname myapp
+iko init --target db:pg://user:pass@postgres/dbname myapp
 ```
 
 Keep in mind Iko is running inside a container, so it uses Docker's networking.
-`localhost` doesn't refer to the host machine. You may need to use
+`localhost` refers to the container, not the host machine.
 
 > 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
