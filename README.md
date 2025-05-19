@@ -53,8 +53,9 @@ database URI is set:
 iko init --target db:pg://user:pass@postgres/dbname myapp
 ```
 
-Keep in mind Iko is running inside a container, so it uses Docker's networking.
-`localhost` refers to the container, not the host machine.
+Keep in mind Iko is running inside a container, so it uses [Docker's
+networking](https://docs.docker.com/engine/network/). `localhost` refers to the
+container, not the host machine!
 
 > 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
