@@ -31,7 +31,7 @@ This creates an executable script at `~/.local/bin/iko`.
 Test it's working:
 
 ```sh
-iko sqitch --version
+iko version
 ```
 
 If you get a _command not found_ error, make sure `~/.local/bin` is in your
