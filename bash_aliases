@@ -1,10 +1,5 @@
 set -euo pipefail
 
-version() {
-  echo "iko $(cat /iko_version.txt)"
-  sqitch --version
-}
-
 # Alias sqitch commands
 
 sqitch_commands=(
@@ -157,6 +152,26 @@ strip_schema() {
 show_files() {
   # batcat adds ^M chars to the output unless --paging=never is used
   batcat --style=plain --paging=never deploy/${1}.sql
+}
+
+version() {
+  echo "iko $(cat /iko_version.txt)"
+  sqitch --version
+}
+
+create() {
+  local -a options
+  local note change
+  get_options options "$@"
+  get_positionals_as "$@" -- note
+  # Generate change name by sanitizing note
+  change=$(echo "$note" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '_' | sed 's/^_//;s/_$//')
+
+  sqitch add "${options[@]}" \
+    --change "$change" \
+    --note "$note"
+
+  show_files $change
 }
 
 # Comment

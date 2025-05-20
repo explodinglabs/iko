@@ -28,7 +28,7 @@ To install the `iko` command-line tool, run:
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
 
-This installs an executable script at ~/.local/bin/iko.
+This installs an executable script at `~/.local/bin/iko`.
 
 To confirm it's working:
 

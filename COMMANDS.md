@@ -4,7 +4,7 @@
 
 Iko aliases all Sqitch commands.
 
-You can also access `sqitch` directly, like:
+You can also access `sqitch` directly, such as:
 
 ```sh
 iko sqitch --version
@@ -14,7 +14,7 @@ iko sqitch --version
 
 ## Migrations
 
-- [Ad-hoc](#ad-hoc)
+- [Create](#create) (ad-hoc migrations)
 - [Comments](#comments)
 - [Extensions](#extensions)
 - [Functions](#functions)
@@ -24,7 +24,31 @@ iko sqitch --version
 - [Tables](#tables)
 - [Triggers](#triggers)
 
-## Ad-hoc
+## Create
+
+Create an ad-hoc migration. Creates empty deploy, verify and revert scripts for
+you to write yourself. Use with `-e/--edit` to open your editor.
+
+```sh
+create <note>
+```
+
+The note describes the purpose of the change, is used for both the Sqitch
+change note and also the change name (after some sanitisation such as replacing
+spaces with underscores).
+
+#### 🧪 Example Usage
+
+To set a comment on the `api` schema:
+
+```sh
+create --edit 'Create customer view'
+```
+
+Is the same as `iko add create_customer_view --note 'Create customer view'`.
+
+> 📖 See
+> [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
 
 ## Comments
 
