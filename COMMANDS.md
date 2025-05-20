@@ -25,7 +25,7 @@ iko sqitch --version
 
 See the [full list of Sqitch commands.](https://sqitch.org/docs/manual/)
 
-## Ad-hoc migrations)
+## Ad-hoc migrations
 
 #### create
 
