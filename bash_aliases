@@ -154,6 +154,17 @@ show_files() {
   batcat --style=plain --paging=never deploy/${1}.sql
 }
 
+string_to_change() {
+  # Usage: string_to_change "Some Note Here"
+  # Output: some_note_here
+
+  local s="$1"
+  local change
+
+  change=$(echo "$s" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '_' | sed 's/^_//;s/_$//')
+  echo "$change"
+}
+
 version() {
   echo "iko $(cat /iko_version.txt)"
   sqitch --version
@@ -164,8 +175,8 @@ create() {
   local note change
   get_options options "$@"
   get_positionals_as "$@" -- note
-  # Generate change name by sanitizing note
-  change=$(echo "$note" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '_' | sed 's/^_//;s/_$//')
+  # Generate change name by sanitising note
+  change=$(string_to_change "$note")
 
   sqitch add "${options[@]}" \
     --change "$change" \
