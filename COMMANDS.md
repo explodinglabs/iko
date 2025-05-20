@@ -1,5 +1,18 @@
 # Commands
 
+## Table of Contents
+
+- [Sqitch Commands](#sqitch-commands)
+- [Ad-hoc Migrations](#ad-hoc-migrations)
+- [Comments](#comments)
+- [Extensions](#extensions)
+- [Functions](#functions)
+- [Grants](#grants)
+- [Roles](#roles)
+- [Schemas](#schemas)
+- [Tables](#tables)
+- [Triggers](#triggers)
+
 ## Sqitch commands
 
 Iko aliases all Sqitch commands.
@@ -12,19 +25,9 @@ iko sqitch --version
 
 [See the full list of Sqitch commands.](https://sqitch.org/docs/manual/)
 
-## Migrations
+## Ad-hoc migrations)
 
-- [Create](#create) (ad-hoc migrations)
-- [Comments](#comments)
-- [Extensions](#extensions)
-- [Functions](#functions)
-- [Grants](#grants)
-- [Roles](#roles)
-- [Schemas](#schemas)
-- [Tables](#tables)
-- [Triggers](#triggers)
-
-## Create
+#### create
 
 Use the `create` command to crate an ad-hoc migration. Creates empty deploy, verify and revert scripts for
 you to write yourself. Use with `-e/--edit` to open your editor.
