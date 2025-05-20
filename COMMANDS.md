@@ -15,7 +15,7 @@
 
 ## Sqitch commands
 
-Iko aliases all Sqitch commands.
+Iko aliases all of [Sqitch's commands](https://sqitch.org/docs/manual/).
 
 You can also access `sqitch` directly, such as:
 
@@ -23,7 +23,7 @@ You can also access `sqitch` directly, such as:
 iko sqitch --version
 ```
 
-[See the full list of Sqitch commands.](https://sqitch.org/docs/manual/)
+See the [full list of Sqitch commands.](https://sqitch.org/docs/manual/)
 
 ## Ad-hoc migrations)
 
