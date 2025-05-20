@@ -1,5 +1,10 @@
 set -euo pipefail
 
+version() {
+  echo "iko $(cat /iko_version.txt)"
+  sqitch --version
+}
+
 # Alias sqitch commands
 
 sqitch_commands=(
@@ -118,7 +123,7 @@ get_positionals_as() {
   done
 }
 
-function extract_schema {
+extract_schema() {
   # Extract the schema from a db object. Give the empty string if it's not
   # schema-qualified.
   #
@@ -129,7 +134,7 @@ function extract_schema {
   echo "$schema"
 }
 
-function extract_schema_plus_dot {
+extract_schema_plus_dot() {
   # Extract the schema from a db object - including the dot. Give the empty
   # string if it's not schema-qualified.
   #
@@ -140,7 +145,7 @@ function extract_schema_plus_dot {
   echo "$schema"
 }
 
-function strip_schema {
+strip_schema() {
   # Strip the schema from a db object.
   #
   # Examples:
@@ -149,14 +154,14 @@ function strip_schema {
   echo "$1" | cut -d . -f2
 }
 
-function show_files {
+show_files() {
   # batcat adds ^M chars to the output unless --paging=never is used
   batcat --style=plain --paging=never deploy/${1}.sql
 }
 
 # Comment
 
-function comment {
+comment() {
   local -a options
   local object underscores change comment_
   declare -a positionals
@@ -183,7 +188,7 @@ function comment {
 
 # Extensions
 
-function create_extension {
+create_extension() {
   local -a options
   local extension change
   get_options options "$@"
@@ -201,7 +206,7 @@ function create_extension {
 
 # Functions
 
-function create_function {
+create_function() {
   local -a options
   local schema_qualified_function change schema function
   get_options options "$@"
@@ -221,7 +226,7 @@ function create_function {
   show_files $change
 }
 
-function create_function_as {
+create_function_as() {
   local -a options
   local schema_qualified_function change schema function change sql
   get_options options "$@"
@@ -245,7 +250,7 @@ function create_function_as {
 
 # Grants
 
-function grant_execute {
+grant_execute() {
   local -a options
   local schema_qualified_function params role change schema function
   get_options options "$@"
@@ -267,7 +272,7 @@ function grant_execute {
   show_files $change
 }
 
-function grant_schema_usage {
+grant_schema_usage() {
   local -a options
   local schema role change
   get_options options "$@"
@@ -284,7 +289,7 @@ function grant_schema_usage {
   show_files $change
 }
 
-function grant_role_membership {
+grant_role_membership() {
   local -a options role role_specification change
   get_options options "$@"
   get_positionals_as "$@" -- role role_specification change
@@ -300,7 +305,7 @@ function grant_role_membership {
   show_files $change
 }
 
-function grant_table_privilege {
+grant_table_privilege() {
   local -a options
   local type schema_qualified_table role change
   get_options options "$@"
@@ -322,7 +327,7 @@ function grant_table_privilege {
 
 # Roles
 
-function create_role {
+create_role() {
   local -a options
   local role change
   get_options options "$@"
@@ -338,7 +343,7 @@ function create_role {
   show_files $change
 }
 
-function create_login_role {
+create_login_role() {
   local -a options
   local role password change
   get_options options "$@"
@@ -357,7 +362,7 @@ function create_login_role {
 
 # Schema
 
-function create_schema {
+create_schema() {
   local -a options
   local schema change
   get_options options "$@"
@@ -375,7 +380,7 @@ function create_schema {
 
 # Tables
 
-function create_table {
+create_table() {
   local -a options
   local schema_qualified_table change
   get_options options "$@"
@@ -393,7 +398,7 @@ function create_table {
   show_files $change
 }
 
-function create_table_as {
+create_table_as() {
   local -a options
   local schema_qualified_table change sql
   get_options options "$@"
@@ -415,7 +420,7 @@ function create_table_as {
 
 # Triggers
 
-function create_trigger {
+create_trigger() {
   local -a options
   local trigger schema_qualified_table schema_qualified_function change
   get_options options "$@"
@@ -435,7 +440,7 @@ function create_trigger {
   show_files $change
 }
 
-function create_trigger_as {
+create_trigger_as() {
   local -a options
   local trigger schema_qualified_table schema_qualified_function change sql
   get_options options "$@"
