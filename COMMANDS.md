@@ -26,7 +26,7 @@ iko sqitch --version
 
 ## Create
 
-Create an ad-hoc migration. Creates empty deploy, verify and revert scripts for
+Use the `create` command to crate an ad-hoc migration. Creates empty deploy, verify and revert scripts for
 you to write yourself. Use with `-e/--edit` to open your editor.
 
 ```sh
