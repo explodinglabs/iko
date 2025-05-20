@@ -18,25 +18,24 @@ once.
 
 ## Installation
 
-Iko runs inside a Docker container, so ensure [Docker is
-installed](https://docs.docker.com/get-docker/).
+Iko runs inside a Docker container, so you'll need to have [Docker
+installed](https://docs.docker.com/get-docker/) first.
 
-To install the `iko` command, run:
+To install the `iko` command-line tool, run:
 
 ```sh
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
 
-This creates an executable script at `~/.local/bin/iko`.
+This installs an executable script at ~/.local/bin/iko.
 
-Test it's working:
+To confirm it's working:
 
 ```sh
-iko sqitch --version
-sqitch (App::Sqitch) v1.5.1
+iko version
 ```
 
-If you get a _command not found_ error, make sure `~/.local/bin` is in your
+If you see a command not found error, make sure `~/.local/bin` is in your
 `$PATH`.
 
 ## Usage

@@ -4,15 +4,7 @@
 
 Iko aliases all Sqitch commands.
 
-So to create a migration not listed below, you can use:
-
-```sh
-iko add create_view -n 'Create a view'
-```
-
-Which is the same as you would do `sqitch add ...`.
-
-You can also access `sqitch` directly, e.g.
+You can also access `sqitch` directly, like:
 
 ```sh
 iko sqitch --version
@@ -22,6 +14,7 @@ iko sqitch --version
 
 ## Migrations
 
+- [Ad-hoc](#ad-hoc)
 - [Comments](#comments)
 - [Extensions](#extensions)
 - [Functions](#functions)
@@ -30,6 +23,8 @@ iko sqitch --version
 - [Schemas](#schemas)
 - [Tables](#tables)
 - [Triggers](#triggers)
+
+## Ad-hoc
 
 ## Comments
 
