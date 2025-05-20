@@ -45,7 +45,10 @@ To set a comment on the `api` schema:
 create --edit 'Create customer view'
 ```
 
-Is the same as `iko add create_customer_view --note 'Create customer view'`.
+This is equivalent to `iko add create_customer_view --note 'Create customer view'`.
+
+Alternatively, use `iko add create_customer_view` which launches the editor for
+you to enter a note.
 
 > 📖 See
 > [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
