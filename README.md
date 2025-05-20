@@ -9,11 +9,13 @@
 
 _Iko_ is a Postgres database **schema migration tool**.
 
-It extends [Sqitch](https://sqitch.org/), adding [shell commands](/COMMANDS.md)
-to simplify creating common migrations from the command-line.
+It extends [Sqitch](https://sqitch.org/), adding a set of [shell
+commands](/COMMANDS.md) that make it easier to create and manage common
+migrations from the command-line.
 
-Combine the commands into [scripts](#scripting) to generate many migrations at
-once.
+You can also [combine commands into scripts](#scripting) to generate multiple
+migrations at once — useful for initializing schemas or evolving complex
+systems.
 
 ## Installation
 
