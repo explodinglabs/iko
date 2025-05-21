@@ -96,7 +96,8 @@ iko deploy
 
 Write reusable scripts that generate migrations, for example:
 
-**scripts/auth.sh**
+<details>
+  <summary>**scripts/auth.sh** - Click to expand</summary>
 
 ```sh
 # Create an auth schema
@@ -125,6 +126,8 @@ EOF
 # Call encrypt_pass when a user is inserted or updated
 create_trigger encrypt_pass auth.user auth.encrypt_pass
 ```
+
+</details>
 
 Place it in `scripts/auth.sh` then run:
 
