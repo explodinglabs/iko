@@ -19,7 +19,7 @@ systems.
 
 ## Installation
 
-Iko runs inside a Docker container, so you'll need to have [Docker
+Iko runs inside a container, so you'll need to have [Docker
 installed](https://docs.docker.com/get-docker/) first.
 
 To install the `iko` command-line tool, run:
@@ -28,9 +28,10 @@ To install the `iko` command-line tool, run:
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
 
-This installs an executable script at `~/.local/bin/iko`.
+A script is created at `~/.local/bin/iko`, which is just a docker run command.
+You might want to modify it to suit your needs.
 
-To confirm it's working:
+Confirm it's working:
 
 ```sh
 iko version
