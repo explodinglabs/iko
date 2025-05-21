@@ -15,13 +15,15 @@
 
 ## Sqitch commands
 
-Iko aliases all of [Sqitch's commands](https://sqitch.org/docs/manual/).
+Iko aliases all of Sqitch's [commands](https://sqitch.org/docs/manual/).
 
 You can also access `sqitch` directly, like:
 
 ```sh
 iko sqitch --version
 ```
+
+See [the full list of Sqitch's commands](https://sqitch.org/docs/manual/).
 
 ## Ad-hoc migrations
 
@@ -32,8 +34,8 @@ ad-hoc migration, for example:
 add create_customer_view
 ```
 
-You'll be required to set a change note, and then to write the deploy, verify
-and revert scripts yourself.
+You'll be required to set a note, and then write the deploy, verify and revert
+scripts yourself.
 
 > 📖 Refer to [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
 
