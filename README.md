@@ -97,7 +97,7 @@ iko deploy
 Write reusable scripts that generate migrations, for example:
 
 <details>
-  <summary>**scripts/auth.sh** - Click to expand</summary>
+  <summary><b>scripts/auth.sh</b> – Click to expand</summary>
 
 ```sh
 # Create an auth schema
