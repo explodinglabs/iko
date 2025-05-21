@@ -127,4 +127,4 @@ Run it to generate migrations:
 iko bash auth.sh
 ```
 
-Next: Jump to [Iko's full command set](COMMANDS.md).
+Next: [Iko's Commands](COMMANDS.md).
