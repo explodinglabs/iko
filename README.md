@@ -20,16 +20,13 @@ systems.
 ## Installation
 
 Iko runs inside a container, so you'll need to have [Docker
-installed](https://docs.docker.com/get-docker/) first.
+installed](https://docs.docker.com/get-docker/).
 
-To install the `iko` command-line tool, run:
+Install the `iko` command-line tool:
 
 ```sh
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
-
-A script is created at `~/.local/bin/iko`. It's just a docker run command, you
-might want to modify it to suit your needs.
 
 Confirm it's working:
 
@@ -37,18 +34,12 @@ Confirm it's working:
 iko version
 ```
 
-Ensure `~/.local/bin` is included in your `$PATH` if you encounter a command
-not found error.
-
 ## Usage
-
-> 📖 Recommended: [Sqitch
-> tutorial](https://sqitch.org/docs/manual/sqitchtutorial/).
 
 ### Initialise a Project
 
-Run the following command to initialize a project, ensuring the correct
-database URI is set:
+Run the following command to initialize a project, setting a default target
+database (generally set it to your local development db):
 
 ```sh
 iko init --target db:pg://user:pass@postgres/dbname myapp
