@@ -129,7 +129,7 @@ create_trigger encrypt_pass auth.user auth.encrypt_pass
 
 </details>
 
-Place it in `scripts/auth.sh` then run:
+Run it to generate migrations:
 
 ```sh
 iko bash auth.sh
