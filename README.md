@@ -28,8 +28,8 @@ To install the `iko` command-line tool, run:
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
 
-A script is created at `~/.local/bin/iko`, which is just a docker run command.
-You might want to modify it to suit your needs.
+A script is created at `~/.local/bin/iko`. It's just a docker run command, you
+might want to modify it to suit your needs.
 
 Confirm it's working:
 
@@ -37,8 +37,8 @@ Confirm it's working:
 iko version
 ```
 
-If you see a command not found error, make sure `~/.local/bin` is in your
-`$PATH`.
+Ensure `~/.local/bin` is included in your `$PATH` if you encounter a command
+not found error.
 
 ## Usage
 
