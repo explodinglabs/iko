@@ -17,13 +17,11 @@
 
 Iko aliases all of [Sqitch's commands](https://sqitch.org/docs/manual/).
 
-You can also access `sqitch` directly, such as:
+You can also access `sqitch` directly, like:
 
 ```sh
 iko sqitch --version
 ```
-
-See the [full list of Sqitch commands.](https://sqitch.org/docs/manual/)
 
 ## Ad-hoc migrations
 
@@ -37,11 +35,11 @@ add create_customer_view
 You'll be required to set a change note, and then to write the deploy, verify
 and revert scripts yourself.
 
-> 📖 See [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
+> 📖 Refer to [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
 
 ## Comments
 
-> 📖 See Postgres
+> 📖 Refer to Postgres
 > [COMMENT](https://www.postgresql.org/docs/current/sql-comment.html).
 
 ### comment
@@ -65,7 +63,7 @@ comment schema api 'Schema for the API endpoints'
 
 ## Extensions
 
-> 📖 See Postgres [CREATE
+> 📖 Refer to Postgres [CREATE
 > EXTENSION](https://www.postgresql.org/docs/current/sql-comment.html).
 
 ### create_extension
@@ -86,7 +84,7 @@ create_extension pgcrypto
 
 ## Functions
 
-> 📖 See Postgres [CREATE
+> 📖 Refer to Postgres [CREATE
 > FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
 
 ### create_function
@@ -132,7 +130,7 @@ EOF
 
 ## Grants
 
-> 📖 See Postgres
+> 📖 Refer to Postgres
 > [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
 
 ### grant_execute
@@ -205,7 +203,7 @@ grant_privilege insert asset dbuser
 
 ## Roles
 
-> 📖 See Postgres [CREATE
+> 📖 Refer to Postgres [CREATE
 > ROLE](https://www.postgresql.org/docs/current/sql-createrole.html).
 
 ### create_role
@@ -242,7 +240,7 @@ create_login_role dbuser 'securepass123'
 
 ## Schemas
 
-> 📖 See Postgres [CREATE
+> 📖 Refer to Postgres [CREATE
 > SCHEMA](https://www.postgresql.org/docs/current/sql-createschema.html).
 
 ### create_schema
@@ -263,7 +261,7 @@ create_schema api
 
 ## Tables
 
-> 📖 See Postgres [CREATE
+> 📖 Refer to Postgres [CREATE
 > TABLE](https://www.postgresql.org/docs/current/sql-createtable.html).
 
 ### create_table
@@ -313,7 +311,7 @@ EOF
 
 ## Triggers
 
-> 📖 See Postgres [CREATE
+> 📖 Refer to Postgres [CREATE
 > TRIGGER](https://www.postgresql.org/docs/current/sql-createtrigger.html).
 
 ### create_trigger
