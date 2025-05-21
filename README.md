@@ -67,9 +67,9 @@ create schema api;
 
 Here's what happened:
 
-1. Three scripts were created – to _deploy_, _revert_ and _verify_ the change.
-2. The change was then added to `sqitch.plan`.
-3. Lastly, the deploy script was printed for you to review.
+1. Three scripts were created: to _deploy_, _revert_, and _verify_ the change.
+2. The change was added to `sqitch.plan`.
+3. Finally, the deploy script was printed for your review.
 
 > 📖 See the [full list of Iko commands](/COMMANDS.md).
 
@@ -89,7 +89,7 @@ iko deploy
 Write reusable scripts that generate migrations, for example:
 
 <details>
-  <summary><b>scripts/auth.sh</b> – Click to expand</summary>
+  <summary><b>auth.sh</b> – Click to expand</summary>
 
 ```sh
 # Create an auth schema
@@ -121,7 +121,7 @@ create_trigger encrypt_pass auth.user auth.encrypt_pass
 
 </details>
 
-Run it to generate migrations:
+Place it in the `scripts` directory, then run it to generate migrations:
 
 ```sh
 iko bash auth.sh
