@@ -39,7 +39,7 @@ iko version
 ### Initialise a Project
 
 Run the following command to initialize a project, setting a default target
-database (generally set it to your local development db):
+database (typically this is your local development server):
 
 ```sh
 iko init --target db:pg://user:pass@postgres/dbname myapp
