@@ -27,34 +27,17 @@ See the [full list of Sqitch commands.](https://sqitch.org/docs/manual/)
 
 ## Ad-hoc migrations
 
-#### create
-
-Use the `create` command to crate an ad-hoc migration. Creates empty deploy, verify and revert scripts for
-you to write yourself. Use with `-e/--edit` to open your editor.
+If your change is not covered by the below commands, use `add` to crate an
+ad-hoc migration, for example:
 
 ```sh
-create <note>
+add create_customer_view
 ```
 
-The note describes the purpose of the change, is used for both the Sqitch
-change note and also the change name (after some sanitisation such as replacing
-spaces with underscores).
+You'll be required to set a change note, and then to write the deploy, verify
+and revert scripts yourself.
 
-#### 🧪 Example Usage
-
-To set a comment on the `api` schema:
-
-```sh
-create --edit 'Create customer view'
-```
-
-This is equivalent to `iko add create_customer_view --note 'Create customer view'`.
-
-Alternatively, use `iko add create_customer_view` which launches the editor for
-you to enter a note.
-
-> 📖 See
-> [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
+> 📖 See [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
 
 ## Comments
 
