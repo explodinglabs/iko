@@ -1,4 +1,4 @@
-create trigger [% trigger %]
-before insert or update on [% schema_qualified_table %]
+create trigger "[% trigger %]"
+before insert or update on [% IF table_schema %]"[% table_schema %]".[% END %]"[% table %]"
 for each row
-execute function [% schema_qualified_function %]();
+execute function [% IF function_schema %]"[% function_schema %]".[% END %]"[% function %]"();

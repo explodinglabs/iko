@@ -1,1 +1,1 @@
-drop table "[% schema_qualified_table %]";
+drop table [% IF schema %]"[% schema %]".[% END %]"[% table %]";

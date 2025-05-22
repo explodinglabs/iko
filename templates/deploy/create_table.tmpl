@@ -1,4 +1,4 @@
-create table [% schema_qualified_table %] (
+create table [% IF schema %]"[% schema %]".[% END %]"[% table %]" (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   name text not null

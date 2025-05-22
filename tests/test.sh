@@ -56,8 +56,8 @@ EOF
 create_login_role authenticator 'securepass123'
 create_role api_user
 grant_schema_usage api api_user
-grant_execute square '(number)' api_user
-grant_execute api.square '(number)' api_user
+grant_execute myfunc '()' api_user
+grant_execute api.myfunc '()' api_user
 grant_role_membership authenticator api_user
 grant_table_privilege select customer api_user
 grant_table_privilege select api.customer api_user

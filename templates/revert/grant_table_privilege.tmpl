@@ -1,1 +1,1 @@
-revoke [% type %] on "[% schema_qualified_table %]" from "[% role %]";
+revoke [% type %] on [% IF schema %]"[% schema %]".[% END %]"[% table %]" from "[% role %]";

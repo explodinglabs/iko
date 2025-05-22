@@ -1,1 +1,1 @@
-drop trigger "[% trigger %]" on "[% schema_qualified_table %]";
+drop trigger "[% trigger %]" on [% IF table_schema %]"[% table_schema %]".[% END %]"[% schema_qualified_table %]";

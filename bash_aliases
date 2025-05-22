@@ -249,7 +249,6 @@ create_function() {
   sqitch add "${options[@]}" \
     --change $change \
     --template create_function \
-    --set schema_qualified_function=$schema_qualified_function \
     --set schema=$schema \
     --set function=$function \
     --note \'"Add $schema_qualified_function function"\'
@@ -270,7 +269,6 @@ create_function_as() {
   sqitch add "${options[@]}" \
     --change $change \
     --template create_function_as \
-    --set schema_qualified_function=$schema_qualified_function \
     --set schema=$schema \
     --set function=$function \
     --set sql="$sql" \
@@ -293,7 +291,6 @@ grant_execute() {
   sqitch add "${options[@]}" \
     --change $change \
     --template grant_execute \
-    --set schema_qualified_function=$schema_qualified_function \
     --set schema=$schema \
     --set function=$function \
     --set params=$params \
@@ -348,7 +345,6 @@ grant_table_privilege() {
     --template grant_table_privilege \
     --set role=$role \
     --set type=$type \
-    --set schema_qualified_table=$schema_qualified_table \
     --set schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
     --note \'"Grant $type on $schema_qualified_table table to $role"\'
@@ -421,7 +417,6 @@ create_table() {
   sqitch add "${options[@]}" \
     --change $change \
     --template create_table \
-    --set schema_qualified_table=$schema_qualified_table \
     --set schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
     --note \'"Create $schema_qualified_table table"\'
@@ -440,7 +435,6 @@ create_table_as() {
   sqitch add "${options[@]}" \
     --change $change \
     --template create_table_as \
-    --set schema_qualified_table=$schema_qualified_table \
     --set schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
     --set sql="$sql" \
@@ -462,10 +456,10 @@ create_trigger() {
     --change $change \
     --template create_trigger \
     --set trigger=$trigger \
-    --set schema_qualified_table=$schema_qualified_table \
-    --set schema=$(extract_schema $schema_qualified_table) \
+    --set function_schema=$(extract_schema $schema_qualified_function) \
+    --set function=schema_qualified_function \
+    --set table_schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
-    --set schema_qualified_function=$schema_qualified_function \
     --note \'"Add $trigger trigger on $schema_qualified_table"\'
 
   show_files $change
@@ -483,10 +477,10 @@ create_trigger_as() {
     --change $change \
     --template create_trigger_as \
     --set trigger=$trigger \
-    --set schema_qualified_table=$schema_qualified_table \
-    --set schema=$(extract_schema $schema_qualified_table) \
+    --set function_schema=$(extract_schema $schema_qualified_function) \
+    --set function=schema_qualified_function \
+    --set table_schema=$(extract_schema $schema_qualified_table) \
     --set table=$(strip_schema $schema_qualified_table) \
-    --set schema_qualified_function=$schema_qualified_function \
     --set sql="$sql" \
     --note \'"Add $trigger trigger on $schema_qualified_table"\'
 
