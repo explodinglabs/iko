@@ -7,22 +7,19 @@
   ikō
 </h1>
 
-**Iko** (_ee-koh_) is a Postgres database **schema migration tool**.
-
-It extends [Sqitch](https://sqitch.org/), adding a set of [shell
-commands](/COMMANDS.md) that make it easy to create and manage migrations from
+**Iko** (_ee-koh_) is a tool for managing Postgres database migrations using
 the command-line.
 
-You can also [combine commands into scripts](#scripting) to generate multiple
-migrations at once — useful for initializing schemas or evolving complex
-systems.
+- **Clarity over magic** — see exactly what your database is doing.
+- **Unix-style composition** — use the shell to script and automate.
+- **Convention over configuration** — just follow the file layout and naming pattern.
 
 ## Installation
 
 Iko runs inside a container, so you'll need to have [Docker
 installed](https://docs.docker.com/get-docker/).
 
-Install the `iko` command-line tool:
+Install `iko`:
 
 ```sh
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
@@ -34,20 +31,15 @@ Confirm it's working:
 iko version
 ```
 
-## Usage
+## Quick Example
 
 ### Initialise a Project
 
-Run the following command to initialize a project, setting a default target
-database (typically this is your local development server):
+Initialize a project, setting a target database:
 
 ```sh
 iko init --target db:pg://user:pass@postgres/dbname myapp
 ```
-
-Keep in mind Iko is running inside a container, so it uses [Docker's
-networking](https://docs.docker.com/engine/network/). `localhost` refers to the
-container, not the host machine!
 
 > 📖 Refer to the [Sqitch manual for
 > init](https://sqitch.org/docs/manual/sqitch-init/).
@@ -65,13 +57,9 @@ Added "create_schema_api" to sqitch.plan
 create schema api;
 ```
 
-Here's what happened:
-
-1. Three scripts were created: to _deploy_, _revert_, and _verify_ the change.
-2. The change was added to `sqitch.plan`.
-3. Finally, the deploy script was printed for your review.
-
-> 📖 See the [full list of Iko commands](/COMMANDS.md).
+Three scripts were created: to _deploy_, _revert_, and _verify_ the change. The
+change was added to `sqitch.plan`. Then the deploy script was printed for your
+review.
 
 ### Deploy
 
@@ -81,7 +69,7 @@ Make sure the database server is running, then type:
 iko deploy
 ```
 
-> 📖 Refer to the [Sqitch manual for
+> 📖 Refer to [Sqitch
 > deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
 
 ## Scripting
