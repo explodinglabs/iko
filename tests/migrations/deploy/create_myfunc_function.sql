@@ -1,4 +1,4 @@
-create function "myfunc"() returns void
+create function myfunc() returns void
 language plpgsql
 as $$
 begin

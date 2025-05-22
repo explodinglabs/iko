@@ -122,11 +122,12 @@ create_function_as <function> <sql>
 To define a function named `square`:
 
 ```sh
-create_function_as square <<EOF
-create function square(@number int) returns int as
+create_function_as square <<'EOF'
+create function square(number int) returns int as $$
 begin
-    return @number * @number;
+    return number * number;
 end;
+$$ language plpgsql;
 EOF
 ```
 
@@ -301,7 +302,7 @@ create_table_as <table> <sql>
 To create a table named `customer`:
 
 ```sh
-create_table_as customer <<EOF
+create_table_as customer <<'EOF'
 create table customer (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
@@ -354,7 +355,7 @@ create_trigger_as <trigger> <table> <sql>
 Create a trigger `modify` on table `contact` calling `modify_record`:
 
 ```sh
-create_trigger_as modify contact <<EOF
+create_trigger_as modify contact <<'EOF'
 create trigger modify
   after insert or update on contact
   for each row execute function modify_record();

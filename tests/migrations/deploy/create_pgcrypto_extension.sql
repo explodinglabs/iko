@@ -1,1 +1,1 @@
-create extension "pgcrypto";
+create extension pgcrypto;
