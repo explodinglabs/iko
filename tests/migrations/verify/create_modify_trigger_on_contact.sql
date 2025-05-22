@@ -5,7 +5,6 @@ begin
       select 1
       from information_schema.triggers
       where trigger_name = 'modify'
-        and event_object_schema = 'contact'
         and event_object_table = 'contact'
     )
   );

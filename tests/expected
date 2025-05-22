@@ -20,6 +20,18 @@ begin
   return;
 end;
 $$;
+Created deploy/create_api_myfunc_function.sql
+Created revert/create_api_myfunc_function.sql
+Created verify/create_api_myfunc_function.sql
+Added "create_api_myfunc_function" to sqitch.plan
+create function "api.myfunc"() returns void
+language plpgsql
+as $$
+begin
+  -- TODO: implement logic
+  return;
+end;
+$$;
 Created deploy/create_square_function.sql
 Created revert/create_square_function.sql
 Created verify/create_square_function.sql
@@ -43,11 +55,16 @@ Created revert/grant_authenticator_membership_to_dbuser.sql
 Created verify/grant_authenticator_membership_to_dbuser.sql
 Added "grant_authenticator_membership_to_dbuser" to sqitch.plan
 grant dbuser to "authenticator";
-Created deploy/grant_select_on_asset_table_to_dbuser.sql
-Created revert/grant_select_on_asset_table_to_dbuser.sql
-Created verify/grant_select_on_asset_table_to_dbuser.sql
-Added "grant_select_on_asset_table_to_dbuser" to sqitch.plan
-grant select on "asset" to "dbuser";
+Created deploy/grant_select_on_customer_table_to_dbuser.sql
+Created revert/grant_select_on_customer_table_to_dbuser.sql
+Created verify/grant_select_on_customer_table_to_dbuser.sql
+Added "grant_select_on_customer_table_to_dbuser" to sqitch.plan
+grant select on "customer" to "dbuser";
+Created deploy/grant_select_on_api_customer_table_to_dbuser.sql
+Created revert/grant_select_on_api_customer_table_to_dbuser.sql
+Created verify/grant_select_on_api_customer_table_to_dbuser.sql
+Added "grant_select_on_api_customer_table_to_dbuser" to sqitch.plan
+grant select on "api.customer" to "dbuser";
 Created deploy/create_dbuser_role.sql
 Created revert/create_dbuser_role.sql
 Created verify/create_dbuser_role.sql
@@ -70,7 +87,15 @@ Added "create_customer_table" to sqitch.plan
 create table "customer" (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now(),
+  name text not null
+);
+Created deploy/create_api_customer_table.sql
+Created revert/create_api_customer_table.sql
+Created verify/create_api_customer_table.sql
+Added "create_api_customer_table" to sqitch.plan
+create table "api.customer" (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
   name text not null
 );
 Created deploy/create_movie_table.sql
@@ -80,7 +105,6 @@ Added "create_movie_table" to sqitch.plan
 create table movie (
   id bigint generated always as identity primary key,
   created_at timestamp not null default now(),
-  updated_at timestamp not null default now(),
   name text not null
 );
 Created deploy/create_update_trigger_on_customer.sql
@@ -89,6 +113,14 @@ Created verify/create_update_trigger_on_customer.sql
 Added "create_update_trigger_on_customer" to sqitch.plan
 create trigger "update"
 before insert or update on "customer"
+for each row
+execute function "update_table"();
+Created deploy/create_update_trigger_on_api_customer.sql
+Created revert/create_update_trigger_on_api_customer.sql
+Created verify/create_update_trigger_on_api_customer.sql
+Added "create_update_trigger_on_api_customer" to sqitch.plan
+create trigger "update"
+before insert or update on "api.customer"
 for each row
 execute function "update_table"();
 Created deploy/create_modify_trigger_on_contact.sql

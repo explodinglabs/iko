@@ -125,8 +125,12 @@ extract_schema() {
   # Examples:
   #   "api.login" -> "api"
   #   "login" -> ""
-  local schema="${1%%.*}"
-  echo "$schema"
+  local input="$1"
+  if [[ "$input" == *.* ]]; then
+    echo "${input%%.*}"
+  else
+    echo ""
+  fi
 }
 
 extract_schema_plus_dot() {
@@ -345,8 +349,8 @@ grant_table_privilege() {
     --set role=$role \
     --set type=$type \
     --set schema_qualified_table=$schema_qualified_table \
-    --set schema=$schema \
-    --set table=$table \
+    --set schema=$(extract_schema $schema_qualified_table) \
+    --set table=$(strip_schema $schema_qualified_table) \
     --note \'"Grant $type on $schema_qualified_table table to $role"\'
 
   show_files $change
