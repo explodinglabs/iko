@@ -3,7 +3,7 @@ begin
   assert (
     select has_function_privilege(
       '[% role %]',
-      '[% schema_qualified_function %][% params %]',
+      '[% IF schema %][% schema %].[% END %][% function %][% params %]',
       'execute'
     )
   );

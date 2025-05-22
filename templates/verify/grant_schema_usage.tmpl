@@ -1,6 +1,5 @@
 do $$
 begin
-  assert pg_has_role('[% role %]', '[% schema %]', 'USAGE'),
-    format('Role %s must have USAGE on schema %s', '[% role %]', '[% schema %]');
+  assert has_schema_privilege('[% role %]', '[% schema %]', 'USAGE');
 end;
 $$ language plpgsql;

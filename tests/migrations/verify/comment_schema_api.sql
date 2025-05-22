@@ -1,13 +1,12 @@
 do $$
+declare
+  actual_comment text;
 begin
-  assert (
-    select exists (
-      select 1
-      from information_schema.table_privileges
-      where lower(privilege_type) = ''
-        and table_name = ''
-        and grantee = ''
-    )
-  );
+  select description into actual_comment
+  from pg_description
+  join pg_namespace on pg_description.objoid = pg_namespace.oid
+  where pg_namespace.nspname = 'api';
+
+  assert actual_comment = 'This is my comment';
 end;
 $$ language plpgsql;

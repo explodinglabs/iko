@@ -1,3 +1,5 @@
+set -euo pipefail
+
 create_extension pgcrypto
 create_schema api
 comment schema api 'This is my comment'
@@ -42,12 +44,12 @@ EOF
 create_trigger update_customer customer update
 create_trigger update_api_customer api.customer api.update
 create_trigger_as modify_customer customer <<'EOF'
-create trigger modify
+create trigger modify_customer
   after insert or update on customer
   for each row execute function update();
 EOF
 create_trigger_as modify_api_customer api.customer <<'EOF'
-create trigger modify
+create trigger modify_api_customer
   after insert or update on api.customer
   for each row execute function api.update();
 EOF

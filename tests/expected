@@ -12,7 +12,7 @@ Created deploy/comment_schema_api.sql
 Created revert/comment_schema_api.sql
 Created verify/comment_schema_api.sql
 Added "comment_schema_api" to sqitch.plan
-comment on "schema api" is 'This is my comment';
+comment on schema api is 'This is my comment';
 Created deploy/create_customer_table.sql
 Created revert/create_customer_table.sql
 Created verify/create_customer_table.sql
@@ -98,7 +98,7 @@ Added "create_update_customer_trigger_on_customer" to sqitch.plan
 create trigger "update_customer"
 before insert or update on "customer"
 for each row
-execute function ""();
+execute function "update"();
 Created deploy/create_update_api_customer_trigger_on_api_customer.sql
 Created revert/create_update_api_customer_trigger_on_api_customer.sql
 Created verify/create_update_api_customer_trigger_on_api_customer.sql
@@ -106,19 +106,19 @@ Added "create_update_api_customer_trigger_on_api_customer" to sqitch.plan
 create trigger "update_api_customer"
 before insert or update on "api"."customer"
 for each row
-execute function "api".""();
+execute function "api"."update"();
 Created deploy/create_modify_customer_trigger_on_customer.sql
 Created revert/create_modify_customer_trigger_on_customer.sql
 Created verify/create_modify_customer_trigger_on_customer.sql
 Added "create_modify_customer_trigger_on_customer" to sqitch.plan
-create trigger modify
+create trigger modify_customer
   after insert or update on customer
   for each row execute function update();
 Created deploy/create_modify_api_customer_trigger_on_api_customer.sql
 Created revert/create_modify_api_customer_trigger_on_api_customer.sql
 Created verify/create_modify_api_customer_trigger_on_api_customer.sql
 Added "create_modify_api_customer_trigger_on_api_customer" to sqitch.plan
-create trigger modify
+create trigger modify_api_customer
   after insert or update on api.customer
   for each row execute function api.update();
 Created deploy/create_authenticator_role.sql
