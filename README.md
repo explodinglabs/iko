@@ -21,7 +21,7 @@ Iko favors:
 Iko runs inside a container, so you'll need to have [Docker
 installed](https://docs.docker.com/get-docker/).
 
-Install `iko`:
+Install Iko:
 
 ```sh
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh
@@ -43,12 +43,9 @@ Initialize a project, setting a target database:
 iko init --target db:pg://user:pass@postgres/dbname myapp
 ```
 
-> 📖 Refer to the [Sqitch manual for
-> init](https://sqitch.org/docs/manual/sqitch-init/).
-
 ### Create Migrations
 
-Let's create a schema named `api`:
+Let's use [Iko's DSL](COMMANDS.md) to create a schema named `api`:
 
 ```sh
 $ iko create_schema api
@@ -70,9 +67,6 @@ Make sure the database server is running, then type:
 ```sh
 iko deploy
 ```
-
-> 📖 Refer to [Sqitch
-> deploy](https://sqitch.org/docs/manual/sqitch-deploy/).
 
 ## Scripting
 
