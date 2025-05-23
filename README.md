@@ -13,6 +13,13 @@ database migrations using the command-line**.
 It wraps [Sqitch](https://sqitch.org/) with a developer-friendly DSL and simple
 scripting.
 
+## ❤️ Why Iko?
+
+- Batteries-included: deploy, revert, verify
+- Works inside a container — zero local deps
+- Reliable, clean migrations for teams
+- Powerful scripting model with Bash
+
 ## 🚀 Installation
 
 > ⚠ **Iko runs inside a container,** so you'll need [Docker
