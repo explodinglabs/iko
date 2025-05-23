@@ -11,7 +11,7 @@
 database migrations.**
 
 It wraps [Sqitch](https://sqitch.org/) with a [developer-friendly
-DSL](COMMANDS.md) and simple scripting.
+DSL](docs/commands.md) and simple scripting.
 
 ## ❤️ Why Iko?
 
@@ -120,4 +120,4 @@ iko bash auth.sh
 
 ## ➡️ Next Steps
 
-- Learn the [DSL commands](COMMANDS.md)
+👉 Learn the [DSL commands](docs/commands.md)
