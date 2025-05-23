@@ -39,7 +39,7 @@ iko init --target db:pg://user:pass@postgres/dbname myapp
 
 ### Create Migrations
 
-Let's use [Iko's DSL](COMMANDS.md) to create a schema named `api`:
+Use [Iko's DSL](COMMANDS.md) to create a schema named `api`:
 
 ```sh
 $ iko create_schema api
@@ -50,9 +50,11 @@ Added "create_schema_api" to sqitch.plan
 create schema api;
 ```
 
-Three scripts were created: to _deploy_, _revert_, and _verify_ the change. The
-change was added to `sqitch.plan`. Then the deploy script was printed for your
-review.
+This does the following:
+
+- Creates scripts to deploy, revert, and verify the change.
+- Adds the change to sqitch.plan.
+- Outputs the deploy script for your review.
 
 ### Deploy
 
