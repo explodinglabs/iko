@@ -18,8 +18,8 @@ Iko favors:
 
 ## Installation
 
-Iko runs inside a container, so you'll need to have [Docker
-installed](https://docs.docker.com/get-docker/).
+> 🗒️ Iko runs inside a container, so you'll need to have [Docker
+> installed](https://docs.docker.com/get-docker/).
 
 Install Iko:
 
