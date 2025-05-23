@@ -15,9 +15,9 @@ It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
 
 ## ❤️ Why Iko?
 
+- Reliable, clean migrations
 - Batteries-included: _deploy, revert, verify_
 - Works inside a container — zero local deps
-- Reliable, clean migrations for teams
 - Powerful scripting model with Bash
 
 ## 🚀 Installation
