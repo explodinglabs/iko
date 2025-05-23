@@ -15,14 +15,14 @@ scripting.
 
 ## ❤️ Why Iko?
 
-- Batteries-included: deploy, revert, verify
+- Batteries-included: _deploy, revert, verify_
 - Works inside a container — zero local deps
 - Reliable, clean migrations for teams
 - Powerful scripting model with Bash
 
 ## 🚀 Installation
 
-> ⚠ **Iko runs inside a container,** so you'll need [Docker
+> ⚠️ **Iko runs inside a container,** so you'll need [Docker
 > installed](https://docs.docker.com/get-docker/).
 
 Install with:
