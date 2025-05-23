@@ -10,12 +10,6 @@
 **Iko** (_ee-koh_) is a tool for managing Postgres database migrations using
 the command-line.
 
-Iko favors:
-
-- **Clarity over magic** — see exactly what your database is doing.
-- **Unix-style composition** — use the shell to script and automate.
-- **Convention over configuration** — just follow the file layout and naming pattern.
-
 ## Installation
 
 > 🗒️ Iko runs inside a container, so you'll need to have [Docker
