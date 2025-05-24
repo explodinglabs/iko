@@ -6,7 +6,7 @@
 Install with:
 
 ```sh
-curl -fsSL https://explodinglabs.com/scripts/install-iko.sh | sh
+curl -fsSL https://explodinglabs.com/iko/install.sh | sh
 ```
 
 Verify it's working:
