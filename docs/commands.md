@@ -1,23 +1,10 @@
 # Commands
 
-## Table of Contents
-
-- [Sqitch Commands](#sqitch-commands)
-- [Ad-hoc Migrations](#ad-hoc-migrations)
-- [Comments](#comments)
-- [Extensions](#extensions)
-- [Functions](#functions)
-- [Grants](#grants)
-- [Roles](#roles)
-- [Schemas](#schemas)
-- [Tables](#tables)
-- [Triggers](#triggers)
-
 ## Sqitch commands
 
-Iko aliases all of Sqitch's [commands](https://sqitch.org/docs/manual/).
+Iko aliases all of [Sqitch's commands](https://sqitch.org/docs/manual/).
 
-You can also access `sqitch` directly, like:
+You can also access `sqitch` directly, for example:
 
 ```sh
 iko sqitch --version
@@ -55,7 +42,7 @@ comment <object> <comment>
 The last argument is taken as the comment; everything before that is considered
 the object.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To set a comment on the `api` schema:
 
@@ -76,7 +63,7 @@ Install an extension.
 create_extension <extension>
 ```
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create an extension named `pgcrypto`:
 
@@ -99,7 +86,7 @@ create_function <function>
 
 `<function>` can be schema-qualified.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create a function named `create_user`:
 
@@ -117,7 +104,7 @@ create_function_as <function> <sql>
 
 `<function>` can be schema-qualified.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To define a function named `square`:
 
@@ -146,7 +133,7 @@ grant_execute <function> <signature> <role>
 
 `<function>` can be schema-qualified.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To grant execute permission on `login` to `dbuser`:
 
@@ -162,7 +149,7 @@ Grant schema usage to a role.
 grant_schema_usage <schema> <role>
 ```
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To grant usage of the `api` schema to `dbuser`:
 
@@ -178,7 +165,7 @@ Grant membership in a role.
 grant_role_membership <role_specification> <role>
 ```
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To grant membership in `authenticator` to `dbuser`:
 
@@ -196,7 +183,7 @@ grant_table_privilege <type> <table> <role>
 
 `<table>` can be schema-qualified.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To allow an `dbuser` to insert into the `asset` table:
 
@@ -217,7 +204,7 @@ Creates a `nologin` role.
 create_role <role>
 ```
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create a `dbuser` role:
 
@@ -233,7 +220,7 @@ Creates a login role with a password.
 create_login_role <role> <password>
 ```
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create a `dbuser` role with password, `securepass123`:
 
@@ -254,7 +241,7 @@ Enter a new schema into the database.
 create_schema <schema>
 ```
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create a schema named `api`:
 
@@ -277,7 +264,7 @@ create_table <table>
 
 `<table>` can be schema-qualified.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create a table named `customer`:
 
@@ -297,7 +284,7 @@ create_table_as <table> <sql>
 
 `<table>` can be schema-qualified.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create a table named `customer`:
 
@@ -331,7 +318,7 @@ Note: Don't schema-qualify the `<trigger>`. From the Postgres docs:
 > The name cannot be schema-qualified — the trigger inherits the schema of its
 > table.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 To create a trigger named `customer_updated` that fires before updating a row
 in `customer`, calling `customer_updated`:
@@ -350,7 +337,7 @@ create_trigger_as <trigger> <table> <sql>
 
 `<table>` can be schema-qualified.
 
-#### 🧪 Example Usage
+<h4>Example</h4>
 
 Create a trigger `modify` on table `contact` calling `modify_record`:
 

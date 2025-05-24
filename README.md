@@ -11,12 +11,13 @@
 database migrations.**
 
 It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
-[DSL](docs/commands.md) and [scripting](#scripting-migrations).
+[DSL](https://www.explodinglabs.com/iko/commands.md) and
+[scripting](#scripting-migrations).
 
 ## ❤️ Why Iko?
 
 - Reliable, clean migrations
-- Batteries-included: _deploy, revert, verify_
+- Batteries-included: _deploy, verify, revert_
 - Works inside a container — zero local deps
 - Powerful scripting model with Bash
 
@@ -28,7 +29,7 @@ It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
 Install with:
 
 ```sh
-curl -fsSL https://explodinglabs.com/iko/install.sh | sh
+curl -fsSL https://explodinglabs.com/scripts/install-iko.sh | sh
 ```
 
 Verify it's working:
@@ -120,4 +121,4 @@ iko bash auth.sh
 
 ## ➡️ Next Steps
 
-👉 Learn the [DSL commands](docs/commands.md)
+👉 Learn the [DSL commands](https://www.explodinglabs.com/iko/commands.md)
