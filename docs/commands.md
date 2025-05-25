@@ -10,9 +10,9 @@ You can also access `sqitch` directly, for example:
 iko sqitch --version
 ```
 
-See [the full list of Sqitch's commands](https://sqitch.org/docs/manual/).
-
 ## Ad-hoc migrations
+
+> 📖 Refer to [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
 
 If your change is not covered by the below commands, use `add` to crate an
 ad-hoc migration, for example:
@@ -23,8 +23,6 @@ add create_customer_view
 
 You'll be required to set a note, and then write the deploy, verify and revert
 scripts yourself.
-
-> 📖 Refer to [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
 
 ## Comments
 
