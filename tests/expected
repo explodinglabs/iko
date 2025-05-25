@@ -1,58 +1,58 @@
-Created deploy/create_pgcrypto_extension.sql
-Created revert/create_pgcrypto_extension.sql
-Created verify/create_pgcrypto_extension.sql
-Added "create_pgcrypto_extension" to sqitch.plan
+Created deploy/create_extension_pgcrypto.sql
+Created revert/create_extension_pgcrypto.sql
+Created verify/create_extension_pgcrypto.sql
+Added "create_extension_pgcrypto" to sqitch.plan
 create extension "pgcrypto";
-Created deploy/create_api_schema.sql
-Created revert/create_api_schema.sql
-Created verify/create_api_schema.sql
-Added "create_api_schema" to sqitch.plan
+Created deploy/create_schema_api.sql
+Created revert/create_schema_api.sql
+Created verify/create_schema_api.sql
+Added "create_schema_api" to sqitch.plan
 create schema "api";
 Created deploy/comment_schema_api.sql
 Created revert/comment_schema_api.sql
 Created verify/comment_schema_api.sql
 Added "comment_schema_api" to sqitch.plan
 comment on schema api is 'This is my comment';
-Created deploy/create_customer_table.sql
-Created revert/create_customer_table.sql
-Created verify/create_customer_table.sql
-Added "create_customer_table" to sqitch.plan
+Created deploy/create_table_customer.sql
+Created revert/create_table_customer.sql
+Created verify/create_table_customer.sql
+Added "create_table_customer" to sqitch.plan
 create table "customer" (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   name text not null
 );
-Created deploy/create_api_customer_table.sql
-Created revert/create_api_customer_table.sql
-Created verify/create_api_customer_table.sql
-Added "create_api_customer_table" to sqitch.plan
+Created deploy/create_table_api_customer.sql
+Created revert/create_table_api_customer.sql
+Created verify/create_table_api_customer.sql
+Added "create_table_api_customer" to sqitch.plan
 create table "api"."customer" (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   name text not null
 );
-Created deploy/create_movie_table.sql
-Created revert/create_movie_table.sql
-Created verify/create_movie_table.sql
-Added "create_movie_table" to sqitch.plan
+Created deploy/create_table_movie.sql
+Created revert/create_table_movie.sql
+Created verify/create_table_movie.sql
+Added "create_table_movie" to sqitch.plan
 create table movie (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   name text not null
 );
-Created deploy/create_api_movie_table.sql
-Created revert/create_api_movie_table.sql
-Created verify/create_api_movie_table.sql
-Added "create_api_movie_table" to sqitch.plan
+Created deploy/create_table_api_movie.sql
+Created revert/create_table_api_movie.sql
+Created verify/create_table_api_movie.sql
+Added "create_table_api_movie" to sqitch.plan
 create table api.movie (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   name text not null
 );
-Created deploy/create_myfunc_function.sql
-Created revert/create_myfunc_function.sql
-Created verify/create_myfunc_function.sql
-Added "create_myfunc_function" to sqitch.plan
+Created deploy/create_function_myfunc.sql
+Created revert/create_function_myfunc.sql
+Created verify/create_function_myfunc.sql
+Added "create_function_myfunc" to sqitch.plan
 create function "myfunc"() returns void
 language plpgsql
 as $$
@@ -61,10 +61,10 @@ begin
   return;
 end;
 $$;
-Created deploy/create_api_myfunc_function.sql
-Created revert/create_api_myfunc_function.sql
-Created verify/create_api_myfunc_function.sql
-Added "create_api_myfunc_function" to sqitch.plan
+Created deploy/create_function_api_myfunc.sql
+Created revert/create_function_api_myfunc.sql
+Created verify/create_function_api_myfunc.sql
+Added "create_function_api_myfunc" to sqitch.plan
 create function "api"."myfunc"() returns void
 language plpgsql
 as $$
@@ -73,68 +73,68 @@ begin
   return;
 end;
 $$;
-Created deploy/create_update_function.sql
-Created revert/create_update_function.sql
-Created verify/create_update_function.sql
-Added "create_update_function" to sqitch.plan
+Created deploy/create_function_update.sql
+Created revert/create_function_update.sql
+Created verify/create_function_update.sql
+Added "create_function_update" to sqitch.plan
 create function update() returns trigger as $$
 begin
   return new;
 end;
 $$ language plpgsql;
-Created deploy/create_api_update_function.sql
-Created revert/create_api_update_function.sql
-Created verify/create_api_update_function.sql
-Added "create_api_update_function" to sqitch.plan
+Created deploy/create_function_api_update.sql
+Created revert/create_function_api_update.sql
+Created verify/create_function_api_update.sql
+Added "create_function_api_update" to sqitch.plan
 create function api.update() returns trigger as $$
 begin
   return new;
 end;
 $$ language plpgsql;
-Created deploy/create_update_customer_trigger_on_customer.sql
-Created revert/create_update_customer_trigger_on_customer.sql
-Created verify/create_update_customer_trigger_on_customer.sql
-Added "create_update_customer_trigger_on_customer" to sqitch.plan
+Created deploy/create_trigger_update_customer_on_customer.sql
+Created revert/create_trigger_update_customer_on_customer.sql
+Created verify/create_trigger_update_customer_on_customer.sql
+Added "create_trigger_update_customer_on_customer" to sqitch.plan
 create trigger "update_customer"
 before insert or update on "customer"
 for each row
 execute function "update"();
-Created deploy/create_update_api_customer_trigger_on_api_customer.sql
-Created revert/create_update_api_customer_trigger_on_api_customer.sql
-Created verify/create_update_api_customer_trigger_on_api_customer.sql
-Added "create_update_api_customer_trigger_on_api_customer" to sqitch.plan
+Created deploy/create_trigger_update_api_customer_on_api_customer.sql
+Created revert/create_trigger_update_api_customer_on_api_customer.sql
+Created verify/create_trigger_update_api_customer_on_api_customer.sql
+Added "create_trigger_update_api_customer_on_api_customer" to sqitch.plan
 create trigger "update_api_customer"
 before insert or update on "api"."customer"
 for each row
 execute function "api"."update"();
-Created deploy/create_modify_customer_trigger_on_customer.sql
-Created revert/create_modify_customer_trigger_on_customer.sql
-Created verify/create_modify_customer_trigger_on_customer.sql
-Added "create_modify_customer_trigger_on_customer" to sqitch.plan
+Created deploy/create_trigger_modify_customer_on_customer.sql
+Created revert/create_trigger_modify_customer_on_customer.sql
+Created verify/create_trigger_modify_customer_on_customer.sql
+Added "create_trigger_modify_customer_on_customer" to sqitch.plan
 create trigger modify_customer
   after insert or update on customer
   for each row execute function update();
-Created deploy/create_modify_api_customer_trigger_on_api_customer.sql
-Created revert/create_modify_api_customer_trigger_on_api_customer.sql
-Created verify/create_modify_api_customer_trigger_on_api_customer.sql
-Added "create_modify_api_customer_trigger_on_api_customer" to sqitch.plan
+Created deploy/create_trigger_modify_api_customer_on_api_customer.sql
+Created revert/create_trigger_modify_api_customer_on_api_customer.sql
+Created verify/create_trigger_modify_api_customer_on_api_customer.sql
+Added "create_trigger_modify_api_customer_on_api_customer" to sqitch.plan
 create trigger modify_api_customer
   after insert or update on api.customer
   for each row execute function api.update();
-Created deploy/create_authenticator_role.sql
-Created revert/create_authenticator_role.sql
-Created verify/create_authenticator_role.sql
-Added "create_authenticator_role" to sqitch.plan
+Created deploy/create_role_authenticator.sql
+Created revert/create_role_authenticator.sql
+Created verify/create_role_authenticator.sql
+Added "create_role_authenticator" to sqitch.plan
 create role "authenticator" noinherit login password 'securepass123';
-Created deploy/create_api_user_role.sql
-Created revert/create_api_user_role.sql
-Created verify/create_api_user_role.sql
-Added "create_api_user_role" to sqitch.plan
+Created deploy/create_role_api_user.sql
+Created revert/create_role_api_user.sql
+Created verify/create_role_api_user.sql
+Added "create_role_api_user" to sqitch.plan
 create role "api_user" nologin;
-Created deploy/grant_api_schema_usage_to_api_user.sql
-Created revert/grant_api_schema_usage_to_api_user.sql
-Created verify/grant_api_schema_usage_to_api_user.sql
-Added "grant_api_schema_usage_to_api_user" to sqitch.plan
+Created deploy/grant_schema_api_usage_to_api_user.sql
+Created revert/grant_schema_api_usage_to_api_user.sql
+Created verify/grant_schema_api_usage_to_api_user.sql
+Added "grant_schema_api_usage_to_api_user" to sqitch.plan
 grant usage on schema "api" to "api_user";
 Created deploy/grant_execute_myfunc_to_api_user.sql
 Created revert/grant_execute_myfunc_to_api_user.sql
@@ -146,18 +146,18 @@ Created revert/grant_execute_api_myfunc_to_api_user.sql
 Created verify/grant_execute_api_myfunc_to_api_user.sql
 Added "grant_execute_api_myfunc_to_api_user" to sqitch.plan
 grant execute on function "api"."myfunc" () to "api_user";
-Created deploy/grant_authenticator_membership_to_api_user.sql
-Created revert/grant_authenticator_membership_to_api_user.sql
-Created verify/grant_authenticator_membership_to_api_user.sql
-Added "grant_authenticator_membership_to_api_user" to sqitch.plan
+Created deploy/grant_membership_authenticator_to_api_user.sql
+Created revert/grant_membership_authenticator_to_api_user.sql
+Created verify/grant_membership_authenticator_to_api_user.sql
+Added "grant_membership_authenticator_to_api_user" to sqitch.plan
 grant "api_user" to "authenticator";
-Created deploy/grant_select_on_customer_table_to_api_user.sql
-Created revert/grant_select_on_customer_table_to_api_user.sql
-Created verify/grant_select_on_customer_table_to_api_user.sql
-Added "grant_select_on_customer_table_to_api_user" to sqitch.plan
+Created deploy/grant_table_privileges_select_on_customer_to_api_user.sql
+Created revert/grant_table_privileges_select_on_customer_to_api_user.sql
+Created verify/grant_table_privileges_select_on_customer_to_api_user.sql
+Added "grant_table_privileges_select_on_customer_to_api_user" to sqitch.plan
 grant select on "customer" to "api_user";
-Created deploy/grant_select_on_api_customer_table_to_api_user.sql
-Created revert/grant_select_on_api_customer_table_to_api_user.sql
-Created verify/grant_select_on_api_customer_table_to_api_user.sql
-Added "grant_select_on_api_customer_table_to_api_user" to sqitch.plan
+Created deploy/grant_table_privileges_select_on_api_customer_to_api_user.sql
+Created revert/grant_table_privileges_select_on_api_customer_to_api_user.sql
+Created verify/grant_table_privileges_select_on_api_customer_to_api_user.sql
+Added "grant_table_privileges_select_on_api_customer_to_api_user" to sqitch.plan
 grant select on "api"."customer" to "api_user";
