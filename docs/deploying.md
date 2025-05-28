@@ -38,13 +38,13 @@ This copies your migrations into the image at /repo, where Iko expects them.
 Give it a meaningful tag, e.g. for production:
 
 ```sh
-docker build -t ghcr.io/your-org/iko-with-migrations .
+docker build -t ghcr.io/your-org/iko-with-migrations:latest .
 ```
 
 Then push it to your container registry:
 
 ```sh
-docker push ghcr.io/your-org/iko-with-migrations
+docker push ghcr.io/your-org/iko-with-migrations:latest
 ```
 
 ### 3. Run the deploy on the remote environment
@@ -57,5 +57,5 @@ docker run --rm \
  -e PG_PASS=yourpass \
  -e PG_HOST=postgres \
  -e PG_DB=app \
- ghcr.io/your-org/iko-with-migrations deploy --verify
+ ghcr.io/your-org/iko-with-migrations:latest deploy --verify
 ```

@@ -16,4 +16,4 @@ schema migrations._
 - [Usage](usage.md)
 - [Commands](commands.md)
 - [Scripting](scripting.md)
-- [Deploy](deploy.md)
+- [Deploying](deploying.md)
