@@ -39,4 +39,4 @@ nav:
   - Usage: usage.md
   - Commands: commands.md
   - Scripting: scripting.md
-  - Deploy: deploy.md
+  - Deploying: deploy.md
