@@ -1,14 +1,22 @@
 # 🛠️ Usage
 
-## 1. Initialise a project
+## 1. Create a `.env` file
 
 ```sh
-iko init --target db:pg://user:pass@postgres/dbname myapp
+echo 'PG_URI=pg://user:pass@postgres/app' > .env
 ```
 
-This creates a new project with a `sqitch.plan`, ready for migrations.
+## 2. Initialise a project
 
-## 2. Create a migration
+```sh
+iko init --target '$PG_URI' myapp
+```
+
+This creates a new Sqitch project in a `migrations` directory. The target is
+set to an environment variable, so it stays portable across dev, CI, and
+production environments.
+
+## 3. Create a migration
 
 ```sh
 iko create_schema api
@@ -28,9 +36,9 @@ What happened:
 - The change was added to sqitch.plan.
 - The deploy script was output for your review.
 
-## 3. Deploy it
+## 4. Deploy it
 
-Make sure your database is running, then:
+Ensure your Postgres server is running, then:
 
 ```sh
 iko deploy

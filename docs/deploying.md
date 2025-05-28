@@ -53,9 +53,6 @@ On the target server or inside your CI/CD pipeline, run:
 
 ```sh
 docker run --rm \
- -e PG_USER=youruser \
- -e PG_PASS=yourpass \
- -e PG_HOST=postgres \
- -e PG_DB=app \
+ -e PG_URI=pg://user:pass@postgres/app \
  ghcr.io/your-org/iko-with-migrations:latest deploy --verify
 ```

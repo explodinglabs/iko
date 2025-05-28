@@ -10,10 +10,18 @@ mkdir -p "$INSTALL_DIR"
 cat > "$WRAPPER" <<'EOF'
 #!/bin/sh
 
-docker run --rm -it \
-  -v "${PWD}/migrations:/repo:rw" \
-  -v "${PWD}/scripts:/scripts:ro" \
-  ghcr.io/explodinglabs/iko:0.1.0 "$@"
+if [ -f .env ]; then
+  docker run --rm -it \
+    --env-file .env \
+    -v "${PWD}/migrations:/repo:rw" \
+    -v "${PWD}/scripts:/scripts:ro" \
+    ghcr.io/explodinglabs/iko:0.1.0 "$@"
+else
+  docker run --rm -it \
+    -v "${PWD}/migrations:/repo:rw" \
+    -v "${PWD}/scripts:/scripts:ro" \
+    ghcr.io/explodinglabs/iko:0.1.0 "$@"
+fi
 EOF
 
 chmod +x "$WRAPPER"
