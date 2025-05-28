@@ -1,14 +1,24 @@
 # Commands
 
+Iko provides a command-line interface for generating and managing Sqitch-based
+migrations.
+
+This page is a reference for all available commands.
+
 ## Sqitch commands
 
 Iko aliases all of [Sqitch's commands](https://sqitch.org/docs/manual/).
+
+For example, `sqitch check` becomes `iko check`.
 
 You can also access `sqitch` directly, for example:
 
 ```sh
 iko sqitch --version
 ```
+
+When scripting, the `iko` part is left out. For example, `iko create_schema api` becomes simply `create_schema api`. In this document the `iko` command is
+left out.
 
 ## Ad-hoc migrations
 
