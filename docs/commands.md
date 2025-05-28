@@ -1,9 +1,16 @@
 # Commands
 
-Iko provides a command-line interface for generating and managing Sqitch-based
-migrations.
+This page documents all available commands provided by Iko.
 
-This page is a reference for all available commands.
+Iko commands are used to define database migrations. They can be run
+interactively via the command line, or embedded inside reusable Bash scripts.
+
+Most commands generate a deploy/revert/verify triple of Sqitch migrations using
+built-in templates. For commands that aren't covered, you can always fall back
+to ad-hoc `add` migrations.
+
+For an overview of how scripting works, see [Scripting
+Migrations](./scripting.md).
 
 ## Sqitch commands
 
@@ -16,9 +23,6 @@ You can also access `sqitch` directly, for example:
 ```sh
 iko sqitch --version
 ```
-
-When scripting, the `iko` part is left out. For example, `iko create_schema api` becomes simply `create_schema api`. In this document the `iko` command is
-left out.
 
 ## Ad-hoc migrations
 
