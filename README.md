@@ -43,7 +43,7 @@ iko version
 ### 1. Initialise a project
 
 ```sh
-iko init --target db:pg://user:pass@postgres/dbname myapp
+iko init --target 'pg://$PG_USER:$PG_PASS@$PG_HOST/$PG_DB't myapp
 ```
 
 This creates a new project with a `sqitch.plan`, ready for migrations.
