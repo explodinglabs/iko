@@ -12,6 +12,9 @@ LABEL maintainer="support@explodinglabs.com" \
 # Start as root, needed to write files
 USER root
 
+# Install Vim and Bat (batcat, to print files)
+RUN apt-get update && apt-get install -y bat vim && rm -rf /var/lib/apt/lists/*
+
 # Write version to a file
 RUN echo "$VERSION" > /iko_version.txt
 
@@ -22,9 +25,6 @@ ENV BASH_ENV=/etc/bash_aliases
 
 # Add scripts directory to $PATH
 ENV PATH="/scripts:${PATH}"
-
-# Install Vim and Bat (batcat, to print files)
-RUN apt-get update && apt-get install -y bat vim && rm -rf /var/lib/apt/lists/*
 
 # Configure Vim
 COPY ./.vim/sql.vim /home/.vim/after/ftplugin/sql.vim

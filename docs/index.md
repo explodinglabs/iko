@@ -7,13 +7,26 @@ hide:
 
 # ikō
 
-_Iko is a command-line tool for reliable generation and management of database
-schema migrations._
+**Iko** (_ee-koh_) is a lightweight containerized tool for managing PostgreSQL
+database migrations with confidence.
 
-## Table of Contents
+It wraps [Sqitch](https://sqitch.org/) with developer-friendly commands and a
+powerful Bash-based scripting model.
 
-- [Installation](installation.md)
-- [Usage](usage.md)
+---
+
+## 🚀 What can I do with Iko?
+
+- Create clean, verifiable migrations using prebuilt templates
+- Run migrations in Docker with zero local setup
+- Script database structure in portable Bash files
+- Build a production-ready migration image for CI/CD
+
+---
+
+## Documentation
+
+- [Getting Started](gettingstarted.md)
 - [Command Reference](commands.md)
 - [Scripting Migrations](scripting.md)
 - [Deploying to Remote Environments](deploying.md)

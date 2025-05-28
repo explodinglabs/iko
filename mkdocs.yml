@@ -35,8 +35,7 @@ markdown_extensions:
   - pymdownx.superfences
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Usage: usage.md
+  - Getting Started: gettingstarted.md
   - Command Reference: commands.md
   - Scripting Migrations: scripting.md
   - Deploying to Remote Environments: deploying.md

@@ -4,9 +4,14 @@ set -euo pipefail
 
 # Alias sqitch commands
 
+function init {
+  # sqitch-init fails if SQITCH_TARGET is set.
+  unset SQITCH_TARGET
+  sqitch init "$@"
+}
+
 sqitch_commands=(
   config
-  init
   engine
   target
   help
