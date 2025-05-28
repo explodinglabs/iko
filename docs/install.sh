@@ -7,7 +7,7 @@ WRAPPER="$INSTALL_DIR/iko"
 
 mkdir -p "$INSTALL_DIR"
 
-cat > "$WRAPPER" <<'EOF'
+cat > "$WRAPPER" <<'SQL'
 #!/bin/sh
 set -euo pipefail
 
@@ -22,7 +22,7 @@ docker run --rm -it \
   -v "${PWD}/migrations:/repo:rw" \
   -v "${PWD}/scripts:/scripts:ro" \
   ghcr.io/explodinglabs/iko:0.1.0 "$@"
-EOF
+SQL
 
 chmod +x "$WRAPPER"
 
