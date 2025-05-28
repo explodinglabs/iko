@@ -11,10 +11,13 @@ cat > "$WRAPPER" <<'EOF'
 #!/bin/sh
 set -euo pipefail
 
-source .env
+[ -f .env ] && source .env
+
+ENV_ARG=""
+[ -f .env ] && ENV_ARG="--env-file .env"
 
 docker run --rm -it \
-  --env-file .env \
+  $ENV_ARG \
   --network "${DOCKER_NETWORK:-bridge}" \
   -v "${PWD}/migrations:/repo:rw" \
   -v "${PWD}/scripts:/scripts:ro" \

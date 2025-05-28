@@ -28,8 +28,8 @@ It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
 
 ```sh
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh  # install dev CLI
-echo 'PG_URI=pg://postgres:postgres@postgres/app' > .env  # set database connection
-iko init --engine pg --target '$PG_URI' myapp  # initialise project
+iko init myapp  # initialise project
+echo 'SQITCH_TARGET=db:pg://postgres:postgres@postgres/app' > .env  # set database connection
 iko create_schema api  # create a migration
 iko deploy  # apply it
 ```
