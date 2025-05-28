@@ -9,19 +9,23 @@ mkdir -p "$INSTALL_DIR"
 
 cat > "$WRAPPER" <<'EOF'
 #!/bin/sh
+set -euo pipefail
 
-if [ -f .env ]; then
-  docker run --rm -it \
-    --env-file .env \
-    -v "${PWD}/migrations:/repo:rw" \
-    -v "${PWD}/scripts:/scripts:ro" \
-    ghcr.io/explodinglabs/iko:0.1.0 "$@"
-else
-  docker run --rm -it \
-    -v "${PWD}/migrations:/repo:rw" \
-    -v "${PWD}/scripts:/scripts:ro" \
-    ghcr.io/explodinglabs/iko:0.1.0 "$@"
-fi
+# Load .env manually so we can use variables inside the script
+[ -f .env ] && source .env
+
+ENV_ARG=""
+[ -f .env ] && ENV_ARG="--env-file .env"
+
+NETWORK_ARG=""
+[ -n "${DOCKER_NETWORK:-}" ] && NETWORK_ARG="--network $DOCKER_NETWORK"
+
+docker run --rm -it \
+  $ENV_ARG \
+  $NETWORK_ARG \
+  -v "${PWD}/migrations:/repo:rw" \
+  -v "${PWD}/scripts:/scripts:ro" \
+  ghcr.io/explodinglabs/iko:0.1.0 "$@"
 EOF
 
 chmod +x "$WRAPPER"
