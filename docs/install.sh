@@ -11,18 +11,11 @@ cat > "$WRAPPER" <<'EOF'
 #!/bin/sh
 set -euo pipefail
 
-# Load .env manually so we can use variables inside the script
-[ -f .env ] && source .env
-
-ENV_ARG=""
-[ -f .env ] && ENV_ARG="--env-file .env"
-
-NETWORK_ARG=""
-[ -n "${DOCKER_NETWORK:-}" ] && NETWORK_ARG="--network $DOCKER_NETWORK"
+source .env
 
 docker run --rm -it \
-  $ENV_ARG \
-  $NETWORK_ARG \
+  --env-file .env \
+  --network "${DOCKER_NETWORK:-bridge}" \
   -v "${PWD}/migrations:/repo:rw" \
   -v "${PWD}/scripts:/scripts:ro" \
   ghcr.io/explodinglabs/iko:0.1.0 "$@"
