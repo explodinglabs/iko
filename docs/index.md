@@ -14,6 +14,6 @@ schema migrations._
 
 - [Installation](installation.md)
 - [Usage](usage.md)
-- [Commands](commands.md)
+- [Command Reference](commands.md)
 - [Scripting Migrations](scripting.md)
 - [Deploying to Remote Environments](deploying.md)
