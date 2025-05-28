@@ -23,9 +23,6 @@ It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
 
 ## 🚀 Quick Start
 
-> ⚠️ **Iko runs inside a container,** so you'll need [Docker
-> installed](https://docs.docker.com/get-docker/).
-
 ```sh
 curl -fsSL https://explodinglabs.com/iko/install.sh | sh  # install dev CLI
 echo 'SQITCH_TARGET=db:pg://postgres:postgres@postgres/app' > .env  # set database connection
