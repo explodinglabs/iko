@@ -1,6 +1,9 @@
 #!/bin/bash
 
-set -euo pipefail
+# Only fail fast in scripts, not interactive shell
+if [[ $- != *i* ]]; then
+  set -euo pipefail
+fi
 
 # Alias sqitch commands
 
@@ -38,6 +41,17 @@ for cmd in "${sqitch_commands[@]}"; do
     sqitch $cmd \"\$@\"
   }"
 done
+
+# Shell command
+
+# Set prompt if running interactively
+if [[ $- == *i* ]]; then
+  export PS1="✨\e[97mikō≫\[\e[0m\] "
+fi
+
+function shell {
+  exec bash --rcfile /etc/bash_aliases -i
+}
 
 # Utility functions
 
