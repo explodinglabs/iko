@@ -46,7 +46,7 @@ done
 
 # Set prompt if running interactively
 if [[ $- == *i* ]]; then
-  export PS1="✨\e[97mikō≫\[\e[0m\] "
+  export PS1="✨\e[96mikō ≫\[\e[0m\] "
 fi
 
 function shell {
