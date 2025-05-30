@@ -57,7 +57,7 @@ files yourself.
 
 More details: [sqitch-add docs](https://sqitch.org/docs/manual/sqitch-add/)
 
-### `add_as`
+### add_as
 
 Create a custom migration with inline deploy SQL.
 
@@ -89,7 +89,7 @@ SQL
 
 ## 🗨️ Comments
 
-### `comment`
+### comment
 
 Add or update a comment on a Postgres object.
 
@@ -109,7 +109,7 @@ comment schema api 'Schema for the API endpoints'
 
 ## 🧩 Extensions
 
-### `create_extension`
+### create_extension
 
 Install a Postgres extension.
 
@@ -129,7 +129,7 @@ create_extension pgcrypto
 
 ## 🧠 Functions
 
-### `create_function`
+### create_function
 
 Create a function using your editor.
 
@@ -147,7 +147,7 @@ create_function create_user
 
 ---
 
-### `create_function_as`
+### create_function_as
 
 Define a function inline — useful in scripts.
 
@@ -175,7 +175,7 @@ SQL
 
 ## 🔐 Grants
 
-### `grant_execute`
+### grant_execute
 
 Grant execute permission on a function.
 
@@ -193,7 +193,7 @@ grant_execute login '(text,text)' dbuser
 
 ---
 
-### `grant_schema_usage`
+### grant_schema_usage
 
 Grant usage on a schema.
 
@@ -211,7 +211,7 @@ grant_schema_usage api dbuser
 
 ---
 
-### `grant_role_membership`
+### grant_role_membership
 
 Grant membership in a role.
 
@@ -229,7 +229,7 @@ grant_role_membership authenticator dbuser
 
 ---
 
-### `grant_table_privilege`
+### grant_table_privilege
 
 Grant privileges on a table.
 
@@ -249,7 +249,7 @@ grant_table_privilege insert asset dbuser
 
 ## 👤 Roles
 
-### `create_role`
+### create_role
 
 Create a nologin role.
 
@@ -267,7 +267,7 @@ create_role dbuser
 
 ---
 
-### `create_login_role`
+### create_login_role
 
 Create a login role with password.
 
@@ -303,7 +303,7 @@ create_schema api
 
 ## 🧱 Tables
 
-### `create_table`
+### create_table
 
 Create a table using your editor.
 
@@ -321,7 +321,7 @@ create_table customer
 
 ---
 
-### `create_table_as`
+### create_table_as
 
 Define a table inline — ideal for scripts.
 
@@ -349,7 +349,7 @@ SQL
 
 ## 🔁 Triggers
 
-### `create_trigger`
+### create_trigger
 
 Create a trigger linked to a function.
 
@@ -369,7 +369,7 @@ create_trigger customer_updated customer customer_updated
 
 ---
 
-### `create_trigger_as`
+### create_trigger_as
 
 Define a trigger inline.
 
