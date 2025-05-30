@@ -40,6 +40,8 @@ iko sqitch --version
 
 ## 🧩 Ad-Hoc Migrations
 
+#### `add`
+
 If your change doesn’t match one of the built-in commands, you can use `add` to
 create a named migration manually:
 
@@ -55,9 +57,39 @@ files yourself.
 
 More details: [sqitch-add docs](https://sqitch.org/docs/manual/sqitch-add/)
 
+### `add_as`
+
+Create a custom migration with inline deploy SQL.
+
+This is useful in scripts when your change isn’t covered by a built-in command
+but you want to define the deploy step inline (instead of editing manually like
+with `add`).
+
+> ⚠️ `add_as` creates empty verify and revert scripts. So the change won't be
+> verified or reverted (unless you write these manually later).
+
+**Syntax:**
+
+```
+add_as <change> <<'SQL'
+<sql>
+SQL
+```
+
+**Example:**
+
+```
+add_as create_customer_view <<'SQL'
+create view customer_view as
+select id, name from customer;
+SQL
+```
+
 ---
 
 ## 🗨️ Comments
+
+#### `comment`
 
 Add or update a comment on a Postgres object.
 
@@ -76,6 +108,8 @@ comment schema api 'Schema for the API endpoints'
 ---
 
 ## 🧩 Extensions
+
+#### `create_extension`
 
 Install a Postgres extension.
 

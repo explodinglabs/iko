@@ -185,6 +185,8 @@ version() {
   sqitch --version
 }
 
+# This was an attempt to simplify "sqitch add", by just using "iko 'create a
+# view'", but it wasn't enough of an improvement to "sqitch add".
 #create() {
 #  local -a options
 #  local note change
@@ -199,6 +201,25 @@ version() {
 #
 #  show_files $change
 #}
+
+# Add
+
+add_as() {
+  local -a options
+  local change sql
+  get_options options "$@"
+  get_positionals_as "$@" -- change sql
+  change=${change:-create_function_${optionally_schema_qualified_function//\./_}}
+  sql=$(cat)
+
+  sqitch add "${options[@]}" \
+    --change $change \
+    --template add_as \
+    --set sql="$sql" \
+    --note \'"Add $change change"\'
+
+  show_files $change
+}
 
 # Comment
 
@@ -266,7 +287,7 @@ create_function() {
 
 create_function_as() {
   local -a options
-  local optionally_schema_qualified_function change schema function change sql
+  local optionally_schema_qualified_function schema function change sql
   get_options options "$@"
   get_positionals_as "$@" -- optionally_schema_qualified_function change
   change=${change:-create_function_${optionally_schema_qualified_function//\./_}}
