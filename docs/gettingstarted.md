@@ -78,3 +78,7 @@ What happened:
 ```sh
 iko deploy
 ```
+
+## 🧭 What's Next?
+
+👉 [Continue to the Iko Command Reference](./commands.md)

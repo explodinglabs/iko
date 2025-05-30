@@ -1,357 +1,353 @@
 # Command Reference
 
-This page documents all available commands provided by Iko.
+This page lists all the commands provided by Iko.
 
-Iko commands are used to define database migrations. They can be run
-interactively via the command line, or embedded inside reusable Bash scripts.
+Iko provides a developer-friendly DSL for defining database migrations. These
+commands generate `deploy`, `revert`, and `verify` scripts using built-in
+templates and follow a consistent pattern.
 
-Most commands generate a deploy/revert/verify triple of Sqitch migrations using
-built-in templates. For commands that aren't covered, you can always fall back
-to ad-hoc `add` migrations.
+You can run commands:
 
-For an overview of how scripting works, see [Scripting
-Migrations](./scripting.md).
+- Directly from the command line
+- Inside an interactive Iko shell
+- From reusable Bash scripts
 
-## Sqitch commands
+For a breakdown of these options, see [Running Commands](./running.md).  
+For tips on writing migration scripts, see [Scripting](./scripting.md).
 
-Iko aliases all of [Sqitch's commands](https://sqitch.org/docs/manual/).
+---
 
-For example, `sqitch check` becomes `iko check`.
+## 🔁 Sqitch Commands
 
-You can also access `sqitch` directly, for example:
+Iko wraps and aliases all core [Sqitch
+commands](https://sqitch.org/docs/manual/).
+
+For example:
+
+```sh
+iko deploy
+iko revert
+iko status
+```
+
+You can also access Sqitch directly:
 
 ```sh
 iko sqitch --version
 ```
 
-## Ad-hoc migrations
+---
 
-> 📖 Refer to [sqitch-add](https://sqitch.org/docs/manual/sqitch-add/).
+## 🧩 Ad-Hoc Migrations
 
-If your change is not covered by the below commands, use `add` to crate an
-ad-hoc migration, for example:
+If your change doesn’t match one of the built-in commands, you can use `add` to
+create a named migration manually:
 
 ```sh
 add create_customer_view
 ```
 
-You'll be required to set a note, and then write the deploy, verify and revert
-scripts yourself.
+You’ll be prompted to enter a note, and then edit the deploy/revert/verify SQL
+files yourself.
 
-## Comments
+> Only the deploy script is required. The verify and revert scripts are
+> optional.
 
-> 📖 Refer to Postgres
-> [COMMENT](https://www.postgresql.org/docs/current/sql-comment.html).
+More details: [sqitch-add docs](https://sqitch.org/docs/manual/sqitch-add/)
 
-### comment
+---
 
-Define or change the comment of an object.
+## 🗨️ Comments
+
+Add or update a comment on a Postgres object.
+
+**Syntax:**
 
 ```sh
 comment <object> <comment>
 ```
 
-The last argument is taken as the comment; everything before that is considered
-the object.
-
-<h4>Example</h4>
-
-To set a comment on the `api` schema:
+**Example:**
 
 ```sh
 comment schema api 'Schema for the API endpoints'
 ```
 
-## Extensions
+---
 
-> 📖 Refer to Postgres [CREATE
-> EXTENSION](https://www.postgresql.org/docs/current/sql-comment.html).
+## 🧩 Extensions
 
-### create_extension
+Install a Postgres extension.
 
-Install an extension.
+**Syntax:**
 
 ```sh
 create_extension <extension>
 ```
 
-<h4>Example</h4>
-
-To create an extension named `pgcrypto`:
+**Example:**
 
 ```sh
 create_extension pgcrypto
 ```
 
-## Functions
+---
 
-> 📖 Refer to Postgres [CREATE
-> FUNCTION](https://www.postgresql.org/docs/current/sql-createfunction.html).
+## 🧠 Functions
 
-### create_function
+### `create_function`
 
-Define a new function. Use with `--edit`.
+Create a function using your editor.
+
+**Syntax:**
 
 ```sh
 create_function <function>
 ```
 
-`<function>` can be schema-qualified.
-
-<h4>Example</h4>
-
-To create a function named `create_user`:
+**Example:**
 
 ```sh
 create_function create_user
 ```
 
-### create_function_as
+---
 
-Define a new function inline. Useful in scripts.
+### `create_function_as`
+
+Define a function inline — useful in scripts.
+
+**Syntax:**
 
 ```sh
-create_function_as <function> <sql>
+create_function_as <function> <<'SQL'
+<sql>
+SQL
 ```
 
-`<function>` can be schema-qualified.
-
-<h4>Example</h4>
-
-To define a function named `square`:
+**Example:**
 
 ```sh
 create_function_as square <<'SQL'
-create function square(number int) returns int as $$
+create function square(n int) returns int as $$
 begin
-    return number * number;
+  return n * n;
 end;
 $$ language plpgsql;
 SQL
 ```
 
-## Grants
+---
 
-> 📖 Refer to Postgres
-> [GRANT](https://www.postgresql.org/docs/current/sql-grant.html).
+## 🔐 Grants
 
-### grant_execute
+### `grant_execute`
 
-Grants execute permission on a function to a role.
+Grant execute permission on a function.
+
+**Syntax:**
 
 ```sh
 grant_execute <function> <signature> <role>
 ```
 
-`<function>` can be schema-qualified.
-
-<h4>Example</h4>
-
-To grant execute permission on `login` to `dbuser`:
+**Example:**
 
 ```sh
 grant_execute login '(text,text)' dbuser
 ```
 
-### grant_schema_usage
+---
 
-Grant schema usage to a role.
+### `grant_schema_usage`
+
+Grant usage on a schema.
+
+**Syntax:**
 
 ```sh
 grant_schema_usage <schema> <role>
 ```
 
-<h4>Example</h4>
-
-To grant usage of the `api` schema to `dbuser`:
+**Example:**
 
 ```sh
 grant_schema_usage api dbuser
 ```
 
-### grant_role_membership
+---
+
+### `grant_role_membership`
 
 Grant membership in a role.
+
+**Syntax:**
 
 ```sh
 grant_role_membership <role_specification> <role>
 ```
 
-<h4>Example</h4>
-
-To grant membership in `authenticator` to `dbuser`:
+**Example:**
 
 ```sh
 grant_role_membership authenticator dbuser
 ```
 
-### grant_table_privilege
+---
+
+### `grant_table_privilege`
 
 Grant privileges on a table.
+
+**Syntax:**
 
 ```sh
 grant_table_privilege <type> <table> <role>
 ```
 
-`<table>` can be schema-qualified.
-
-<h4>Example</h4>
-
-To allow an `dbuser` to insert into the `asset` table:
+**Example:**
 
 ```sh
-grant_privilege insert asset dbuser
+grant_table_privilege insert asset dbuser
 ```
 
-## Roles
+---
 
-> 📖 Refer to Postgres [CREATE
-> ROLE](https://www.postgresql.org/docs/current/sql-createrole.html).
+## 👤 Roles
 
-### create_role
+### `create_role`
 
-Creates a `nologin` role.
+Create a nologin role.
+
+**Syntax:**
 
 ```sh
 create_role <role>
 ```
 
-<h4>Example</h4>
-
-To create a `dbuser` role:
+**Example:**
 
 ```sh
 create_role dbuser
 ```
 
-### create_login_role
+---
 
-Creates a login role with a password.
+### `create_login_role`
+
+Create a login role with password.
+
+**Syntax:**
 
 ```sh
 create_login_role <role> <password>
 ```
 
-<h4>Example</h4>
-
-To create a `dbuser` role with password, `securepass123`:
+**Example:**
 
 ```sh
 create_login_role dbuser 'securepass123'
 ```
 
-## Schemas
+---
 
-> 📖 Refer to Postgres [CREATE
-> SCHEMA](https://www.postgresql.org/docs/current/sql-createschema.html).
+## 🏗️ Schemas
 
-### create_schema
-
-Enter a new schema into the database.
+**Syntax:**
 
 ```sh
 create_schema <schema>
 ```
 
-<h4>Example</h4>
-
-To create a schema named `api`:
+**Example:**
 
 ```sh
 create_schema api
 ```
 
-## Tables
+---
 
-> 📖 Refer to Postgres [CREATE
-> TABLE](https://www.postgresql.org/docs/current/sql-createtable.html).
+## 🧱 Tables
 
-### create_table
+### `create_table`
 
-Generates a migration to create a table. Use with `--edit`.
+Create a table using your editor.
+
+**Syntax:**
 
 ```sh
 create_table <table>
 ```
 
-`<table>` can be schema-qualified.
-
-<h4>Example</h4>
-
-To create a table named `customer`:
+**Example:**
 
 ```sh
 create_table customer
 ```
 
-The editor is launched for you to edit the function.
+---
 
-### create_table_as
+### `create_table_as`
 
-Create a new table in the database, inline. Useful in scripts.
+Define a table inline — ideal for scripts.
+
+**Syntax:**
 
 ```sh
-create_table_as <table> <sql>
+create_table_as <table> <<'SQL'
+<sql>
+SQL
 ```
 
-`<table>` can be schema-qualified.
-
-<h4>Example</h4>
-
-To create a table named `customer`:
+**Example:**
 
 ```sh
 create_table_as customer <<'SQL'
 create table customer (
   id bigint generated always as identity primary key,
-  created_at timestamp not null default now(),
-  name text not null
+  name text not null,
+  created_at timestamp not null default now()
 );
 SQL
 ```
 
-## Triggers
+---
 
-> 📖 Refer to Postgres [CREATE
-> TRIGGER](https://www.postgresql.org/docs/current/sql-createtrigger.html).
+## 🔁 Triggers
 
-### create_trigger
+### `create_trigger`
 
-Create a trigger on a table.
+Create a trigger linked to a function.
+
+**Syntax:**
 
 ```sh
 create_trigger <trigger> <table> <function>
 ```
 
-`<table>` and `<function>` can be schema-qualified.
-
-Note: Don't schema-qualify the `<trigger>`. From the Postgres docs:
-
-> The name cannot be schema-qualified — the trigger inherits the schema of its
-> table.
-
-<h4>Example</h4>
-
-To create a trigger named `customer_updated` that fires before updating a row
-in `customer`, calling `customer_updated`:
+**Example:**
 
 ```sh
 create_trigger customer_updated customer customer_updated
 ```
 
-### create_trigger_as
+> Note: Trigger names cannot be schema-qualified — they inherit the table's schema.
 
-Create a trigger on a table, inline.
+---
+
+### `create_trigger_as`
+
+Define a trigger inline.
+
+**Syntax:**
 
 ```sh
-create_trigger_as <trigger> <table> <sql>
+create_trigger_as <trigger> <table> <<'SQL'
+<sql>
+SQL
 ```
 
-`<table>` can be schema-qualified.
-
-<h4>Example</h4>
-
-Create a trigger `modify` on table `contact` calling `modify_record`:
+**Example:**
 
 ```sh
 create_trigger_as modify contact <<'SQL'
@@ -360,3 +356,10 @@ create trigger modify
   for each row execute function modify_record();
 SQL
 ```
+
+---
+
+## ⏭️ Next Steps
+
+👉 Learn the [different ways to run commands](./running.md)  
+👉 Or go deeper into [writing reusable scripts](./scripting.md)

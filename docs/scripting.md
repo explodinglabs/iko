@@ -1,39 +1,63 @@
 # ✨ Scripting Migrations
 
-Write reusable Bash scripts to define database changes:
+Iko’s scripting model lets you define migrations in plain Bash — using the same
+DSL commands you’d use in CLI or shell mode.
 
-<strong>scripts/auth.sh</strong>
+---
+
+## 📁 Where Scripts Go
+
+Place your scripts in a `scripts/` directory in your project:
+
+```
+myapp/
+├── migrations/
+└── scripts/
+    ├── auth.sh
+    └── roles.sh
+```
+
+---
+
+## 🧪 Example Script
 
 ```sh
-# Create an auth schema
+# scripts/auth.sh
+
 create_schema auth
 
-# Create a user table
 create_table_as auth.user <<'SQL'
 create table auth.user (
-  username text primary key check (length(username) >= 3),
-  password text not null check (length(password) < 512),
-  role name not null check (length(role) < 512)
+  username text primary key,
+  password text not null,
+  role name not null
 );
 SQL
 
-# Add a function to hash passwords
 create_function_as auth.encrypt_pass <<'SQL'
 create function auth.encrypt_pass () returns trigger language plpgsql as $$
 begin
+  -- hash password before insert/update
   if tg_op = 'INSERT' or new.password <> old.password then
     new.password = crypt(new.password, gen_salt('bf'));
   end if;
   return new;
 end; $$
 SQL
-
-# Trigger it on insert/update
-create_trigger encrypt_pass auth.user auth.encrypt_pass
 ```
 
-Run the script to generate migrations:
+Run with:
 
 ```sh
 iko bash auth.sh
 ```
+
+## 🧠 Tips
+
+- Use `<<'SQL'` to safely embed SQL blocks
+- Break large scripts into smaller ones per concern (e.g. auth.sh, roles.sh, audit.sh)
+- Scripts are regular Bash: loops, conditionals, and functions all work
+
+## 🧭 What's Next?
+
+👉 [See how to deploy migrations to remote environments](./deploying.md)
