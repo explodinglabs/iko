@@ -40,7 +40,7 @@ iko sqitch --version
 
 ## 🧩 Ad-Hoc Migrations
 
-#### `add`
+### add
 
 If your change doesn’t match one of the built-in commands, you can use `add` to
 create a named migration manually:
@@ -89,7 +89,7 @@ SQL
 
 ## 🗨️ Comments
 
-#### `comment`
+### `comment`
 
 Add or update a comment on a Postgres object.
 
@@ -109,7 +109,7 @@ comment schema api 'Schema for the API endpoints'
 
 ## 🧩 Extensions
 
-#### `create_extension`
+### `create_extension`
 
 Install a Postgres extension.
 
