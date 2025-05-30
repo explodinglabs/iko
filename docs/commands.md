@@ -12,8 +12,8 @@ You can run commands:
 - Inside an interactive Iko shell
 - From reusable Bash scripts
 
-For a breakdown of these options, see [Running Commands](./running.md).  
-For tips on writing migration scripts, see [Scripting](./scripting.md).
+👉 For a breakdown of these options, see [Running Commands](./running.md).  
+👉 For tips on writing migration scripts, see [Scripting](./scripting.md).
 
 ---
 
