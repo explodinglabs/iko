@@ -34,4 +34,4 @@ iko deploy  # apply it
 
 ## 📚 Full Documentation
 
-👉 [https://explodinglabs.com/iko/](https://explodinglabs.com/iko/)
+👉 [explodinglabs.com/iko/](https://explodinglabs.com/iko/)
