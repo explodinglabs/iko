@@ -29,4 +29,4 @@ powerful Bash-based scripting model.
 - [Getting Started](gettingstarted.md)
 - [Command Reference](commands.md)
 - [Scripting Migrations](scripting.md)
-- [Deploying to Remote Environments](deploying.md)
+- [Deploying Migrations to Remote Environments](deploying.md)

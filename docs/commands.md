@@ -1,4 +1,4 @@
-# Commands
+# Command Reference
 
 This page documents all available commands provided by Iko.
 
