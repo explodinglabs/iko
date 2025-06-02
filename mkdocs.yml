@@ -37,6 +37,6 @@ nav:
   - Home: index.md
   - Getting Started: gettingstarted.md
   - Running Commands: running.md
-  - Command Reference: commands.md
   - Scripting Migrations: scripting.md
   - Deploying Migrations to Remote Environments: deploying.md
+  - Command Reference: commands.md

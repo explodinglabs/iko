@@ -29,7 +29,7 @@ powerful Bash-based scripting model.
 | Topic                                                       | Description                                                |
 | ----------------------------------------------------------- | ---------------------------------------------------------- |
 | [Getting Started](gettingstarted.md)                        | Install Iko and run your first migration                   |
-| [Command Reference](commands.md)                            | Full list of DSL commands                                  |
 | [Running Commands](running.md)                              | Learn the 3 ways to run Iko commands (CLI, shell, scripts) |
 | [Scripting Migrations](scripting.md)                        | Write reusable Bash scripts to generate migrations         |
 | [Deploying Migrations to Remote Environments](deploying.md) | Configure targets and deploy to staging/production         |
+| [Command Reference](commands.md)                            | Full list of DSL commands                                  |

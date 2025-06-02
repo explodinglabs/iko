@@ -81,4 +81,5 @@ iko deploy
 
 ## 🧭 What's Next?
 
-👉 [Continue to the Iko Command Reference](./commands.md)
+👉 [Running Commands](./running.md)  
+👉 [Iko Command Reference](./commands.md)
