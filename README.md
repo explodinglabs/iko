@@ -24,12 +24,11 @@ It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
 ## 🚀 Quick Start
 
 ```sh
-curl -fsSL https://explodinglabs.com/iko/install.sh | sh  # install dev CLI
-echo 'SQITCH_TARGET=db:pg://postgres:postgres@postgres/app' > .env  # set database connection
-echo 'DOCKER_NETWORK=your_network' >> .env  # optionally set network name
-iko init myapp  # initialise project
-iko create_schema api  # create a migration
-iko deploy  # apply it
+curl -fsSL https://explodinglabs.com/iko/install.sh | sh
+echo 'SQITCH_TARGET=db:pg://postgres:postgres@localhost/app' > .env
+iko init myapp
+iko create_schema api
+iko deploy
 ```
 
 ## 📚 Full Documentation
