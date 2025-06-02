@@ -8,9 +8,12 @@ fi
 # Alias sqitch commands
 
 function init {
-  # sqitch-init fails if SQITCH_TARGET is set.
+  # Unset SQITCH_TARGET temporarily, because sqitch-init fails if SQITCH_TARGET is set
+  local saved_target="$SQITCH_TARGET"
   unset SQITCH_TARGET
   sqitch init "$@"
+  # Restore SQITCH_TARGET
+  export SQITCH_TARGET="$saved_target"
 }
 
 sqitch_commands=(
