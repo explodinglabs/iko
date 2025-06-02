@@ -45,6 +45,20 @@ SQITCH_TARGET=db:pg://postgres:postgres@localhost/app
 
 On Mac or WSL2, use `host.docker.internal` instead of `localhost`.
 
+Verify your connection:
+
+```sh
+iko check
+```
+
+You should get:
+
+```
+No registry found in db:pg://postgres@postgres/app. Have you ever deployed?
+```
+
+This means your connection is working.
+
 ## 3. Initialise a project
 
 ```sh
