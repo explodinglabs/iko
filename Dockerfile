@@ -29,7 +29,7 @@ ENV PATH="/scripts:${PATH}"
 # Configure Vim
 COPY ./.vim/sql.vim /home/.vim/after/ftplugin/sql.vim
 COPY ./.vim/vimrc /home/.vimrc
-ENV SQITCH_EDITOR='vim -o'
+ENV SQITCH_EDITOR='vim -p'
 
 # Custom entrypoint script, to ensure bash aliases are loaded and bash shell is
 # used instead of sh

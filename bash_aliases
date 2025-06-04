@@ -34,7 +34,7 @@ sqitch_commands=(
   log
   revert
   status
-  uograde
+  upgrade
   verify
 )
 
