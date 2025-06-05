@@ -287,6 +287,8 @@ create_login_role dbuser 'securepass123'
 
 ## 🏗️ Schemas
 
+### create_schema
+
 **Syntax:**
 
 ```sh
