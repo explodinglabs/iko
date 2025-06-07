@@ -7,8 +7,8 @@
   ikō
 </h1>
 
-**Iko** (_ee-koh_) is a lightweight command-line tool for managing **Postgres
-database migrations.**
+**Iko** (_ee-koh_) is a lightweight command-line tool for managing
+**Postgres database migrations.**
 
 It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
 [DSL](https://www.explodinglabs.com/iko/commands/) and
