@@ -228,25 +228,21 @@ add_as() {
 
 comment() {
   local -a options
-  local object underscores change comment_
-  declare -a positionals
+  local object_type optionally_schema_qualified_object change schema object comment_
   get_options options "$@"
-  get_positionals positionals "$@"
+  get_positionals_as "$@" -- object_type optionally_schema_qualified_object comment_
 
-  # Get the object - all args except the last
-  object="${positionals[@]:0:${#positionals[@]}-1}"
-  # Get the change name, stripping non alphanumeric chars
-  underscores="comment_${object//[ .]/_}"
-  change=${underscores//[^a-zA-Z0-9_]}
-  # Get the comment (the last param)
-  comment_="${positionals[-1]}"
+  change="comment_${object_type}_${optionally_schema_qualified_object//[ .]/_}"
+  change=${change//[^a-zA-Z0-9_]}
 
   sqitch add "${options[@]}" \
     --change $change \
-    --template comment \
-    --set object="$object" \
+    --template comment_$object_type \
+    --set type="$object_type" \
+    --set schema=$(extract_schema "$optionally_schema_qualified_object") \
+    --set object=$(strip_schema "$optionally_schema_qualified_object") \
     --set comment="$comment_" \
-    --note \'"Comment on $object"\'
+    --note \'"Comment on $object_type $optionally_schema_qualified_object"\'
 
   show_files $change
 }

@@ -1,0 +1,17 @@
+do $$
+declare
+  table_name text := split_part('[% object %]', '.', 1);
+  column_name text := split_part('[% object %]', '.', 2);
+begin
+  assert (
+    select description = '[% comment %]'
+    from pg_attribute a
+    join pg_class c on c.oid = a.attrelid
+    join pg_namespace n on n.oid = c.relnamespace
+    join pg_description d on d.objoid = a.attrelid and d.objsubid = a.attnum
+    where c.relname = table_name
+      and a.attname = column_name
+      and n.nspname = '[% schema %]'
+  );
+end;
+$$ language plpgsql;

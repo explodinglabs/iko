@@ -91,6 +91,9 @@ SQL
 
 ### comment
 
+> ⚠️ Note only commenting on schemas, tables, columns and functions are
+> supported currently.
+
 Add or update a comment on a Postgres object.
 
 **Syntax:**
@@ -99,10 +102,18 @@ Add or update a comment on a Postgres object.
 comment <object> <comment>
 ```
 
-**Example:**
+**Examples:**
 
 ```sh
 comment schema api 'Schema for the API endpoints'
+```
+
+```sh
+comment function api.encrypt_pass() 'Hashes passwords'
+```
+
+```sh
+comment function api.do_thing(integer, text) 'Does something'
 ```
 
 ---
