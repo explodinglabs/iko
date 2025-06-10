@@ -14,6 +14,8 @@ It wraps [Sqitch](https://sqitch.org/) with a developer-friendly
 [DSL](https://www.explodinglabs.com/iko/commands/) and
 [scripting](https://www.explodinglabs.com/iko/scripting/).
 
+https://github.com/user-attachments/assets/9dcc4ffe-f142-4bd2-aca5-8ea8bc90f712
+
 ## ❤️ Why Iko?
 
 - Reliable, clean migrations
