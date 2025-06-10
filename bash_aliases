@@ -228,11 +228,11 @@ add_as() {
 
 comment() {
   local -a options
-  local object_type optionally_schema_qualified_object change schema object comment_
+  local object_type optionally_schema_qualified_object comment_ change
   get_options options "$@"
-  get_positionals_as "$@" -- object_type optionally_schema_qualified_object comment_
+  get_positionals_as "$@" -- object_type optionally_schema_qualified_object comment_ change
 
-  change="comment_${object_type}_${optionally_schema_qualified_object//[ .]/_}"
+  change=${change:-comment_${object_type}_${optionally_schema_qualified_object//[ .]/_}}
   change=${change//[^a-zA-Z0-9_]}
 
   sqitch add "${options[@]}" \
