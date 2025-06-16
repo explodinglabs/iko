@@ -9,7 +9,7 @@ fi
 
 # Set prompt if running interactively
 if [[ $- == *i* ]]; then
-  export PS1="✨\e[96mikō>\[\e[0m\] "
+  export PS1="\[\e[96m\]✨ikō>\[\e[0m\] "
 fi
 
 # Alias sqitch commands
@@ -43,3 +43,9 @@ for cmd in "${sqitch_commands[@]}"; do
     sqitch $cmd \"\$@\"
   }"
 done
+
+# Optional user shell customizations
+if [[ -f /etc/bash_extras ]]; then
+  # shellcheck source=/dev/null
+  source /etc/bash_extras || echo "⚠️  Warning: /etc/bash_extras failed to source" >&2
+fi

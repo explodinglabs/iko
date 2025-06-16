@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -euo pipefail
 
 source /etc/bash_aliases
