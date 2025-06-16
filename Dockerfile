@@ -20,6 +20,7 @@ RUN echo "$VERSION" > /iko_version.txt
 
 # Copy templates and shell functions
 COPY ./templates /etc/sqitch/templates
+COPY ./.bashrc /home/.bashrc
 COPY ./bash_aliases /etc/bash_aliases
 ENV BASH_ENV=/etc/bash_aliases
 
@@ -36,8 +37,8 @@ COPY ./.vim/sql.vim /home/.vim/after/ftplugin/sql.vim
 COPY ./.vim/vimrc /home/.vimrc
 ENV SQITCH_EDITOR='vim -p'
 
-# Custom entrypoint script, to ensure bash aliases are loaded and bash
-# shell is used instead of sh
+# Custom entrypoint script, to ensure bash aliases are loaded and bash shell
+# is used instead of sh
 COPY entry.sh /usr/local/bin/iko-entry.sh
 RUN chmod +x /usr/local/bin/iko-entry.sh
 

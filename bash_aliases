@@ -1,19 +1,9 @@
-#!/bin/bash
-# Custom iko commands live in 'bin'.
-# This file only aliases raw sqitch commands not overridden
-
 # Only fail fast in scripts, not interactive shell
 if [[ $- != *i* ]]; then
   set -euo pipefail
 fi
 
-# Set prompt if running interactively
-if [[ $- == *i* ]]; then
-  export PS1="\[\e[96m\]✨ikō>\[\e[0m\] "
-fi
-
-# Alias sqitch commands
-# Note "init" is in bin/init.
+# Alias sqitch commands (all except "init" which is in bin)
 
 sqitch_commands=(
   config
@@ -43,9 +33,3 @@ for cmd in "${sqitch_commands[@]}"; do
     sqitch $cmd \"\$@\"
   }"
 done
-
-# Optional user shell customizations
-if [[ -f /etc/bash_extras ]]; then
-  # shellcheck source=/dev/null
-  source /etc/bash_extras || echo "⚠️  Warning: /etc/bash_extras failed to source" >&2
-fi

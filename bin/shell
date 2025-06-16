@@ -1,4 +1,4 @@
 #!/bin/bash
 set -euo pipefail
 
-exec bash --rcfile /etc/bash_aliases -i
+exec bash -i
