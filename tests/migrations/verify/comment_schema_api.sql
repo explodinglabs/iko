@@ -1,12 +1,11 @@
 do $$
-declare
-  actual_comment text;
 begin
-  select description into actual_comment
-  from pg_description
-  join pg_namespace on pg_description.objoid = pg_namespace.oid
-  where pg_namespace.nspname = 'api';
-
-  assert actual_comment = 'This is my comment';
+  assert (
+    select description = 'This is my comment'
+    from pg_namespace n
+    join pg_description d on d.objoid = n.oid
+    where n.nspname = 'api'
+      and d.objsubid = 0
+  );
 end;
 $$ language plpgsql;
