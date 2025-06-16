@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+optionally_schema_qualified_table=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- optionally_schema_qualified_table change
+change=${change:-create_table_${optionally_schema_qualified_table//\./_}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template create_table \
+  --set schema=$(extract_schema $optionally_schema_qualified_table) \
+  --set table=$(strip_schema $optionally_schema_qualified_table) \
+  --note \'"Create $optionally_schema_qualified_table table"\'
+
+show_files $change

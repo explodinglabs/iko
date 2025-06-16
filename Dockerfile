@@ -23,16 +23,21 @@ COPY ./templates /etc/sqitch/templates
 COPY ./bash_aliases /etc/bash_aliases
 ENV BASH_ENV=/etc/bash_aliases
 
-# Add scripts directory to $PATH
-ENV PATH="/scripts:${PATH}"
+# Copy cli into path
+COPY lib /iko/lib
+COPY bin /iko/bin
+ENV PATH="/iko/bin:$PATH"
+
+# Add user-scripts directory to $PATH
+ENV PATH="/iko/scripts:${PATH}"
 
 # Configure Vim
 COPY ./.vim/sql.vim /home/.vim/after/ftplugin/sql.vim
 COPY ./.vim/vimrc /home/.vimrc
 ENV SQITCH_EDITOR='vim -p'
 
-# Custom entrypoint script, to ensure bash aliases are loaded and bash shell is
-# used instead of sh
+# Custom entrypoint script, to ensure bash aliases are loaded and bash
+# shell is used instead of sh
 COPY entry.sh /usr/local/bin/iko-entry.sh
 RUN chmod +x /usr/local/bin/iko-entry.sh
 

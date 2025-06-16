@@ -1,0 +1,17 @@
+#!/bin/bash
+set -euo pipefail
+
+# Save and unset SQITCH_TARGET if it's set
+if [[ -v SQITCH_TARGET ]]; then
+  saved_target="$SQITCH_TARGET"
+  unset SQITCH_TARGET
+else
+  saved_target=
+fi
+
+sqitch init "$@"
+
+# Restore SQITCH_TARGET only if it was previously set
+if [[ -n "$saved_target" ]]; then
+  export SQITCH_TARGET="$saved_target"
+fi

@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+optionally_schema_qualified_function=
+change=
+schema=
+function=
+
+get_options options "$@"
+get_positionals_as "$@" -- optionally_schema_qualified_function change
+change=${change:-create_function_${optionally_schema_qualified_function//\./_}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template create_function \
+  --set schema=$(extract_schema $optionally_schema_qualified_function) \
+  --set function=$(strip_schema $optionally_schema_qualified_function) \
+  --note \'"Add $optionally_schema_qualified_function function"\'
+
+show_files $change

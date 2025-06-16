@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+schema=
+role=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- schema role change
+change=${change:-grant_schema_${schema}_usage_to_${role}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template grant_schema_usage \
+  --set role=$role \
+  --set schema=$schema \
+  --note \'"Grant $schema schema usage to $role"\'
+
+show_files $change

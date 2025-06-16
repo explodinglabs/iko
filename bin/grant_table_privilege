@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+type=
+optionally_schema_qualified_table=
+role=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- type optionally_schema_qualified_table role change
+change=${change:-grant_table_privileges_${type}_on_${optionally_schema_qualified_table//\./_}_to_${role}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template grant_table_privilege \
+  --set role=$role \
+  --set type=$type \
+  --set schema=$(extract_schema $optionally_schema_qualified_table) \
+  --set table=$(strip_schema $optionally_schema_qualified_table) \
+  --note \'"Grant $type on $optionally_schema_qualified_table table to $role"\'
+
+show_files $change

@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+extension=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- extension change
+change=${change:-create_extension_${extension}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template create_extension \
+  --set extension=$extension \
+  --note \'"Create $extension extension"\'
+
+show_files $change

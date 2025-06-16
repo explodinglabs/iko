@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+role=
+password=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- role password change
+change=${change:-create_role_${role}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template create_login_role \
+  --set role=$role \
+  --set password=$password \
+  --note \'"Create $role role"\'
+
+show_files $change

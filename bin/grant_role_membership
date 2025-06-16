@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+role=
+role_specification=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- role role_specification change
+change=${change:-grant_membership_${role}_to_${role_specification}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template grant_role_membership \
+  --set role_specification=$role_specification \
+  --set role=$role \
+  --note \'"Grant $role membership to $role_specification"\'
+
+show_files $change

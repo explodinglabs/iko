@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+change=
+sql=
+
+get_options options "$@"
+get_positionals_as "$@" -- change sql
+change=${change:-create_function_${optionally_schema_qualified_function//\./_}}
+sql=$(cat)
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template add_as \
+  --set sql="$sql" \
+  --note \'"Add $change change"\'
+
+show_files $change

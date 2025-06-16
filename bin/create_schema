@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+schema=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- schema change
+change=${change:-create_schema_${schema}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template create_schema \
+  --set schema=$schema \
+  --note \'"Create $schema schema"\'
+
+show_files $change

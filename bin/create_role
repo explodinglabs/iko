@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+role=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- role change
+change=${change:-create_role_${role}}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template create_role \
+  --set role=$role \
+  --note \'"Create $role role"\'
+
+show_files $change

@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+source /iko/lib/utils.sh
+
+options=()
+object_type=
+optionally_schema_qualified_object=
+comment_=
+change=
+
+get_options options "$@"
+get_positionals_as "$@" -- object_type optionally_schema_qualified_object comment_ change
+
+change=${change:-comment_${object_type}_${optionally_schema_qualified_object//[ .]/_}}
+change=${change//[^a-zA-Z0-9_]}
+
+sqitch add "${options[@]}" \
+  --change $change \
+  --template comment_$object_type \
+  --set type="$object_type" \
+  --set schema=$(extract_schema "$optionally_schema_qualified_object") \
+  --set object=$(strip_schema "$optionally_schema_qualified_object") \
+  --set comment="$comment_" \
+  --note \'"Comment on $object_type $optionally_schema_qualified_object"\'
+
+show_files $change
