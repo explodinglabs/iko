@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-source /iko/lib/utils.sh
+source /iko-lib/utils.sh
 
 options=()
 role=

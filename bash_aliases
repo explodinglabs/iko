@@ -1,7 +1,7 @@
 #!/bin/bash
-# Custom iko commands live in /iko/bin (on $PATH)
+# Custom iko commands live in 'bin'.
 # This file only aliases raw sqitch commands not overridden
-#
+
 # Only fail fast in scripts, not interactive shell
 if [[ $- != *i* ]]; then
   set -euo pipefail

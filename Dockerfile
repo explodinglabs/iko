@@ -24,12 +24,12 @@ COPY ./bash_aliases /etc/bash_aliases
 ENV BASH_ENV=/etc/bash_aliases
 
 # Copy cli into path
-COPY lib /iko/lib
-COPY bin /iko/bin
-ENV PATH="/iko/bin:$PATH"
+COPY lib /iko-lib
+COPY bin /iko-bin
+ENV PATH="/iko-bin:$PATH"
 
 # Add user-scripts directory to $PATH
-ENV PATH="/iko/scripts:${PATH}"
+ENV PATH="/scripts:${PATH}"
 
 # Configure Vim
 COPY ./.vim/sql.vim /home/.vim/after/ftplugin/sql.vim
