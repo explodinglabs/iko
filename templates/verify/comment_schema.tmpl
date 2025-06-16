@@ -4,7 +4,7 @@ begin
     select description = '[% comment %]'
     from pg_namespace n
     join pg_description d on d.objoid = n.oid
-    where n.nspname = '[% schema %]'
+    where n.nspname = '[% object %]'
       and d.objsubid = 0
   );
 end;
