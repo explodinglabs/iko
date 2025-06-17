@@ -4,16 +4,18 @@ source /iko-lib/utils.sh
 
 options=()
 extension=
-change=
 
-get_options options "$@"
-get_positionals_as "$@" -- extension change
-change=${change:-create_extension_${extension}}
+get_options options "$@" -- extension
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="create_extension_${extension}"
+  options+=(--change "$change")
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
   --template create_extension \
-  --set extension=$extension \
-  --note \'"Create $extension extension"\'
+  --set extension="$extension" \
+  --note "Create $extension extension"
 
-show_files $change
+show_files "$change"

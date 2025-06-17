@@ -5,28 +5,30 @@ source /iko-lib/utils.sh
 options=()
 object_type=
 optionally_schema_qualified_object=
-comment_=
-change=
+comment_input=
 
-get_options options "$@"
-get_positionals_as "$@" -- object_type optionally_schema_qualified_object comment_input change
 
-if [[ "$comment_input" == "<<"* ]]; then
-  comment_=$(cat)
-else
-  comment_=$comment_input
+get_options options "$@" -- object_type optionally_schema_qualified_object comment_input
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="comment_${object_type}_${optionally_schema_qualified_object//[ .]/_}"
+  change=${change//[^a-zA-Z0-9_]}
+  options+=(--change "$change")
 fi
 
-change=${change:-comment_${object_type}_${optionally_schema_qualified_object//[ .]/_}}
-change=${change//[^a-zA-Z0-9_]}
+if [ -t 0 ]; then
+  comment_="$comment_input"
+else
+  comment_=$(cat)
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
-  --template comment_$object_type \
+  --template comment_"$object_type" \
   --set type="$object_type" \
-  --set schema=$(extract_schema "$optionally_schema_qualified_object") \
-  --set object=$(strip_schema "$optionally_schema_qualified_object") \
+  --set schema="$(extract_schema "$optionally_schema_qualified_object")" \
+  --set object="$(strip_schema "$optionally_schema_qualified_object")" \
   --set comment="$comment_" \
-  --note \'"Comment on $object_type $optionally_schema_qualified_object"\'
+  --note "Comment on $object_type $optionally_schema_qualified_object"
 
-show_files $change
+show_files "$change"

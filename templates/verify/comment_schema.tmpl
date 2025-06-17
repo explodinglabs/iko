@@ -1,11 +1,13 @@
 do $$
+declare
+  actual text;
 begin
-  assert (
-    select description = '[% comment %]'
-    from pg_namespace n
-    join pg_description d on d.objoid = n.oid
-    where n.nspname = '[% object %]'
-      and d.objsubid = 0
-  );
+  select description into actual
+  from pg_namespace n
+  join pg_description d on d.objoid = n.oid
+  where n.nspname = '[% object %]'
+    and d.objsubid = 0;
+
+  assert actual = '[% comment %]';
 end;
 $$ language plpgsql;

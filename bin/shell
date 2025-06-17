@@ -1,4 +1,5 @@
 #!/bin/bash
+# Start an interactive shell inside the Iko container
 set -euo pipefail
 
 exec bash -i

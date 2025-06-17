@@ -4,16 +4,18 @@ source /iko-lib/utils.sh
 
 options=()
 schema=
-change=
 
-get_options options "$@"
-get_positionals_as "$@" -- schema change
-change=${change:-create_schema_${schema}}
+get_options options "$@" -- schema
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="create_schema_${schema}"
+  options+=(--change "$change")
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
   --template create_schema \
-  --set schema=$schema \
-  --note \'"Create $schema schema"\'
+  --set schema="$schema" \
+  --note "Create $schema schema"
 
-show_files $change
+show_files "$change"

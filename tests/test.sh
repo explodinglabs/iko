@@ -3,6 +3,11 @@ set -euo pipefail
 create_extension pgcrypto
 create_schema api
 comment schema api 'This is my comment'
+comment -c another_comment schema api <<'EOF'
+Multiline comment
+Multiline comment
+Multiline comment
+EOF
 
 # Tables
 create_table customer

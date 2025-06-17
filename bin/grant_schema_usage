@@ -5,17 +5,19 @@ source /iko-lib/utils.sh
 options=()
 schema=
 role=
-change=
 
-get_options options "$@"
-get_positionals_as "$@" -- schema role change
-change=${change:-grant_schema_${schema}_usage_to_${role}}
+get_options options "$@" -- schema role
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="grant_schema_${schema}_usage_to_${role}"
+  options+=(--change "$change")
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
   --template grant_schema_usage \
-  --set role=$role \
-  --set schema=$schema \
-  --note \'"Grant $schema schema usage to $role"\'
+  --set role="$role" \
+  --set schema="$schema" \
+  --note "Grant $schema schema usage to $role"
 
-show_files $change
+show_files "$change"

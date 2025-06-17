@@ -3,18 +3,19 @@ set -euo pipefail
 source /iko-lib/utils.sh
 
 options=()
-change=
-sql=
-
-get_options options "$@"
-get_positionals_as "$@" -- change sql
-change=${change:-create_function_${optionally_schema_qualified_function//\./_}}
 sql=$(cat)
 
+get_options options "$@"
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="add_as_$(date +%s)"
+  options+=(--change "$change")
+fi
+
 sqitch add "${options[@]}" \
-  --change $change \
   --template add_as \
   --set sql="$sql" \
-  --note \'"Add $change change"\'
+  --note "Add $change change"
 
-show_files $change
+show_files "$change"

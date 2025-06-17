@@ -6,21 +6,21 @@ options=()
 optionally_schema_qualified_function=
 params=
 role=
-change=
-schema=
-function=
 
-get_options options "$@"
-get_positionals_as "$@" -- optionally_schema_qualified_function params role change
-change=${change:-grant_execute_${optionally_schema_qualified_function//\./_}_to_${role}}
+get_options options "$@" -- optionally_schema_qualified_function params role
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="grant_execute_${optionally_schema_qualified_function//./_}_to_${role}"
+  options+=(--change "$change")
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
   --template grant_execute \
-  --set schema=$(extract_schema $optionally_schema_qualified_function) \
-  --set function=$(strip_schema $optionally_schema_qualified_function) \
-  --set params=$params \
-  --set role=$role \
-  --note \'"Grant execute $optionally_schema_qualified_function to $role"\'
+  --set schema="$(extract_schema "$optionally_schema_qualified_function")" \
+  --set function="$(strip_schema "$optionally_schema_qualified_function")" \
+  --set params="$params" \
+  --set role="$role" \
+  --note "Grant execute $optionally_schema_qualified_function to $role"
 
-show_files $change
+show_files "$change"

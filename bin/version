@@ -1,4 +1,5 @@
 #!/bin/bash
+# Print Iko and Sqitch versions
 set -euo pipefail
 
 echo "iko $(cat /iko_version.txt)"

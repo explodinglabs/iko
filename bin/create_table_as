@@ -4,20 +4,21 @@ source /iko-lib/utils.sh
 
 options=()
 optionally_schema_qualified_table=
-change=
-sql=
-
-get_options options "$@"
-get_positionals_as "$@" -- optionally_schema_qualified_table change
-change=${change:-create_table_${optionally_schema_qualified_table//\./_}}
 sql=$(cat)
 
-sqitch add "${options[@]}" \
-  --change $change \
-  --template create_table_as \
-  --set schema=$(extract_schema $optionally_schema_qualified_table) \
-  --set table=$(strip_schema $optionally_schema_qualified_table) \
-  --set sql="$sql" \
-  --note \'"Add $optionally_schema_qualified_table table"\'
+get_options options "$@" -- optionally_schema_qualified_table
 
-show_files $change
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="create_table_${optionally_schema_qualified_table//./_}"
+  options+=(--change "$change")
+fi
+
+sqitch add "${options[@]}" \
+  --template create_table_as \
+  --set schema="$(extract_schema "$optionally_schema_qualified_table")" \
+  --set table="$(strip_schema "$optionally_schema_qualified_table")" \
+  --set sql="$sql" \
+  --note "Add $optionally_schema_qualified_table table"
+
+show_files "$change"

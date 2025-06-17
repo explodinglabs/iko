@@ -6,20 +6,22 @@ options=()
 trigger=
 optionally_schema_qualified_table=
 optionally_schema_qualified_function=
-change=
 
-get_options options "$@"
-get_positionals_as "$@" -- trigger optionally_schema_qualified_table optionally_schema_qualified_function change
-change=${change:-create_trigger_${trigger}_on_${optionally_schema_qualified_table//\./_}}
+get_options options "$@" -- trigger optionally_schema_qualified_table optionally_schema_qualified_function
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="create_trigger_${trigger}_on_${optionally_schema_qualified_table//./_}"
+  options+=(--change "$change")
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
   --template create_trigger \
-  --set trigger=$trigger \
-  --set function_schema=$(extract_schema $optionally_schema_qualified_function) \
-  --set function=$(strip_schema $optionally_schema_qualified_function) \
-  --set table_schema=$(extract_schema $optionally_schema_qualified_table) \
-  --set table=$(strip_schema $optionally_schema_qualified_table) \
-  --note \'"Add $trigger trigger on $optionally_schema_qualified_table"\'
+  --set trigger="$trigger" \
+  --set function_schema="$(extract_schema "$optionally_schema_qualified_function")" \
+  --set function="$(strip_schema "$optionally_schema_qualified_function")" \
+  --set table_schema="$(extract_schema "$optionally_schema_qualified_table")" \
+  --set table="$(strip_schema "$optionally_schema_qualified_table")" \
+  --note "Add $trigger trigger on $optionally_schema_qualified_table"
 
-show_files $change
+show_files "$change"

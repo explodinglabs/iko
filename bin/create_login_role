@@ -5,17 +5,19 @@ source /iko-lib/utils.sh
 options=()
 role=
 password=
-change=
 
-get_options options "$@"
-get_positionals_as "$@" -- role password change
-change=${change:-create_role_${role}}
+get_options options "$@" -- role password
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="create_role_${role}"
+  options+=(--change "$change")
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
   --template create_login_role \
-  --set role=$role \
-  --set password=$password \
-  --note \'"Create $role role"\'
+  --set role="$role" \
+  --set password="$password" \
+  --note "Create $role role"
 
-show_files $change
+show_files "$change"

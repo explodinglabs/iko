@@ -1,12 +1,14 @@
 do $$
+declare
+  actual text;
 begin
-  assert (
-    select description = '[% comment %]'
-    from pg_proc p
-    join pg_namespace n on n.oid = p.pronamespace
-    join pg_description d on d.objoid = p.oid
-    where n.nspname = '[% schema %]'
-      and p.oid = '[% schema %].[% object %]'::regprocedure
-  );
+  select description into actual
+  from pg_proc p
+  join pg_namespace n on n.oid = p.pronamespace
+  join pg_description d on d.objoid = p.oid
+  where n.nspname = '[% schema %]'
+    and p.oid = '[% schema %].[% object %]'::regprocedure;
+
+  assert actual = '[% comment %]';
 end;
 $$ language plpgsql;

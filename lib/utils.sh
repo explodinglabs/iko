@@ -1,86 +1,76 @@
 # Utility functions
 
+
+# usage: get_options options "$@" -- var1 var2 var3 ...
 get_options() {
-  local -n _result=$1
-  shift
-  _result=()
-  while [[ $# -gt 0 ]]; do
-    case "$1" in
-      --*=*|-?=*) _result+=("$1") ;;
-      --*|-?)    _result+=("$1") ;;
-    esac
-    shift
-  done
-}
-
-get_positionals() {
-  local -n _out=$1
-  shift
-
-  local arg
-  local seen_double_dash=0
-  _out=()
-
-  for arg in "$@"; do
-    if [[ "$arg" == -- ]]; then
-      seen_double_dash=1
-      continue
-    fi
-    if [[ $seen_double_dash == 1 || "$arg" != -* ]]; then
-      _out+=("$arg")
-    fi
-  done
-}
-
-get_positionals_as() {
-  local -a args=()
+  local -n _opts=$1; shift
+  local -a raw_args=()
   local -a names=()
   local -a values=()
-  local found_separator=0
 
+  # Split on '--'
   while [[ $# -gt 0 ]]; do
     if [[ "$1" == "--" ]]; then
-      found_separator=1
       shift
       break
     fi
-    args+=("$1")
+    raw_args+=("$1")
     shift
   done
 
-  if [[ $found_separator -eq 0 ]]; then
-    echo "❌ error: expected '--' to separate args and variable names." >&2
-    return 1
-  fi
+  # Remaining args are variable names
+  names=("$@")
 
-  # Remaining arguments are the variable names
-  while [[ $# -gt 0 ]]; do
-    names+=("$1")
-    shift
+  # Parse options from raw_args
+  _opts=()
+  while [[ ${#raw_args[@]} -gt 0 ]]; do
+    case "${raw_args[0]}" in
+      --*=*)
+        _opts+=("${raw_args[0]}")
+        raw_args=("${raw_args[@]:1}")
+        ;;
+      --*|-?)
+        if [[ ${#raw_args[@]} -gt 1 && "${raw_args[1]}" != "-"* ]]; then
+          _opts+=("${raw_args[0]}" "${raw_args[1]}")
+          raw_args=("${raw_args[@]:2}")
+        else
+          _opts+=("${raw_args[0]}")
+          raw_args=("${raw_args[@]:1}")
+        fi
+        ;;
+      *)
+        break
+        ;;
+    esac
   done
 
-  # Filter only positional arguments (not starting with '-') from args
-  local seen_double_dash=0
-  for arg in "${args[@]}"; do
-    if [[ "$arg" == "--" ]]; then
-      seen_double_dash=1
-      continue
-    fi
-    if [[ "$arg" != -* || $seen_double_dash -eq 1 ]]; then
-      values+=("$arg")
-    fi
-  done
+  # Remaining elements in raw_args are the positionals
+  values=("${raw_args[@]}")
 
-  # Assign positionals to the provided variable names (globally)
+  # Assign values to named variables
   for i in "${!names[@]}"; do
     local var="${names[$i]}"
-    if [[ $i -lt ${#values[@]} ]]; then
-      val="${values[$i]}"
-    else
-      val=""
-    fi
+    local val="${values[$i]:-}"
     printf -v "$var" %s "$val"
   done
+}
+
+# usage: get_opt "${options[@]}" --change -c
+get_opt() {
+  local -a opts=("${@:1:$(($#-2))}")
+  local primary="${@: -2:1}"
+  local fallback="${@: -1}"
+
+  for ((i = 0; i < ${#opts[@]}; i++)); do
+    if [[ "${opts[i]}" == "$primary" || "${opts[i]}" == "$fallback" ]]; then
+      if (( i + 1 < ${#opts[@]} )); then
+        echo "${opts[i+1]}"
+        return 0
+      fi
+    fi
+  done
+
+  return 1
 }
 
 extract_schema() {

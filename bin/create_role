@@ -4,16 +4,18 @@ source /iko-lib/utils.sh
 
 options=()
 role=
-change=
 
-get_options options "$@"
-get_positionals_as "$@" -- role change
-change=${change:-create_role_${role}}
+get_options options "$@" -- role
+
+change=$(get_opt "${options[@]}" --change -c || echo "")
+if [[ -z "$change" ]]; then
+  change="create_role_${role}"
+  options+=(--change "$change")
+fi
 
 sqitch add "${options[@]}" \
-  --change $change \
   --template create_role \
-  --set role=$role \
-  --note \'"Create $role role"\'
+  --set role="$role" \
+  --note "Create $role role"
 
-show_files $change
+show_files "$change"
