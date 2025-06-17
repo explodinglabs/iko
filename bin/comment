@@ -9,7 +9,13 @@ comment_=
 change=
 
 get_options options "$@"
-get_positionals_as "$@" -- object_type optionally_schema_qualified_object comment_ change
+get_positionals_as "$@" -- object_type optionally_schema_qualified_object comment_input change
+
+if [[ "$comment_input" == "<<"* ]]; then
+  comment_=$(cat)
+else
+  comment_=$comment_input
+fi
 
 change=${change:-comment_${object_type}_${optionally_schema_qualified_object//[ .]/_}}
 change=${change//[^a-zA-Z0-9_]}

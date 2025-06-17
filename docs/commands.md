@@ -102,10 +102,17 @@ Add or update a comment on a Postgres object.
 comment <object> <comment>
 ```
 
+The comment can be a string or a heredoc.
+
 **Examples:**
 
 ```sh
 comment schema api 'Schema for the API endpoints'
+comment table api.customer <<'EOF'
+The customer table
+
+Schema for the api.customer table.
+EOF
 ```
 
 ```sh
