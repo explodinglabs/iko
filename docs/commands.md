@@ -113,6 +113,7 @@ The customer table
 
 Schema for the api.customer table.
 EOF
+comment column api.customer.name 'The customer\'s name'
 ```
 
 ```sh

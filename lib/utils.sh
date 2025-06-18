@@ -73,28 +73,58 @@ get_opt() {
   return 1
 }
 
-extract_schema() {
-  # Extract the schema from a db object. Give the empty string if it's not
-  # schema-qualified.
-  #
-  # Examples:
-  #   "api.login" -> "api"
-  #   "login" -> ""
-  local input="${1:-}"
+
+# Parse an optionally-qualified identifiers
+#
+# Example:
+#   >>> parse_identifier "api.users" -- schema table
+
+parse_identifier() {
+  local input="$1"
+  shift
+  [[ "$1" == "--" ]] && shift
+  local -n out_schema="$1"
+  local -n out_object="$2"
+
   if [[ "$input" == *.* ]]; then
-    echo "${input%%.*}"
+    out_schema="${input%%.*}"
+    out_object="${input##*.}"
   else
-    echo ""
+    out_schema=""
+    out_object="$input"
   fi
 }
 
-strip_schema() {
-  # Strip the schema from a db object.
-  #
-  # Examples:
-  #   "api.login" -> "login"
-  #   "login" -> "login"
-  echo "${1:-}" | cut -d . -f2
+# Parse an optionally-qualified a 2- or 3- part identifier (such as a column)
+#
+# Example:
+#   >>> parse_identifier "api.users.name" -- schema table column
+
+
+parse_column_identifier() {
+  local input="$1"
+  shift
+  [[ "$1" == "--" ]] && shift
+  local -n out_schema="$1"
+  local -n out_table="$2"
+  local -n out_column="$3"
+
+  local count
+  count=$(awk -F. '{print NF}' <<< "$input")
+
+  if (( count == 3 )); then
+    out_schema="${input%%.*}"
+    out_table="$(cut -d. -f2 <<< "$input")"
+    out_column="${input##*.}"
+  elif (( count == 2 )); then
+    out_schema=""
+    out_table="${input%%.*}"
+    out_column="${input##*.}"
+  else
+    out_schema=""
+    out_table=""
+    out_column=""
+  fi
 }
 
 show_files() {

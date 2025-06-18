@@ -4,14 +4,17 @@ source /iko-lib/utils.sh
 
 options=()
 type=
-optionally_schema_qualified_table=
+optionally_qualified_table=
+schema=
+table=
 role=
 
-get_options options "$@" -- type optionally_schema_qualified_table role
+get_options options "$@" -- type optionally_qualified_table role
+parse_identifier "$optionally_qualified_table" -- schema table
 
 change=$(get_opt "${options[@]}" --change -c || echo "")
 if [[ -z "$change" ]]; then
-  change="grant_table_privileges_${type}_on_${optionally_schema_qualified_table//./_}_to_${role}"
+  change="grant_table_privileges_${type}_on_${optionally_qualified_table//./_}_to_${role}"
   options+=(--change "$change")
 fi
 
@@ -19,8 +22,8 @@ sqitch add "${options[@]}" \
   --template grant_table_privilege \
   --set role="$role" \
   --set type="$type" \
-  --set schema="$(extract_schema "$optionally_schema_qualified_table")" \
-  --set table="$(strip_schema "$optionally_schema_qualified_table")" \
-  --note "Grant $type on $optionally_schema_qualified_table table to $role"
+  --set schema="$schema" \
+  --set table="$table" \
+  --note "Grant $type on $optionally_qualified_table table to $role"
 
 show_files "$change"

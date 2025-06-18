@@ -3,22 +3,25 @@ set -euo pipefail
 source /iko-lib/utils.sh
 
 options=()
-optionally_schema_qualified_table=
+optionally_qualified_table=
+schema=
+table=
 sql=$(cat)
 
-get_options options "$@" -- optionally_schema_qualified_table
+get_options options "$@" -- optionally_qualified_table
+parse_identifier "$optionally_qualified_table" -- schema table
 
 change=$(get_opt "${options[@]}" --change -c || echo "")
 if [[ -z "$change" ]]; then
-  change="create_table_${optionally_schema_qualified_table//./_}"
+  change="create_table_${optionally_qualified_table//./_}"
   options+=(--change "$change")
 fi
 
 sqitch add "${options[@]}" \
   --template create_table_as \
-  --set schema="$(extract_schema "$optionally_schema_qualified_table")" \
-  --set table="$(strip_schema "$optionally_schema_qualified_table")" \
+  --set schema="$schema" \
+  --set table="$table" \
   --set sql="$sql" \
-  --note "Add $optionally_schema_qualified_table table"
+  --note "Add $optionally_qualified_table table"
 
 show_files "$change"

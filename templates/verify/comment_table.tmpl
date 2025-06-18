@@ -7,9 +7,11 @@ begin
   join pg_namespace n on n.oid = c.relnamespace
   join pg_description d on d.objoid = c.oid
   where c.relname = '[% object %]'
-    and n.nspname = '[% schema %]'
+    [% IF schema %]and n.nspname = '[% schema %]'[% END %]
     and d.objsubid = 0;
 
-  assert actual = '[% comment %]';
+  -- We don't assert on the value because subsequent comments may override the
+  -- original one, which will make the earlier verify scripts fail
+  assert actual is not null;
 end;
 $$ language plpgsql;

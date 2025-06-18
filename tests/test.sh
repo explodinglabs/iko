@@ -2,12 +2,6 @@ set -euo pipefail
 
 create_extension pgcrypto
 create_schema api
-comment schema api 'This is my comment'
-comment -c another_comment schema api <<'EOF'
-Multiline comment
-Multiline comment
-Multiline comment
-EOF
 
 # Tables
 create_table customer
@@ -59,12 +53,27 @@ create trigger modify_api_customer
   for each row execute function api.update();
 SQL
 
+# Comments
+comment schema api 'This is my comment'
+comment -c another_comment schema api <<'EOF'
+Multiline comment
+Multiline comment
+Multiline comment
+EOF
+comment table api.customer 'The customer table'
+comment column api.customer.name 'The customers name'
+# Test where the table is not schema qualified
+comment column movie.name 'The movie name'
+comment function 'api.myfunc()' 'The myfunc function'
+
 # Roles & Permissions
 create_login_role authenticator 'securepass123'
 create_role api_user
 grant_schema_usage api api_user
-grant_execute myfunc '()' api_user
-grant_execute api.myfunc '()' api_user
+grant_execute 'myfunc()' api_user
+grant_execute 'api.myfunc()' api_user
 grant_role_membership authenticator api_user
 grant_table_privilege select customer api_user
 grant_table_privilege select api.customer api_user
+
+

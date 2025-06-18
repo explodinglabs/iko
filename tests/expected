@@ -8,18 +8,6 @@ Created revert/create_schema_api.sql
 Created verify/create_schema_api.sql
 Added "create_schema_api" to sqitch.plan
 create schema "api";
-Created deploy/comment_schema_api.sql
-Created revert/comment_schema_api.sql
-Created verify/comment_schema_api.sql
-Added "comment_schema_api" to sqitch.plan
-comment on schema "api" is 'This is my comment';
-Created deploy/another_comment.sql
-Created revert/another_comment.sql
-Created verify/another_comment.sql
-Added "another_comment" to sqitch.plan
-comment on schema "api" is 'Multiline comment
-Multiline comment
-Multiline comment';
 Created deploy/create_table_customer.sql
 Created revert/create_table_customer.sql
 Created verify/create_table_customer.sql
@@ -128,6 +116,38 @@ Added "create_trigger_modify_api_customer_on_api_customer" to sqitch.plan
 create trigger modify_api_customer
   after insert or update on api.customer
   for each row execute function api.update();
+Created deploy/comment_schema_api.sql
+Created revert/comment_schema_api.sql
+Created verify/comment_schema_api.sql
+Added "comment_schema_api" to sqitch.plan
+comment on schema "api" is 'This is my comment';
+Created deploy/another_comment.sql
+Created revert/another_comment.sql
+Created verify/another_comment.sql
+Added "another_comment" to sqitch.plan
+comment on schema "api" is 'Multiline comment
+Multiline comment
+Multiline comment';
+Created deploy/comment_table_api_customer.sql
+Created revert/comment_table_api_customer.sql
+Created verify/comment_table_api_customer.sql
+Added "comment_table_api_customer" to sqitch.plan
+comment on table "api"."customer" is 'The customer table';
+Created deploy/comment_column_api_customer_name.sql
+Created revert/comment_column_api_customer_name.sql
+Created verify/comment_column_api_customer_name.sql
+Added "comment_column_api_customer_name" to sqitch.plan
+comment on column "api"."customer"."name" is 'The customers name';
+Created deploy/comment_column_movie_name.sql
+Created revert/comment_column_movie_name.sql
+Created verify/comment_column_movie_name.sql
+Added "comment_column_movie_name" to sqitch.plan
+comment on column "movie"."name" is 'The movie name';
+Created deploy/comment_function_api_myfunc.sql
+Created revert/comment_function_api_myfunc.sql
+Created verify/comment_function_api_myfunc.sql
+Added "comment_function_api_myfunc" to sqitch.plan
+comment on function "api".myfunc() is 'The myfunc function';
 Created deploy/create_role_authenticator.sql
 Created revert/create_role_authenticator.sql
 Created verify/create_role_authenticator.sql
@@ -147,12 +167,12 @@ Created deploy/grant_execute_myfunc_to_api_user.sql
 Created revert/grant_execute_myfunc_to_api_user.sql
 Created verify/grant_execute_myfunc_to_api_user.sql
 Added "grant_execute_myfunc_to_api_user" to sqitch.plan
-grant execute on function "myfunc" () to "api_user";
+grant execute on function myfunc() to "api_user";
 Created deploy/grant_execute_api_myfunc_to_api_user.sql
 Created revert/grant_execute_api_myfunc_to_api_user.sql
 Created verify/grant_execute_api_myfunc_to_api_user.sql
 Added "grant_execute_api_myfunc_to_api_user" to sqitch.plan
-grant execute on function "api"."myfunc" () to "api_user";
+grant execute on function "api".myfunc() to "api_user";
 Created deploy/grant_membership_authenticator_to_api_user.sql
 Created revert/grant_membership_authenticator_to_api_user.sql
 Created verify/grant_membership_authenticator_to_api_user.sql

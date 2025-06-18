@@ -3,22 +3,25 @@ set -euo pipefail
 source /iko-lib/utils.sh
 
 options=()
-optionally_schema_qualified_function=
+optionally_qualified_function=
+schema=
+function_=
 sql=$(cat)
 
-get_options options "$@" -- optionally_schema_qualified_function
+get_options options "$@" -- optionally_qualified_function
+parse_identifier "$optionally_qualified_function" -- schema function_
 
 change=$(get_opt "${options[@]}" --change -c || echo "")
 if [[ -z "$change" ]]; then
-  change="create_function_${optionally_schema_qualified_function//./_}"
+  change="create_function_${optionally_qualified_function//./_}"
   options+=(--change "$change")
 fi
 
 sqitch add "${options[@]}" \
   --template create_function_as \
-  --set schema="$(extract_schema "$optionally_schema_qualified_function")" \
-  --set function="$(strip_schema "$optionally_schema_qualified_function")" \
+  --set schema="$schema" \
+  --set function="$function_" \
   --set sql="$sql" \
-  --note "Add $optionally_schema_qualified_function function"
+  --note "Add $optionally_qualified_function function"
 
 show_files "$change"

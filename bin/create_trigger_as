@@ -4,26 +4,33 @@ source /iko-lib/utils.sh
 
 options=()
 trigger=
-optionally_schema_qualified_table=
-optionally_schema_qualified_function=
+optionally_qualified_table=
+table_schema=
+table=
+optionally_qualified_function=
+function_schema=
+function_=
 sql=$(cat)
 
-get_options options "$@" -- trigger optionally_schema_qualified_table optionally_schema_qualified_function
+get_options options "$@" -- trigger optionally_qualified_table optionally_qualified_function
+parse_identifier "$optionally_qualified_table" -- table_schema table
+parse_identifier "$optionally_qualified_function" -- function_schema function_
 
+# Get change name
 change=$(get_opt "${options[@]}" --change -c || echo "")
 if [[ -z "$change" ]]; then
-  change="create_trigger_${trigger}_on_${optionally_schema_qualified_table//./_}"
+  change="create_trigger_${trigger}_on_${optionally_qualified_table//./_}"
   options+=(--change "$change")
 fi
 
 sqitch add "${options[@]}" \
   --template create_trigger_as \
   --set trigger="$trigger" \
-  --set function_schema="$(extract_schema "$optionally_schema_qualified_function")" \
-  --set function="$(strip_schema "$optionally_schema_qualified_function")" \
-  --set table_schema="$(extract_schema "$optionally_schema_qualified_table")" \
-  --set table="$(strip_schema "$optionally_schema_qualified_table")" \
+  --set table_schema="$table_schema" \
+  --set table="$table" \
+  --set function_schema="$function_schema" \
+  --set function="$function_" \
   --set sql="$sql" \
-  --note "Add $trigger trigger on $optionally_schema_qualified_table"
+  --note "Add $trigger trigger on $optionally_qualified_table"
 
 show_files "$change"

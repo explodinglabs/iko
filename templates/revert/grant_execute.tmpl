@@ -1,1 +1,1 @@
-revoke execute on function [% IF schema %]"[% schema %]".[% END %]"[% function %]" from "[% role %]";
+revoke execute on function [% IF schema %]"[% schema %]".[% END %][% function %] from "[% role %]";

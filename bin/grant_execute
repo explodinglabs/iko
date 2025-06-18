@@ -3,24 +3,26 @@ set -euo pipefail
 source /iko-lib/utils.sh
 
 options=()
-optionally_schema_qualified_function=
-params=
+optionally_qualified_function=
+schema=
+function_=
 role=
 
-get_options options "$@" -- optionally_schema_qualified_function params role
+get_options options "$@" -- optionally_qualified_function role
+parse_identifier "$optionally_qualified_function" -- schema function_
 
 change=$(get_opt "${options[@]}" --change -c || echo "")
 if [[ -z "$change" ]]; then
-  change="grant_execute_${optionally_schema_qualified_function//./_}_to_${role}"
+  change="grant_execute_${optionally_qualified_function//./_}_to_${role}"
+  change=${change//[^a-zA-Z0-9_]}
   options+=(--change "$change")
 fi
 
 sqitch add "${options[@]}" \
   --template grant_execute \
-  --set schema="$(extract_schema "$optionally_schema_qualified_function")" \
-  --set function="$(strip_schema "$optionally_schema_qualified_function")" \
-  --set params="$params" \
+  --set schema="$schema" \
+  --set function="$function_" \
   --set role="$role" \
-  --note "Grant execute $optionally_schema_qualified_function to $role"
+  --note "Grant execute $optionally_qualified_function to $role"
 
 show_files "$change"

@@ -1,7 +1,5 @@
 do $$
 declare
-  table_name text := split_part('[% object %]', '.', 1);
-  column_name text := split_part('[% object %]', '.', 2);
   actual text;
 begin
   select description into actual
@@ -9,10 +7,10 @@ begin
   join pg_class c on c.oid = a.attrelid
   join pg_namespace n on n.oid = c.relnamespace
   join pg_description d on d.objoid = a.attrelid and d.objsubid = a.attnum
-  where c.relname = table_name
-    and a.attname = column_name
-    and n.nspname = '[% schema %]';
+  where c.relname = '[% object %]'
+    [% IF schema %]and n.nspname = '[% schema %]'[% END %]
+    and a.attname = '[% column %]';
 
-  assert actual = '[% comment %]';
+  assert actual is not null;
 end;
 $$ language plpgsql;
